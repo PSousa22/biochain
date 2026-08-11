@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BioChain — Blockchain da Tecnocracia Biocêntrica</title>
+  <meta name="description" content="Blockchain descentralizada para gestão de ativos naturais, créditos ecológicos e governança biocêntrica no Brasil." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════ HEADER ═══════════════════ -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-icon">🌿</div>
+        <div>
+          <h1 class="brand-name">BioChain</h1>
+          <span class="brand-sub">Tecnocracia Biocêntrica • v1.0</span>
+        </div>
+      </div>
+      <div class="header-stats">
+        <div class="stat-pill" id="stat-blocks">
+          <span class="stat-label">Blocos</span>
+          <span class="stat-val" id="val-blocks">1</span>
+        </div>
+        <div class="stat-pill" id="stat-tokens">
+          <span class="stat-label">GAIA Tokens</span>
+          <span class="stat-val" id="val-tokens">0</span>
+        </div>
+        <div class="stat-pill" id="stat-co2">
+          <span class="stat-label">CO₂ Sequestrado</span>
+          <span class="stat-val" id="val-co2">0 tC</span>
+        </div>
+        <div class="pill-status" id="chain-status">
+          <span class="dot green"></span> Chain Válida
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section class="hero">
+    <div class="hero-bg-orbs">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Blockchain para Governança Ambiental</p>
+      <h2 class="hero-title">A natureza como<br/><span class="gradient-text">sujeito de direitos</span></h2>
+      <p class="hero-desc">
+        Cada bloco registra créditos ecológicos, ativos naturais tokenizados e votos de governança —
+        garantindo transparência, imutabilidade e participação descentralizada na gestão do território biocêntrico.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ MAIN LAYOUT ═══════════════════ -->
+  <main class="main-grid">
+
+    <!-- ── COLUNA ESQUERDA ── -->
+    <aside class="left-panel">
+
+      <!-- Nova Transação -->
+      <div class="card" id="card-tx">
+        <div class="card-header">
+          <span class="card-icon">⚡</span>
+          <h3>Nova Transação Ecológica</h3>
+        </div>
+
+        <div class="form-group">
+          <label for="tx-type">Tipo de Ativo</label>
+          <select id="tx-type">
+            <option value="floresta">🌳 Crédito Florestal</option>
+            <option value="rio">🌊 Crédito Hídrico</option>
+            <option value="biodiversidade">🦋 Crédito de Biodiversidade</option>
+            <option value="carbono">💨 Crédito de Carbono</option>
+            <option value="solo">🌱 Crédito de Solo Saudável</option>
+            <option value="governanca">🗳️ Voto de Governança</option>
+            <option value="renda">💚 Renda Básica Ecológica</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="tx-origin">Origem (Nó Guardian)</label>
+          <input type="text" id="tx-origin" placeholder="ex: Guardian-Amazônia-0x1A" value="Guardian-Amazônia-0x1A" />
+        </div>
+
+        <div class="form-group">
+          <label for="tx-dest">Destino (Nó ou Comunidade)</label>
+          <input type="text" id="tx-dest" placeholder="ex: Comunidade-Caiapó-0x2B" value="Comunidade-Caiapó-0x2B" />
+        </div>
+
+        <div class="form-group">
+          <label for="tx-amount">Quantidade (GAIA tokens)</label>
+          <input type="number" id="tx-amount" min="1" max="10000" value="500" />
+        </div>
+
+        <div class="form-group">
+          <label for="tx-area">Área Protegida (ha)</label>
+          <input type="number" id="tx-area" min="0" step="0.1" value="120.5" />
+        </div>
+
+        <div class="form-group">
+          <label for="tx-co2">CO₂ Sequestrado (toneladas)</label>
+          <input type="number" id="tx-co2" min="0" step="0.1" value="85.2" />
+        </div>
+
+        <div class="form-group">
+          <label for="tx-data">Metadados (JSON opcional)</label>
+          <textarea id="tx-data" rows="3" placeholder='{"bioma":"Cerrado","iot_sensor":"S-042"}'></textarea>
+        </div>
+
+        <button class="btn btn-primary" id="btn-add-tx" onclick="addPendingTransaction()">
+          <span>➕</span> Adicionar à Mempool
+        </button>
+      </div>
+
+      <!-- Mempool -->
+      <div class="card" id="card-mempool">
+        <div class="card-header">
+          <span class="card-icon">🔄</span>
+          <h3>Mempool</h3>
+          <span class="badge" id="mempool-badge">0</span>
+        </div>
+        <div id="mempool-list" class="mempool-list">
+          <p class="empty-msg">Nenhuma transação pendente.</p>
+        </div>
+        <button class="btn btn-secondary" id="btn-mine" onclick="mineBlock()" disabled>
+          <span>⛏️</span> Minerar Bloco (PoE)
+        </button>
+        <p class="hint-text">Proof-of-Ecology: difficulty adaptada ao índice de impacto ambiental.</p>
+      </div>
+
+      <!-- Nós da Rede -->
+      <div class="card" id="card-nodes">
+        <div class="card-header">
+          <span class="card-icon">🌐</span>
+          <h3>Nós Guardiões</h3>
+        </div>
+        <div id="nodes-list" class="nodes-list"></div>
+        <button class="btn btn-ghost" onclick="addRandomNode()">+ Adicionar Nó</button>
+      </div>
+
+    </aside>
+
+    <!-- ── CENTRO: BLOCKCHAIN VISUAL ── -->
+    <section class="chain-panel">
+      <div class="chain-header">
+        <h2>Cadeia de Blocos</h2>
+        <div class="chain-actions">
+          <button class="btn btn-ghost btn-sm" onclick="validateChain()">✅ Validar Cadeia</button>
+          <button class="btn btn-ghost btn-sm" onclick="exportChain()">📥 Exportar JSON</button>
+          <button class="btn btn-danger btn-sm" onclick="simulateTamper()">⚠️ Simular Ataque</button>
+        </div>
+      </div>
+
+      <div id="chain-container" class="chain-container">
+        <!-- Blocos gerados dinamicamente -->
+      </div>
+    </section>
+
+    <!-- ── COLUNA DIREITA ── -->
+    <aside class="right-panel">
+
+      <!-- Bloco Selecionado / Inspector -->
+      <div class="card" id="card-inspector">
+        <div class="card-header">
+          <span class="card-icon">🔍</span>
+          <h3>Inspetor de Bloco</h3>
+        </div>
+        <div id="inspector-content">
+          <p class="empty-msg">Clique em um bloco para inspecioná-lo.</p>
+        </div>
+      </div>
+
+      <!-- Painel de Governança -->
+      <div class="card" id="card-governance">
+        <div class="card-header">
+          <span class="card-icon">🏛️</span>
+          <h3>Governança Biocêntrica</h3>
+        </div>
+        <div class="gov-proposals" id="gov-proposals">
+          <!-- Propostas carregadas dinamicamente -->
+        </div>
+      </div>
+
+      <!-- Métricas Ecológicas -->
+      <div class="card" id="card-metrics">
+        <div class="card-header">
+          <span class="card-icon">📊</span>
+          <h3>Métricas Ecológicas</h3>
+        </div>
+        <div class="metrics-grid">
+          <div class="metric-item">
+            <span class="metric-icon">🌳</span>
+            <div>
+              <span class="metric-val" id="m-floresta">0</span>
+              <span class="metric-label">Créditos Florestais</span>
+            </div>
+          </div>
+          <div class="metric-item">
+            <span class="metric-icon">🌊</span>
+            <div>
+              <span class="metric-val" id="m-rio">0</span>
+              <span class="metric-label">Créditos Hídricos</span>
+            </div>
+          </div>
+          <div class="metric-item">
+            <span class="metric-icon">🦋</span>
+            <div>
+              <span class="metric-val" id="m-bio">0</span>
+              <span class="metric-label">Créditos Biodiversidade</span>
+            </div>
+          </div>
+          <div class="metric-item">
+            <span class="metric-icon">💨</span>
+            <div>
+              <span class="metric-val" id="m-co2">0</span>
+              <span class="metric-label">Créditos Carbono</span>
+            </div>
+          </div>
+          <div class="metric-item">
+            <span class="metric-icon">💚</span>
+            <div>
+              <span class="metric-val" id="m-rbe">0</span>
+              <span class="metric-label">Renda Básica Ecológica</span>
+            </div>
+          </div>
+          <div class="metric-item">
+            <span class="metric-icon">🗳️</span>
+            <div>
+              <span class="metric-val" id="m-gov">0</span>
+              <span class="metric-label">Votos Registrados</span>
+            </div>
+          </div>
+        </div>
+        <div class="eco-index">
+          <span class="eco-label">Índice de Saúde Ecosistêmica (ISE)</span>
+          <div class="eco-bar-bg">
+            <div class="eco-bar-fill" id="eco-bar"></div>
+          </div>
+          <span class="eco-pct" id="eco-pct">0%</span>
+        </div>
+      </div>
+
+      <!-- Log de Eventos -->
+      <div class="card" id="card-log">
+        <div class="card-header">
+          <span class="card-icon">📜</span>
+          <h3>Log de Eventos</h3>
+        </div>
+        <div id="event-log" class="event-log"></div>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- Mining Modal -->
+  <div id="mining-modal" class="modal hidden">
+    <div class="modal-inner">
+      <div class="mining-animation">
+        <div class="mining-orb">⛏️</div>
+        <div class="mining-rings">
+          <div class="ring r1"></div>
+          <div class="ring r2"></div>
+          <div class="ring r3"></div>
+        </div>
+      </div>
+      <h3>Minerando Bloco...</h3>
+      <p id="mining-status">Calculando Proof-of-Ecology...</p>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="mining-progress"></div>
+      </div>
+      <p class="mining-hash" id="mining-hash">Hash: 0x000...</p>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast-container"></div>
+
+  <footer class="footer">
+    <p>BioChain © 2026 — Tecnocracia Biocêntrica | Todos os seres vivos como sujeitos de direito | UFPR</p>
+  </footer>
+
+  <script src="blockchain.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
