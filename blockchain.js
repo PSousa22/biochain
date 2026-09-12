@@ -1,4 +1,4 @@
-﻿// ═══════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════
 //  BioChain — Core Blockchain Engine
 //  Tecnocracia Biocêntrica · Proof-of-Ecology Consensus
 //  Federação de Biomas Nacionais do Brasil
@@ -173,10 +173,10 @@ class BioBlockchain {
   constructor() {
     this.chain = [];
     this.pendingTransactions = [];
-    this.difficulty = 3;
+    this.difficulty = 2;
     this.nodes = new Set();
     this.burnedTokens = 0;
-    this._initGenesis();
+    this.ready = this._initGenesis();
   }
 
   async _initGenesis() {

@@ -1,4 +1,4 @@
-﻿// ═══════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════
 //  BioChain — UI Application Layer (v2.0 Soberana)
 //  Tecnocracia Biocêntrica · Método Brasiliano
 // ═══════════════════════════════════════════════════════════
@@ -164,7 +164,9 @@ const DOCS_DATA = {
 // ─── Init ─────────────────────────────────────────────────
 async function init() {
   blockchain = new BioBlockchain();
-  await sleep(100);
+  if (blockchain.ready) await blockchain.ready;
+  else await sleep(100);
+
   renderNodes();
   renderGovernance();
   renderBiomes();
@@ -179,6 +181,11 @@ async function init() {
 
   // Inicia telemetria periódica simulada dos oráculos
   setInterval(simulateOracleTelemetry, 5000);
+
+  // Fechar modal de documentos ao clicar fora
+  document.getElementById('doc-modal')?.addEventListener('click', (e) => {
+    if (e.target.id === 'doc-modal') closeDocModal();
+  });
 }
 
 // ─── Switch Tab Navigation ────────────────────────────────
@@ -204,10 +211,12 @@ async function seedDemoData() {
   ];
   txs.forEach(tx => blockchain.addTransaction(tx));
 
-  const modal = document.getElementById('mining-modal');
-  modal.classList.remove('hidden');
+  // Minera bloco demonstrativo de forma instantânea sem bloquear a tela
+  const oldDiff = blockchain.difficulty;
+  blockchain.difficulty = 1;
   await blockchain.mineBlock('Guardian-Amazônia-0x1A', () => {});
-  modal.classList.add('hidden');
+  blockchain.difficulty = oldDiff;
+
   log(`Bloco #1 minerado · 4 transações de custódia e queima confirmadas`, 'success');
 }
 
