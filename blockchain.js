@@ -1,6 +1,7 @@
-// ═══════════════════════════════════════════════════════════
+﻿// ═══════════════════════════════════════════════════════════
 //  BioChain — Core Blockchain Engine
 //  Tecnocracia Biocêntrica · Proof-of-Ecology Consensus
+//  Federação de Biomas Nacionais do Brasil
 // ═══════════════════════════════════════════════════════════
 
 'use strict';
@@ -12,6 +13,17 @@ async function sha256(message) {
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
+
+// ─── Fatores de Estresse Ecológico por Bioma ──────────────
+const BIOME_STRESS_FACTORS = {
+  'Amazônia': 1.20,
+  'Cerrado': 1.25,
+  'Mata Atlântica': 1.40,
+  'Pantanal': 1.35,
+  'Caatinga': 1.30,
+  'Pampa': 1.15,
+  'Zona Costeira e Marinha': 1.25
+};
 
 // ─── Transaction ──────────────────────────────────────────
 class BioTransaction {
@@ -29,7 +41,6 @@ class BioTransaction {
   }
 
   _sign() {
-    // Simplified deterministic "signature" for demo
     const payload = `${this.id}|${this.origin}|${this.destination}|${this.amount}`;
     return btoa(payload).slice(0, 32);
   }
@@ -38,10 +49,12 @@ class BioTransaction {
   ecologicalWeight() {
     const weights = {
       floresta: 10, rio: 8, biodiversidade: 9,
-      carbono: 7, solo: 6, governanca: 4, renda: 5
+      carbono: 7, solo: 6, governanca: 4, renda: 5, queima: 8
     };
     const base = weights[this.type] || 3;
-    return base + (this.co2 * 0.05) + (this.area * 0.02);
+    const biome = this.metadata?.bioma || 'Amazônia';
+    const multiplier = BIOME_STRESS_FACTORS[biome] || 1.0;
+    return (base + (this.co2 * 0.05) + (this.area * 0.02)) * multiplier;
   }
 
   toObject() {
@@ -77,7 +90,6 @@ class BioBlock {
 
   _computeMerkleRoot() {
     if (!this.transactions.length) return '0'.repeat(64);
-    // Simple concatenation-based merkle approximation
     const leaves = this.transactions.map(tx =>
       `${tx.id}|${tx.amount}|${tx.type}`
     );
@@ -91,7 +103,6 @@ class BioBlock {
       }
       level = next;
     }
-    // Return a fixed-length hex-like string
     const raw = level[0];
     let h = 0;
     for (let i = 0; i < raw.length; i++) {
@@ -127,7 +138,6 @@ class BioBlock {
       hash = await sha256(this.dataString());
       if (this.nonce % 200 === 0 && onProgress) {
         onProgress(this.nonce, hash);
-        // Yield to UI
         await new Promise(r => setTimeout(r, 0));
       }
     }
@@ -137,7 +147,6 @@ class BioBlock {
 
   isValid() {
     if (this.index === 0) return true;
-    // Recompute merkle root
     const recomputed = this._computeMerkleRoot();
     return recomputed === this.merkleRoot && this.hash.startsWith('0'.repeat(this.effectiveDifficulty()));
   }
@@ -166,6 +175,7 @@ class BioBlockchain {
     this.pendingTransactions = [];
     this.difficulty = 3;
     this.nodes = new Set();
+    this.burnedTokens = 0;
     this._initGenesis();
   }
 
@@ -174,10 +184,10 @@ class BioBlockchain {
       index: 0,
       transactions: [],
       previousHash: '0'.repeat(64),
-      validator: 'Genesis-BioChain',
+      validator: 'Genesis-BioChain-Brasil',
       difficulty: 1
     });
-    genesis.hash = await sha256('GENESIS_BIOCENTRIC_TECHNOCRACY_2026');
+    genesis.hash = await sha256('GENESIS_BIOCENTRIC_TECHNOCRACY_BRASIL_2026');
     this.chain.push(genesis);
   }
 
@@ -202,6 +212,12 @@ class BioBlockchain {
 
     await block.mine(onProgress);
     this.chain.push(block);
+
+    // Contabiliza queima de tokens caso haja txs de compensacao
+    txs.forEach(tx => {
+      if (tx.type === 'queima') this.burnedTokens += tx.amount;
+    });
+
     this.pendingTransactions = [];
     return block;
   }
@@ -217,8 +233,13 @@ class BioBlockchain {
   }
 
   getTotalTokens() {
-    return this.chain.reduce((sum, b) =>
-      sum + b.transactions.reduce((s, tx) => s + tx.amount, 0), 0);
+    const issued = this.chain.reduce((sum, b) =>
+      sum + b.transactions.reduce((s, tx) => (tx.type !== 'queima' ? s + tx.amount : s), 0), 0);
+    return Math.max(0, issued - this.burnedTokens);
+  }
+
+  getTotalBurned() {
+    return this.burnedTokens;
   }
 
   getTotalCO2() {
@@ -226,8 +247,13 @@ class BioBlockchain {
       sum + b.transactions.reduce((s, tx) => s + tx.co2, 0), 0);
   }
 
+  getTotalArea() {
+    return this.chain.reduce((sum, b) =>
+      sum + b.transactions.reduce((s, tx) => s + tx.area, 0), 0);
+  }
+
   getMetricsByType() {
-    const acc = { floresta: 0, rio: 0, biodiversidade: 0, carbono: 0, solo: 0, governanca: 0, renda: 0 };
+    const acc = { floresta: 0, rio: 0, biodiversidade: 0, carbono: 0, solo: 0, governanca: 0, renda: 0, queima: 0 };
     this.chain.forEach(b => b.transactions.forEach(tx => {
       if (acc[tx.type] !== undefined) acc[tx.type] += tx.amount;
     }));
@@ -235,7 +261,11 @@ class BioBlockchain {
   }
 
   toJSON() {
-    return JSON.stringify({ chain: this.chain.map(b => b.toObject()), timestamp: new Date().toISOString() }, null, 2);
+    return JSON.stringify({ 
+      chain: this.chain.map(b => b.toObject()), 
+      burnedTokens: this.burnedTokens,
+      timestamp: new Date().toISOString() 
+    }, null, 2);
   }
 }
 
@@ -243,3 +273,4 @@ class BioBlockchain {
 window.BioTransaction = BioTransaction;
 window.BioBlock = BioBlock;
 window.BioBlockchain = BioBlockchain;
+window.BIOME_STRESS_FACTORS = BIOME_STRESS_FACTORS;

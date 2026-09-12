@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BioChain — Blockchain da Tecnocracia Biocêntrica</title>
-  <meta name="description" content="Blockchain descentralizada para gestão de ativos naturais, créditos ecológicos e governança biocêntrica no Brasil." />
+  <title>BioChain — Plataforma da Tecnocracia Biocêntrica & Política Pública</title>
+  <meta name="description" content="Infraestrutura pública descentralizada para custódia de ativos naturais, Proof-of-Ecology, Renda Básica Ecológica e governança soberana no Brasil." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -19,7 +19,7 @@
         <div class="brand-icon">🌿</div>
         <div>
           <h1 class="brand-name">BioChain</h1>
-          <span class="brand-sub">Tecnocracia Biocêntrica • v1.0</span>
+          <span class="brand-sub">Tecnocracia Biocêntrica · v2.0 Soberana</span>
         </div>
       </div>
       <div class="header-stats">
@@ -35,11 +35,38 @@
           <span class="stat-label">CO₂ Sequestrado</span>
           <span class="stat-val" id="val-co2">0 tC</span>
         </div>
+        <div class="stat-pill" id="stat-rbe">
+          <span class="stat-label">Famílias RBE</span>
+          <span class="stat-val" id="val-rbe-familias">15.420</span>
+        </div>
+        <div class="stat-pill" id="stat-biomas">
+          <span class="stat-label">Biomas Conectados</span>
+          <span class="stat-val" id="val-biomas-count">7/7</span>
+        </div>
         <div class="pill-status" id="chain-status">
           <span class="dot green"></span> Chain Válida
         </div>
       </div>
     </div>
+
+    <!-- Navegação por Módulos -->
+    <nav class="nav-tabs-container">
+      <button class="tab-btn active" id="btn-tab-dlt" onclick="switchTab('dlt')">
+        <span>⛓️</span> Simulador DLT (PoE)
+      </button>
+      <button class="tab-btn" id="btn-tab-biomas" onclick="switchTab('biomas')">
+        <span>🗺️</span> Biomas & Oráculos IA <span class="tab-badge">7 Nós</span>
+      </button>
+      <button class="tab-btn" id="btn-tab-rbe" onclick="switchTab('rbe')">
+        <span>💚</span> Calculadora RBE & Drex
+      </button>
+      <button class="tab-btn" id="btn-tab-politica" onclick="switchTab('politica')">
+        <span>🏛️</span> Acervo de Estado <span class="tab-badge">5 Docs</span>
+      </button>
+      <button class="tab-btn" id="btn-tab-narcisidio" onclick="switchTab('narcisidio')">
+        <span>⚖️</span> Balanço Anti-Narcisídio
+      </button>
+    </nav>
   </header>
 
   <!-- ═══════════════════ HERO ═══════════════════ -->
@@ -50,215 +77,514 @@
       <div class="orb orb3"></div>
     </div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Blockchain para Governança Ambiental</p>
-      <h2 class="hero-title">A natureza como<br/><span class="gradient-text">sujeito de direitos</span></h2>
+      <p class="hero-eyebrow">Política Pública de Estado · Método Brasiliano</p>
+      <h2 class="hero-title">A natureza como<br/><span class="gradient-text">sujeito de direitos e matriz soberana</span></h2>
       <p class="hero-desc">
-        Cada bloco registra créditos ecológicos, ativos naturais tokenizados e votos de governança —
-        garantindo transparência, imutabilidade e participação descentralizada na gestão do território biocêntrico.
+        Infraestrutura pública digital para custódia de ativos naturais, consenso <b>Proof-of-Ecology</b>,
+        distribuição da <b>Renda Básica Ecológica</b> e inteligência artificial soberana para o Brasil do século XXI.
       </p>
     </div>
   </section>
 
-  <!-- ═══════════════════ MAIN LAYOUT ═══════════════════ -->
-  <main class="main-grid">
+  <!-- ═══════════════════ TAB 1: SIMULADOR DLT ═══════════════════ -->
+  <div id="tab-dlt" class="tab-content active">
+    <main class="main-grid">
 
-    <!-- ── COLUNA ESQUERDA ── -->
-    <aside class="left-panel">
+      <!-- ── COLUNA ESQUERDA ── -->
+      <aside class="left-panel">
+        <!-- Nova Transação -->
+        <div class="card" id="card-tx">
+          <div class="card-header">
+            <span class="card-icon">⚡</span>
+            <h3>Nova Transação Ecológica</h3>
+          </div>
 
-      <!-- Nova Transação -->
-      <div class="card" id="card-tx">
-        <div class="card-header">
-          <span class="card-icon">⚡</span>
-          <h3>Nova Transação Ecológica</h3>
+          <div class="form-group">
+            <label for="tx-type">Tipo de Ativo</label>
+            <select id="tx-type">
+              <option value="floresta">🌳 Crédito Florestal</option>
+              <option value="rio">🌊 Crédito Hídrico</option>
+              <option value="biodiversidade">🦋 Crédito de Biodiversidade</option>
+              <option value="carbono">💨 Crédito de Carbono</option>
+              <option value="solo">🌱 Crédito de Solo Saudável</option>
+              <option value="governanca">🗳️ Voto de Governança</option>
+              <option value="renda">💚 Renda Básica Ecológica</option>
+              <option value="queima">🔥 Queima / Compensação GAIA</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tx-origin">Origem (Nó Guardian)</label>
+            <input type="text" id="tx-origin" placeholder="ex: Guardian-Amazônia-0x1A" value="Guardian-Amazônia-0x1A" />
+          </div>
+
+          <div class="form-group">
+            <label for="tx-dest">Destino (Nó ou Comunidade)</label>
+            <input type="text" id="tx-dest" placeholder="ex: Comunidade-Caiapó-0x2B" value="Comunidade-Caiapó-0x2B" />
+          </div>
+
+          <div class="form-group">
+            <label for="tx-amount">Quantidade (GAIA tokens)</label>
+            <input type="number" id="tx-amount" min="1" max="10000" value="500" />
+          </div>
+
+          <div class="form-group">
+            <label for="tx-area">Área Protegida (ha)</label>
+            <input type="number" id="tx-area" min="0" step="0.1" value="120.5" />
+          </div>
+
+          <div class="form-group">
+            <label for="tx-co2">CO₂ Sequestrado (toneladas)</label>
+            <input type="number" id="tx-co2" min="0" step="0.1" value="85.2" />
+          </div>
+
+          <div class="form-group">
+            <label for="tx-data">Metadados (JSON opcional)</label>
+            <textarea id="tx-data" rows="2" placeholder='{"bioma":"Amazônia","oraculo":"INPE-DETER"}'></textarea>
+          </div>
+
+          <button class="btn btn-primary" id="btn-add-tx" onclick="addPendingTransaction()">
+            <span>➕</span> Adicionar à Mempool
+          </button>
         </div>
 
-        <div class="form-group">
-          <label for="tx-type">Tipo de Ativo</label>
-          <select id="tx-type">
-            <option value="floresta">🌳 Crédito Florestal</option>
-            <option value="rio">🌊 Crédito Hídrico</option>
-            <option value="biodiversidade">🦋 Crédito de Biodiversidade</option>
-            <option value="carbono">💨 Crédito de Carbono</option>
-            <option value="solo">🌱 Crédito de Solo Saudável</option>
-            <option value="governanca">🗳️ Voto de Governança</option>
-            <option value="renda">💚 Renda Básica Ecológica</option>
-          </select>
+        <!-- Mempool -->
+        <div class="card" id="card-mempool">
+          <div class="card-header">
+            <span class="card-icon">🔄</span>
+            <h3>Mempool</h3>
+            <span class="badge" id="mempool-badge">0</span>
+          </div>
+          <div id="mempool-list" class="mempool-list">
+            <p class="empty-msg">Nenhuma transação pendente.</p>
+          </div>
+          <button class="btn btn-secondary" id="btn-mine" onclick="mineBlock()" disabled>
+            <span>⛏️</span> Minerar Bloco (PoE)
+          </button>
+          <p class="hint-text">Proof-of-Ecology: dificuldade adaptada ao índice de impacto ambiental auditado.</p>
         </div>
 
-        <div class="form-group">
-          <label for="tx-origin">Origem (Nó Guardian)</label>
-          <input type="text" id="tx-origin" placeholder="ex: Guardian-Amazônia-0x1A" value="Guardian-Amazônia-0x1A" />
+        <!-- Nós da Rede -->
+        <div class="card" id="card-nodes">
+          <div class="card-header">
+            <span class="card-icon">🌐</span>
+            <h3>Federação de Biomas</h3>
+          </div>
+          <div id="nodes-list" class="nodes-list"></div>
+          <button class="btn btn-ghost" onclick="addRandomNode()">+ Adicionar Sub-Nó</button>
+        </div>
+      </aside>
+
+      <!-- ── CENTRO: BLOCKCHAIN VISUAL ── -->
+      <section class="chain-panel">
+        <div class="chain-header">
+          <h2>Cadeia de Blocos Pública</h2>
+          <div class="chain-actions">
+            <button class="btn btn-ghost btn-sm" onclick="validateChain()">✅ Validar Cadeia</button>
+            <button class="btn btn-ghost btn-sm" onclick="exportChain()">📥 Exportar JSON</button>
+            <button class="btn btn-danger btn-sm" onclick="simulateTamper()">⚠️ Simular Ataque</button>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="tx-dest">Destino (Nó ou Comunidade)</label>
-          <input type="text" id="tx-dest" placeholder="ex: Comunidade-Caiapó-0x2B" value="Comunidade-Caiapó-0x2B" />
+        <div id="chain-container" class="chain-container">
+          <!-- Blocos gerados dinamicamente -->
+        </div>
+      </section>
+
+      <!-- ── COLUNA DIREITA ── -->
+      <aside class="right-panel">
+        <!-- Inspetor de Bloco -->
+        <div class="card" id="card-inspector">
+          <div class="card-header">
+            <span class="card-icon">🔍</span>
+            <h3>Inspetor de Bloco</h3>
+          </div>
+          <div id="inspector-content">
+            <p class="empty-msg">Clique em um bloco para inspecioná-lo.</p>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="tx-amount">Quantidade (GAIA tokens)</label>
-          <input type="number" id="tx-amount" min="1" max="10000" value="500" />
+        <!-- Painel de Governança -->
+        <div class="card" id="card-governance">
+          <div class="card-header">
+            <span class="card-icon">🏛️</span>
+            <h3>DAO Biocêntrica</h3>
+          </div>
+          <div class="gov-proposals" id="gov-proposals"></div>
         </div>
 
-        <div class="form-group">
-          <label for="tx-area">Área Protegida (ha)</label>
-          <input type="number" id="tx-area" min="0" step="0.1" value="120.5" />
+        <!-- Métricas Ecológicas -->
+        <div class="card" id="card-metrics">
+          <div class="card-header">
+            <span class="card-icon">📊</span>
+            <h3>Métricas Biofísicas</h3>
+          </div>
+          <div class="metrics-grid">
+            <div class="metric-item">
+              <span class="metric-icon">🌳</span>
+              <div>
+                <span class="metric-val" id="m-floresta">0</span>
+                <span class="metric-label">Créditos Florestais</span>
+              </div>
+            </div>
+            <div class="metric-item">
+              <span class="metric-icon">🌊</span>
+              <div>
+                <span class="metric-val" id="m-rio">0</span>
+                <span class="metric-label">Créditos Hídricos</span>
+              </div>
+            </div>
+            <div class="metric-item">
+              <span class="metric-icon">🦋</span>
+              <div>
+                <span class="metric-val" id="m-bio">0</span>
+                <span class="metric-label">Biodiversidade</span>
+              </div>
+            </div>
+            <div class="metric-item">
+              <span class="metric-icon">💨</span>
+              <div>
+                <span class="metric-val" id="m-co2">0</span>
+                <span class="metric-label">Créditos Carbono</span>
+              </div>
+            </div>
+            <div class="metric-item">
+              <span class="metric-icon">💚</span>
+              <div>
+                <span class="metric-val" id="m-rbe">0</span>
+                <span class="metric-label">Renda Básica (GAIA)</span>
+              </div>
+            </div>
+            <div class="metric-item">
+              <span class="metric-icon">🔥</span>
+              <div>
+                <span class="metric-val" id="m-queima">0</span>
+                <span class="metric-label">GAIA Compensados</span>
+              </div>
+            </div>
+          </div>
+          <div class="eco-index">
+            <span class="eco-label">Índice de Saúde Ecosistêmica (ISE)</span>
+            <div class="eco-bar-bg">
+              <div class="eco-bar-fill" id="eco-bar"></div>
+            </div>
+            <span class="eco-pct" id="eco-pct">0%</span>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="tx-co2">CO₂ Sequestrado (toneladas)</label>
-          <input type="number" id="tx-co2" min="0" step="0.1" value="85.2" />
+        <!-- Log de Eventos -->
+        <div class="card" id="card-log">
+          <div class="card-header">
+            <span class="card-icon">📜</span>
+            <h3>Log de Eventos</h3>
+          </div>
+          <div id="event-log" class="event-log"></div>
         </div>
+      </aside>
+    </main>
+  </div>
 
-        <div class="form-group">
-          <label for="tx-data">Metadados (JSON opcional)</label>
-          <textarea id="tx-data" rows="3" placeholder='{"bioma":"Cerrado","iot_sensor":"S-042"}'></textarea>
+  <!-- ═══════════════════ TAB 2: BIOMAS & ORÁCULOS IA ═══════════════════ -->
+  <div id="tab-biomas" class="tab-content">
+    <section class="biomes-section">
+      <div class="biomes-header-box">
+        <div>
+          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Rede Nacional de Oráculos Soberanos</h2>
+          <p style="font-size: 13px; color: var(--text2); margin-top: 4px;">
+            Fusão em tempo real de sensoriamento orbital (INPE/CBERS/Sentinel), telemetria IoT terrestre e laudos comunitários em nuvem de Estado (SERPRO/RNP).
+          </p>
         </div>
-
-        <button class="btn btn-primary" id="btn-add-tx" onclick="addPendingTransaction()">
-          <span>➕</span> Adicionar à Mempool
-        </button>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <span class="badge" style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 20px;">
+            ● 7 Biomas Sincronizados
+          </span>
+          <span class="badge" style="background: rgba(45,212,191,0.15); color: var(--teal); padding: 6px 12px; border-radius: 20px;">
+            Reconciliação Bayesiana: 98.9%
+          </span>
+        </div>
       </div>
 
-      <!-- Mempool -->
-      <div class="card" id="card-mempool">
-        <div class="card-header">
-          <span class="card-icon">🔄</span>
-          <h3>Mempool</h3>
-          <span class="badge" id="mempool-badge">0</span>
-        </div>
-        <div id="mempool-list" class="mempool-list">
-          <p class="empty-msg">Nenhuma transação pendente.</p>
-        </div>
-        <button class="btn btn-secondary" id="btn-mine" onclick="mineBlock()" disabled>
-          <span>⛏️</span> Minerar Bloco (PoE)
-        </button>
-        <p class="hint-text">Proof-of-Ecology: difficulty adaptada ao índice de impacto ambiental.</p>
-      </div>
-
-      <!-- Nós da Rede -->
-      <div class="card" id="card-nodes">
-        <div class="card-header">
-          <span class="card-icon">🌐</span>
-          <h3>Nós Guardiões</h3>
-        </div>
-        <div id="nodes-list" class="nodes-list"></div>
-        <button class="btn btn-ghost" onclick="addRandomNode()">+ Adicionar Nó</button>
-      </div>
-
-    </aside>
-
-    <!-- ── CENTRO: BLOCKCHAIN VISUAL ── -->
-    <section class="chain-panel">
-      <div class="chain-header">
-        <h2>Cadeia de Blocos</h2>
-        <div class="chain-actions">
-          <button class="btn btn-ghost btn-sm" onclick="validateChain()">✅ Validar Cadeia</button>
-          <button class="btn btn-ghost btn-sm" onclick="exportChain()">📥 Exportar JSON</button>
-          <button class="btn btn-danger btn-sm" onclick="simulateTamper()">⚠️ Simular Ataque</button>
-        </div>
-      </div>
-
-      <div id="chain-container" class="chain-container">
-        <!-- Blocos gerados dinamicamente -->
+      <div class="biomes-grid" id="biomes-grid">
+        <!-- Renderizado dinamicamente via app.js -->
       </div>
     </section>
+  </div>
 
-    <!-- ── COLUNA DIREITA ── -->
-    <aside class="right-panel">
-
-      <!-- Bloco Selecionado / Inspector -->
-      <div class="card" id="card-inspector">
-        <div class="card-header">
-          <span class="card-icon">🔍</span>
-          <h3>Inspetor de Bloco</h3>
-        </div>
-        <div id="inspector-content">
-          <p class="empty-msg">Clique em um bloco para inspecioná-lo.</p>
+  <!-- ═══════════════════ TAB 3: CALCULADORA RBE & DREX ═══════════════════ -->
+  <div id="tab-rbe" class="tab-content">
+    <section class="rbe-section">
+      <div class="biomes-header-box">
+        <div>
+          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Simulador do Programa Nacional de Renda Básica Ecológica (RBE)</h2>
+          <p style="font-size: 13px; color: var(--text2); margin-top: 4px;">
+            Cálculo paramétrico do benefício de custódia segundo o Art. 14 do Anteprojeto de Lei da BioChain, com liquidação automática via Drex (Real Digital).
+          </p>
         </div>
       </div>
 
-      <!-- Painel de Governança -->
-      <div class="card" id="card-governance">
-        <div class="card-header">
-          <span class="card-icon">🏛️</span>
-          <h3>Governança Biocêntrica</h3>
+      <div class="rbe-grid">
+        <!-- Controles / Sliders -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">🎛️</span>
+            <h3>Parâmetros Territoriais de Custódia</h3>
+          </div>
+
+          <div class="form-group">
+            <label for="rbe-bioma">Bioma sob Custódia</label>
+            <select id="rbe-bioma" onchange="calculateRBE()">
+              <option value="Pantanal">Pantanal (Fator de Estresse: 1.35x)</option>
+              <option value="Mata Atlântica">Mata Atlântica (Fator de Estresse: 1.40x)</option>
+              <option value="Cerrado">Cerrado (Fator de Estresse: 1.25x)</option>
+              <option value="Amazônia" selected>Amazônia (Fator de Estresse: 1.20x)</option>
+              <option value="Caatinga">Caatinga (Fator de Estresse: 1.30x)</option>
+              <option value="Pampa">Pampa (Fator de Estresse: 1.15x)</option>
+              <option value="Zona Costeira">Zona Costeira e Marinha (Fator: 1.25x)</option>
+            </select>
+          </div>
+
+          <div class="range-slider-wrap">
+            <div class="range-slider-head">
+              <label>Área Preservada Auditada</label>
+              <span class="range-val-badge" id="rbe-area-val">150 ha</span>
+            </div>
+            <input type="range" class="range-input" id="rbe-area-slider" min="10" max="2000" step="10" value="150" oninput="calculateRBE()" />
+          </div>
+
+          <div class="range-slider-wrap">
+            <div class="range-slider-head">
+              <label>Famílias Guardiãs no Território</label>
+              <span class="range-val-badge" id="rbe-families-val">12 famílias</span>
+            </div>
+            <input type="range" class="range-input" id="rbe-families-slider" min="1" max="100" step="1" value="12" oninput="calculateRBE()" />
+          </div>
+
+          <div class="range-slider-wrap">
+            <div class="range-slider-head">
+              <label>Índice de Integridade Ecológica (IIE)</label>
+              <span class="range-val-badge" id="rbe-iie-val">94%</span>
+            </div>
+            <input type="range" class="range-input" id="rbe-iie-slider" min="50" max="100" step="1" value="94" oninput="calculateRBE()" />
+          </div>
+
+          <div style="background: var(--bg2); padding: 14px; border-radius: var(--radius-sm); font-size: 12px; color: var(--text2); line-height: 1.5;">
+            💡 <b>Fórmula Legal:</b> R$ 600,00 (base legal) + (Hectares × Fator Bioma × IIE) dividido equitativamente pelas famílias guardiãs homologadas.
+          </div>
         </div>
-        <div class="gov-proposals" id="gov-proposals">
-          <!-- Propostas carregadas dinamicamente -->
+
+        <!-- Resultados & Drex -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">💳</span>
+            <h3>Demonstrativo de Liquidação Soberana</h3>
+          </div>
+
+          <div style="background: linear-gradient(135deg, rgba(52,211,100,0.1), rgba(45,212,191,0.05)); border: 1px solid var(--green); border-radius: var(--radius); padding: 20px; text-align: center; margin-bottom: 20px;">
+            <span style="font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em;">RBE Mensal por Família</span>
+            <div style="font-size: 36px; font-weight: 800; color: var(--green); font-family: 'JetBrains Mono', monospace; margin: 6px 0;" id="rbe-total-family">
+              R$ 876,00
+            </div>
+            <span style="font-size: 12px; color: var(--teal);" id="rbe-gaia-equiv">
+              equiv. a 146 GAIA Tokens / mês
+            </span>
+          </div>
+
+          <div class="biome-stats-grid">
+            <div class="biome-stat-box">
+              <span class="biome-stat-lbl">Repasse Mensal Território</span>
+              <span class="biome-stat-val" id="rbe-territorio-total">R$ 10.512,00</span>
+            </div>
+            <div class="biome-stat-box">
+              <span class="biome-stat-lbl">CO₂e Sequestrado Anual</span>
+              <span class="biome-stat-val" id="rbe-co2-anual">480 tCO₂e</span>
+            </div>
+          </div>
+
+          <!-- Comprovante Criptográfico Drex -->
+          <div class="drex-receipt-box">
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding-bottom: 6px; margin-bottom: 8px;">
+              <span>LIQUIDAÇÃO DREX (BACEN)</span>
+              <span style="color: var(--green);">● CONTRATO HOMOLOGADO</span>
+            </div>
+            <div>Beneficiário: Família Guardiã Xingu (Hash: 0x9f4c...3e1a)</div>
+            <div>Contrato: 0xBioChainRBEBridgeV1_Drex</div>
+            <div>Origem: 60% Fundo de Emissão Primária GAIA</div>
+            <div style="margin-top: 6px; color: var(--teal);">Taxa de Intermediação: R$ 0,00 (Zero Pedágio)</div>
+          </div>
+
+          <button class="btn btn-primary" style="margin-top: 16px; width: 100%;" onclick="simulateRBEDeposit()">
+            <span>🚀</span> Simular Emissão de Lote RBE On-Chain
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════ TAB 4: ACERVO DE POLÍTICA PÚBLICA ═══════════════════ -->
+  <div id="tab-politica" class="tab-content">
+    <section class="policy-section">
+      <div class="biomes-header-box">
+        <div>
+          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Acervo de Política Pública de Estado</h2>
+          <p style="font-size: 13px; color: var(--text2); margin-top: 4px;">
+            Documentação legislativa, regulatória e técnica submetida para transformar a BioChain em política de Estado brasileira.
+          </p>
+        </div>
+        <a href="https://github.com/PSousa22/biochain/tree/main/politica-publica" target="_blank" class="btn btn-ghost">
+          <span>🐙</span> Ver Acervo no GitHub
+        </a>
+      </div>
+
+      <div class="policy-cards-grid">
+        <!-- Card 1 -->
+        <div class="policy-card">
+          <div>
+            <span class="policy-badge">Proposta Mestra</span>
+            <h3 class="policy-card-title">01. Diretriz Geral Decenal (2026–2030)</h3>
+            <p class="policy-card-desc">
+              Plano de 10 capítulos com fundamentação no Método Brasiliano, superação do narcisídio social, modelo econômico do token GAIA e governança quadripartite.
+            </p>
+          </div>
+          <div class="policy-actions">
+            <button class="btn btn-secondary btn-sm" onclick="openDocModal('01')">Ler Online</button>
+            <a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/01_politica_publica_diretriz.md" target="_blank" class="btn btn-ghost btn-sm">GitHub</a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="policy-card">
+          <div>
+            <span class="policy-badge">Briefing Executivo</span>
+            <h3 class="policy-card-title">02. One-Pager para Decisores</h3>
+            <p class="policy-card-desc">
+              Síntese estratégica para ministros, presidentes de casas legislativas e bancos multilaterais com 4 pilares, impacto fiscal neutro e chamada imediata para 60 dias.
+            </p>
+          </div>
+          <div class="policy-actions">
+            <button class="btn btn-secondary btn-sm" onclick="openDocModal('02')">Ler Online</button>
+            <a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/02_one_pager_executivo.md" target="_blank" class="btn btn-ghost btn-sm">GitHub</a>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="policy-card">
+          <div>
+            <span class="policy-badge">Pitch Deck</span>
+            <h3 class="policy-card-title">03. Apresentação Institucional (13 Slides)</h3>
+            <p class="policy-card-desc">
+              Lâminas executivas formatadas com notas para o orador para reuniões de cúpula ministerial, audiências públicas no Congresso e fóruns climáticos internacionais.
+            </p>
+          </div>
+          <div class="policy-actions">
+            <button class="btn btn-secondary btn-sm" onclick="openDocModal('03')">Ler Online</button>
+            <a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/03_pitch_deck_institucional.md" target="_blank" class="btn btn-ghost btn-sm">GitHub</a>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="policy-card">
+          <div>
+            <span class="policy-badge">Texto Legislativo</span>
+            <h3 class="policy-card-title">04. Anteprojeto de Lei (Minuta Formal)</h3>
+            <p class="policy-card-desc">
+              Minuta redigida nos padrões da LC nº 95/1998 que institui a infraestrutura BioChain, o consenso PoE, o Ativo GAIA, a Renda Básica Ecológica e altera a Lei de PSA.
+            </p>
+          </div>
+          <div class="policy-actions">
+            <button class="btn btn-secondary btn-sm" onclick="openDocModal('04')">Ler Online</button>
+            <a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/04_anteprojeto_de_lei.md" target="_blank" class="btn btn-ghost btn-sm">GitHub</a>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="policy-card">
+          <div>
+            <span class="policy-badge">Engenharia de Protocolo</span>
+            <h3 class="policy-card-title">05. White Paper Técnico-Econômico</h3>
+            <p class="policy-card-desc">
+              Especificação formal: matemática do Proof-of-Ecology, oráculos bayesianos, teoria dos jogos de preservação (Nash Equilibrium) e smart contract Solidity da RBE.
+            </p>
+          </div>
+          <div class="policy-actions">
+            <button class="btn btn-secondary btn-sm" onclick="openDocModal('05')">Ler Online</button>
+            <a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/05_whitepaper_tecnico.md" target="_blank" class="btn btn-ghost btn-sm">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════ TAB 5: BALANÇO ANTI-NARCISÍDIO ═══════════════════ -->
+  <div id="tab-narcisidio" class="tab-content">
+    <section class="narc-section">
+      <div class="biomes-header-box">
+        <div>
+          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Rompendo o Narcisídio Social: A Matemática da Transição</h2>
+          <p style="font-size: 13px; color: var(--text2); margin-top: 4px;">
+            Comparativo de teoria econômica: por que a destruição florestal é um suicídio contábil de curto prazo e a custódia BioChain é um equilíbrio de Nash estrito.
+          </p>
         </div>
       </div>
 
-      <!-- Métricas Ecológicas -->
-      <div class="card" id="card-metrics">
-        <div class="card-header">
-          <span class="card-icon">📊</span>
-          <h3>Métricas Ecológicas</h3>
-        </div>
-        <div class="metrics-grid">
-          <div class="metric-item">
-            <span class="metric-icon">🌳</span>
-            <div>
-              <span class="metric-val" id="m-floresta">0</span>
-              <span class="metric-label">Créditos Florestais</span>
-            </div>
+      <div class="narc-compare-grid">
+        <!-- Lado Predatório -->
+        <div class="narc-box predatory">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="font-size: 24px;">🪓</span>
+            <h3 style="color: var(--red); font-size: 18px;">Economia do Narcisídio Social</h3>
           </div>
-          <div class="metric-item">
-            <span class="metric-icon">🌊</span>
-            <div>
-              <span class="metric-val" id="m-rio">0</span>
-              <span class="metric-label">Créditos Hídricos</span>
-            </div>
-          </div>
-          <div class="metric-item">
-            <span class="metric-icon">🦋</span>
-            <div>
-              <span class="metric-val" id="m-bio">0</span>
-              <span class="metric-label">Créditos Biodiversidade</span>
-            </div>
-          </div>
-          <div class="metric-item">
-            <span class="metric-icon">💨</span>
-            <div>
-              <span class="metric-val" id="m-co2">0</span>
-              <span class="metric-label">Créditos Carbono</span>
-            </div>
-          </div>
-          <div class="metric-item">
-            <span class="metric-icon">💚</span>
-            <div>
-              <span class="metric-val" id="m-rbe">0</span>
-              <span class="metric-label">Renda Básica Ecológica</span>
-            </div>
-          </div>
-          <div class="metric-item">
-            <span class="metric-icon">🗳️</span>
-            <div>
-              <span class="metric-val" id="m-gov">0</span>
-              <span class="metric-label">Votos Registrados</span>
-            </div>
+          <ul style="list-style: none; font-size: 13px; color: var(--text2); line-height: 1.8;">
+            <li>❌ <b>Receita Única e Exaustiva:</b> Venda de madeira e pasto de baixa produtividade (R$ 1.800/ha uma única vez).</li>
+            <li>❌ <b>Externalidades Socializadas:</b> Secas, quebra de safras e custos hospitalares pagos pelo povo.</li>
+            <li>❌ <b>Insegurança Jurídica:</b> Risco constante de embargo, multas do IBAMA e perda de acesso a crédito rural.</li>
+            <li>❌ <b>Horizonte Econômico:</b> Degradação do solo em 5 a 7 anos, transformando ativos em desertos.</li>
+          </ul>
+          <div style="background: rgba(239, 68, 68, 0.1); border-radius: var(--radius-sm); padding: 12px; margin-top: 16px; font-size: 12px; color: #fca5a5;">
+            <b>VPL em 10 Anos:</b> R$ 2.450 / ha (exaustão do solo e sanções)
           </div>
         </div>
-        <div class="eco-index">
-          <span class="eco-label">Índice de Saúde Ecosistêmica (ISE)</span>
-          <div class="eco-bar-bg">
-            <div class="eco-bar-fill" id="eco-bar"></div>
+
+        <!-- Lado Biocêntrico -->
+        <div class="narc-box biocentric">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="font-size: 24px;">🌿</span>
+            <h3 style="color: var(--green); font-size: 18px;">Tecnocracia Biocêntrica (BioChain)</h3>
           </div>
-          <span class="eco-pct" id="eco-pct">0%</span>
+          <ul style="list-style: none; font-size: 13px; color: var(--text2); line-height: 1.8;">
+            <li>✅ <b>Fluxo Perpétuo de Caixa:</b> Emissão contínua de GAIA e créditos de biodiversidade todo ano.</li>
+            <li>✅ <b>Renda Básica Direta:</b> R$ 600 a R$ 1.200/mês para as famílias que mantêm a floresta de pé.</li>
+            <li>✅ <b>Colateralização Financeira:</b> Ativos GAIA auditáveis servem de garantia em empréstimos verdes no SFN.</li>
+            <li>✅ <b>Soberania e Reconhecimento:</b> O Brasil como polo regulador da nova moeda ecológica global.</li>
+          </ul>
+          <div style="background: rgba(52, 211, 100, 0.1); border-radius: var(--radius-sm); padding: 12px; margin-top: 16px; font-size: 12px; color: #86efac;">
+            <b>VPL em 10 Anos:</b> R$ 14.800 / ha (fluxo contínuo perpétuo + valorização de GAIA)
+          </div>
         </div>
       </div>
 
-      <!-- Log de Eventos -->
-      <div class="card" id="card-log">
-        <div class="card-header">
-          <span class="card-icon">📜</span>
-          <h3>Log de Eventos</h3>
-        </div>
-        <div id="event-log" class="event-log"></div>
+      <!-- Equilíbrio de Nash -->
+      <div class="card" style="background: var(--surface2); border: 1px solid var(--border2); padding: 24px;">
+        <h3 style="color: var(--teal); font-size: 16px; margin-bottom: 8px;">Conclusão da Modelagem de Teoria dos Jogos</h3>
+        <p style="font-size: 13px; color: var(--text); line-height: 1.6;">
+          Quando a renda contínua da BioChain somada à Renda Básica Ecológica e às sanções da Lei de Crimes Ambientais supera o retorno da madeira predatória,
+          <b>a preservação torna-se a estratégia dominante estrita para proprietários e comunidades</b>. O narcisídio social deixa de ser viável não apenas por apelo moral, mas por pura racionalidade econômica e matemática.
+        </p>
       </div>
+    </section>
+  </div>
 
-    </aside>
-  </main>
+  <!-- ═══════════════════ MODAL LEITOR DE DOCUMENTOS ═══════════════════ -->
+  <div id="doc-modal" class="doc-modal hidden">
+    <div class="doc-modal-inner">
+      <div class="doc-modal-head">
+        <h3 id="doc-modal-title" style="color: var(--green); font-size: 16px;">Visualizador de Documento</h3>
+        <button class="btn btn-ghost btn-sm" onclick="closeDocModal()">✕ Fechar</button>
+      </div>
+      <div class="doc-modal-body" id="doc-modal-body">
+        <!-- Conteúdo do documento carregado aqui -->
+      </div>
+    </div>
+  </div>
 
   <!-- Mining Modal -->
   <div id="mining-modal" class="modal hidden">
@@ -284,7 +610,7 @@
   <div id="toast-container"></div>
 
   <footer class="footer">
-    <p>BioChain © 2026 — Tecnocracia Biocêntrica | Todos os seres vivos como sujeitos de direito | UFPR</p>
+    <p>BioChain © 2026 — Tecnocracia Biocêntrica · Método Brasiliano | A natureza como sujeito de direito | Universidade Federal do Paraná (UFPR)</p>
   </footer>
 
   <script src="blockchain.js"></script>
