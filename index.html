@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -39,9 +39,14 @@
           <span class="stat-label">Famílias RBE</span>
           <span class="stat-val" id="val-rbe-familias">15.420</span>
         </div>
-        <div class="stat-pill" id="stat-biomas">
-          <span class="stat-label">Biomas Conectados</span>
-          <span class="stat-val" id="val-biomas-count">7/7</span>
+        <!-- BioWallet Pill -->
+        <div class="wallet-pill" id="wallet-pill" onclick="toggleWalletDrawer()" title="Clique para gerenciar sua carteira soberana Drex">
+          <span class="wallet-profile-icon" id="wallet-icon">🌿</span>
+          <div style="display: flex; flex-direction: column; text-align: left;">
+            <span class="wallet-name" id="wallet-name">Guardião Xingu</span>
+            <span class="wallet-balance-tag" id="wallet-balance">2.400 GAIA | R$ 14.400 Drex</span>
+          </div>
+          <span style="font-size: 11px; opacity: 0.6;">▼</span>
         </div>
         <div class="pill-status" id="chain-status">
           <span class="dot green"></span> Chain Válida
@@ -58,7 +63,7 @@
         <span>🗺️</span> Biomas & Oráculos IA <span class="tab-badge">7 Nós</span>
       </button>
       <button class="tab-btn" id="btn-tab-rbe" onclick="switchTab('rbe')">
-        <span>💚</span> Calculadora RBE & Drex
+        <span>💚</span> Calculadora RBE
       </button>
       <button class="tab-btn" id="btn-tab-politica" onclick="switchTab('politica')">
         <span>🏛️</span> Acervo de Estado <span class="tab-badge">5 Docs</span>
@@ -204,11 +209,15 @@
           </div>
         </div>
 
-        <!-- Painel de Governança -->
+        <!-- Painel de Governança Quadrática -->
         <div class="card" id="card-governance">
           <div class="card-header">
             <span class="card-icon">🏛️</span>
-            <h3>DAO Biocêntrica</h3>
+            <h3>DAO Biocêntrica (Votação Quadrática)</h3>
+          </div>
+          <div style="background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 14px; font-size: 12px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: var(--text2);">Orçamento de Voz:</span>
+            <span style="color: var(--gold); font-family: 'JetBrains Mono', monospace; font-weight: 700;" id="user-voice-budget">100 Créditos</span>
           </div>
           <div class="gov-proposals" id="gov-proposals"></div>
         </div>
@@ -301,6 +310,161 @@
           <span class="badge" style="background: rgba(45,212,191,0.15); color: var(--teal); padding: 6px 12px; border-radius: 20px;">
             Reconciliação Bayesiana: 98.9%
           </span>
+        </div>
+      </div>
+
+      <!-- MAPA VETORIAL INTERATIVO DOS 7 BIOMAS -->
+      <div class="map-section-box">
+        <div class="map-header-row">
+          <div>
+            <h3 style="font-size: 19px; font-weight: 800; color: var(--green);">Mapa Geoespacial Soberano do Brasil</h3>
+            <p style="font-size: 12px; color: var(--text2); margin-top: 4px;">
+              Clique em qualquer bioma ou nó guardião para inspecionar dados orbitais ao vivo e sincronizar a calculadora territorial.
+            </p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <span class="badge" style="background: rgba(52,211,100,0.15); color: var(--green); padding: 5px 12px; border-radius: 12px; font-size: 11px;">
+              ● 7 Biomas Sincronizados
+            </span>
+            <span class="badge" style="background: rgba(45,212,191,0.15); color: var(--teal); padding: 5px 12px; border-radius: 12px; font-size: 11px;">
+              📡 Oráculos SERPRO/INPE Ativos
+            </span>
+          </div>
+        </div>
+
+        <div class="map-container-wrap">
+          <!-- SVG Vetorial do Território Brasileiro -->
+          <div class="brazil-svg-box">
+            <svg viewBox="0 0 600 600" id="brazil-map-svg">
+              <defs>
+                <linearGradient id="grad-amz" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#059669" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#10b981" stop-opacity="0.9" />
+                </linearGradient>
+                <linearGradient id="grad-cer" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#d97706" stop-opacity="0.75" />
+                  <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.85" />
+                </linearGradient>
+                <linearGradient id="grad-caa" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ea580c" stop-opacity="0.75" />
+                  <stop offset="100%" stop-color="#fb923c" stop-opacity="0.85" />
+                </linearGradient>
+                <linearGradient id="grad-mat" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#047857" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#34d399" stop-opacity="0.9" />
+                </linearGradient>
+                <linearGradient id="grad-pan" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0891b2" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.9" />
+                </linearGradient>
+                <linearGradient id="grad-pam" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#65a30d" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#a3e635" stop-opacity="0.9" />
+                </linearGradient>
+                <linearGradient id="grad-cos" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0284c7" stop-opacity="0.5" />
+                  <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.7" />
+                </linearGradient>
+              </defs>
+
+              <!-- Zona Costeira / Marinha -->
+              <path class="biome-path" id="biome-svg-cos" d="M 520,130 Q 580,240 520,380 L 460,490 L 390,580 L 420,590 L 510,480 Q 610,330 550,140 Z" fill="url(#grad-cos)" onclick="selectBiomeFromMap('cos')" title="Zona Costeira e Marinha" />
+
+              <!-- Amazônia -->
+              <path class="biome-path selected" id="biome-svg-amz" d="M 50,180 Q 90,70 210,50 Q 310,45 370,110 L 390,180 L 310,230 L 230,290 L 110,270 Z" fill="url(#grad-amz)" onclick="selectBiomeFromMap('amz')" title="Bioma Amazônia" />
+
+              <!-- Cerrado -->
+              <path class="biome-path" id="biome-svg-cer" d="M 230,290 L 310,230 L 390,180 L 420,210 L 410,340 L 330,390 L 250,380 L 225,330 Z" fill="url(#grad-cer)" onclick="selectBiomeFromMap('cer')" title="Bioma Cerrado" />
+
+              <!-- Caatinga -->
+              <path class="biome-path" id="biome-svg-caa" d="M 390,180 Q 470,120 530,155 L 535,225 L 455,265 L 420,210 Z" fill="url(#grad-caa)" onclick="selectBiomeFromMap('caa')" title="Bioma Caatinga" />
+
+              <!-- Mata Atlântica -->
+              <path class="biome-path" id="biome-svg-mat" d="M 455,265 L 535,225 Q 515,310 475,390 L 415,480 L 365,460 L 410,340 Z" fill="url(#grad-mat)" onclick="selectBiomeFromMap('mat')" title="Bioma Mata Atlântica" />
+
+              <!-- Pantanal -->
+              <path class="biome-path" id="biome-svg-pan" d="M 195,335 L 245,315 L 255,385 L 205,395 Z" fill="url(#grad-pan)" onclick="selectBiomeFromMap('pan')" title="Bioma Pantanal" />
+
+              <!-- Pampa -->
+              <path class="biome-path" id="biome-svg-pam" d="M 335,485 L 415,480 L 390,575 L 320,565 Z" fill="url(#grad-pam)" onclick="selectBiomeFromMap('pam')" title="Bioma Pampa" />
+
+              <!-- Marcadores de Nós Guardiões Georreferenciados -->
+              <g class="map-node-dot" onclick="selectBiomeFromMap('amz')">
+                <circle cx="210" cy="150" r="14" fill="#10b981" class="node-pulse-ring" />
+                <circle cx="210" cy="150" r="6" fill="#ffffff" stroke="#059669" stroke-width="2" />
+                <text x="220" y="145" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Amazônia</text>
+              </g>
+
+              <g class="map-node-dot" onclick="selectBiomeFromMap('cer')">
+                <circle cx="315" cy="295" r="14" fill="#f59e0b" class="node-pulse-ring" />
+                <circle cx="315" cy="295" r="6" fill="#ffffff" stroke="#d97706" stroke-width="2" />
+                <text x="325" y="290" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Cerrado</text>
+              </g>
+
+              <g class="map-node-dot" onclick="selectBiomeFromMap('caa')">
+                <circle cx="455" cy="195" r="14" fill="#ea580c" class="node-pulse-ring" />
+                <circle cx="455" cy="195" r="6" fill="#ffffff" stroke="#c2410c" stroke-width="2" />
+                <text x="400" y="180" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Caatinga</text>
+              </g>
+
+              <g class="map-node-dot" onclick="selectBiomeFromMap('mat')">
+                <circle cx="440" cy="390" r="14" fill="#34d399" class="node-pulse-ring" />
+                <circle cx="440" cy="390" r="6" fill="#ffffff" stroke="#047857" stroke-width="2" />
+                <text x="450" y="405" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Mata-Atlântica</text>
+              </g>
+
+              <g class="map-node-dot" onclick="selectBiomeFromMap('pan')">
+                <circle cx="225" cy="355" r="14" fill="#22d3ee" class="node-pulse-ring" />
+                <circle cx="225" cy="355" r="6" fill="#ffffff" stroke="#0891b2" stroke-width="2" />
+                <text x="120" y="360" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Pantanal</text>
+              </g>
+
+              <g class="map-node-dot" onclick="selectBiomeFromMap('pam')">
+                <circle cx="360" cy="530" r="14" fill="#a3e635" class="node-pulse-ring" />
+                <circle cx="360" cy="530" r="6" fill="#ffffff" stroke="#65a30d" stroke-width="2" />
+                <text x="370" y="545" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Pampa</text>
+              </g>
+
+              <g class="map-node-dot" onclick="selectBiomeFromMap('cos')">
+                <circle cx="510" cy="310" r="14" fill="#38bdf8" class="node-pulse-ring" />
+                <circle cx="510" cy="310" r="6" fill="#ffffff" stroke="#0284c7" stroke-width="2" />
+                <text x="460" y="295" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Costeiro</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Card de Detalhe Espacial do Bioma Selecionado -->
+          <div class="map-info-card" id="map-info-card">
+            <div class="map-info-title">
+              <span id="map-info-icon">🌳</span>
+              <span id="map-info-name">Bioma Amazônia</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text2); line-height: 1.5; margin-bottom: 16px;" id="map-info-desc">
+              Maior floresta tropical contínua da Terra, abrangendo 4,1 milhões de km² em território brasileiro. Regulador primordial do ciclo de rios voadores e sequestro ativo de carbono.
+            </p>
+
+            <div class="biome-stats-grid">
+              <div class="biome-stat-box">
+                <div class="biome-stat-lbl">Multiplicador PoE</div>
+                <div class="biome-stat-val" id="map-info-stress">1.20x</div>
+              </div>
+              <div class="biome-stat-box">
+                <div class="biome-stat-lbl">Cobertura Atual</div>
+                <div class="biome-stat-val" id="map-info-canopy">86.4%</div>
+              </div>
+              <div class="biome-stat-box">
+                <div class="biome-stat-lbl">Oráculo Ativo</div>
+                <div class="biome-stat-val" style="font-size: 11px;" id="map-info-oracle">INPE-DETER-AMZ-01</div>
+              </div>
+              <div class="biome-stat-box">
+                <div class="biome-stat-lbl">Índice Hídrico</div>
+                <div class="biome-stat-val" style="color: var(--teal);" id="map-info-water">Excelente (78%)</div>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 8px;" onclick="syncMapWithCalculator()">
+              <span>💚</span> Simular RBE neste Bioma
+            </button>
         </div>
       </div>
 
@@ -573,6 +737,130 @@
     </section>
   </div>
 
+  <!-- ═══════════════════ DRAWER DA BIOWALLET SOBERANA ═══════════════════ -->
+  <div id="wallet-drawer" class="wallet-drawer">
+    <div class="wallet-drawer-head">
+      <h3 style="font-size: 17px; font-weight: 700; color: var(--green); display: flex; align-items: center; gap: 8px;">
+        <span>👛</span> BioWallet Drex Soberana
+      </h3>
+      <button class="btn btn-ghost btn-sm" onclick="toggleWalletDrawer()">✕</button>
+    </div>
+
+    <div class="wallet-card-display">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <span style="font-size: 11px; color: var(--text3); text-transform: uppercase;">Saldo de Custódia</span>
+        <span style="font-size: 10px; color: var(--green); background: rgba(52,211,100,0.1); padding: 2px 6px; border-radius: 6px;">● Drex Vinculado</span>
+      </div>
+      <div style="font-size: 26px; font-weight: 800; color: var(--text); font-family: 'JetBrains Mono', monospace;" id="drawer-gaia-balance">
+        2.400 GAIA
+      </div>
+      <div style="font-size: 13px; color: var(--teal); font-family: 'JetBrains Mono', monospace; margin-top: 4px;" id="drawer-drex-balance">
+        ≈ R$ 14.400,00 Drex
+      </div>
+      <div style="margin-top: 14px; font-size: 10px; color: var(--text3); font-family: 'JetBrains Mono', monospace;">
+        Endereço: <span id="drawer-wallet-address">0x71C3...4E9A_BR</span>
+      </div>
+    </div>
+
+    <div style="font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 10px;">Alternar Perfil Institucional:</div>
+    <div class="wallet-profile-select-grid">
+      <div class="profile-card-option active" id="prof-guardian" onclick="setWalletProfile('guardian')">
+        <span style="font-size: 20px;">🌿</span>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--text);">Guardião Territorial</div>
+          <div style="font-size: 11px; color: var(--text3);">Comunidade Xingu · Recebimento RBE</div>
+        </div>
+      </div>
+      <div class="profile-card-option" id="prof-enterprise" onclick="setWalletProfile('enterprise')">
+        <span style="font-size: 20px;">🏢</span>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--text);">Empresa Compensadora</div>
+          <div style="font-size: 11px; color: var(--text3);">Indústria S.A. · Queima de Créditos</div>
+        </div>
+      </div>
+      <div class="profile-card-option" id="prof-auditor" onclick="setWalletProfile('auditor')">
+        <span style="font-size: 20px;">🏛️</span>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--text);">Auditor de Estado</div>
+          <div style="font-size: 11px; color: var(--text3);">INPE / TCU · Conformidade de Oráculos</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: auto;">
+      <button class="btn btn-primary" style="width: 100%; margin-bottom: 8px;" onclick="simulateDrexWithdrawal()">
+        <span>💸</span> Simular Saque RBE via Pix / Drex
+      </button>
+      <button class="btn btn-ghost btn-sm" style="width: 100%;" onclick="toggleWalletDrawer()">Fechar Painel</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ MODAL CERTIFICADO DE DESCARBONIZAÇÃO ═══════════════════ -->
+  <div id="cert-modal" class="cert-modal hidden">
+    <div class="cert-modal-inner">
+      <button class="btn btn-ghost btn-sm" style="position: absolute; top: 16px; right: 16px;" onclick="closeCertModal()">✕ Fechar</button>
+
+      <div class="cert-border-seal">
+        <div class="cert-header">
+          <div class="cert-emblem">🌿</div>
+          <div class="cert-country">República Federativa do Brasil</div>
+          <div class="cert-agency">Agência Nacional de Governança Biocêntrica · Protocolo BioChain</div>
+          <h2 class="cert-title">CERTIFICADO NACIONAL DE COMPENSAÇÃO E CUSTÓDIA AMBIENTAL</h2>
+          <p style="font-size: 12px; color: var(--text2);">Emitido nos termos da Lei Federal nº 14.119/2021 e do Marco Legal da BioChain</p>
+        </div>
+
+        <p style="font-size: 14px; text-align: justify; line-height: 1.7; margin-bottom: 20px;">
+          Certifica-se, para todos os efeitos civis, tributários e de conformidade ESG soberana, que a entidade <b id="cert-holder-name">Indústria Sustentável S.A.</b> realizou a <b>queima e aposentadoria criptográfica irrevogável</b> de tokens ambientais GAIA no livro-razão público da <b>BioChain Brasil</b>, tornando nula qualquer possibilidade de dupla contabilidade.
+        </p>
+
+        <div class="cert-meta-grid">
+          <div class="cert-meta-item">
+            <div class="cert-meta-lbl">Volume Neutralizado</div>
+            <div class="cert-meta-val" id="cert-co2-val" style="color: var(--green);">300.0 tCO₂e</div>
+          </div>
+          <div class="cert-meta-item">
+            <div class="cert-meta-lbl">Tokens GAIA Aposentados</div>
+            <div class="cert-meta-val" id="cert-tokens-val">300 GAIA</div>
+          </div>
+          <div class="cert-meta-item">
+            <div class="cert-meta-lbl">Bioma Beneficiado</div>
+            <div class="cert-meta-val" id="cert-biome-val">Amazônia (Fator 1.20x)</div>
+          </div>
+          <div class="cert-meta-item">
+            <div class="cert-meta-lbl">Data de Aposentadoria</div>
+            <div class="cert-meta-val" id="cert-date-val">12/09/2026 15:30:00</div>
+          </div>
+          <div class="cert-meta-item" style="grid-column: 1 / -1;">
+            <div class="cert-meta-lbl">Hash da Queima (Imutável)</div>
+            <div class="cert-meta-val" style="font-size: 11px; word-break: break-all;" id="cert-hash-val">0x9f4ce31a78b021c45689efd1234a9012356789abcdef</div>
+          </div>
+        </div>
+
+        <div class="cert-qr-row">
+          <div style="font-size: 11px; color: var(--text2); line-height: 1.5;">
+            <b>Autenticação On-Chain:</b><br/>
+            Rede: BioChain Mainnet Federação Biomas<br/>
+            Contrato: <span style="font-family: 'JetBrains Mono';">0x000000000000000000000000000000000000dEaD</span><br/>
+            Validador: Guardian-Amazônia-0x1A
+          </div>
+          <!-- QR Code Vetorial -->
+          <div class="cert-qr-code" title="QR Code de Verificação Pública">
+            <svg viewBox="0 0 100 100" width="76" height="76">
+              <path fill="#000" d="M0,0 h30 v30 h-30 z M40,0 h20 v10 h-20 z M70,0 h30 v30 h-30 z M10,10 h10 v10 h-10 z M80,10 h10 v10 h-10 z M40,20 h10 v20 h-10 z M0,40 h10 v20 h-10 z M20,40 h20 v10 h-20 z M60,40 h30 v10 h-30 z M0,70 h30 v30 h-30 z M10,80 h10 v10 h-10 z M40,70 h20 v10 h-20 z M70,60 h10 v40 h-10 z M90,80 h10 v20 h-10 z M40,90 h20 v10 h-20 z" />
+            </svg>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; gap: 12px; margin-top: 24px;">
+          <button class="btn btn-primary" onclick="window.print()">
+            <span>🖨️</span> Imprimir / Salvar PDF
+          </button>
+          <button class="btn btn-ghost" onclick="closeCertModal()">Concluído</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══════════════════ MODAL LEITOR DE DOCUMENTOS ═══════════════════ -->
   <div id="doc-modal" class="doc-modal hidden">
     <div class="doc-modal-inner">
@@ -610,7 +898,7 @@
   <div id="toast-container"></div>
 
   <footer class="footer">
-    <p>BioChain © 2026 — Tecnocracia Biocêntrica · Método Brasiliano | A natureza como sujeito de direito | Universidade Federal do Paraná (UFPR)</p>
+    <p>BioChain © 2026 — Tecnocracia Biocêntrica · Método Brasiliano | A natureza como sujeito de direito</p>
   </footer>
 
   <script src="blockchain.js"></script>

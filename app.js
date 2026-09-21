@@ -24,21 +24,134 @@ const TYPE_ICONS = {
   carbono: '💨', solo: '🌱', governanca: '🗳️', renda: '💚', queima: '🔥'
 };
 
+let voiceBudget = 100;
+let currentProfile = 'guardian';
+let selectedBiomeId = 'amz';
+
+const WALLET_PROFILES = {
+  guardian: {
+    id: 'guardian',
+    name: 'Guardião Territorial',
+    shortName: 'Guardião Xingu',
+    role: 'Comunidade Xingu · Recebimento RBE',
+    address: '0x71C3...4E9A_BR',
+    gaia: 2400,
+    drex: 'R$ 14.400,00',
+    icon: '🌿',
+    origin: 'Guardian-Amazônia-0x1A'
+  },
+  enterprise: {
+    id: 'enterprise',
+    name: 'Empresa Compensadora',
+    shortName: 'Indústria S.A.',
+    role: 'Indústria Sustentável S.A. · Queima de Créditos',
+    address: '0x99A4...2B10_BR',
+    gaia: 12500,
+    drex: 'R$ 75.000,00',
+    icon: '🏢',
+    origin: 'Indústria-Descarbonizada-0x99'
+  },
+  auditor: {
+    id: 'auditor',
+    name: 'Auditor de Estado',
+    shortName: 'Auditor TCU',
+    role: 'INPE / TCU · Conformidade de Oráculos',
+    address: '0x3F88...E019_BR',
+    gaia: 500,
+    drex: 'R$ 3.000,00',
+    icon: '🏛️',
+    origin: 'Tribunal-Contas-Uniao-0x01'
+  }
+};
+
+const BIOME_MAP_INFO = {
+  amz: {
+    name: 'Bioma Amazônia',
+    icon: '🌳',
+    desc: 'Maior floresta tropical contínua da Terra, abrangendo 4,1 milhões de km² em território brasileiro. Regulador primordial do ciclo de rios voadores e sequestro ativo de carbono.',
+    stress: '1.20x',
+    canopy: '86.4%',
+    oracle: 'INPE-DETER-AMZ-01',
+    water: 'Excelente (78%)',
+    biomaSelectVal: 'Amazonia'
+  },
+  cer: {
+    name: 'Bioma Cerrado',
+    icon: '🌱',
+    desc: 'Berço das águas brasileiras e savana mais biodiversa do mundo (2,0M km²). Alimenta 8 das 12 principais bacias hidrográficas nacionais com alta taxa de estresse antrópico.',
+    stress: '1.25x',
+    canopy: '51.2%',
+    oracle: 'INPE-DETER-CR-04',
+    water: 'Crítico (44%)',
+    biomaSelectVal: 'Cerrado'
+  },
+  caa: {
+    name: 'Bioma Caatinga',
+    icon: '🌵',
+    desc: 'Único bioma exclusivamente brasileiro (844k km²). Alta resiliência climática, endemismo biológico e fronteira prioritária contra a desertificação no Semiárido.',
+    stress: '1.30x',
+    canopy: '42.0%',
+    oracle: 'INPE-SEMIARIDO-03',
+    water: 'Seco (28%)',
+    biomaSelectVal: 'Caatinga'
+  },
+  mat: {
+    name: 'Bioma Mata Atlântica',
+    icon: '🌿',
+    desc: 'Bioma mais ameaçado e densamente habitado (1,3M km² original, 28,5% remanescente). Abriga 70% da população e gera 80% do PIB, com altíssimo valor de conservação.',
+    stress: '1.40x',
+    canopy: '28.5%',
+    oracle: 'INPE-SIRENE-MA-02',
+    water: 'Moderado (62%)',
+    biomaSelectVal: 'MataAtlantica'
+  },
+  pan: {
+    name: 'Bioma Pantanal',
+    icon: '🐾',
+    desc: 'Maior planície alagável contínua do planeta (150k km²). Patrimônio Natural da Humanidade com ciclos hidrológicos extremos e altíssima vulnerabilidade a incêndios.',
+    stress: '1.35x',
+    canopy: '72.1%',
+    oracle: 'ANA-TELEMETRIA-PAN-09',
+    water: 'Alagado (82%)',
+    biomaSelectVal: 'Pantanal'
+  },
+  pam: {
+    name: 'Bioma Pampa',
+    icon: '🌾',
+    desc: 'Campos sulinos com rica biodiversidade vegetal e solos de alto teor de matéria orgânica (176k km²). Tradição pastoril sustentável e conservação de pastagens naturais.',
+    stress: '1.15x',
+    canopy: '74.0%',
+    oracle: 'EMBRAPA-PAMPA-01',
+    water: 'Estável (65%)',
+    biomaSelectVal: 'Pampa'
+  },
+  cos: {
+    name: 'Zona Costeira e Marinha',
+    icon: '🌊',
+    desc: 'Mais de 8.500 km de costa (Amazônia Azul). Manguezais com sequestro de carbono azul até 5x superior a florestas terrestres e proteção de recifes de corais.',
+    stress: '1.25x',
+    canopy: '91.0%',
+    oracle: 'MARINHA-ORACULO-07',
+    water: 'Marinho (95%)',
+    biomaSelectVal: 'ZonaCosteira'
+  }
+};
+
 const PROPOSALS = [
   {
     id: 'p1', title: 'PSA Universal — Pagamento por Serviços Ambientais',
     desc: 'Tokenizar 50M ha de floresta nativa e distribuir GAIA tokens para guardiões locais.',
-    yes: 72, no: 18
+    yes: 72, no: 18, userVotes: 0
   },
   {
     id: 'p2', title: 'RBE — Renda Básica Ecológica',
     desc: 'Financiar renda básica com receita de créditos de carbono tokenizados na BioChain.',
-    yes: 85, no: 10
+    yes: 85, no: 10, userVotes: 0
   },
   {
     id: 'p3', title: 'Oráculos de IA Soberana (INPE/MapBiomas)',
     desc: 'Hospedar modelos de visão computacional ambiental em infraestrutura pública do SERPRO/RNP.',
-    yes: 94, no: 4
+    yes: 94, no: 4, userVotes: 0
   }
 ];
 
@@ -171,6 +284,8 @@ async function init() {
   renderGovernance();
   renderBiomes();
   calculateRBE();
+  selectBiomeFromMap('amz');
+  setWalletProfile('guardian');
 
   log('BioChain v2.0 inicializada · Bloco Gênesis criado', 'success');
   log('Tecnocracia Biocêntrica · Federação de Biomas ativa', 'success');
@@ -185,6 +300,21 @@ async function init() {
   // Fechar modal de documentos ao clicar fora
   document.getElementById('doc-modal')?.addEventListener('click', (e) => {
     if (e.target.id === 'doc-modal') closeDocModal();
+  });
+
+  // Fechar modal de certificado ao clicar fora
+  document.getElementById('cert-modal')?.addEventListener('click', (e) => {
+    if (e.target.id === 'cert-modal') closeCertModal();
+  });
+
+  // Atalho Teclado ESC para fechar gavetas e modais
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeDocModal();
+      closeCertModal();
+      const drawer = document.getElementById('wallet-drawer');
+      if (drawer?.classList.contains('open')) toggleWalletDrawer();
+    }
   });
 }
 
@@ -298,6 +428,14 @@ function selectBlock(index) {
     txHTML = '<p class="empty-msg">Sem transações neste bloco.</p>';
   }
 
+  const hasQueima = block.transactions.some(tx => tx.type === 'queima');
+  const certBtn = hasQueima ? `
+    <div style="margin-top: 14px;">
+      <button class="btn btn-secondary btn-sm" style="width: 100%;" onclick="openCertModalForBlock(${index})">
+        <span>📜</span> Visualizar Certificado de Descarbonização
+      </button>
+    </div>` : '';
+
   content.innerHTML = `
     <div class="inspector-field"><div class="inspector-key">Índice</div><div class="inspector-val">${block.index}</div></div>
     <div class="inspector-field"><div class="inspector-key">Hash</div><div class="inspector-val">${block.hash}</div></div>
@@ -308,6 +446,7 @@ function selectBlock(index) {
     <div class="inspector-field"><div class="inspector-key">Validador</div><div class="inspector-val">${block.validator}</div></div>` : ''}
     <div class="inspector-field"><div class="inspector-key">Transações</div></div>
     ${txHTML}
+    ${certBtn}
   `;
 }
 
@@ -399,6 +538,10 @@ async function mineBlock() {
     renderMempool();
     updateStats();
     selectBlock(block.index);
+
+    if (block.transactions.some(t => t.type === 'queima')) {
+      setTimeout(() => openCertModalForBlock(block.index), 500);
+    }
 
     log(`⛏️ Bloco #${block.index} minerado por ${validator} · Score PoE: ${block.ecologicalScore}`, 'success');
     showToast(`⛏️ Bloco #${block.index} minerado com sucesso!`, 'success');
@@ -628,10 +771,19 @@ function addRandomNode() {
 
 function renderGovernance() {
   const container = document.getElementById('gov-proposals');
+  const budgetEl = document.getElementById('user-voice-budget');
+  if (budgetEl) budgetEl.textContent = `${voiceBudget} Créditos`;
+
+  if (!container) return;
+
   container.innerHTML = PROPOSALS.map(p => {
     const total = p.yes + p.no;
-    const yesPct = Math.round((p.yes / total) * 100);
+    const yesPct = total ? Math.round((p.yes / total) * 100) : 50;
     const noPct = 100 - yesPct;
+    const userVotes = p.userVotes || 0;
+    const nextVoteCost = 2 * userVotes + 1;
+    const creditsSpent = userVotes * userVotes;
+
     return `
     <div class="gov-proposal" id="prop-${p.id}">
       <div class="gov-proposal-title">${p.title}</div>
@@ -640,10 +792,23 @@ function renderGovernance() {
         <div class="gov-vote-bar"><div class="gov-vote-fill yes" style="width:${yesPct}%"></div></div>
         <div class="gov-vote-bar"><div class="gov-vote-fill no" style="width:${noPct}%"></div></div>
       </div>
-      <div class="gov-vote-labels"><span>✅ ${yesPct}% (${p.yes})</span><span>❌ ${noPct}% (${p.no})</span></div>
-      <div class="gov-vote-btns">
-        <button class="gov-vote-btn yes" onclick="vote('${p.id}', true)">Sim</button>
-        <button class="gov-vote-btn no" onclick="vote('${p.id}', false)">Não</button>
+      <div class="gov-vote-labels">
+        <span>✅ Sim: ${yesPct}% (${p.yes})</span>
+        <span>❌ Não: ${noPct}% (${p.no})</span>
+      </div>
+
+      <!-- Controle de Votação Quadrática (v²) -->
+      <div class="quad-vote-control">
+        <div>
+          <span style="font-size: 11px; color: var(--text2);">Poder de Voz:</span>
+          <span class="quad-cost-badge">${userVotes} Voto${userVotes !== 1 ? 's' : ''} (${creditsSpent} cr)</span>
+        </div>
+        <div style="display: flex; gap: 6px; align-items: center;">
+          <button class="quad-btn" onclick="voteQuadratic('${p.id}', -1)" ${userVotes <= 0 ? 'disabled style="opacity:0.4;cursor:not-allowed;"' : ''} title="Remover 1 voto">-</button>
+          <button class="btn btn-secondary btn-sm" onclick="voteQuadratic('${p.id}', 1)" title="Adicionar 1 voto (custo: ${nextVoteCost} cr)">
+            +1 Voto (${nextVoteCost} cr)
+          </button>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -663,6 +828,218 @@ function vote(id, yes) {
   renderMempool();
   log(`🗳️ Voto registrado: "${p.title.slice(0, 30)}..."`, 'success');
   showToast(`🗳️ Voto adicionado à mempool!`, 'success');
+}
+
+// ─── Mapa Vetorial dos Biomas ─────────────────────────────
+function selectBiomeFromMap(biomeId) {
+  const info = BIOME_MAP_INFO[biomeId];
+  if (!info) return;
+  selectedBiomeId = biomeId;
+
+  document.querySelectorAll('.biome-path').forEach(p => p.classList.remove('selected'));
+  const activePath = document.getElementById(`biome-svg-${biomeId}`);
+  if (activePath) activePath.classList.add('selected');
+
+  const iconEl = document.getElementById('map-info-icon');
+  const nameEl = document.getElementById('map-info-name');
+  const descEl = document.getElementById('map-info-desc');
+  const stressEl = document.getElementById('map-info-stress');
+  const canopyEl = document.getElementById('map-info-canopy');
+  const oracleEl = document.getElementById('map-info-oracle');
+  const waterEl = document.getElementById('map-info-water');
+
+  if (iconEl) iconEl.textContent = info.icon;
+  if (nameEl) nameEl.textContent = info.name;
+  if (descEl) descEl.textContent = info.desc;
+  if (stressEl) stressEl.textContent = info.stress;
+  if (canopyEl) canopyEl.textContent = info.canopy;
+  if (oracleEl) oracleEl.textContent = info.oracle;
+  if (waterEl) waterEl.textContent = info.water;
+
+  document.querySelectorAll('.biome-card').forEach(c => c.style.borderColor = 'var(--border)');
+  const card = document.getElementById(`card-biome-${biomeId}`);
+  if (card) {
+    card.style.borderColor = 'var(--green)';
+  }
+
+  log(`Mapa Vetorial: ${info.name} selecionado · Oráculo ${info.oracle}`, 'info');
+}
+
+function syncMapWithCalculator() {
+  const info = BIOME_MAP_INFO[selectedBiomeId];
+  if (!info) return;
+
+  switchTab('rbe');
+  const biomaSelect = document.getElementById('rbe-bioma');
+  if (biomaSelect) {
+    biomaSelect.value = info.biomaSelectVal;
+    calculateRBE();
+  }
+  showToast(`💚 Calculadora RBE sincronizada com o ${info.name}!`, 'success');
+  log(`Calculadora RBE: Parâmetros ajustados para ${info.name}`, 'info');
+}
+
+// ─── BioWallet Drex ───────────────────────────────────────
+function toggleWalletDrawer() {
+  const drawer = document.getElementById('wallet-drawer');
+  if (drawer) {
+    drawer.classList.toggle('open');
+  }
+}
+
+function setWalletProfile(profileKey) {
+  const prof = WALLET_PROFILES[profileKey];
+  if (!prof) return;
+  currentProfile = profileKey;
+
+  document.querySelectorAll('.profile-card-option').forEach(el => el.classList.remove('active'));
+  const activeEl = document.getElementById(`prof-${profileKey}`);
+  if (activeEl) activeEl.classList.add('active');
+
+  const drawerGaia = document.getElementById('drawer-gaia-balance');
+  const drawerDrex = document.getElementById('drawer-drex-balance');
+  const drawerAddr = document.getElementById('drawer-wallet-address');
+  if (drawerGaia) drawerGaia.textContent = `${prof.gaia.toLocaleString('pt-BR')} GAIA`;
+  if (drawerDrex) drawerDrex.textContent = `≈ ${prof.drex} Drex`;
+  if (drawerAddr) drawerAddr.textContent = prof.address;
+
+  const pillIcon = document.getElementById('wallet-icon');
+  const pillName = document.getElementById('wallet-name');
+  const pillBalance = document.getElementById('wallet-balance');
+  if (pillIcon) pillIcon.textContent = prof.icon;
+  if (pillName) pillName.textContent = prof.shortName;
+  if (pillBalance) pillBalance.textContent = `${prof.gaia.toLocaleString('pt-BR')} GAIA | ${prof.drex} Drex`;
+
+  const txOrigin = document.getElementById('tx-origin');
+  if (txOrigin) txOrigin.value = prof.origin;
+
+  log(`BioWallet Drex: Perfil alterado para "${prof.name}"`, 'info');
+  showToast(`👛 Perfil ativo: ${prof.name}`, 'info');
+}
+
+function simulateDrexWithdrawal() {
+  const prof = WALLET_PROFILES[currentProfile];
+  if (!prof) return;
+
+  const withdrawAmount = Math.min(prof.gaia, 400);
+  if (withdrawAmount <= 0) {
+    showToast('Saldo insuficiente para saque!', 'warn');
+    return;
+  }
+
+  prof.gaia -= withdrawAmount;
+  const drexValor = withdrawAmount * 6;
+  prof.drex = `R$ ${(prof.gaia * 6).toLocaleString('pt-BR')},00`;
+
+  setWalletProfile(currentProfile);
+
+  const tx = new BioTransaction({
+    type: 'renda',
+    origin: prof.origin,
+    destination: 'Banco-Central-Drex-Gateway-0xBACEN',
+    amount: withdrawAmount,
+    area: 0,
+    co2: 0,
+    metadata: {
+      motivo: 'Liquidação RBE Drex',
+      favorecido: prof.name,
+      liquidado_brl: `R$ ${drexValor.toLocaleString('pt-BR')},00`,
+      chave_pix: prof.address
+    }
+  });
+  blockchain.addTransaction(tx);
+  renderMempool();
+
+  showToast(`💸 Saque de R$ ${drexValor.toLocaleString('pt-BR')},00 liquidado via Drex!`, 'success');
+  log(`Drex Settlement: R$ ${drexValor.toLocaleString('pt-BR')},00 transferidos para conta vinculada`, 'success');
+}
+
+// ─── Certificado de Descarbonização ────────────────────────
+function openCertModal(tx, block) {
+  const modal = document.getElementById('cert-modal');
+  if (!modal) return;
+
+  const holderName = document.getElementById('cert-holder-name');
+  const co2Val = document.getElementById('cert-co2-val');
+  const tokensVal = document.getElementById('cert-tokens-val');
+  const biomeVal = document.getElementById('cert-biome-val');
+  const dateVal = document.getElementById('cert-date-val');
+  const hashVal = document.getElementById('cert-hash-val');
+
+  const origin = tx?.origin || 'Indústria Sustentável S.A.';
+  const co2 = tx?.co2 ? tx.co2.toFixed(1) : (tx?.amount ? tx.amount.toFixed(1) : '300.0');
+  const tokens = tx?.amount ? `${tx.amount.toLocaleString('pt-BR')} GAIA` : '300 GAIA';
+  const bioma = tx?.metadata?.bioma || 'Amazônia (Fator 1.20x)';
+  const date = block ? new Date(block.timestamp).toLocaleString('pt-BR') : new Date().toLocaleString('pt-BR');
+  const hash = tx?.id || block?.hash || ('0x' + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join(''));
+
+  if (holderName) holderName.textContent = origin;
+  if (co2Val) co2Val.textContent = `${co2} tCO₂e`;
+  if (tokensVal) tokensVal.textContent = tokens;
+  if (biomeVal) biomeVal.textContent = bioma;
+  if (dateVal) dateVal.textContent = date;
+  if (hashVal) hashVal.textContent = hash;
+
+  modal.classList.remove('hidden');
+  log(`Certificado Verde emitido on-chain para ${origin}`, 'success');
+}
+
+function openCertModalForBlock(index) {
+  const block = blockchain.chain[index];
+  if (!block) return;
+  const queimaTx = block.transactions.find(t => t.type === 'queima') || block.transactions[0];
+  openCertModal(queimaTx, block);
+}
+
+function closeCertModal() {
+  const modal = document.getElementById('cert-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+// ─── Governança Quadrática ────────────────────────────────
+function voteQuadratic(proposalId, delta) {
+  const p = PROPOSALS.find(item => item.id === proposalId);
+  if (!p) return;
+  p.userVotes = p.userVotes || 0;
+
+  if (delta > 0) {
+    const cost = 2 * p.userVotes + 1;
+    if (voiceBudget < cost) {
+      showToast(`⚠️ Créditos de voz insuficientes! Custo: ${cost}, você tem: ${voiceBudget}`, 'warn');
+      return;
+    }
+    voiceBudget -= cost;
+    p.userVotes += 1;
+    p.yes += 1;
+
+    const tx = new BioTransaction({
+      type: 'governanca',
+      origin: WALLET_PROFILES[currentProfile]?.origin || nodes[0].name,
+      destination: 'DAO-BioChain-Brasil',
+      amount: 1,
+      metadata: {
+        proposta: p.id,
+        tipo: 'voto_quadratico_favoravel',
+        votos_acumulados: p.userVotes,
+        creditos_gastos: cost
+      }
+    });
+    blockchain.addTransaction(tx);
+    renderMempool();
+    showToast(`🗳️ Voto quadrático computado para "${p.title.slice(0, 25)}..."! Custo: ${cost} cr`, 'success');
+    log(`DAO Votação Quadrática: +1 voto em ${p.id} (Custo: ${cost} créditos)`, 'success');
+  } else if (delta < 0) {
+    if (p.userVotes <= 0) return;
+    const refund = 2 * p.userVotes - 1;
+    voiceBudget += refund;
+    p.userVotes -= 1;
+    p.yes = Math.max(0, p.yes - 1);
+
+    showToast(`↩️ Voto retirado. ${refund} créditos devolvidos ao seu orçamento de voz.`, 'info');
+    log(`DAO Votação Quadrática: -1 voto em ${p.id} (Reembolso: ${refund} créditos)`, 'info');
+  }
+
+  renderGovernance();
 }
 
 // ─── Log & Toast ──────────────────────────────────────────
