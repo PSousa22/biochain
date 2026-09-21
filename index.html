@@ -12,6 +12,11 @@
 </head>
 <body>
 
+  <!-- ═══════════════════ BANNER DE PROTÓTIPO ═══════════════════ -->
+  <div class="prototype-notice-bar">
+    <span>⚠️ SIMULAÇÃO INTERATIVA DE POLÍTICA PÚBLICA · AMBIENTE DE DEMONSTRAÇÃO E PROTÓTIPO ACADÊMICO (V2.0 SOBERANA)</span>
+  </div>
+
   <!-- ═══════════════════ HEADER ═══════════════════ -->
   <header class="header">
     <div class="header-inner">
@@ -36,7 +41,7 @@
           <span class="stat-val" id="val-co2">0 tC</span>
         </div>
         <div class="stat-pill" id="stat-rbe">
-          <span class="stat-label">Famílias RBE</span>
+          <span class="stat-label">Famílias RBE (Simulado)</span>
           <span class="stat-val" id="val-rbe-familias">15.420</span>
         </div>
         <!-- BioWallet Pill -->
@@ -564,16 +569,16 @@
             </div>
           </div>
 
-          <!-- Comprovante Criptográfico Drex -->
+          <!-- Comprovante Criptográfico RBE em 2 Fases -->
           <div class="drex-receipt-box">
             <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding-bottom: 6px; margin-bottom: 8px;">
-              <span>LIQUIDAÇÃO DREX (BACEN)</span>
-              <span style="color: var(--green);">● CONTRATO HOMOLOGADO</span>
+              <span>ARQUITETURA RBE (FASE 1: PIX/CAIXA | FASE 2: DREX VAREJO)</span>
+              <span style="color: var(--teal);">● SIMULAÇÃO DE FLUXO</span>
             </div>
             <div>Beneficiário: Família Guardiã Xingu (Hash: 0x9f4c...3e1a)</div>
-            <div>Contrato: 0xBioChainRBEBridgeV1_Drex</div>
-            <div>Origem: 60% Fundo de Emissão Primária GAIA</div>
-            <div style="margin-top: 6px; color: var(--teal);">Taxa de Intermediação: R$ 0,00 (Zero Pedágio)</div>
+            <div>Trilho Vigente (Fase 1): Pix / Caixa Econômica Federal (Conta Social)</div>
+            <div>Migração Futura (Fase 2): Smart Contracts Drex Varejo (Roadmap Bacen)</div>
+            <div style="margin-top: 6px; color: var(--green);">Taxa de Intermediação: R$ 0,00 (Zero Pedágio)</div>
           </div>
 
           <button class="btn btn-primary" style="margin-top: 16px; width: 100%;" onclick="simulateRBEDeposit()">
@@ -798,19 +803,23 @@
   <!-- ═══════════════════ MODAL CERTIFICADO DE DESCARBONIZAÇÃO ═══════════════════ -->
   <div id="cert-modal" class="cert-modal hidden">
     <div class="cert-modal-inner">
-      <button class="btn btn-ghost btn-sm" style="position: absolute; top: 16px; right: 16px;" onclick="closeCertModal()">✕ Fechar</button>
+      <div class="cert-watermark">PROTÓTIPO DE SIMULAÇÃO · NÃO OFICIAL</div>
+      <button class="btn btn-ghost btn-sm" style="position: absolute; top: 16px; right: 16px; z-index: 20;" onclick="closeCertModal()">✕ Fechar</button>
 
       <div class="cert-border-seal">
+        <div class="cert-prototype-banner">
+          ⚠️ PROTÓTIPO DE SIMULAÇÃO ACADÊMICA DE POLÍTICA PÚBLICA — DOCUMENTO NÃO OFICIAL (DEMONSTRAÇÃO DE CONCEITO)
+        </div>
         <div class="cert-header">
           <div class="cert-emblem">🌿</div>
-          <div class="cert-country">República Federativa do Brasil</div>
-          <div class="cert-agency">Agência Nacional de Governança Biocêntrica · Protocolo BioChain</div>
-          <h2 class="cert-title">CERTIFICADO NACIONAL DE COMPENSAÇÃO E CUSTÓDIA AMBIENTAL</h2>
-          <p style="font-size: 12px; color: var(--text2);">Emitido nos termos da Lei Federal nº 14.119/2021 e do Marco Legal da BioChain</p>
+          <div class="cert-country">PROTÓTIPO DE POLÍTICA PÚBLICA · MÉTODO BRASILIANO</div>
+          <div class="cert-agency">MINUTA DE SIMULAÇÃO DE PROTOCOLO BIOCHAIN · DEMONSTRAÇÃO DE CONCEITO</div>
+          <h2 class="cert-title">SIMULAÇÃO DE CERTIFICADO NACIONAL DE COMPENSAÇÃO AMBIENTAL</h2>
+          <p style="font-size: 12px; color: var(--text2);">Documento de demonstração conceitual baseado na Lei Federal nº 14.119/2021</p>
         </div>
 
         <p style="font-size: 14px; text-align: justify; line-height: 1.7; margin-bottom: 20px;">
-          Certifica-se, para todos os efeitos civis, tributários e de conformidade ESG soberana, que a entidade <b id="cert-holder-name">Indústria Sustentável S.A.</b> realizou a <b>queima e aposentadoria criptográfica irrevogável</b> de tokens ambientais GAIA no livro-razão público da <b>BioChain Brasil</b>, tornando nula qualquer possibilidade de dupla contabilidade.
+          Certifica-se, para fins de <b>demonstração do modelo de política pública</b>, que a entidade <b id="cert-holder-name">Indústria Sustentável S.A.</b> realizou a <b>queima e aposentadoria criptográfica simulada</b> de tokens ambientais GAIA no livro-razão de testes da <b>BioChain Brasil</b>.
         </p>
 
         <div class="cert-meta-grid">
@@ -831,15 +840,15 @@
             <div class="cert-meta-val" id="cert-date-val">12/09/2026 15:30:00</div>
           </div>
           <div class="cert-meta-item" style="grid-column: 1 / -1;">
-            <div class="cert-meta-lbl">Hash da Queima (Imutável)</div>
+            <div class="cert-meta-lbl">Hash da Queima (Imutável / Simulação)</div>
             <div class="cert-meta-val" style="font-size: 11px; word-break: break-all;" id="cert-hash-val">0x9f4ce31a78b021c45689efd1234a9012356789abcdef</div>
           </div>
         </div>
 
         <div class="cert-qr-row">
           <div style="font-size: 11px; color: var(--text2); line-height: 1.5;">
-            <b>Autenticação On-Chain:</b><br/>
-            Rede: BioChain Mainnet Federação Biomas<br/>
+            <b>Autenticação On-Chain (Ambiente de Testes):</b><br/>
+            Rede: BioChain Testnet / Federação de Biomas<br/>
             Contrato: <span style="font-family: 'JetBrains Mono';">0x000000000000000000000000000000000000dEaD</span><br/>
             Validador: Guardian-Amazônia-0x1A
           </div>
@@ -851,7 +860,11 @@
           </div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; gap: 12px; margin-top: 24px;">
+        <p style="font-size: 11px; color: var(--gold); background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.25); padding: 8px 12px; border-radius: 6px; margin-top: 16px; text-align: center;">
+          <b>* AVISO REGULATÓRIO:</b> Este documento é uma simulação gráfica para demonstração de conceito acadêmico e de política pública. Não possui validade jurídica cartorial imediata nem representa documento expedido por órgão oficial do Governo Federal.
+        </p>
+
+        <div style="display: flex; justify-content: space-between; gap: 12px; margin-top: 20px;">
           <button class="btn btn-primary" onclick="window.print()">
             <span>🖨️</span> Imprimir / Salvar PDF
           </button>

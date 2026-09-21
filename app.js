@@ -723,14 +723,14 @@ function simulateRBEDeposit() {
     amount: families * 150,
     area: area,
     co2: Math.round(area * 0.4),
-    metadata: { bioma, familias: families, canal: 'Drex-BACEN-AutoSettlement' }
+    metadata: { bioma, familias: families, canal: 'Pix-ContaSocial-Fase1' }
   });
 
   blockchain.addTransaction(tx);
   renderMempool();
   switchTab('dlt');
-  showToast(`✅ Lote RBE de R$ liquidado e enviado à mempool!`, 'success');
-  log(`Lote RBE gerado: ${families} famílias do bioma ${bioma} · Contrato Drex executado`, 'success');
+  showToast(`✅ Lote RBE simulado enviado à mempool (Fase 1: Pix/Caixa)!`, 'success');
+  log(`Lote RBE gerado: ${families} famílias do bioma ${bioma} · Ordem de pagamento enviada (Fase 1: Pix / Conta Social)`, 'success');
 }
 
 // ─── Public Policy Reader Modal ───────────────────────────
@@ -950,8 +950,8 @@ function simulateDrexWithdrawal() {
   blockchain.addTransaction(tx);
   renderMempool();
 
-  showToast(`💸 Saque de R$ ${drexValor.toLocaleString('pt-BR')},00 liquidado via Drex!`, 'success');
-  log(`Drex Settlement: R$ ${drexValor.toLocaleString('pt-BR')},00 transferidos para conta vinculada`, 'success');
+  showToast(`💸 Saque RBE de R$ ${drexValor.toLocaleString('pt-BR')},00 simulado (Fase 1: Pix / Conta Social)!`, 'success');
+  log(`Liquidação RBE: R$ ${drexValor.toLocaleString('pt-BR')},00 simulados via Pix/Conta Social (Migração Drex na Fase 2)`, 'success');
 }
 
 // ─── Certificado de Descarbonização ────────────────────────

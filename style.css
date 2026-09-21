@@ -889,9 +889,60 @@ body {
   padding: 2px 6px; border-radius: 6px;
 }
 
+/* ═══════════ PROTOTYPE NOTICE & WATERMARKS ═══════════ */
+.prototype-notice-bar {
+  background: linear-gradient(90deg, #451a03, #78350f, #451a03);
+  color: #fef3c7;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 6px 16px;
+  border-bottom: 1px solid rgba(251, 191, 36, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cert-prototype-banner {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+
+.cert-watermark {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-25deg);
+  font-size: 28px;
+  font-weight: 900;
+  color: rgba(239, 68, 68, 0.15);
+  border: 4px dashed rgba(239, 68, 68, 0.25);
+  padding: 12px 20px;
+  border-radius: 12px;
+  pointer-events: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  z-index: 10;
+}
+
 @media print {
   body * { visibility: hidden; }
   .cert-modal-inner, .cert-modal-inner * { visibility: visible; }
   .cert-modal { position: absolute; left: 0; top: 0; background: white; color: black; }
   .cert-modal-inner { border: 2px solid black; box-shadow: none; max-width: 100%; color: black; }
+  .cert-prototype-banner { background: #fef2f2; border: 2px solid #ef4444; color: #b91c1c; }
+  .cert-watermark { color: rgba(185, 28, 28, 0.25); border-color: rgba(185, 28, 28, 0.35); }
 }
