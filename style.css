@@ -946,3 +946,77 @@ body {
   .cert-prototype-banner { background: #fef2f2; border: 2px solid #ef4444; color: #b91c1c; }
   .cert-watermark { color: rgba(185, 28, 28, 0.25); border-color: rgba(185, 28, 28, 0.35); }
 }
+
+/* ═══════════ BIOCHAIN v3.0 SCIENTIFIC ARCHITECTURE ═══════════ */
+.causal-flow-box {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 24px 0;
+}
+.causal-flow-title {
+  font-size: 16px; font-weight: 800; color: var(--teal);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.causal-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+}
+.causal-step-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px; position: relative;
+  transition: all 0.2s ease;
+}
+.causal-step-card:hover {
+  border-color: var(--green);
+  transform: translateY(-2px);
+}
+.causal-step-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; color: var(--gold);
+  background: rgba(251, 191, 36, 0.1); padding: 2px 6px; border-radius: 4px;
+  display: inline-block; margin-bottom: 6px;
+}
+.causal-step-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.causal-step-desc { font-size: 11px; color: var(--text2); line-height: 1.4; }
+
+/* Red Team Adversarial Panel */
+.red-team-box {
+  background: linear-gradient(135deg, #180909, #0f1a12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius);
+  padding: 24px; margin-top: 24px;
+}
+.red-team-head {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  margin-bottom: 16px; border-bottom: 1px solid rgba(239, 68, 68, 0.2); padding-bottom: 12px;
+}
+.red-team-title { font-size: 18px; font-weight: 800; color: #fca5a5; display: flex; align-items: center; gap: 8px; }
+.scenario-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;
+}
+.scenario-card {
+  background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm); padding: 12px; transition: all 0.2s;
+  cursor: pointer;
+}
+.scenario-card:hover {
+  border-color: var(--red); background: rgba(239,68,68,0.1);
+}
+.scenario-card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.scenario-tag { font-size: 10px; font-weight: 700; color: #fca5a5; background: rgba(239,68,68,0.2); padding: 2px 6px; border-radius: 4px; }
+
+/* Ontological Badges */
+.ontological-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+  padding: 3px 8px; border-radius: 6px; display: inline-block; margin-right: 6px;
+}
+.onto-gaia { background: rgba(52, 211, 100, 0.15); color: var(--green); border: 1px solid rgba(52, 211, 100, 0.3); }
+.onto-carbon { background: rgba(45, 212, 191, 0.15); color: var(--teal); border: 1px solid rgba(45, 212, 191, 0.3); }
+.onto-bio { background: rgba(251, 191, 36, 0.15); color: var(--gold); border: 1px solid rgba(251, 191, 36, 0.3); }
+.onto-cert { background: rgba(168, 85, 247, 0.15); color: var(--purple); border: 1px solid rgba(168, 85, 247, 0.3); }
+

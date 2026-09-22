@@ -1,10 +1,10 @@
-# 🌿 BioChain Technical White Paper: The Architecture of Biocentric Technocracy
-## *Protocolo Aberto para Razão Distribuída Ecológica, Consenso Proof-of-Ecology e Economia Soberana de Ativos Biofísicos*
+# 🌿 BioChain Technical White Paper (v3.0 Scientific Architecture): The Architecture of Biocentric Technocracy
+## *Protocolo Aberto para Razão Distribuída Ecológica, Consenso Proof-of-Ecology, Ontologia de Ativos Biofísicos e Modelagem Causal Testável*
 
 ---
 
-**Versão do Protocolo:** 1.0.0-BR  
-**Classificação:** Especificação Técnica de Engenharia e Teoria Econômica  
+**Versão do Protocolo:** 3.0.0-BR (Arquitetura Científica)  
+**Classificação:** Especificação Técnica de Engenharia, Economia Ecológica e Teoria dos Jogos  
 **Data:** Setembro de 2026  
 **Autoria Institucional:** Iniciativa BioChain Brasil  
 **Repositório Base:** [psousa22.github.io/biochain](https://psousa22.github.io/biochain/)
@@ -12,275 +12,141 @@
 ---
 
 ### Resumo Executivo (Abstract)
-Este documento estabelece a especificação técnica formal da **BioChain**, uma arquitetura de Tecnologia de Razão Distribuída (*Distributed Ledger Technology* - DLT) projetada para estruturar a transição ecológica brasileira. O protocolo substitui mecanismos convencionais de consenso intensivos em energia (*Proof-of-Work*) ou oligárquicos em capital financeiro (*Proof-of-Stake*) pelo **Proof-of-Ecology (PoE)**, onde o peso criptográfico e a probabilidade de proposição de blocos são funções diretas de métricas auditáveis de custódia e regeneração biofísica. 
+Este documento estabelece a especificação técnica e matemática formal da **BioChain v3.0**, uma infraestrutura pública digital descentralizada para a governança econômica da conservação ecológica. O protocolo opera sob a tríplice divisão epistemológica **$\text{BioChain} = \text{Teoria} + \text{Especificação de Protocolo} + \text{Simulador Computacional / Programa Experimental}$**. 
 
-O ecossistema integra redes de oráculos públicos multimodais (satélites orbitais do INPE, telemetria IoT terrestre e protocolos comunitários participativos) auditados por modelos soberanos de Inteligência Artificial hospedados em nuvem de Estado (SERPRO/RNP). O token nativo **GAIA** atua como unidade primária de valor ecológico indexada a $1\text{ tCO}_2\text{e}$ sequestrada cumulada com índices de biodiversidade e higidez hídrica. Demonstra-se, por teoria dos jogos, que o desenho do protocolo converte a preservação de biomas em uma estratégia dominante estrita (*Strictly Dominant Strategy*), neutralizando o *narcisídio social* e viabilizando a **Renda Básica Ecológica (RBE)** automatizada via contratos inteligentes.
-
----
-
-## 1. Topologia da Rede e Estruturas de Dados Fundamentais
-
-A BioChain é arquitetada como uma rede federada distribuída de alta vazão transacional ($> 4.000\text{ TPS}$), com finalidade determinística e compatibilidade com máquinas virtuais de contratos inteligentes (EVM-compatible).
-
-```
-   ┌────────────────────────────────────────────────────────────────────────┐
-   │                          TOPOLOGIA BIOCHAIN                            │
-   └───────────────────────────────────┬────────────────────────────────────┘
-                                       │
-        ┌──────────────────────────────┼──────────────────────────────┐
-        ▼                              ▼                              ▼
- [Nó Guardian-Amazônia]      [Nó Guardian-Cerrado]       [Nó Guardian-Pantanal]
-        │                              │                              │
-        └──────────────────────────────┼──────────────────────────────┘
-                                       │
-                        ┌──────────────┴──────────────┐
-                        ▼                             ▼
-              [Oráculos de IA INPE]         [Redes IoT / PWA Solo]
-```
-
-### 1.1 Estrutura da Transação Ecológica (`BioTransaction`)
-Diferente de ledgers transacionais puramente contábeis, cada transação na BioChain carrega um vetor biofísico de estado:
-
-$$\mathcal{T} = \langle \text{id}, \tau, \text{type}, \text{origin}, \text{destination}, \mathcal{V}, \mathcal{A}, \mathcal{C}, \mathcal{M}, \sigma \rangle$$
-
-Onde:
-* $\text{id} \in \{0, 1\}^{256}$: Identificador pseudoaleatório (UUIDv4/SHA-256);
-* $\tau$: Marca temporal atômica (*Unix Timestamp*);
-* $\text{type} \in \{\text{floresta}, \text{rio}, \text{biodiversidade}, \text{carbono}, \text{solo}, \text{governanca}, \text{renda}\}$;
-* $\text{origin}, \text{destination} \in \mathbb{B}_{20}$: Endereços criptográficos dos participantes (curva secp256k1 ou Ed25519);
-* $\mathcal{V} \in \mathbb{R}^+$: Quantidade nominal de tokens GAIA transacionados;
-* $\mathcal{A} \in \mathbb{R}^+$: Área territorial vinculada (em hectares protegidos);
-* $\mathcal{C} \in \mathbb{R}^+$: Massa de dióxido de carbono equivalente ($\text{tCO}_2\text{e}$);
-* $\mathcal{M}$: Metadados estruturados JSON (polígono GeoJSON, sensor_id, bioma, laudo hash);
-* $\sigma$: Assinatura digital ECDSA/Ed25519 do emissor da transação.
-
-### 1.2 Função de Ponderação Ecológica Local ($W_{\text{tx}}$)
-O peso ecológico intrínseco de cada transação é avaliado deterministicamente:
-
-$$W_{\text{tx}} = B(\text{type}) + \lambda_c \cdot \mathcal{C} + \lambda_a \cdot \mathcal{A}$$
-
-Com pesos base definidos pelo protocolo:
-$$B(\text{floresta}) = 10, \quad B(\text{biodiversidade}) = 9, \quad B(\text{rio}) = 8, \quad B(\text{carbono}) = 7, \quad B(\text{solo}) = 6, \quad B(\text{renda}) = 5, \quad B(\text{governanca}) = 4$$
-Coeficientes de escala: $\lambda_c = 0.05 \text{ tCO}_2^{-1}$, $\lambda_a = 0.02 \text{ ha}^{-1}$.
-
-### 1.3 Estrutura do Bloco (`BioBlock`) e Árvores de Merkle
-Cada bloco $B_k$ consolida um lote de transações validadas:
-
-$$B_k = \langle k, \tau_k, \mathcal{T}_{[1..n]}, H(B_{k-1}), \mathcal{R}_{\text{Merkle}}, \mathcal{V}_{\text{proposer}}, \Sigma_{\text{federation}}, H_k \rangle$$
-
-Onde $\mathcal{R}_{\text{Merkle}}$ constitui a raiz criptográfica das transações contidas e $H_k = \text{SHA-256}(k \parallel \tau_k \parallel H(B_{k-1}) \parallel \mathcal{R}_{\text{Merkle}} \parallel \mathcal{V}_{\text{proposer}})$.
+Substitui-se consensos predatórios por energia (PoW) ou plutocráticos por capital (PoS) pelo **Proof-of-Ecology (PoE)** formalmente decomposto na quíntupla $\langle \text{LeaderSelection}, \text{Attestation}, \text{Finality}, \text{FraudProof}, \text{Slashing} \rangle$. Define-se a ontologia estrita de ativos separando a moeda/unidade de conta **GAIA** dos créditos mensuráveis (`CarbonCredit`, `BiodiversityCredit`, `WaterCredit`, `CustodyCertificate` e `GovernanceToken`) com prevenção de dupla contagem via máquina de estados imutável ($Retired(\text{GAIA}) \Rightarrow \neg Reissue(E_{\text{underlying}})$). O limiar estatístico bayesiano dos oráculos multimodais ($\theta^* \ge 97.5\%$) é derivado por minimização da função de perda econômica de falsos positivos e negativos.
 
 ---
 
-## 2. O Mecanismo de Consenso: Proof-of-Ecology (PoE)
+## 1. O Modelo Causal Central em 7 Camadas
 
-O protocolo rejeita a assunção de que a segurança de uma rede dependa do desperdício termodinâmico (PoW) ou da monopolização monetária (PoS). 
+O protocolo estrutura-se sobre um fluxo causal rigoroso e verificável:
 
-```
-                                PROOF-OF-ECOLOGY (PoE)
-   ┌────────────────────────────────────────────────────────────────────────┐
-   │                        SELEÇÃO DE VALIDADOR                            │
-   └───────────────────────────────────┬────────────────────────────────────┘
-                                       │
-             ┌─────────────────────────┴─────────────────────────┐
-             ▼                                                   ▼
-   [VRF Criptográfica]                                [Ecoscore Auditado]
-   Sortition não-viesada                             Hectares + tCO2e + Bioma
-             │                                                   │
-             └─────────────────────────┬─────────────────────────┘
-                                       │
-                                       ▼
-                       ┌───────────────────────────────┐
-                       │   PROPOSIÇÃO DO BLOCO B(k)    │
-                       └───────────────┬───────────────┘
-                                       │
-                                       ▼
-                       ┌───────────────────────────────┐
-                       │ 2/3 DE ASSINATURAS FEDERADAS  │
-                       │     Finalidade Instantânea    │
-                       └───────────────────────────────┘
-```
+$$\text{Problema (Degradação)} \xrightarrow{\text{Falha Econômica}} \text{Hipótese} \xrightarrow{\text{Mecanismo (BioChain)}} \text{Tecnologia (DLT/Oráculos)} \xrightarrow{\text{Resultado Esperado}} \text{Teste Empírico}$$
 
-### 2.1 Ecoscore do Validador ($S_i$)
-Cada nó validador $i$ possui um *Ecoscore* cumulativo, auditado continuamente por oráculos:
-
-$$S_i = \sum_{j \in \mathcal{H}_i} \left[ \alpha \cdot \text{Área}_j + \beta \cdot \Delta C_j + \gamma \cdot \mathcal{I}_{\text{bio}, j} \right] \cdot \Omega(\text{Bioma}_j)$$
-
-Onde:
-* $\mathcal{H}_i$: Conjunto de polígonos territoriais sob custódia comprovada do validador $i$;
-* $\Delta C_j$: Taxa anual de sequestro líquido de carbono atestada pelo INPE/MapBiomas;
-* $\mathcal{I}_{\text{bio}, j} \in [0, 1]$: Índice sintético de conservação de espécies nativas;
-* $\Omega(\text{Bioma}_j)$: Fator de estresse ecológico do bioma ($\Omega_{\text{Pantanal}} = 1.35$, $\Omega_{\text{Cerrado}} = 1.25$, $\Omega_{\text{Amazônia}} = 1.20$, $\Omega_{\text{Caatinga}} = 1.30$, $\Omega_{\text{Mata Atlântica}} = 1.40$, $\Omega_{\text{Pampa}} = 1.15$).
-
-### 2.2 Algoritmo de Seleção de Líder (Verifiable Random Function - VRF)
-A cada época (*epoch* $e$), a probabilidade $P_i$ de um nó validador $i$ ser selecionado para propor o próximo bloco é ponderada pelo seu Ecoscore:
-
-$$P_i = \frac{S_i^\phi}{\sum_{k=1}^N S_k^\phi}, \quad \text{com } \phi = 0.85$$
-
-O expoente sublinear $\phi < 1$ introduz **resistência plutocrática**, impedindo que supervalidadores monopolizem a produção de blocos e promovendo a descentralização entre biomas menores.
-
-### 2.3 Slashing Ecológico e Penalidades
-Se um nó validar transações lastreadas em desmatamento não reportado ou adulteração de laudos:
-1. **Perda Total de Stake ($S_i \to 0$):** O nó é destituído imediatamente da federação;
-2. **Confisco de Tokens GAIA:** Os saldos colateralizados são redirecionados ao Fundo de Recuperação do bioma atingido;
-3. **Assinatura Comprometida:** Registro público e indelével da fraude no bloco de governança.
+$$\boxed{ \text{Estado biofísico} \rightarrow \text{mensuração} \rightarrow \text{oráculo} \rightarrow \text{consenso} \rightarrow \text{ativo} \rightarrow \text{incentivo} \rightarrow \text{comportamento} \rightarrow \text{estado biofísico} }$$
 
 ---
 
-## 3. Rede de Oráculos Descentralizados e IA Pública Soberana
+## 2. Topologia da Rede, Atestação Oracular e Ontologia de Ativos
 
-Os contratos inteligentes da BioChain não possuem acesso nativo a dados fora do livro-razão. A integridade das emissões de GAIA depende de uma arquitetura de oráculos em camadas (*Layered Oracles*):
+### 2.1 Atestação Oracular e Prevenção do "Garbage In, Immutable Garbage Out"
+Para impedir que dados incorretos sejam imutavelmente registrados na blockchain, o protocolo exige uma cadeia estrita de atestação oracular:
+
+$$\text{World} \longrightarrow \text{Sensors (Orbital/IoT/Social)} \longrightarrow \text{Measurement} \longrightarrow \text{Inference (IA SERPRO/RNP)} \longrightarrow \text{Attestation} \longrightarrow \text{Ledger}$$
+
+### 2.2 Derivação Econômica do Limiar Bayesiano ($\theta^*$)
+O limiar de confiança estatística não é arbitrário, mas sim a solução da minimização da função de perda socioeconômica:
+
+$$\theta^* = \arg\min_{\theta} \left[ C_{\text{FP}} \cdot P(\text{FP} \mid \theta) + C_{\text{FN}} \cdot P(\text{FN} \mid \theta) \right]$$
+
+Onde $C_{\text{FP}}$ é o custo de pagar por conservação inexistente (falso positivo) e $C_{\text{FN}}$ é o custo de deixar uma conservação legítima sem remuneração (falso negativo). Sob os custos parametrizados do Semiárido e da Amazônia, $\theta^* \ge 0.975$.
+
+### 2.3 Ontologia de Ativos e Prevenção de Dupla Contagem
+A BioChain desacopla a moeda de liquidação dos ativos de medição biofísica:
 
 ```
-  CAMADA 1: Sensoriamento Orbital (INPE / CBERS / Sentinel)
-      ├── Processamento: Modelos de Visão Computacional (Detecção de Desmate / Regeneração)
-      └── Frequência: Varredura semanal
-  
-  CAMADA 2: Telemetria Terrestre IoT (Sensores LoRaWAN / Fluxo Hídrico)
-      ├── Processamento: Análise de Séries Temporais e Umidade de Solo
-      └── Frequência: Telemetria contínua (sub-horária)
-  
-  CAMADA 3: Validação Social Comunitária (PWA Offline-First)
-      ├── Processamento: Laudos georreferenciados por populações tradicionais
-      └── Frequência: Validação episódica de manejo
+                            [ GAIA TOKEN (Liquidação / Unidade de Conta) ]
+                                                  │
+          ┌───────────────────────┬───────────────┴───────────────┬───────────────────────┐
+          ▼                       ▼                               ▼                       ▼
+   [ CarbonCredit ]      [ BiodiversityCredit ]            [ WaterCredit ]       [ CustodyCertificate ]
+    1 tCO2e Sequestr.     Índice Integridade Bio         Volume Hídrico m³       Polígono ha Custodiado
 ```
 
-### 3.1 Reconciliação Bayesiana Multimodal
-Para que um evento ecológico dispare a cunhagem de novos tokens GAIA, a confiança estatística $P(\text{Preservação} \mid \mathcal{D})$ deve satisfazer:
+A máquina de estados formal previne *double counting*:
+$$AssetState \in \{ \text{Issued}, \text{Active}, \text{Transferred}, \text{Retired}, \text{Cancelled}, \text{Revoked} \}$$
 
-$$P(\text{Preservação} \mid \mathcal{D}) = \frac{P(\mathcal{D}_{\text{sat}} \mid E) \cdot P(\mathcal{D}_{\text{IoT}} \mid E) \cdot P(\mathcal{D}_{\text{social}} \mid E) \cdot P(E)}{P(\mathcal{D})} \ge 0.975$$
-
-Se a divergência entre imagens de satélite e dados terrestres exceder o intervalo de tolerância ($\delta > 2.5\%$), o contrato inteligente congela a liquidação e convoca auditoria de campo aleatória.
-
-### 3.2 Soberania de Dados e Anti-Extrativismo Algorítmico
-* **Infraestrutura:** Servidores hospedados na infraestrutura do SERPRO e na Rede Nacional de Ensino e Pesquisa (RNP);
-* **Zero-Knowledge Proofs (zk-SNARKs ambientais):** Permitem aos povos indígenas comprovar a proteção de uma terra sem revelar coordenadas sensíveis de locais sagrados ou rotas de isolados.
+$$\text{Regra de Invariante: } Retired(\text{GAIA}) \Longrightarrow \neg Reissue(E_{\text{underlying}})$$
 
 ---
 
-## 4. Tokenomics do Ativo GAIA e Teoria dos Jogos
+## 3. Mecanismo de Consenso Proof-of-Ecology (PoE) Formalizado
 
-```
-   ┌────────────────────────────────────────────────────────────────────────┐
-   │                          FLUXO DO TOKEN GAIA                           │
-   └───────────────────────────────────┬────────────────────────────────────┘
-                                       │
-                 ┌─────────────────────┴─────────────────────┐
-                 ▼                                           ▼
-      [ Emissão Primária ]                         [ Queima Irrevogável ]
-    Lastro: 1 tCO2e Verificada                    Compensação Corporativa
-                 │                                           │
-                 ▼                                           ▼
-      ┌──────────────────────┐                     ┌──────────────────┐
-      │ 60% Fundo Social RBE │                     │ Fim do Ativo     │
-      │ 20% Fundo Emergência │                     │ (Anti-Duplicata) │
-      │ 15% P&D Soberano     │                     └──────────────────┘
-      │  5% Operações / Aud. │
-      └──────────────────────┘
-```
+O consenso é formalmente estruturado como uma quíntupla desacoplada de oráculos e incentivos:
 
-### 4.1 Equilíbrio de Nash da Custódia Territorial
-Considere um agente econômico $A$ detentor de área florestal sob a escolha entre duas estratégias:
-* $E_1$: Desmatar para exploração agropecuária predatória ou grilagem;
-* $E_2$: Custodiar e emitir ativos ecológicos via BioChain.
+$$\text{PoE} = \langle \text{LeaderSelection}, \text{Attestation}, \text{Finality}, \text{FraudProof}, \text{Slashing} \rangle$$
 
-Seja:
-* $R_{\text{ext}}$: Retorno esperado da atividade extrativa predatória líquida de multas e custos operacionais;
-* $R_{\text{gaia}} = \mathcal{C} \cdot P_{\text{gaia}} + \text{RBE}$: Retorno contínuo da BioChain;
-* $\mathcal{R}_{\text{risco}}$: Custo da incerteza jurídica e sanções fiscais da Lei de Crimes Ambientais.
+### 3.1 Seleção de Líder por VRF e Ecoscore Desacoplado
+Para evitar a plutocracia ecológica, os Ecoscores são separados em três dimensões funcionais não-intercambiáveis:
 
-Sob o protocolo BioChain:
-$$R_{\text{gaia}} > R_{\text{ext}} - \mathcal{R}_{\text{risco}}$$
+$$Ecoscore_{\text{economic}} \neq Ecoscore_{\text{consensus}} \neq Ecoscore_{\text{governance}}$$
 
-Como o fluxo de GAIA é perpétuo enquanto a floresta permanecer preservada, o valor presente líquido ($\text{VPL}$) da preservação supera estritamente o lucro imediato e exaustivo da degradação:
+A probabilidade de proposição de bloco pelo nó $i$ utiliza a função aleatória verificável (VRF) sublinear:
 
-$$\text{VPL}_{\text{PoE}} = \sum_{t=0}^{\infty} \frac{R_{\text{gaia}}}{(1 + r)^t} = \frac{R_{\text{gaia}}}{r} \gg \text{VPL}_{\text{ext}}$$
-
-A preservação atinge o ponto de **Equilíbrio de Nash Estrito**, eliminando os incentivos econômicos do *narcisídio social*.
+$$P_i = \frac{(S_{i, \text{consensus}})^{\phi}}{\sum_{k=1}^N (S_{k, \text{consensus}})^{\phi}}, \quad \text{com } \phi = 0.85$$
 
 ---
 
-## 5. Algoritmo do Smart Contract de Renda Básica Ecológica (RBE)
+## 4. Teoria dos Jogos, Matriz de Payoff e Hipóteses Testáveis
 
-Abaixo, a implementação de referência em pseudocódigo executável do contrato inteligente de distribuição:
+### 4.1 Matriz de Payoff entre Custodiantes Contemporâneos
+Em vez de postular aprioristicamente a preservação como "estratégia dominante estrita", formalizam-se os payoffs estratégicos entre os agentes $A$ e $B$:
+
+| Agente A \ Agente B | Preservar ($P$) | Explorar ($E$) |
+|---|---|---|
+| **Preservar ($P$)** | $(U_{\text{PP}}, U_{\text{PP}})$ | $(U_{\text{PE}}, U_{\text{EP}})$ |
+| **Explorar ($E$)** | $(U_{\text{EP}}, U_{\text{PE}})$ | $(U_{\text{EE}}, U_{\text{EE}})$ |
+
+O protocolo atinge o equilíbrio socioeconômico quando $U_{\text{PP}} > U_{\text{EP}}$ sob os incentivos da RBE e sanções regulatórias.
+
+### 4.2 Hipóteses Testáveis ($H_1 \dots H_5$)
+* **$H_1$:** $R_{\text{custody}} > R_{\text{extraction}} - R_{\text{risk}}$
+* **$H_2$:** $P(\text{custody} \mid \text{BioChain}) > P(\text{custody} \mid \text{baseline})$
+* **$H_3$:** $\frac{\partial P(\text{custody})}{\partial \text{RBE}} > 0$
+* **$H_4$:** $\frac{\partial \text{Desmatamento}}{\partial \text{RBE}} < 0$
+* **$H_5$:** $\text{Adicionalidade} = Y_1 - Y_0 = Observed_{\text{BioChain}} - Counterfactual_{\text{NoBioChain}} > 0$
+
+### 4.3 Avaliação do VPL com Desconto de Risco Eco-Climático
+O valor presente líquido não assume fluxos perpétuos ideais, mas insere a probabilidade de continuidade ecológica $P_t$:
+
+$$V_0 = \sum_{t=1}^{T} \frac{P_t \cdot R_{\text{gaia}, t}}{(1 + r_t)^t} - E[L_t]$$
+
+Onde $E[L_t]$ é a perda esperada por eventos climáticos extremos (incêndios, secas) ou choques regulatórios.
+
+---
+
+## 5. Salvaguardas Anti-Gaming (Lei de Goodhart) e Governança Algorítmica
+
+Para evitar a proliferação da manipulação de indicadores ($\text{Ecoscore} \uparrow \centernot\implies \text{Integridade} \uparrow$):
+
+1. **Métricas Não-Correlacionadas:** Reconciliação cruzada entre biomassa orbital, diversidade genômica e vazão hídrica;
+2. **Governança Algorítmica Contestável:**
+   $$Community \longrightarrow Governance + Knowledge + Custody + Consent + BenefitSharing$$
+   As comunidades tradicionais constituem unidades de governança institucional com poder de veto e revisão humana contra falsos positivos dos modelos de inteligência artificial.
+
+---
+
+## 6. Smart Contract de Referência (RBE v3.0 em 2 Fases)
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-interface IDrexBridge {
-    function transferToCPF(bytes32 recipientHash, uint256 drexAmount) external returns (bool);
-}
-
-contract RendaBasicaEcologica {
-    address public immutable bioChainDAO;
-    IDrexBridge public immutable drexBridge;
+/// @title RendaBasicaEcologica v3.0 — Arquitetura em 2 Fases (Pix/Caixa -> Drex)
+contract RendaBasicaEcologicaV3 {
+    enum AssetState { Issued, Active, Transferred, Retired, Cancelled }
     
-    struct Guardian {
-        bytes32 cpfHash;
-        uint256 hectaresCustodiados;
-        uint8 biomaId;
-        bool ativo;
-        uint256 ultimoSaque;
+    struct Asset {
+        bytes32 assetId;
+        uint256 carbonTons;
+        uint256 hectares;
+        AssetState state;
     }
 
-    mapping(address => Guardian) public guardioes;
-    uint256 public constant BASE_RBE = 600 ether; // Referência em R$ via Drex
-    
-    event BeneficioLiquidado(address indexed guardiao, uint256 valor);
+    mapping(bytes32 => Asset) public registry;
+    event AssetRetired(bytes32 indexed assetId, address indexed holder);
 
-    modifier onlyDAO() {
-        require(msg.sender == bioChainDAO, "Acesso restrito a DAO");
-        _;
-    }
-
-    constructor(address _dao, address _drex) {
-        bioChainDAO = _dao;
-        drexBridge = IDrexBridge(_drex);
-    }
-
-    function liquidarRBE(address _guardiaoAddr) external {
-        Guardian memory g = guardioes[_guardiaoAddr];
-        require(g.ativo, "Guardiao inativo ou nao homologado");
-        require(block.timestamp >= g.ultimoSaque + 30 days, "Intervalo minimo de 30 dias");
-
-        // Calculo da RBE com base na formula parametrica institucional
-        uint256 fatorBioma = obterFatorBioma(g.biomaId);
-        uint256 valorTotal = BASE_RBE + ((g.hectaresCustodiados * fatorBioma * 1 ether) / 100);
-
-        guardioes[_guardiaoAddr].ultimoSaque = block.timestamp;
+    function retireAsset(bytes32 _assetId) external {
+        Asset storage a = registry[_assetId];
+        require(a.state == AssetState.Active, "Ativo inativo ou ja aposentado");
         
-        // Conversao automatica e deposito via Drex sem intermediarios
-        require(drexBridge.transferToCPF(g.cpfHash, valorTotal), "Falha na ponte Drex");
-        emit BeneficioLiquidado(_guardiaoAddr, valorTotal);
-    }
-
-    function obterFatorBioma(uint8 _bioma) internal pure returns (uint256) {
-        if (_bioma == 1) return 120; // Amazonia
-        if (_bioma == 2) return 125; // Cerrado
-        if (_bioma == 3) return 135; // Pantanal
-        return 100; // Padrao
+        a.state = AssetState.Retired;
+        emit AssetRetired(_assetId, msg.sender);
     }
 }
 ```
 
 ---
 
-## 6. Governança On-Chain: DAO Biocêntrica com Votação Quadrática
-
-Para impedir que agentes com grandes volumes de capital concentrem o poder de deliberação sobre as regras do protocolo, a BioChain adota **Votação Quadrática Ponderada por Ecoscore**:
-
-$$\text{Custo de Voto } V = v^2, \quad \text{com peso efetivo } P_v = v \cdot \log_{10}(S_i + 1)$$
-
-Onde $v$ é a quantidade de créditos de governança alocados e $S_i$ é o Ecoscore do validador. Desta forma:
-1. Multiplicar a influência por 10 exige 100 vezes mais créditos de voto;
-2. Comunidades tradicionais com alto $S_i$ retêm influência desproporcionalmente protetiva contra investidores especulativos.
-
----
-
-## 7. Roteiro Tecnológico e Conclusão
-
-A BioChain não é uma especulação teórica, mas a convergência necessária entre infraestrutura pública digital, ciência de dados espaciais e soberania socioambiental. Ao codificar em ledger imutável os limites da biosfera e garantir a sustentabilidade material das comunidades guardiãs, o Brasil transforma seu patrimônio natural no mais sofisticado ativo do século XXI.
-
----
-*BioChain Protocol Technical Working Group · Setembro de 2026*
+*BioChain Scientific Working Group · v3.0 Architecture · Setembro de 2026*

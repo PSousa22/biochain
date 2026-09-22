@@ -87,12 +87,56 @@
       <div class="orb orb3"></div>
     </div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Política Pública de Estado · Método Brasiliano</p>
-      <h2 class="hero-title">A natureza como<br/><span class="gradient-text">sujeito de direitos e matriz soberana</span></h2>
+      <p class="hero-eyebrow">Política Pública de Estado · Método Brasiliano · v3.0 Arquitetura Científica</p>
+      <h2 class="hero-title">BioChain v3.0:<br/><span class="gradient-text">Teoria, Protocolo e Simulador de Governança Ecológica</span></h2>
       <p class="hero-desc">
-        Infraestrutura pública digital para custódia de ativos naturais, consenso <b>Proof-of-Ecology</b>,
-        distribuição da <b>Renda Básica Ecológica</b> e inteligência artificial soberana para o Brasil do século XXI.
+        Infraestrutura pública digital para custódia de ativos biofísicos, consenso <b>Proof-of-Ecology</b>,
+        distribuição da <b>Renda Básica Ecológica</b> e simulação contrafactual para o Brasil do século XXI.
       </p>
+
+      <!-- Diagrama Causal em 7 Camadas -->
+      <div class="causal-flow-box">
+        <div class="causal-flow-title">
+          <span>🔬</span> Modelo Causal Integrado (Do Estado Biofísico à Conservação Verificável)
+        </div>
+        <div class="causal-steps-grid">
+          <div class="causal-step-card">
+            <span class="causal-step-num">Camada 1</span>
+            <div class="causal-step-title">1. Estado Biofísico</div>
+            <div class="causal-step-desc">Massa vegetal, carbono orgânico e higidez hídrica.</div>
+          </div>
+          <div class="causal-step-card">
+            <span class="causal-step-num">Camada 2</span>
+            <div class="causal-step-title">2. Mensuração</div>
+            <div class="causal-step-desc">Sensoriamento INPE, IoT e laudos participativos.</div>
+          </div>
+          <div class="causal-step-card">
+            <span class="causal-step-num">Camada 3</span>
+            <div class="causal-step-title">3. Oráculo IA</div>
+            <div class="causal-step-desc">Inferência bayesiana com limiar θ* ≥ 97.5%.</div>
+          </div>
+          <div class="causal-step-card">
+            <span class="causal-step-num">Camada 4</span>
+            <div class="causal-step-title">4. Consenso PoE</div>
+            <div class="causal-step-desc">VRF sublinear ponderada pelo Ecoscore auditado.</div>
+          </div>
+          <div class="causal-step-card">
+            <span class="causal-step-num">Camada 5</span>
+            <div class="causal-step-title">5. Ativo GAIA</div>
+            <div class="causal-step-desc">Unidade de conta com máquina de estados.</div>
+          </div>
+          <div class="causal-step-card">
+            <span class="causal-step-num">Camada 6</span>
+            <div class="causal-step-title">6. Incentivo RBE</div>
+            <div class="causal-step-desc">Repasse direto às famílias guardiãs territoriais.</div>
+          </div>
+          <div class="causal-step-card">
+            <span class="causal-step-num">Camada 7</span>
+            <div class="causal-step-title">7. Conservação</div>
+            <div class="causal-step-desc">Feedback positivo e adicionalidade ecológica (Y1 - Y0).</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -198,6 +242,55 @@
 
         <div id="chain-container" class="chain-container">
           <!-- Blocos gerados dinamicamente -->
+        </div>
+
+        <!-- Painel Adversarial Red Team / Testes de Estresse (v3.0) -->
+        <div class="red-team-box">
+          <div class="red-team-head">
+            <div class="red-team-title">
+              <span>🛡️</span> Adversarial BioChain Red Team (Simulação de Cenários de Falha)
+            </div>
+            <span class="badge" style="background: rgba(239,68,68,0.2); color: #fca5a5; font-size: 11px;">
+              ● Resiliência Cripto-Ecológica
+            </span>
+          </div>
+          <p style="font-size: 12px; color: var(--text2); margin-bottom: 14px;">
+            Selecione um cenário de teste adversarial para disparar simulações de estresse e medir a capacidade de mitigação do protocolo:
+          </p>
+
+          <div class="scenario-grid">
+            <div class="scenario-card" onclick="runStressTest('price_crash')">
+              <div class="scenario-card-head">
+                <span style="font-size: 12px; font-weight: 700; color: var(--text);">A: Queda do GAIA</span>
+                <span class="scenario-tag">-80% Preço</span>
+              </div>
+              <div style="font-size: 11px; color: var(--text2);">Testa se o piso RBE protege a custódia mesmo com colapso de mercado.</div>
+            </div>
+
+            <div class="scenario-card" onclick="runStressTest('oracle_spoof')">
+              <div class="scenario-card-head">
+                <span style="font-size: 12px; font-weight: 700; color: var(--text);">B: Oráculo Spoofing</span>
+                <span class="scenario-tag">Sensor Falso</span>
+              </div>
+              <div style="font-size: 11px; color: var(--text2);">Testa se o limiar bayesiano (θ* ≥ 97,5%) detecta laudos adulterados.</div>
+            </div>
+
+            <div class="scenario-card" onclick="runStressTest('collusion_30')">
+              <div class="scenario-card-head">
+                <span style="font-size: 12px; font-weight: 700; color: var(--text);">C: Cartel Validadores</span>
+                <span class="scenario-tag">30% Colusão</span>
+              </div>
+              <div style="font-size: 11px; color: var(--text2);">Testa se a VRF sublinear (ϕ = 0,85) e o Slashing neutralizam cartéis.</div>
+            </div>
+
+            <div class="scenario-card" onclick="runStressTest('wildfire')">
+              <div class="scenario-card-head">
+                <span style="font-size: 12px; font-weight: 700; color: var(--text);">D: Incêndio Florestal</span>
+                <span class="scenario-tag">Choque Clima</span>
+              </div>
+              <div style="font-size: 11px; color: var(--text2);">Testa o congelamento preventivo de ativos e acionamento do Fundo de Emergência.</div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -566,6 +659,10 @@
             <div class="biome-stat-box">
               <span class="biome-stat-lbl">CO₂e Sequestrado Anual</span>
               <span class="biome-stat-val" id="rbe-co2-anual">480 tCO₂e</span>
+            </div>
+            <div class="biome-stat-box" style="grid-column: 1 / -1; background: rgba(45, 212, 191, 0.05); border-color: rgba(45, 212, 191, 0.2);">
+              <span class="biome-stat-lbl">Adicionalidade Ecológica Contrafactual (Y1 - Y0)</span>
+              <span class="biome-stat-val" id="rbe-additionality-val" style="color: var(--teal); font-size: 13px;">+84,2% de retenção florestal vs. linha de base</span>
             </div>
           </div>
 

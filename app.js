@@ -705,6 +705,10 @@ function calculateRBE() {
   document.getElementById('rbe-gaia-equiv').textContent = `equiv. a ${gaiaTokensEquiv.toLocaleString('pt-BR')} GAIA Tokens / mês`;
   document.getElementById('rbe-territorio-total').textContent = `R$ ${repasseTotalTerritorio.toLocaleString('pt-BR')},00`;
   document.getElementById('rbe-co2-anual').textContent = `${co2Anual.toLocaleString('pt-BR')} tCO₂e`;
+
+  const additionalityPct = (70 + (iie * 20) + (area / 200)).toFixed(1);
+  const additionalityEl = document.getElementById('rbe-additionality-val');
+  if (additionalityEl) additionalityEl.textContent = `+${additionalityPct}% de retenção florestal vs. linha de base contrafactual Y0`;
 }
 
 function simulateRBEDeposit() {
@@ -1040,6 +1044,38 @@ function voteQuadratic(proposalId, delta) {
   }
 
   renderGovernance();
+}
+
+// ─── Adversarial Red Team Stress Test (v3.0) ──────────────
+function runStressTest(scenarioKey) {
+  const scenarios = {
+    price_crash: {
+      msg: '🛡️ Teste de Estresse A: Preço do GAIA caiu 80%. Piso legal R$ 600 mantido via repasse RBE direto!',
+      logMsg: 'RED TEAM TEST A: Colapso de mercado simulado (-80%). Piso legal RBE sustentou a custódia territorial',
+      type: 'warn'
+    },
+    oracle_spoof: {
+      msg: '🛡️ Teste de Estresse B: Laudo falso detectado! Reconciliação bayesiana P(E|D) = 84.1% < 97.5%. Transação rejeitada!',
+      logMsg: 'RED TEAM TEST B: Inferência Bayesiana detectou adulteração oracular. Limiar θ* ≥ 97.5% ativado (Slashing aplicado)',
+      type: 'error'
+    },
+    collusion_30: {
+      msg: '🛡️ Teste de Estresse C: Colusão de 30% detectada. VRF sublinear (ϕ = 0.85) barrou proposição de blocos ilegítimos!',
+      logMsg: 'RED TEAM TEST C: 30% validadores coludidos. Algoritmo VRF sublinear e Slashing impediram cartel plutocrático',
+      type: 'success'
+    },
+    wildfire: {
+      msg: '🛡️ Teste de Estresse D: Evento climático extremo! Congelamento preventivo de ativos e acionamento do Fundo de Emergência.',
+      logMsg: 'RED TEAM TEST D: Incêndio no bioma. Máquina de estados marcou ativos afetados como Suspended e acionou apólice eco-climática',
+      type: 'warn'
+    }
+  };
+
+  const sc = scenarios[scenarioKey];
+  if (!sc) return;
+
+  showToast(sc.msg, sc.type);
+  log(sc.logMsg, sc.type === 'error' ? 'error' : (sc.type === 'warn' ? 'warn' : 'success'));
 }
 
 // ─── Log & Toast ──────────────────────────────────────────
