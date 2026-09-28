@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════
-//  BioChain — UI Application Layer (v2.0 Soberana)
+//  BioChain — UI Application Layer 
 //  Tecnocracia Biocêntrica · Método Brasiliano
 // ═══════════════════════════════════════════════════════════
 
@@ -73,7 +73,7 @@ const BIOME_MAP_INFO = {
     canopy: '86.4%',
     oracle: 'INPE-DETER-AMZ-01',
     water: 'Excelente (78%)',
-    biomaSelectVal: 'Amazonia'
+    biomaSelectVal: 'Amazônia'
   },
   cer: {
     name: 'Bioma Cerrado',
@@ -103,7 +103,7 @@ const BIOME_MAP_INFO = {
     canopy: '28.5%',
     oracle: 'INPE-SIRENE-MA-02',
     water: 'Moderado (62%)',
-    biomaSelectVal: 'MataAtlantica'
+    biomaSelectVal: 'Mata Atlântica'
   },
   pan: {
     name: 'Bioma Pantanal',
@@ -133,7 +133,7 @@ const BIOME_MAP_INFO = {
     canopy: '91.0%',
     oracle: 'MARINHA-ORACULO-07',
     water: 'Marinho (95%)',
-    biomaSelectVal: 'ZonaCosteira'
+    biomaSelectVal: 'Zona Costeira'
   }
 };
 
@@ -149,7 +149,7 @@ const PROPOSALS = [
     yes: 85, no: 10, userVotes: 0
   },
   {
-    id: 'p3', title: 'Oráculos de IA Soberana (INPE/MapBiomas)',
+    id: 'p3', title: 'Oráculos de IA  (INPE/MapBiomas)',
     desc: 'Hospedar modelos de visão computacional ambiental em infraestrutura pública do SERPRO/RNP.',
     yes: 94, no: 4, userVotes: 0
   }
@@ -230,7 +230,7 @@ const DOCS_DATA = {
       <p>Estrutura completa em 13 lâminas com notas para o orador para apresentações em plenário e reuniões ministeriais.</p>
       <h3>Lâminas de Destaque:</h3>
       <ol>
-        <li>Capa & Tese de Impacto: A maior biodiversidade como motor de riqueza soberana.</li>
+        <li>Capa & Tese de Impacto: A maior biodiversidade como motor de riqueza .</li>
         <li>O Narcisídio Social: A floresta valorada a zero no PIB e os custos socializados.</li>
         <li>A Encruzilhada da IA: Anti-extrativismo de dados genéticos por Big Techs.</li>
         <li>O Método Brasiliano: Síntese de DLT, dados do INPE e saberes ancestrais.</li>
@@ -287,10 +287,9 @@ async function init() {
   selectBiomeFromMap('amz');
   setWalletProfile('guardian');
 
-  log('BioChain v2.0 inicializada · Bloco Gênesis criado', 'success');
+  log('BioChain inicializada · Bloco Gênesis criado', 'success');
   log('Tecnocracia Biocêntrica · Federação de Biomas ativa', 'success');
 
-  await seedDemoData();
   renderChain();
   updateStats();
 
@@ -593,7 +592,7 @@ function exportChain() {
   const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = 'biochain_soberana_export.json';
+  a.href = url; a.download = 'biochain__export.json';
   a.click(); URL.revokeObjectURL(url);
   log('Blockchain exportada com sucesso (JSON)', 'success');
   showToast('📥 Blockchain exportada!', 'success');
@@ -694,16 +693,15 @@ function calculateRBE() {
   const stressMultiplier = window.BIOME_STRESS_FACTORS ? (window.BIOME_STRESS_FACTORS[bioma] || 1.2) : 1.2;
 
   // Formula Institucional (Art. 14 Anteprojeto BioChain):
-  // RBE Base R$ 600 + adicional por hectare custodiado ponderado pelo bioma e saude ecologica
-  const adicionalTerritorial = (area * 28 * stressMultiplier * iie);
-  const repasseTotalTerritorio = Math.round(600 * families + adicionalTerritorial);
-  const valorPorFamilia = Math.round(repasseTotalTerritorio / families);
+  // RBE Base R$ 600 + (ha * Fator * IIE)
+  const valorPorFamilia = 600 + (area * stressMultiplier * iie);
+  const repasseTotalTerritorio = valorPorFamilia * families;
   const gaiaTokensEquiv = Math.round(valorPorFamilia / 6.0); // 1 GAIA ~ R$ 6,00 no modelo primario
   const co2Anual = Math.round(area * 3.2);
 
-  document.getElementById('rbe-total-family').textContent = `R$ ${valorPorFamilia.toLocaleString('pt-BR')},00`;
+  document.getElementById('rbe-total-family').textContent = `R$ ${valorPorFamilia.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
   document.getElementById('rbe-gaia-equiv').textContent = `equiv. a ${gaiaTokensEquiv.toLocaleString('pt-BR')} GAIA Tokens / mês`;
-  document.getElementById('rbe-territorio-total').textContent = `R$ ${repasseTotalTerritorio.toLocaleString('pt-BR')},00`;
+  document.getElementById('rbe-territorio-total').textContent = `R$ ${repasseTotalTerritorio.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
   document.getElementById('rbe-co2-anual').textContent = `${co2Anual.toLocaleString('pt-BR')} tCO₂e`;
 
   const additionalityPct = (70 + (iie * 20) + (area / 200)).toFixed(1);
@@ -1046,7 +1044,7 @@ function voteQuadratic(proposalId, delta) {
   renderGovernance();
 }
 
-// ─── Adversarial Red Team Stress Test (v3.0) ──────────────
+// ─── Adversarial Red Team Stress Test ──────────────
 function runStressTest(scenarioKey) {
   const scenarios = {
     price_crash: {
