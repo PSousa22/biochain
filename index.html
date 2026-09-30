@@ -70,6 +70,9 @@
       <button class="tab-btn" id="btn-tab-rbe" onclick="switchTab('rbe')">
         <span>💚</span> Calculadora RBE
       </button>
+      <button class="tab-btn" id="btn-tab-causal" onclick="switchTab('causal')">
+        <span>🔬</span> Modelo Causal
+      </button>
       <button class="tab-btn" id="btn-tab-politica" onclick="switchTab('politica')">
         <span>🏛️</span> Acervo de Estado <span class="tab-badge">5 Docs</span>
       </button>
@@ -93,50 +96,6 @@
         Infraestrutura pública digital para custódia de ativos biofísicos, consenso <b>Proof-of-Ecology</b>,
         distribuição da <b>Renda Básica Ecológica</b> e simulação contrafactual para o Brasil do século XXI.
       </p>
-
-      <!-- Diagrama Causal em 7 Camadas -->
-      <div class="causal-flow-box">
-        <div class="causal-flow-title">
-          <span>🔬</span> Modelo Causal Integrado (Do Estado Biofísico à Conservação Verificável)
-        </div>
-        <div class="causal-steps-grid">
-          <div class="causal-step-card">
-            <span class="causal-step-num">Camada 1</span>
-            <div class="causal-step-title">1. Estado Biofísico</div>
-            <div class="causal-step-desc">Massa vegetal, carbono orgânico e higidez hídrica.</div>
-          </div>
-          <div class="causal-step-card">
-            <span class="causal-step-num">Camada 2</span>
-            <div class="causal-step-title">2. Mensuração</div>
-            <div class="causal-step-desc">Sensoriamento INPE, IoT e laudos participativos.</div>
-          </div>
-          <div class="causal-step-card">
-            <span class="causal-step-num">Camada 3</span>
-            <div class="causal-step-title">3. Oráculo IA</div>
-            <div class="causal-step-desc">Inferência bayesiana com limiar θ* ≥ 97.5%.</div>
-          </div>
-          <div class="causal-step-card">
-            <span class="causal-step-num">Camada 4</span>
-            <div class="causal-step-title">4. Consenso PoE</div>
-            <div class="causal-step-desc">VRF sublinear ponderada pelo Ecoscore auditado.</div>
-          </div>
-          <div class="causal-step-card">
-            <span class="causal-step-num">Camada 5</span>
-            <div class="causal-step-title">5. Ativo GAIA</div>
-            <div class="causal-step-desc">Unidade de conta com máquina de estados.</div>
-          </div>
-          <div class="causal-step-card">
-            <span class="causal-step-num">Camada 6</span>
-            <div class="causal-step-title">6. Incentivo RBE</div>
-            <div class="causal-step-desc">Repasse direto às famílias guardiãs territoriais.</div>
-          </div>
-          <div class="causal-step-card">
-            <span class="causal-step-num">Camada 7</span>
-            <div class="causal-step-title">7. Conservação</div>
-            <div class="causal-step-desc">Feedback positivo e adicionalidade ecológica (Y1 - Y0).</div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -213,9 +172,9 @@
             <p class="empty-msg">Nenhuma transação pendente.</p>
           </div>
           <button class="btn btn-secondary" id="btn-mine" onclick="mineBlock()" disabled>
-            <span>⛏️</span> Minerar Bloco (PoE)
+            <span>⛏️</span> Validar Bloco (PoE)
           </button>
-          <p class="hint-text">Proof-of-Ecology: dificuldade adaptada ao índice de impacto ambiental auditado.</p>
+          <p class="hint-text">Proof-of-Ecology: seleção probabilística do validador ponderada pelo Ecoscore do bioma.</p>
         </div>
 
         <!-- Nós da Rede -->
@@ -396,7 +355,7 @@
     <section class="biomes-section">
       <div class="biomes-header-box">
         <div>
-          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Rede Nacional de Oráculos Soberanos</h2>
+          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Rede Nacional de Oráculos Ambientais</h2>
           <p style="font-size: 13px; color: var(--text2); margin-top: 4px;">
             Fusão em tempo real de sensoriamento orbital (INPE/CBERS/Sentinel), telemetria IoT terrestre e laudos comunitários em nuvem de Estado (SERPRO/RNP).
           </p>
@@ -415,7 +374,7 @@
       <div class="map-section-box">
         <div class="map-header-row">
           <div>
-            <h3 style="font-size: 19px; font-weight: 800; color: var(--green);">Mapa Geoespacial Soberano do Brasil</h3>
+            <h3 style="font-size: 19px; font-weight: 800; color: var(--green);">Mapa Geoespacial dos Biomas Brasileiros</h3>
             <p style="font-size: 12px; color: var(--text2); margin-top: 4px;">
               Clique em qualquer bioma ou nó guardião para inspecionar dados orbitais ao vivo e sincronizar a calculadora territorial.
             </p>
@@ -682,6 +641,123 @@
             <span>🚀</span> Simular Emissão de Lote RBE On-Chain
           </button>
         </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════ TAB: MODELO CAUSAL INTEGRADO ═══════════════════ -->
+  <div id="tab-causal" class="tab-content">
+    <section class="biomes-section">
+      <div class="biomes-header-box">
+        <div>
+          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Modelo Causal Integrado</h2>
+          <p style="font-size: 13px; color: var(--text2); margin-top: 4px;">
+            Do estado biofísico verificável à conservação ecológica economicamente incentivada — o circuito completo da BioChain em 7 camadas causais.
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <span class="badge" style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 20px;">
+            🔬 Arquitetura Científica
+          </span>
+          <span class="badge" style="background: rgba(45,212,191,0.15); color: var(--teal); padding: 6px 12px; border-radius: 20px;">
+            7 Camadas Causais
+          </span>
+        </div>
+      </div>
+
+      <!-- Diagrama de Fluxo Causal em 7 Camadas -->
+      <div style="padding: 24px; max-width: 1100px; margin: 0 auto;">
+
+        <!-- Ciclo visual em seta com cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px;">
+
+          <div class="card" style="border-left: 4px solid var(--green); padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 1 · Entrada</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Estado Biofísico</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Massa vegetal, carbono orgânico, higidez hídrica e biodiversidade mensurável como variáveis de estado ecológico (World W).</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">Fonte: IBGE / INPE / MapBiomas</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--teal); padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 2 · Aquisição</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Mensuração Multimodal</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Sensoriamento INPE/CBERS, IoT terrestre, laudos comunitários e reconciliação bayesiana: P(E|D<sub>sat</sub>, D<sub>IoT</sub>, D<sub>soc</sub>).</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">SERPRO / ANA / EMBRAPA</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--gold); padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 3 · Inferência</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Oráculo IA Bayesiano</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Inferência probabilística com limiar θ* ≥ 97,5% derivado da função de perda assimétrica. Rejeita laudos adulterados via slashing.</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">GAIA Oracle Network</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid #a78bfa; padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 4 · Consenso</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Proof-of-Ecology (PoE)</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Seleção de validadores via VRF sublinear ponderada pelo Ecoscore: P<sub>i</sub> = S<sub>i</sub><sup>ϕ</sup> / Σ S<sub>k</sub><sup>ϕ</sup>, com ϕ = 0,85. Resistente a Sybil.</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">BioBFT / EcoSort Protocol</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid #fb923c; padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: #fb923c; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 5 · Ativo</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Ativo GAIA</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">GAIA = f(Carbono, Biodiversidade, Água, Solo, Território, Custódia). Máquina de estados: Pendente → Ativo → Suspenso → Aposentado.</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">Lei Federal 14.119/2021</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--green); padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 6 · Redistribuição</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Renda Básica Ecológica</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">RBE = R$ 600 + (ha × Ω<sub>bioma</sub> × IIE). Repasse direto via Pix/Caixa (Fase 1) e Drex Real Digital (Fase 2). Zero intermediários.</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">STN / Banco Central do Brasil</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--teal); padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 7 · Resultado</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Conservação Verificável</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Adicionalidade contrafactual: Y1 − Y0 mensura retenção florestal real vs. linha de base. Fecha o ciclo: Custódia → Natureza → Custódia.</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">INPE-DETER / MapBiomas Alert</div>
+          </div>
+
+        </div>
+
+        <!-- Diagrama de fluxo em linha -->
+        <div class="card" style="padding: 24px; margin-bottom: 24px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: var(--green); margin-bottom: 16px;">Circuito Causal Completo</h3>
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px; font-family: 'JetBrains Mono', monospace;">
+            <span style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 8px; font-weight: 700;">🌿 Natureza</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(45,212,191,0.1); color: var(--teal); padding: 6px 12px; border-radius: 8px;">📡 Medição</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(251,191,36,0.1); color: var(--gold); padding: 6px 12px; border-radius: 8px;">🤖 Oráculo</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(167,139,250,0.1); color: #a78bfa; padding: 6px 12px; border-radius: 8px;">⛓️ Blockchain</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(251,146,60,0.1); color: #fb923c; padding: 6px 12px; border-radius: 8px;">🪙 GAIA</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 8px;">💚 RBE</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(45,212,191,0.1); color: var(--teal); padding: 6px 12px; border-radius: 8px;">👨‍👩‍👧 Família</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 8px; font-weight: 700;">🌿 Custódia</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text3); margin-top: 12px;">Cada seta representa uma transformação verificada criptograficamente e registrada de forma imutável no livro-razão público da BioChain.</p>
+        </div>
+
+        <!-- Nota Epistemológica -->
+        <div class="card" style="padding: 20px; border: 1px solid rgba(251,191,36,0.3); background: rgba(251,191,36,0.05);">
+          <h3 style="font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 10px;">⚠️ Nota Epistemológica (Protótipo Acadêmico)</h3>
+          <p style="font-size: 13px; color: var(--text2); line-height: 1.7;">
+            Este modelo causal está <b>em desenvolvimento e validação acadêmica</b>. Cada camada opera em um nível epistemológico distinto: 
+            (A) hipótese normativa — a natureza deve ser tratada como sujeito de direitos; 
+            (B) teoria econômica — incentivos financeiros alteram comportamento de agentes; 
+            (C) modelo matemático — Ecoscore, GAIA e RBE podem ser formalizados; 
+            (D) implementação computacional — blockchain e smart contracts podem executar essas regras.
+            A validade de cada camada <b>não implica automaticamente a validade das demais</b>, e o circuito completo requer validação empírica em escala.
+          </p>
+        </div>
+
       </div>
     </section>
   </div>
@@ -995,7 +1071,7 @@
           <div class="ring r3"></div>
         </div>
       </div>
-      <h3>Minerando Bloco...</h3>
+      <h3>Validando Bloco...</h3>
       <p id="mining-status">Calculando Proof-of-Ecology...</p>
       <div class="progress-bar-bg">
         <div class="progress-bar-fill" id="mining-progress"></div>

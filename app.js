@@ -547,7 +547,7 @@ async function mineBlock() {
   } catch (e) {
     clearInterval(progressInterval);
     modal.classList.add('hidden');
-    showToast('❌ Erro ao minerar bloco: ' + e.message, 'error');
+    showToast('❌ Erro ao validar bloco: ' + e.message, 'error');
   }
 }
 
