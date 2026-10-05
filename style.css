@@ -947,7 +947,7 @@ body {
   .cert-watermark { color: rgba(185, 28, 28, 0.25); border-color: rgba(185, 28, 28, 0.35); }
 }
 
-/* ═══════════ BIOCHAIN v3.0 SCIENTIFIC ARCHITECTURE ═══════════ */
+/* ═══════════ BIOCHAIN SCIENTIFIC ARCHITECTURE ═══════════ */
 .causal-flow-box {
   background: var(--surface2);
   border: 1px solid var(--border2);

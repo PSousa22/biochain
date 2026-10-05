@@ -3,7 +3,7 @@
 
 ---
 
-**Versão do Protocolo:** M�todo Brasiliano (Arquitetura Científica)  
+**Protocolo:** Método Brasiliano (Arquitetura Científica)  
 **Classificação:** Especificação Técnica de Engenharia, Economia Ecológica e Teoria dos Jogos  
 **Data:** Setembro de 2026  
 **Autoria Institucional:** Iniciativa BioChain Brasil  
@@ -12,7 +12,7 @@
 ---
 
 ### Resumo Executivo (Abstract)
-Este documento estabelece a especificação técnica e matemática formal da **BioChain **, uma infraestrutura pública digital descentralizada para a governança econômica da conservação ecológica. O protocolo opera sob a tríplice divisão epistemológica **$\text{BioChain} = \text{Teoria} + \text{Especificação de Protocolo} + \text{Simulador Computacional / Programa Experimental}$**. 
+Este documento estabelece a especificação técnica e matemática formal da **BioChain**, uma infraestrutura pública digital descentralizada para a governança econômica da conservação ecológica. O protocolo opera sob a tríplice divisão epistemológica **$\text{BioChain} = \text{Teoria} + \text{Especificação de Protocolo} + \text{Simulador Computacional / Programa Experimental}$**. 
 
 Substitui-se consensos predatórios por energia (PoW) ou plutocráticos por capital (PoS) pelo **Proof-of-Ecology (PoE)** formalmente decomposto na quíntupla $\langle \text{LeaderSelection}, \text{Attestation}, \text{Finality}, \text{FraudProof}, \text{Slashing} \rangle$. Define-se a ontologia estrita de ativos separando a moeda/unidade de conta **GAIA** dos créditos mensuráveis (`CarbonCredit`, `BiodiversityCredit`, `WaterCredit`, `CustodyCertificate` e `GovernanceToken`) com prevenção de dupla contagem via máquina de estados imutável ($Retired(\text{GAIA}) \Rightarrow \neg Reissue(E_{\text{underlying}})$). O limiar estatístico bayesiano dos oráculos multimodais ($\theta^* \ge 97.5\%$) é derivado por minimização da função de perda econômica de falsos positivos e negativos.
 
@@ -117,14 +117,14 @@ Para evitar a proliferação da manipulação de indicadores ($\text{Ecoscore} \
 
 ---
 
-## 6. Smart Contract de Referência (RBE  em 2 Fases)
+## 6. Smart Contract de Referência (RBE em 2 Fases)
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-/// @title RendaBasicaEcologica  — Arquitetura em 2 Fases (Pix/Caixa -> Drex)
-contract RendaBasicaEcologicaV3 {
+/// @title RendaBasicaEcologica — Arquitetura em 2 Fases (Pix/Caixa -> Drex)
+contract RendaBasicaEcologica {
     enum AssetState { Issued, Active, Transferred, Retired, Cancelled }
     
     struct Asset {
@@ -149,4 +149,4 @@ contract RendaBasicaEcologicaV3 {
 
 ---
 
-*BioChain Scientific Working Group ·  Architecture · Setembro de 2026*
+*BioChain Scientific Working Group · Arquitetura Científica · Setembro de 2026*

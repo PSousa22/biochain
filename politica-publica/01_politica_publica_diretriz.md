@@ -136,7 +136,7 @@ Cada bioma brasileiro tem representação na rede como **nó validador soberano*
 🦋 biodiversidade — índices de espécies
 💨 carbono     — sequestro e créditos
 🌱 solo        — saúde edáfica
-🗳️ governança  — votos e propostas
+🗳️ governança — votos e propostas
 💚 renda       — pagamentos a guardiões (PSA)
 ```
 
@@ -170,7 +170,7 @@ As decisões de política são tomadas por **propostas on-chain**, votadas propo
 4. **Bioeconomia:** produtos florestais não-madeireiros tokenizados
 5. **Turismo ecológico tokenizado:** NFTs de acesso e proteção territorial
 6. **Royalties de biodiversidade:** partilha de benefícios com comunidades (Protocolo de Nagoya)
-7. **Fundo Amazônia 2.0:** redistribuição via smart contracts (sem intermediários políticos)
+7. **Fundo Amazônia via Blockchain:** redistribuição via smart contracts (sem intermediários políticos)
 
 ### 4.3 Renda Básica Ecológica (RBE)
 
@@ -381,7 +381,7 @@ O **Método Brasiliano** é a chave epistemológica: não importamos uma soluç�
 ---
 
 **Documento elaborado com base em:**
-- BioChain v1.0 — [psousa22.github.io/biochain](https://psousa22.github.io/biochain/)
+- BioChain — [psousa22.github.io/biochain](https://psousa22.github.io/biochain/)
 - IPCC AR6 (2023) — Sixth Assessment Report
 - Protocolo de Nagoya (CDB)
 - Lei 14.119/2021 — Política Nacional de Pagamento por Serviços Ambientais
@@ -389,4 +389,4 @@ O **Método Brasiliano** é a chave epistemológica: não importamos uma soluç�
 - REDD+ — ONU-REDD Programme
 - Lei 12.651/2012 — Código Florestal Brasileiro
 
-*Versão 1.0 — Setembro 2026 · Projeto BioChain Brasil*
+*Setembro 2026 · Projeto BioChain Brasil*

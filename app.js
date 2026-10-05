@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════
-//  BioChain — UI Application Layer 
+//  BioChain — UI Application Layer
 //  Tecnocracia Biocêntrica · Método Brasiliano
 // ═══════════════════════════════════════════════════════════
 
@@ -230,7 +230,7 @@ const DOCS_DATA = {
       <p>Estrutura completa em 13 lâminas com notas para o orador para apresentações em plenário e reuniões ministeriais.</p>
       <h3>Lâminas de Destaque:</h3>
       <ol>
-        <li>Capa & Tese de Impacto: A maior biodiversidade como motor de riqueza .</li>
+        <li>Capa & Tese de Impacto: A maior biodiversidade como motor de riqueza nacional.</li>
         <li>O Narcisídio Social: A floresta valorada a zero no PIB e os custos socializados.</li>
         <li>A Encruzilhada da IA: Anti-extrativismo de dados genéticos por Big Techs.</li>
         <li>O Método Brasiliano: Síntese de DLT, dados do INPE e saberes ancestrais.</li>
