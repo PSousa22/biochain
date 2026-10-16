@@ -28,6 +28,16 @@ let voiceBudget = 100;
 let currentProfile = 'guardian';
 let selectedBiomeId = 'amz';
 
+// ─── XSS Escape Helper ────────────────────────────────────
+function esc(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 const WALLET_PROFILES = {
   guardian: {
     id: 'guardian',
@@ -133,7 +143,7 @@ const BIOME_MAP_INFO = {
     canopy: '91.0%',
     oracle: 'MARINHA-ORACULO-07',
     water: 'Marinho (95%)',
-    biomaSelectVal: 'Zona Costeira'
+    biomaSelectVal: 'Zona Costeira e Marinha'
   }
 };
 
@@ -415,12 +425,12 @@ function selectBlock(index) {
   if (block.transactions.length) {
     txHTML = block.transactions.map(tx => `
       <div class="inspector-tx">
-        <div class="inspector-tx-type">${TYPE_ICONS[tx.type] || '📦'} ${tx.type.toUpperCase()} · ${tx.amount} GAIA</div>
+        <div class="inspector-tx-type">${TYPE_ICONS[tx.type] || '📦'} ${esc(tx.type).toUpperCase()} · ${tx.amount} GAIA</div>
         <div class="inspector-tx-detail">
-          <b>De:</b> ${tx.origin}<br/>
-          <b>Para:</b> ${tx.destination}<br/>
+          <b>De:</b> ${esc(tx.origin)}<br/>
+          <b>Para:</b> ${esc(tx.destination)}<br/>
           <b>Área:</b> ${tx.area} ha &nbsp;|&nbsp; <b>CO₂:</b> ${tx.co2} tC<br/>
-          <b>ID:</b> <span style="font-family:'JetBrains Mono',monospace;font-size:10px">${tx.id}</span>
+          <b>ID:</b> <span style="font-family:'JetBrains Mono',monospace;font-size:10px">${esc(tx.id)}</span>
         </div>
       </div>`).join('');
   } else {
@@ -492,8 +502,8 @@ function renderMempool() {
     <div class="mempool-item">
       <div class="mempool-item-icon">${TYPE_ICONS[tx.type] || '📦'}</div>
       <div class="mempool-item-body">
-        <div class="mempool-item-type">${tx.type.toUpperCase()}</div>
-        <div class="mempool-item-route">${truncate(tx.origin, 22)} → ${truncate(tx.destination, 22)}</div>
+        <div class="mempool-item-type">${esc(tx.type).toUpperCase()}</div>
+        <div class="mempool-item-route">${esc(truncate(tx.origin, 22))} → ${esc(truncate(tx.destination, 22))}</div>
         <div class="mempool-item-amount">${tx.amount} GAIA · ${tx.co2} tCO₂</div>
       </div>
     </div>
@@ -511,7 +521,14 @@ async function mineBlock() {
   modal.classList.remove('hidden');
 
   let pct = 0;
-  const validator = nodes[Math.floor(Math.random() * nodes.length)].name;
+  // BC-05: Seleção de validador ponderada por stake (PoE / Stake Ecológico)
+  const totalStake = nodes.reduce((s, n) => s + (n.stake || 1), 0);
+  let r = Math.random() * totalStake, cumulative = 0;
+  const selectedNode = nodes.find(n => {
+    cumulative += (n.stake || 1);
+    return r <= cumulative;
+  }) || nodes[0];
+  const validator = selectedNode.name;
   status.textContent = `Validador: ${validator}`;
 
   const progressInterval = setInterval(() => {
@@ -522,7 +539,7 @@ async function mineBlock() {
   try {
     const block = await blockchain.mineBlock(validator, (nonce, hash) => {
       hashEl.textContent = `Hash: 0x${hash.slice(0, 20)}...`;
-      status.textContent = `Nonce: ${nonce.toLocaleString()} · PoE Ativo`;
+      status.textContent = `Nonce: ${nonce.toLocaleString('pt-BR')} · PoE Ativo`;
     });
 
     clearInterval(progressInterval);
@@ -552,13 +569,14 @@ async function mineBlock() {
 }
 
 // ─── Validate Chain ───────────────────────────────────────
-function validateChain() {
-  const result = blockchain.validateChain();
+async function validateChain() {
+  const result = await blockchain.validateChain();
   const statusEl = document.getElementById('chain-status');
   if (result.valid) {
     statusEl.innerHTML = '<span class="dot green"></span> Chain Válida';
     showToast('✅ Cadeia íntegra! Todos os hashes e árvores de Merkle conferem.', 'success');
     log('Validação criptográfica: 100% íntegra', 'success');
+    document.querySelectorAll('.block-card').forEach(c => c.classList.remove('tampered'));
   } else {
     statusEl.innerHTML = '<span class="dot red"></span> Chain Comprometida';
     showToast(`❌ Violação no bloco #${result.blockIndex}: ${result.reason}`, 'error');
@@ -576,14 +594,19 @@ function simulateTamper() {
   const block = blockchain.chain[targetIdx];
   if (block.transactions.length) {
     block.transactions[0].amount = 999999999;
+    // Atualiza Merkle root para tentar burlar a árvore, mas o SHA-256 do bloco detectará
+    block.merkleRoot = block._computeMerkleRoot();
+  } else {
+    block.validator = 'Invasor-0xDEAD';
   }
-  block.hash = 'TAMPERED_' + block.hash.slice(9);
+  // BC-01: Não alterar block.hash artificialmente!
+  // A validação criptográfica (recomputação de SHA-256) detectará a fraude genuinamente.
   renderChain();
   const statusEl = document.getElementById('chain-status');
-  statusEl.innerHTML = '<span class="dot red"></span> Chain Comprometida';
+  statusEl.innerHTML = '<span class="dot red"></span> Bloco Modificado (Aguardando Validação)';
   document.getElementById(`block-${targetIdx}`)?.classList.add('tampered');
-  showToast(`⚠️ Ataque simulado no bloco #${targetIdx}. Clique em Validar Cadeia.`, 'warn');
-  log(`🔴 Ataque simulado no bloco #${targetIdx}`, 'warn');
+  showToast(`⚠️ Dados adulterados no bloco #${targetIdx}. Clique em "Validar Cadeia" para testar a detecção criptográfica.`, 'warn');
+  log(`🔴 Adulteração não autorizada inserida no bloco #${targetIdx} (Clique em Validar Cadeia)`, 'warn');
 }
 
 // ─── Export ───────────────────────────────────────────────
@@ -605,12 +628,12 @@ function updateStats() {
   document.getElementById('val-co2').textContent = blockchain.getTotalCO2().toFixed(1) + ' tC';
 
   const m = blockchain.getMetricsByType();
-  document.getElementById('m-floresta').textContent = m.floresta.toLocaleString();
-  document.getElementById('m-rio').textContent = m.rio.toLocaleString();
-  document.getElementById('m-bio').textContent = m.biodiversidade.toLocaleString();
-  document.getElementById('m-co2').textContent = m.carbono.toLocaleString();
-  document.getElementById('m-rbe').textContent = m.renda.toLocaleString();
-  document.getElementById('m-queima').textContent = (m.queima || blockchain.getTotalBurned()).toLocaleString();
+  document.getElementById('m-floresta').textContent = m.floresta.toLocaleString('pt-BR');
+  document.getElementById('m-rio').textContent = m.rio.toLocaleString('pt-BR');
+  document.getElementById('m-bio').textContent = m.biodiversidade.toLocaleString('pt-BR');
+  document.getElementById('m-co2').textContent = m.carbono.toLocaleString('pt-BR');
+  document.getElementById('m-rbe').textContent = m.renda.toLocaleString('pt-BR');
+  document.getElementById('m-queima').textContent = (m.queima || blockchain.getTotalBurned()).toLocaleString('pt-BR');
 
   const totalTokens = blockchain.getTotalTokens();
   const ise = totalTokens ? Math.min(100, Math.round((blockchain.getTotalCO2() / totalTokens) * 500 + blockchain.chain.length * 5)) : 0;
@@ -657,7 +680,7 @@ function renderBiomes() {
 
       <div class="oracle-pulse-row">
         <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px;">📡 ${b.oracle}</span>
-        <span style="color: var(--green); font-size: 10px;">● AO VIVO (SERPRO/INPE)</span>
+        <span style="color: var(--green); font-size: 10px;">● SIMULADO (SERPRO/INPE)</span>
       </div>
     </div>
   `).join('');
@@ -670,6 +693,34 @@ function simulateOracleTelemetry() {
     const el = document.getElementById(`moisture-${b.id}`);
     if (el) el.textContent = b.moisture + '%';
   });
+}
+
+// ─── RBE Shared Calculation ───────────────────────────────
+const BASE_RBE = 810.50; // Piso legal: 50% do salário mínimo 2026 (R$ 1.621,00)
+
+function computeRBE(bioma, area, families, iie) {
+  const stressMultiplier = (window.BIOME_STRESS_FACTORS && window.BIOME_STRESS_FACTORS[bioma]) || 1.0;
+  // A parcela territorial é dividida equitativamente entre as famílias guardiãs (Art. 14)
+  const parcelaVariavelPorFamilia = families > 0 ? (area * stressMultiplier * iie) / families : 0;
+  const valorPorFamilia = BASE_RBE + parcelaVariavelPorFamilia;
+  const repasseTotalTerritorio = valorPorFamilia * families;
+  const gaiaTokensEquiv = Math.round(valorPorFamilia / 6.0); // 1 GAIA ~ R$ 6,00 no modelo primário
+  const co2Anual = Math.round(area * 3.2);
+  const additionalityPct = (70 + (iie * 20) + (area / 200)).toLocaleString('pt-BR', {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1
+  });
+
+  return {
+    BASE_RBE,
+    stressMultiplier,
+    parcelaVariavelPorFamilia,
+    valorPorFamilia,
+    repasseTotalTerritorio,
+    gaiaTokensEquiv,
+    co2Anual,
+    additionalityPct
+  };
 }
 
 // ─── RBE Calculator Module ────────────────────────────────
@@ -686,53 +737,54 @@ function calculateRBE() {
   const families = parseInt(familiesSlider.value);
   const iie = parseFloat(iieSlider.value) / 100;
 
-  document.getElementById('rbe-area-val').textContent = `${area.toLocaleString()} ha`;
-  document.getElementById('rbe-families-val').textContent = `${families} família${families !== 1 ? 's' : ''}`;
+  document.getElementById('rbe-area-val').textContent = `${area.toLocaleString('pt-BR')} ha`;
+  document.getElementById('rbe-families-val').textContent = `${families.toLocaleString('pt-BR')} família${families !== 1 ? 's' : ''}`;
   document.getElementById('rbe-iie-val').textContent = `${Math.round(iie * 100)}%`;
 
-  const stressMultiplier = window.BIOME_STRESS_FACTORS ? (window.BIOME_STRESS_FACTORS[bioma] || 1.2) : 1.2;
+  const rbe = computeRBE(bioma, area, families, iie);
 
-  // Formula Institucional (Art. 14 Anteprojeto BioChain):
-  // RBE Base R$ 600 + (ha * Fator * IIE)
-  const valorPorFamilia = 600 + (area * stressMultiplier * iie);
-  const repasseTotalTerritorio = valorPorFamilia * families;
-  const gaiaTokensEquiv = Math.round(valorPorFamilia / 6.0); // 1 GAIA ~ R$ 6,00 no modelo primario
-  const co2Anual = Math.round(area * 3.2);
+  document.getElementById('rbe-total-family').textContent = `R$ ${rbe.valorPorFamilia.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+  document.getElementById('rbe-gaia-equiv').textContent = `equiv. a ${rbe.gaiaTokensEquiv.toLocaleString('pt-BR')} GAIA Tokens / mês`;
+  document.getElementById('rbe-territorio-total').textContent = `R$ ${rbe.repasseTotalTerritorio.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+  document.getElementById('rbe-co2-anual').textContent = `${rbe.co2Anual.toLocaleString('pt-BR')} tCO₂e`;
 
-  document.getElementById('rbe-total-family').textContent = `R$ ${valorPorFamilia.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-  document.getElementById('rbe-gaia-equiv').textContent = `equiv. a ${gaiaTokensEquiv.toLocaleString('pt-BR')} GAIA Tokens / mês`;
-  document.getElementById('rbe-territorio-total').textContent = `R$ ${repasseTotalTerritorio.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-  document.getElementById('rbe-co2-anual').textContent = `${co2Anual.toLocaleString('pt-BR')} tCO₂e`;
-
-  const additionalityPct = (70 + (iie * 20) + (area / 200)).toFixed(1);
   const additionalityEl = document.getElementById('rbe-additionality-val');
-  if (additionalityEl) additionalityEl.textContent = `+${additionalityPct}% de retenção florestal vs. linha de base contrafactual Y0`;
+  if (additionalityEl) additionalityEl.textContent = `+${rbe.additionalityPct}% de retenção florestal vs. linha de base (estimativa ilustrativa)`;
 }
 
 function simulateRBEDeposit() {
   const biomaSelect = document.getElementById('rbe-bioma');
   const areaSlider = document.getElementById('rbe-area-slider');
   const familiesSlider = document.getElementById('rbe-families-slider');
+  const iieSlider = document.getElementById('rbe-iie-slider');
 
   const bioma = biomaSelect.value;
   const area = parseFloat(areaSlider.value);
   const families = parseInt(familiesSlider.value);
+  const iie = iieSlider ? (parseFloat(iieSlider.value) / 100) : 0.94;
+
+  const rbe = computeRBE(bioma, area, families, iie);
 
   const tx = new BioTransaction({
     type: 'renda',
     origin: 'Fundo-Nacional-RBE-STN',
     destination: `Comunidade-${bioma}-0x${Math.random().toString(16).slice(2,6).toUpperCase()}`,
-    amount: families * 150,
+    amount: rbe.gaiaTokensEquiv * families,
     area: area,
-    co2: Math.round(area * 0.4),
-    metadata: { bioma, familias: families, canal: 'Pix-ContaSocial-Fase1' }
+    co2: rbe.co2Anual,
+    metadata: {
+      bioma,
+      familias: families,
+      canal: 'Pix-ContaSocial-Fase1',
+      repasseTotalBRL: `R$ ${rbe.repasseTotalTerritorio.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`
+    }
   });
 
   blockchain.addTransaction(tx);
   renderMempool();
   switchTab('dlt');
   showToast(`✅ Lote RBE simulado enviado à mempool (Fase 1: Pix/Caixa)!`, 'success');
-  log(`Lote RBE gerado: ${families} famílias do bioma ${bioma} · Ordem de pagamento enviada (Fase 1: Pix / Conta Social)`, 'success');
+  log(`Lote RBE gerado: ${families.toLocaleString('pt-BR')} famílias do bioma ${bioma} · Ordem de pagamento enviada (Fase 1: Pix / Conta Social)`, 'success');
 }
 
 // ─── Public Policy Reader Modal ───────────────────────────
@@ -756,7 +808,7 @@ function renderNodes() {
     <div class="node-item">
       <div class="node-status"></div>
       <div class="node-name">${n.name}</div>
-      <div class="node-stake">${n.stake.toLocaleString()} GAIA</div>
+      <div class="node-stake">${n.stake.toLocaleString('pt-BR')} GAIA</div>
     </div>`).join('');
 }
 
@@ -1083,7 +1135,7 @@ function log(msg, type = 'info') {
   const now = new Date().toLocaleTimeString('pt-BR');
   const entry = document.createElement('div');
   entry.className = 'log-entry';
-  entry.innerHTML = `<span class="log-time">${now}</span><span class="log-msg ${type}">${msg}</span>`;
+  entry.innerHTML = `<span class="log-time">${esc(now)}</span><span class="log-msg ${esc(type)}">${esc(msg)}</span>`;
   logEl.prepend(entry);
   while (logEl.children.length > 30) logEl.removeChild(logEl.lastChild);
 }

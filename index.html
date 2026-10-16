@@ -365,7 +365,7 @@
             ● 7 Biomas Sincronizados
           </span>
           <span class="badge" style="background: rgba(45,212,191,0.15); color: var(--teal); padding: 6px 12px; border-radius: 20px;">
-            Reconciliação Bayesiana: 98.9%
+            Reconciliação Bayesiana: 98.9% (Simulado)
           </span>
         </div>
       </div>
@@ -560,7 +560,7 @@
               <option value="Amazônia" selected>Amazônia (Fator de Estresse: 1.20x)</option>
               <option value="Caatinga">Caatinga (Fator de Estresse: 1.30x)</option>
               <option value="Pampa">Pampa (Fator de Estresse: 1.15x)</option>
-              <option value="Zona Costeira">Zona Costeira e Marinha (Fator: 1.25x)</option>
+              <option value="Zona Costeira e Marinha">Zona Costeira e Marinha (Fator: 1.25x)</option>
             </select>
           </div>
 
@@ -589,7 +589,7 @@
           </div>
 
           <div style="background: var(--bg2); padding: 14px; border-radius: var(--radius-sm); font-size: 12px; color: var(--text2); line-height: 1.5;">
-            💡 <b>Fórmula Legal:</b> R$ 600,00 (base legal) + (Hectares × Fator Bioma × IIE) dividido equitativamente pelas famílias guardiãs homologadas.
+            💡 <b>Fórmula Legal:</b> R$ 810,50 (piso legal: 50% SM 2026) + (Hectares × Fator Bioma × IIE) dividido equitativamente pelas famílias guardiãs homologadas.
           </div>
         </div>
 
@@ -603,25 +603,25 @@
           <div style="background: linear-gradient(135deg, rgba(52,211,100,0.1), rgba(45,212,191,0.05)); border: 1px solid var(--green); border-radius: var(--radius); padding: 20px; text-align: center; margin-bottom: 20px;">
             <span style="font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em;">RBE Mensal por Família</span>
             <div style="font-size: 36px; font-weight: 800; color: var(--green); font-family: 'JetBrains Mono', monospace; margin: 6px 0;" id="rbe-total-family">
-              R$ 876,00
+              —
             </div>
             <span style="font-size: 12px; color: var(--teal);" id="rbe-gaia-equiv">
-              equiv. a 146 GAIA Tokens / mês
+              —
             </span>
           </div>
 
           <div class="biome-stats-grid">
             <div class="biome-stat-box">
               <span class="biome-stat-lbl">Repasse Mensal Território</span>
-              <span class="biome-stat-val" id="rbe-territorio-total">R$ 10.512,00</span>
+              <span class="biome-stat-val" id="rbe-territorio-total">—</span>
             </div>
             <div class="biome-stat-box">
               <span class="biome-stat-lbl">CO₂e Sequestrado Anual</span>
-              <span class="biome-stat-val" id="rbe-co2-anual">480 tCO₂e</span>
+              <span class="biome-stat-val" id="rbe-co2-anual">—</span>
             </div>
             <div class="biome-stat-box" style="grid-column: 1 / -1; background: rgba(45, 212, 191, 0.05); border-color: rgba(45, 212, 191, 0.2);">
               <span class="biome-stat-lbl">Adicionalidade Ecológica Contrafactual (Y1 - Y0)</span>
-              <span class="biome-stat-val" id="rbe-additionality-val" style="color: var(--teal); font-size: 13px;">+84,2% de retenção florestal vs. linha de base</span>
+              <span class="biome-stat-val" id="rbe-additionality-val" style="color: var(--teal); font-size: 13px;">—</span>
             </div>
           </div>
 
@@ -695,7 +695,7 @@
           <div class="card" style="border-left: 4px solid #a78bfa; padding: 20px;">
             <div style="font-size: 11px; font-weight: 700; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 4 · Consenso</div>
             <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Proof-of-Ecology (PoE)</div>
-            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Seleção de validadores via VRF sublinear ponderada pelo Ecoscore: P<sub>i</sub> = S<sub>i</sub><sup>ϕ</sup> / Σ S<sub>k</sub><sup>ϕ</sup>, com ϕ = 0,85. Resistente a Sybil.</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Seleção de validadores via VRF sublinear ponderada pelo Ecoscore: P<sub>i</sub> = S<sub>i</sub><sup>ϕ</sup> / Σ S<sub>k</sub><sup>ϕ</sup>, com ϕ = 0,85 e mitigação de Sybil via credenciamento institucional federado.</div>
             <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">BioBFT / EcoSort Protocol</div>
           </div>
 
@@ -709,7 +709,7 @@
           <div class="card" style="border-left: 4px solid var(--green); padding: 20px;">
             <div style="font-size: 11px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 6 · Redistribuição</div>
             <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Renda Básica Ecológica</div>
-            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">RBE = R$ 600 + (ha × Ω<sub>bioma</sub> × IIE). Repasse direto via Pix/Caixa (Fase 1) e Drex Real Digital (Fase 2). Zero intermediários.</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">RBE = R$ 810,50 (piso legal) + (ha × Ω<sub>bioma</sub> × IIE) / Famílias. Repasse direto via Pix/Caixa (Fase 1) e Drex Real Digital (Fase 2). Zero intermediários.</div>
             <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">STN / Banco Central do Brasil</div>
           </div>
 

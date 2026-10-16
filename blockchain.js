@@ -41,8 +41,11 @@ class BioTransaction {
   }
 
   _sign() {
-    const payload = `${this.id}|${this.origin}|${this.destination}|${this.amount}`;
-    return btoa(payload).slice(0, 32);
+    try {
+      const payload = `${this.id}|${this.origin}|${this.destination}|${this.amount}`;
+      // unescape+encodeURIComponent permite caracteres UTF-8 (emoji, travessão)
+      return btoa(unescape(encodeURIComponent(payload))).slice(0, 32);
+    } catch { return 'SIGN_ERR'; }
   }
 
   // Ecological impact score (0-100) — used in Proof-of-Ecology
@@ -201,6 +204,10 @@ class BioBlockchain {
   }
 
   async mineBlock(validatorNode, onProgress) {
+    if (this._mining) throw new Error('Mineração já em progresso');
+    this._mining = true;
+
+    const txIds = new Set(this.pendingTransactions.map(t => t.id));
     const txs = [...this.pendingTransactions];
     const block = new BioBlock({
       index: this.chain.length,
@@ -218,16 +225,24 @@ class BioBlockchain {
       if (tx.type === 'queima') this.burnedTokens += tx.amount;
     });
 
-    this.pendingTransactions = [];
+    // Remove apenas as transações que foram incluídas (evita perda de txs adicionadas durante a mineração)
+    this.pendingTransactions = this.pendingTransactions.filter(t => !txIds.has(t.id));
+    this._mining = false;
     return block;
   }
 
-  validateChain() {
+  async validateChain() {
     for (let i = 1; i < this.chain.length; i++) {
       const current = this.chain[i];
       const previous = this.chain[i - 1];
-      if (current.previousHash !== previous.hash) return { valid: false, blockIndex: i, reason: 'Hash chain quebrada' };
-      if (!current.isValid()) return { valid: false, blockIndex: i, reason: 'Bloco inválido' };
+      if (current.previousHash !== previous.hash)
+        return { valid: false, blockIndex: i, reason: 'Hash chain quebrada' };
+      // Recomputa o hash SHA-256 para detectar adulteração de dados
+      const recomputedHash = await sha256(current.dataString());
+      if (recomputedHash !== current.hash)
+        return { valid: false, blockIndex: i, reason: 'Hash do bloco adulterado' };
+      if (!current.isValid())
+        return { valid: false, blockIndex: i, reason: 'Merkle inválido' };
     }
     return { valid: true };
   }
