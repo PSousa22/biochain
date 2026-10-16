@@ -22,9 +22,10 @@ Substitui-se consensos predatórios por energia (PoW) ou plutocráticos por capi
 
 O protocolo estrutura-se sobre um fluxo causal rigoroso e verificável:
 
-$$\text{Problema (Degradação)} \xrightarrow{\text{Falha Econômica}} \text{Hipótese} \xrightarrow{\text{Mecanismo (BioChain)}} \text{Tecnologia (DLT/Oráculos)} \xrightarrow{\text{Resultado Esperado}} \text{Teste Empírico}$$
 
-$$\boxed{ \text{Estado biofísico} \rightarrow \text{mensuração} \rightarrow \text{oráculo} \rightarrow \text{consenso} \rightarrow \text{ativo} \rightarrow \text{incentivo} \rightarrow \text{comportamento} \rightarrow \text{estado biofísico} }$$
+$$\boxed{ \text{Estado biofísico} \rightarrow \text{Mensuração} \rightarrow \text{Oráculo} \rightarrow \text{Consenso} \rightarrow \text{Ativo} \rightarrow \text{Incentivo} \rightarrow \text{Comportamento} \rightarrow \text{Estado biofísico} }$$
+
+$$\text{Problema (Degradação)} \xrightarrow{\text{Falha Econômica}} \text{Hipótese} \xrightarrow{\text{Mecanismo (BioChain)}} \text{Tecnologia (DLT/Oráculos)} \xrightarrow{\text{Resultado Esperado}} \text{Teste Empírico}$$
 
 ---
 
