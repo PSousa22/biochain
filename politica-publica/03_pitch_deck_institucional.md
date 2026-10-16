@@ -65,7 +65,7 @@
 ### SLIDE 5 | A BioChain: Arquitetura da Solução
 ## O Registro Público e Imutável da Vida
 
-A **BioChain** é uma infraestrutura de Tecnologia de Razão Distribuída (DLT) pública que registra, autentica e liquida ativos ecológicos em tempo real.
+A **BioChain** é uma infraestrutura de Tecnologia de Registro Distribuído (DLT) pública que registra, autentica e liquida ativos ecológicos em tempo real.
 
 ```
   [ INPE / MapBiomas ]        [ Sensores IoT ]        [ Comunidades Locais ]
