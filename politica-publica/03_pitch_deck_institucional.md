@@ -53,7 +53,7 @@
 ### SLIDE 4 | O Método Brasiliano: A Virada Epistêmica
 ## Não Copiar Modelos: Construir a Vanguarda a Partir da Realidade Concreta
 
-* **Recusa da Subalternidade:** Parar de importar frameworks concebidos em escritórios do Atlântico Norte desconectados da realidade das florestas e várzeas tropicais.
+* **Recusa da Subalternidade:** Parar de importar estruturas de pensamento concebidas em escritórios do Atlântico Norte desconectados da realidade das florestas e várzeas tropicais.
 * **Síntese Tropical:** Articulação pioneira entre:
   * **Alta Tecnologia:** Razão Distribuída (DLT), criptografia de ponta e oráculos de IA.
   * **Ciência de Estado:** Monitoramento orbital do INPE, dados fundiários e MapBiomas.
