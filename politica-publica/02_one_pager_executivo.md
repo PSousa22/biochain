@@ -28,7 +28,7 @@ Pelo **Método Brasiliano**, o Brasil deixa de importar marcos regulatórios ex�
    │                        ARQUITETURA DA BIOCHAIN                         │
    └───────┬─────────────────┬────────────────────┬──────────────────┬──────┘
            ▼                 ▼                    ▼                  ▼
-   [Proof-of-Ecology] [Oráculos de IA]    [Token GAIA]       [RBE Universal]
+   [Proof-of-Ecology] [Oráculos de IA]    [Token GAIA]       [RBE]
    Consenso ancorado  Validação híbrida:  Unidade de valor   Renda Básica
    em indicadores     satélites + IoT +   lastreada em tCO2e Ecológica direta
    biofísicos reais   saberes locais      auditado e bioma   aos guardiões
