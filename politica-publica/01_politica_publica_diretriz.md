@@ -366,7 +366,7 @@ A proposta nomeia o problema sem eufemismo:
 
 ## Conclusão: A BioChain como Antídoto ao Narcisídio
 
-O narcisídio social brasileiro não é uma fatalidade — é uma escolha de arquitetura institucional. Uma civilização que não precifica a vida que a sustenta está programada para se destruir.
+O narcisídio social brasileiro não é uma fatalidade — é uma escolha de arquitetura institucional. Uma civilização que não valoriza e precifica a vida que a sustenta está programada para se destruir.
 
 A BioChain é uma **reprogramação de incentivos**:
 - Preservar passa a ser mais lucrativo que destruir
