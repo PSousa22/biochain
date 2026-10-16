@@ -12,7 +12,9 @@
 ---
 
 ### Resumo Executivo (Abstract)
-Este documento estabelece a especificação técnica e matemática formal da **BioChain**, uma infraestrutura pública digital descentralizada para a governança econômica da conservação ecológica. O protocolo opera sob a tríplice divisão epistemológica **$\text{BioChain} = \text{Teoria} + \text{Especificação de Protocolo} + \text{Simulador Computacional / Programa Experimental}$**. 
+Este documento estabelece a especificação técnica e matemática formal da **BioChain**, uma infraestrutura pública digital descentralizada para a governança econômica da conservação ecológica. O protocolo opera sob a tríplice divisão epistemológica 
+
+**$$\text{BioChain} = \text{Teoria} + \text{Especificação de Protocolo} + \text{Simulador Computacional / Programa Experimental}$$**. 
 
 Substitui-se consensos predatórios por energia (PoW) ou plutocráticos por capital (PoS) pelo **Proof-of-Ecology (PoE)** formalmente decomposto na quíntupla $\langle \text{LeaderSelection}, \text{Attestation}, \text{Finality}, \text{FraudProof}, \text{Slashing} \rangle$. Define-se a ontologia estrita de ativos separando a moeda/unidade de conta **GAIA** dos créditos mensuráveis (`CarbonCredit`, `BiodiversityCredit`, `WaterCredit`, `CustodyCertificate` e `GovernanceToken`) com prevenção de dupla contagem via máquina de estados imutável ($Retired(\text{GAIA}) \Rightarrow \neg Reissue(E_{\text{underlying}})$). O limiar estatístico bayesiano dos oráculos multimodais ($\theta^* \ge 97.5\%$) é derivado por minimização da função de perda econômica de falsos positivos e negativos.
 
