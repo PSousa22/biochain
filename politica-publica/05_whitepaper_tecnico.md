@@ -32,7 +32,7 @@ $$\boxed{ \text{Estado biofísico} \rightarrow \text{Mensuração} \rightarrow \
 ### 2.1 Atestação Oracular e Prevenção do "Garbage In, Immutable Garbage Out"
 Para impedir que dados incorretos sejam imutavelmente registrados na blockchain, o protocolo exige uma cadeia estrita de atestação oracular:
 
-$$\text{World} \longrightarrow \text{Sensors (Orbital/IoT/Social)} \longrightarrow \text{Measurement} \longrightarrow \text{Inference (IA SERPRO/RNP)} \longrightarrow \text{Attestation} \longrightarrow \text{Ledger}$$
+$$\text{Meio Ambiente} \longrightarrow \text{Sensores (Orbital/IoT/Social)} \longrightarrow \text{Measuração} \longrightarrow \text{Inferência (IA SERPRO/RNP)} \longrightarrow \text{Comprovação} \longrightarrow \text{Registro}$$
 
 ### 2.2 Derivação Econômica do Limiar Bayesiano ($\theta^*$)
 O limiar de confiança estatística não é arbitrário, mas sim a solução da minimização da função de perda socioeconômica:
