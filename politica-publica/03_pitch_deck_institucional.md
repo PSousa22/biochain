@@ -112,7 +112,7 @@ A **BioChain** é uma infraestrutura de Tecnologia de Registro Distribuído (DLT
 2. **Oráculos Inteligentes:**
    * Algoritmos de visão computacional comparam imagens de satélite semanais para aferir regeneração de biomassa.
    * Modelos preditivos de risco de queimadas disparam fundos de contingência automáticos via contratos inteligentes.
-3. **Auditabilidade Total:** Toda decisão algorítmica deixa rastro criptográfico auditável no ledger público.
+3. **Auditabilidade Total:** Toda decisão algorítmica deixa rastro criptográfico auditável no registro público.
 
 ---
 
@@ -122,7 +122,7 @@ A **BioChain** é uma infraestrutura de Tecnologia de Registro Distribuído (DLT
 * **O Problema Global:** Mercados de carbono voluntários desmoralizados por duplicidade de créditos, medições fantasmas e taxas predatórias de intermediários.
 * **A Solução GAIA:**
   * **1 GAIA = 1 tonelada de CO₂e** sequestrada comprovadamente + métricas adicionais de preservação hídrica e biodiversidade.
-  * **Queima Imutável:** Quando uma empresa compensa sua emissão, o token é destruído no ledger, impedindo dupla contabilidade (*double spending*).
+  * **Queima Imutável:** Quando uma empresa compensa sua emissão, o token é destruído no registro distribuído, impedindo dupla contabilidade (*double spending*).
   * **Rastreabilidade Pública:** Qualquer cidadão ou auditor internacional pode verificar a coordenada geográfica exata do hectare que originou o ativo.
 
 ---
