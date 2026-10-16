@@ -302,7 +302,7 @@ A narrativa central desta política não é de sacrifício — é de **lideranç
 | **Classe política** | "Soberania digital + liderança climática global + receita nova para o Brasil" |
 | **Mercado financeiro** | "O maior ativo ecológico do mundo, tokenizado e auditável" |
 | **Comunidade científica** | "Infraestrutura aberta para dados ambientais com governança democrática" |
-| **Juventude** | "O sistema que faz o Brasil virar o lado certo" |
+| **Juventude** | "O sistema que faz o Brasil virar exemplo de sustentabilidade existencial" |
 | **Comunidade internacional** | "O sul global liderando a transição ecológica com tecnologia própria" |
 
 ### 7.3 Combate ao Narcisídio na Narrativa
