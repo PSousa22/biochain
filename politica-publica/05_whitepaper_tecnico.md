@@ -25,8 +25,6 @@ O protocolo estrutura-se sobre um fluxo causal rigoroso e verificável:
 
 $$\boxed{ \text{Estado biofísico} \rightarrow \text{Mensuração} \rightarrow \text{Oráculo} \rightarrow \text{Consenso} \rightarrow \text{Ativo} \rightarrow \text{Incentivo} \rightarrow \text{Comportamento} \rightarrow \text{Estado biofísico} }$$
 
-$$\text{Problema (Degradação)} \xrightarrow{\text{Falha Econômica}} \text{Hipótese} \xrightarrow{\text{Mecanismo (BioChain)}} \text{Tecnologia (DLT/Oráculos)} \xrightarrow{\text{Resultado Esperado}} \text{Teste Empírico}$$
-
 ---
 
 ## 2. Topologia da Rede, Atestação Oracular e Ontologia de Ativos
