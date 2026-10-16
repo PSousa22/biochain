@@ -47,7 +47,7 @@ Pelo **Método Brasiliano**, o Brasil deixa de importar marcos regulatórios ex�
 |---|---|
 | **Impacto Fiscal** | **Neutro a Positivo:** Financiado pela internalização do mercado voluntário/regulado e atração de fundos climáticos multilaterais (sem aumento de dívida pública). |
 | **Inclusão Social** | **500.000 famílias guardiãs** integradas à Renda Básica Ecológica até 2030, dinamizando economias locais no interior do país. |
-| **Integridade de Mercado** | Rastreabilidade criptográfica ponta a ponta que coloca o crédito ambiental brasileiro no mais alto nível de *premium* internacional. |
+| **Integridade de Mercado** | Rastreabilidade criptográfica ponta a ponta que coloca o crédito ambiental brasileiro no mais alto nível de confiabilidade internacional. |
 | **Soberania Digital** | Proteção do patrimônio genético e ecológico contra a biopirataria algorítmica. |
 
 ---
