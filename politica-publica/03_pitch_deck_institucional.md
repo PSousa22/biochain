@@ -56,7 +56,7 @@
 * **Recusa da Subalternidade:** Parar de importar estruturas de pensamento concebidas em escritórios do Atlântico Norte desconectados da realidade das florestas e várzeas tropicais.
 * **Síntese Tropical:** Articulação pioneira entre:
   * **Alta Tecnologia:** Registro Distribuído (DLT), criptografia de ponta e oráculos de IA.
-  * **Ciência de Estado:** Monitoramento orbital do INPE, dados fundiários e MapBiomas.
+  * **Ciência de Estado:** Monitoramento orbital do INPE, dados fundiários in loco e MapBiomas.
   * **Saberes Ancestrais:** Protocolos comunitários de manejo sustentável e governança territorial.
 * **Territorialidade Radical:** Soluções que funcionam na aldeia, no assentamento, no quilombo e no plenário do Banco Central.
 
