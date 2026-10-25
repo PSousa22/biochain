@@ -44,40 +44,43 @@
           <span class="stat-label">Famílias RBE (Simulado)</span>
           <span class="stat-val" id="val-rbe-familias">15.420</span>
         </div>
-        <!-- BioWallet Pill -->
-        <div class="wallet-pill" id="wallet-pill" onclick="toggleWalletDrawer()" title="Clique para gerenciar sua carteira Drex">
+        <!-- BioWallet Pill (Acessível) -->
+        <button type="button" class="wallet-pill" id="wallet-pill" onclick="toggleWalletDrawer()" aria-label="Abrir carteira digital Drex e perfil institucional" aria-expanded="false" aria-controls="wallet-drawer" title="Clique para gerenciar sua carteira Drex">
           <span class="wallet-profile-icon" id="wallet-icon">🌿</span>
           <div style="display: flex; flex-direction: column; text-align: left;">
             <span class="wallet-name" id="wallet-name">Guardião Xingu</span>
             <span class="wallet-balance-tag" id="wallet-balance">2.400 GAIA | R$ 14.400 Drex</span>
           </div>
           <span style="font-size: 11px; opacity: 0.6;">▼</span>
-        </div>
+        </button>
+        <button type="button" class="btn btn-ghost btn-sm" onclick="openGlossaryModal()" title="Abrir glossário de conceitos e fórmulas da BioChain" aria-haspopup="dialog" style="padding: 6px 12px; border-radius: 20px; font-size: 12px; border: 1px solid var(--border);">
+          📖 Glossário
+        </button>
         <div class="pill-status" id="chain-status">
           <span class="dot green"></span> Chain Válida
         </div>
       </div>
     </div>
 
-    <!-- Navegação por Módulos -->
-    <nav class="nav-tabs-container">
-      <button class="tab-btn active" id="btn-tab-dlt" onclick="switchTab('dlt')">
-        <span>⛓️</span> Simulador DLT (PoE)
-      </button>
-      <button class="tab-btn" id="btn-tab-biomas" onclick="switchTab('biomas')">
-        <span>🗺️</span> Biomas & Oráculos IA <span class="tab-badge">7 Domínios</span>
-      </button>
-      <button class="tab-btn" id="btn-tab-rbe" onclick="switchTab('rbe')">
-        <span>💚</span> Calculadora RBE
-      </button>
-      <button class="tab-btn" id="btn-tab-causal" onclick="switchTab('causal')">
+    <!-- Navegação por Módulos em Ordem Narrativa de Decisão -->
+    <nav class="nav-tabs-container" role="tablist" aria-label="Módulos da Plataforma BioChain">
+      <button class="tab-btn active" id="btn-tab-causal" onclick="switchTab('causal')" role="tab" aria-selected="true" aria-controls="tab-causal" tabindex="0">
         <span>🔬</span> Modelo Causal
       </button>
-      <button class="tab-btn" id="btn-tab-politica" onclick="switchTab('politica')">
-        <span>🏛️</span> Acervo de Estado <span class="tab-badge">5 Docs</span>
+      <button class="tab-btn" id="btn-tab-rbe" onclick="switchTab('rbe')" role="tab" aria-selected="false" aria-controls="tab-rbe" tabindex="0">
+        <span>💚</span> Calculadora RBE
       </button>
-      <button class="tab-btn" id="btn-tab-narcisidio" onclick="switchTab('narcisidio')">
+      <button class="tab-btn" id="btn-tab-biomas" onclick="switchTab('biomas')" role="tab" aria-selected="false" aria-controls="tab-biomas" tabindex="0">
+        <span>🗺️</span> Biomas & Oráculos IA <span class="tab-badge">7 Domínios</span>
+      </button>
+      <button class="tab-btn" id="btn-tab-dlt" onclick="switchTab('dlt')" role="tab" aria-selected="false" aria-controls="tab-dlt" tabindex="0">
+        <span>⛓️</span> Simulador DLT (PoE)
+      </button>
+      <button class="tab-btn" id="btn-tab-narcisidio" onclick="switchTab('narcisidio')" role="tab" aria-selected="false" aria-controls="tab-narcisidio" tabindex="0">
         <span>⚖️</span> Balanço Anti-Narcisídio
+      </button>
+      <button class="tab-btn" id="btn-tab-politica" onclick="switchTab('politica')" role="tab" aria-selected="false" aria-controls="tab-politica" tabindex="0">
+        <span>🏛️</span> Acervo de Estado <span class="tab-badge">5 Docs</span>
       </button>
     </nav>
   </header>
@@ -99,8 +102,441 @@
     </div>
   </section>
 
+  <!-- ═══════════════════ TAB: MODELO CAUSAL INTEGRADO ═══════════════════ -->
+  <div id="tab-causal" class="tab-content active" role="tabpanel" aria-labelledby="btn-tab-causal" tabindex="0">
+    <section class="biomes-section">
+      <div class="biomes-header-box">
+        <div>
+          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Modelo Causal Integrado</h2>
+          <p style="font-size: 13px; color: var(--text2); margin-top: 4px;">
+            Do estado biofísico verificável à conservação ecológica economicamente incentivada — o circuito completo da BioChain em 7 camadas causais.
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <span class="badge" style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 20px;">
+            🔬 Arquitetura Científica
+          </span>
+          <span class="badge" style="background: rgba(45,212,191,0.15); color: var(--teal); padding: 6px 12px; border-radius: 20px;">
+            7 Camadas Causais
+          </span>
+        </div>
+      </div>
+
+      <!-- Diagrama de Fluxo Causal em 7 Camadas -->
+      <div style="padding: 24px; max-width: 1100px; margin: 0 auto;">
+
+        <!-- Ciclo visual em seta com cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px;">
+
+          <div class="card" style="border-left: 4px solid var(--green); padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 1 · Entrada</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Estado Biofísico</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Massa vegetal, carbono orgânico, higidez hídrica e biodiversidade mensurável como variáveis de estado ecológico (World W).</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">Fonte prevista: IBGE / INPE / MapBiomas</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--teal); padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 2 · Aquisição</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Mensuração Multimodal</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Sensoriamento INPE/CBERS, IoT terrestre, laudos comunitários e reconciliação bayesiana: P(E|D<sub>sat</sub>, D<sub>IoT</sub>, D<sub>soc</sub>).</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">Fonte prevista: SERPRO / ANA / EMBRAPA</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--gold); padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 3 · Inferência</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Oráculo IA Bayesiano</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Inferência probabilística com limiar θ* ≥ 97,5% derivado da função de perda assimétrica. Rejeita laudos adulterados via slashing.</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">Marco de referência: GAIA Oracle Network / SERPRO</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid #a78bfa; padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 4 · Consenso</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Proof-of-Ecology (PoE)</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Seleção de validadores via VRF sublinear ponderada pelo Ecoscore: P<sub>i</sub> = S<sub>i</sub><sup>ϕ</sup> / Σ S<sub>k</sub><sup>ϕ</sup>, com ϕ = 0,85 e mitigação de Sybil via credenciamento institucional federado.</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">Marco de referência: BioBFT / EcoSort Protocol</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid #fb923c; padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: #fb923c; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 5 · Ativo</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Ativo GAIA</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">GAIA = f(Carbono, Biodiversidade, Água, Solo, Território, Custódia). Máquina de estados: Pendente → Ativo → Suspenso → Aposentado.</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">Marco legal: Lei Federal nº 14.119/2021</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--green); padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 6 · Redistribuição</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Renda Básica Ecológica</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">RBE = R$ 810,50 (piso legal) + (ha × Ω<sub>bioma</sub> × IIE) / Famílias. Repasse direto via Pix/Caixa (Fase 1) e Drex Real Digital (Fase 2). Zero intermediários.</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">Marco institucional: STN / Banco Central do Brasil</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--teal); padding: 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 7 · Resultado</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Conservação Verificável</div>
+            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Adicionalidade contrafactual: Y1 − Y0 mensura retenção florestal real vs. linha de base. Fecha o ciclo: Custódia → Natureza → Custódia.</div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">INPE-DETER / MapBiomas Alert</div>
+          </div>
+
+        </div>
+
+        <!-- Diagrama de fluxo em linha -->
+        <div class="card" style="padding: 24px; margin-bottom: 24px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: var(--green); margin-bottom: 16px;">Circuito Causal Completo</h3>
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px; font-family: 'JetBrains Mono', monospace;">
+            <span style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 8px; font-weight: 700;">🌿 Natureza</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(45,212,191,0.1); color: var(--teal); padding: 6px 12px; border-radius: 8px;">📡 Medição</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(251,191,36,0.1); color: var(--gold); padding: 6px 12px; border-radius: 8px;">🤖 Oráculo</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(167,139,250,0.1); color: #a78bfa; padding: 6px 12px; border-radius: 8px;">⛓️ Blockchain</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(251,146,60,0.1); color: #fb923c; padding: 6px 12px; border-radius: 8px;">🪙 GAIA</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 8px;">💚 RBE</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(45,212,191,0.1); color: var(--teal); padding: 6px 12px; border-radius: 8px;">👨‍👩‍👧 Família</span>
+            <span style="color: var(--text3);">→</span>
+            <span style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 8px; font-weight: 700;">🌿 Custódia</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text3); margin-top: 12px;">Cada seta representa uma transformação verificada criptograficamente e registrada de forma imutável no livro-razão público da BioChain.</p>
+        </div>
+
+        <!-- Nota Epistemológica -->
+        <div class="card" style="padding: 20px; border: 1px solid rgba(251,191,36,0.3); background: rgba(251,191,36,0.05);">
+          <h3 style="font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 10px;">⚠️ Nota Epistemológica (Protótipo Acadêmico)</h3>
+          <p style="font-size: 13px; color: var(--text2); line-height: 1.7;">
+            Este modelo causal está <b>em desenvolvimento e validação acadêmica</b>. Cada camada opera em um nível epistemológico distinto: 
+            (A) hipótese normativa — a natureza deve ser tratada como sujeito de direitos; 
+            (B) teoria econômica — incentivos financeiros alteram comportamento de agentes; 
+            (C) modelo matemático — Ecoscore, GAIA e RBE podem ser formalizados; 
+            (D) implementação computacional — blockchain e smart contracts podem executar essas regras.
+            A validade de cada camada <b>não implica automaticamente a validade das demais</b>, e o circuito completo requer validação empírica em escala.
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════ TAB 3: CALCULADORA RBE & DREX ═══════════════════ -->
+  <div id="tab-rbe" class="tab-content" role="tabpanel" aria-labelledby="btn-tab-rbe" tabindex="0">
+    <section class="rbe-section">
+      <div class="biomes-header-box">
+        <div>
+          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Simulador do Programa Nacional de Renda Básica Ecológica (RBE)</h2>
+          <p style="font-size: 13px; color: var(--text2); margin-top: 4px;">
+            Cálculo paramétrico do benefício de custódia segundo o Art. 14 do Anteprojeto de Lei da BioChain, com liquidação automática via Drex (Real Digital).
+          </p>
+        </div>
+      </div>
+
+      <div class="rbe-grid">
+        <!-- Controles / Sliders -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">🎛️</span>
+            <h3>Parâmetros Territoriais de Custódia</h3>
+          </div>
+
+          <div class="form-group">
+            <label for="rbe-bioma">Bioma sob Custódia</label>
+            <select id="rbe-bioma" onchange="calculateRBE()">
+              <option value="Pantanal">Pantanal (Fator de Estresse: 1.35x)</option>
+              <option value="Mata Atlântica">Mata Atlântica (Fator de Estresse: 1.40x)</option>
+              <option value="Cerrado">Cerrado (Fator de Estresse: 1.25x)</option>
+              <option value="Amazônia" selected>Amazônia (Fator de Estresse: 1.20x)</option>
+              <option value="Caatinga">Caatinga (Fator de Estresse: 1.30x)</option>
+              <option value="Pampa">Pampa (Fator de Estresse: 1.15x)</option>
+              <option value="Zona Costeira e Marinha">Zona Costeira e Marinha (Fator: 1.25x)</option>
+            </select>
+          </div>
+
+          <div class="range-slider-wrap">
+            <div class="range-slider-head">
+              <label for="rbe-area-slider">Área Preservada Auditada</label>
+              <output class="range-val-badge" id="rbe-area-val" for="rbe-area-slider" aria-live="polite">150 ha</output>
+            </div>
+            <input type="range" class="range-input" id="rbe-area-slider" min="10" max="2000" step="10" value="150" oninput="calculateRBE()" aria-label="Área preservada auditada em hectares" />
+          </div>
+
+          <div class="range-slider-wrap">
+            <div class="range-slider-head">
+              <label for="rbe-families-slider">Famílias Guardiãs no Território</label>
+              <output class="range-val-badge" id="rbe-families-val" for="rbe-families-slider" aria-live="polite">12 famílias</output>
+            </div>
+            <input type="range" class="range-input" id="rbe-families-slider" min="1" max="100" step="1" value="12" oninput="calculateRBE()" aria-label="Número de famílias guardiãs no território" />
+          </div>
+
+          <div class="range-slider-wrap">
+            <div class="range-slider-head">
+              <label for="rbe-iie-slider">Índice de Integridade Ecológica (IIE)</label>
+              <output class="range-val-badge" id="rbe-iie-val" for="rbe-iie-slider" aria-live="polite">94%</output>
+            </div>
+            <input type="range" class="range-input" id="rbe-iie-slider" min="50" max="100" step="1" value="94" oninput="calculateRBE()" aria-label="Índice de Integridade Ecológica" />
+          </div>
+
+          <div style="background: var(--bg2); padding: 14px; border-radius: var(--radius-sm); font-size: 12px; color: var(--text2); line-height: 1.5;">
+            💡 <b>Fórmula Legal:</b> R$ 810,50 (piso legal: 50% SM 2026) + (Hectares × Fator Bioma × IIE) dividido equitativamente pelas famílias guardiãs homologadas.
+          </div>
+        </div>
+
+        <!-- Resultados & Drex -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">💳</span>
+            <h3>Demonstrativo de Liquidação</h3>
+          </div>
+
+          <div style="background: linear-gradient(135deg, rgba(52,211,100,0.1), rgba(45,212,191,0.05)); border: 1px solid var(--green); border-radius: var(--radius); padding: 20px; text-align: center; margin-bottom: 20px;">
+            <span style="font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em;">RBE Mensal por Família</span>
+            <div style="font-size: 36px; font-weight: 800; color: var(--green); font-family: 'JetBrains Mono', monospace; margin: 6px 0;" id="rbe-total-family">
+              —
+            </div>
+            <span style="font-size: 12px; color: var(--teal);" id="rbe-gaia-equiv">
+              —
+            </span>
+          </div>
+
+          <div class="biome-stats-grid">
+            <div class="biome-stat-box">
+              <span class="biome-stat-lbl">Repasse Mensal Território</span>
+              <span class="biome-stat-val" id="rbe-territorio-total">—</span>
+            </div>
+            <div class="biome-stat-box">
+              <span class="biome-stat-lbl">CO₂e Sequestrado Anual</span>
+              <span class="biome-stat-val" id="rbe-co2-anual">—</span>
+            </div>
+            <div class="biome-stat-box" style="grid-column: 1 / -1; background: rgba(45, 212, 191, 0.05); border-color: rgba(45, 212, 191, 0.2);">
+              <span class="biome-stat-lbl">Adicionalidade Ecológica Contrafactual (Y1 - Y0)</span>
+              <span class="biome-stat-val" id="rbe-additionality-val" style="color: var(--teal); font-size: 13px;">—</span>
+            </div>
+          </div>
+
+          <!-- Comprovante Criptográfico RBE em 2 Fases -->
+          <div class="drex-receipt-box">
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding-bottom: 6px; margin-bottom: 8px;">
+              <span>ARQUITETURA RBE (FASE 1: PIX/CAIXA | FASE 2: DREX VAREJO)</span>
+              <span style="color: var(--teal);">● SIMULAÇÃO DE FLUXO</span>
+            </div>
+            <div>Beneficiário: Família Guardiã Xingu (Hash: 0x9f4c...3e1a)</div>
+            <div>Trilho Vigente (Fase 1): Pix / Caixa Econômica Federal (Conta Social)</div>
+            <div>Migração Futura (Fase 2): Smart Contracts Drex Varejo (Roadmap Bacen)</div>
+            <div style="margin-top: 6px; color: var(--green);">Taxa de Intermediação: R$ 0,00 (Zero Pedágio)</div>
+          </div>
+
+          <button class="btn btn-primary" style="margin-top: 16px; width: 100%;" onclick="simulateRBEDeposit()">
+            <span>🚀</span> Simular Emissão de Lote RBE On-Chain
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════ TAB 2: BIOMAS & ORÁCULOS IA ═══════════════════ -->
+  <div id="tab-biomas" class="tab-content" role="tabpanel" aria-labelledby="btn-tab-biomas" tabindex="0">
+    <section class="biomes-section">
+      <div class="biomes-header-box">
+        <div>
+          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Rede Nacional de Oráculos Ambientais</h2>
+          <p style="font-size: 13px; color: var(--text2); margin-top: 4px;">
+            Fusão em tempo real de sensoriamento orbital (INPE/CBERS/Sentinel), telemetria IoT terrestre e laudos comunitários em nuvem de Estado (SERPRO/RNP).
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <span class="badge" style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 20px;">
+            ● 7 Biomas Sincronizados
+          </span>
+          <span class="badge" style="background: rgba(45,212,191,0.15); color: var(--teal); padding: 6px 12px; border-radius: 20px;">
+            Reconciliação Bayesiana: 98.9% (Simulado)
+          </span>
+        </div>
+      </div>
+
+      <!-- MAPA VETORIAL INTERATIVO DOS 7 BIOMAS -->
+      <div class="map-section-box">
+        <div class="map-header-row">
+          <div>
+            <h3 style="font-size: 19px; font-weight: 800; color: var(--green);">Mapa Geoespacial dos Biomas Brasileiros</h3>
+            <p style="font-size: 12px; color: var(--text2); margin-top: 4px;">
+              Clique em qualquer bioma ou nó guardião para inspecionar dados orbitais ao vivo e sincronizar a calculadora territorial.
+            </p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <span class="badge" style="background: rgba(52,211,100,0.15); color: var(--green); padding: 5px 12px; border-radius: 12px; font-size: 11px;">
+              ● 7 Biomas Sincronizados
+            </span>
+            <span class="badge" style="background: rgba(45,212,191,0.15); color: var(--teal); padding: 5px 12px; border-radius: 12px; font-size: 11px;">
+              📡 Oráculos SERPRO/INPE Ativos
+            </span>
+          </div>
+        </div>
+
+        <div class="map-container-wrap">
+          <!-- SVG Vetorial do Território Brasileiro -->
+          <div class="brazil-svg-box">
+            <svg viewBox="0 0 600 600" id="brazil-map-svg">
+              <defs>
+                <linearGradient id="grad-amz" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#059669" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#10b981" stop-opacity="0.9" />
+                </linearGradient>
+                <linearGradient id="grad-cer" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#d97706" stop-opacity="0.75" />
+                  <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.85" />
+                </linearGradient>
+                <linearGradient id="grad-caa" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ea580c" stop-opacity="0.75" />
+                  <stop offset="100%" stop-color="#fb923c" stop-opacity="0.85" />
+                </linearGradient>
+                <linearGradient id="grad-mat" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#047857" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#34d399" stop-opacity="0.9" />
+                </linearGradient>
+                <linearGradient id="grad-pan" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0891b2" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.9" />
+                </linearGradient>
+                <linearGradient id="grad-pam" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#65a30d" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#a3e635" stop-opacity="0.9" />
+                </linearGradient>
+                <linearGradient id="grad-cos" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0284c7" stop-opacity="0.5" />
+                  <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.7" />
+                </linearGradient>
+              </defs>
+
+              <!-- Zona Costeira / Marinha -->
+              <path class="biome-path" id="biome-svg-cos" d="M 520,130 Q 580,240 520,380 L 460,490 L 390,580 L 420,590 L 510,480 Q 610,330 550,140 Z" fill="url(#grad-cos)" onclick="selectBiomeFromMap('cos')" tabindex="0" role="button" aria-label="Zona Costeira e Marinha" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('cos');event.preventDefault();}">
+                <title>Zona Costeira e Marinha</title>
+              </path>
+
+              <!-- Amazônia -->
+              <path class="biome-path selected" id="biome-svg-amz" d="M 50,180 Q 90,70 210,50 Q 310,45 370,110 L 390,180 L 310,230 L 230,290 L 110,270 Z" fill="url(#grad-amz)" onclick="selectBiomeFromMap('amz')" tabindex="0" role="button" aria-label="Bioma Amazônia" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('amz');event.preventDefault();}">
+                <title>Bioma Amazônia</title>
+              </path>
+
+              <!-- Cerrado -->
+              <path class="biome-path" id="biome-svg-cer" d="M 230,290 L 310,230 L 390,180 L 420,210 L 410,340 L 330,390 L 250,380 L 225,330 Z" fill="url(#grad-cer)" onclick="selectBiomeFromMap('cer')" tabindex="0" role="button" aria-label="Bioma Cerrado" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('cer');event.preventDefault();}">
+                <title>Bioma Cerrado</title>
+              </path>
+
+              <!-- Caatinga -->
+              <path class="biome-path" id="biome-svg-caa" d="M 390,180 Q 470,120 530,155 L 535,225 L 455,265 L 420,210 Z" fill="url(#grad-caa)" onclick="selectBiomeFromMap('caa')" tabindex="0" role="button" aria-label="Bioma Caatinga" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('caa');event.preventDefault();}">
+                <title>Bioma Caatinga</title>
+              </path>
+
+              <!-- Mata Atlântica -->
+              <path class="biome-path" id="biome-svg-mat" d="M 455,265 L 535,225 Q 515,310 475,390 L 415,480 L 365,460 L 410,340 Z" fill="url(#grad-mat)" onclick="selectBiomeFromMap('mat')" tabindex="0" role="button" aria-label="Bioma Mata Atlântica" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('mat');event.preventDefault();}">
+                <title>Bioma Mata Atlântica</title>
+              </path>
+
+              <!-- Pantanal -->
+              <path class="biome-path" id="biome-svg-pan" d="M 195,335 L 245,315 L 255,385 L 205,395 Z" fill="url(#grad-pan)" onclick="selectBiomeFromMap('pan')" tabindex="0" role="button" aria-label="Bioma Pantanal" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('pan');event.preventDefault();}">
+                <title>Bioma Pantanal</title>
+              </path>
+
+              <!-- Pampa -->
+              <path class="biome-path" id="biome-svg-pam" d="M 335,485 L 415,480 L 390,575 L 320,565 Z" fill="url(#grad-pam)" onclick="selectBiomeFromMap('pam')" tabindex="0" role="button" aria-label="Bioma Pampa" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('pam');event.preventDefault();}">
+                <title>Bioma Pampa</title>
+              </path>
+
+              <!-- Marcadores de Nós Guardiões Georreferenciados -->
+              <g class="map-node-dot" onclick="selectBiomeFromMap('amz')" tabindex="0" role="button" aria-label="Nó Guardian-Amazônia" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('amz');event.preventDefault();}">
+                <title>Nó Guardian-Amazônia</title>
+                <circle cx="210" cy="150" r="14" fill="#10b981" class="node-pulse-ring" />
+                <circle cx="210" cy="150" r="6" fill="#ffffff" stroke="#059669" stroke-width="2" />
+                <text x="220" y="145" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Amazônia</text>
+              </g>
+
+              <g class="map-node-dot" onclick="selectBiomeFromMap('cer')" tabindex="0" role="button" aria-label="Nó Guardian-Cerrado" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('cer');event.preventDefault();}">
+                <title>Nó Guardian-Cerrado</title>
+                <circle cx="315" cy="295" r="14" fill="#f59e0b" class="node-pulse-ring" />
+                <circle cx="315" cy="295" r="6" fill="#ffffff" stroke="#d97706" stroke-width="2" />
+                <text x="325" y="290" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Cerrado</text>
+              </g>
+
+              <g class="map-node-dot" onclick="selectBiomeFromMap('caa')" tabindex="0" role="button" aria-label="Nó Guardian-Caatinga" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('caa');event.preventDefault();}">
+                <title>Nó Guardian-Caatinga</title>
+                <circle cx="455" cy="195" r="14" fill="#ea580c" class="node-pulse-ring" />
+                <circle cx="455" cy="195" r="6" fill="#ffffff" stroke="#c2410c" stroke-width="2" />
+                <text x="400" y="180" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Caatinga</text>
+              </g>
+
+              <g class="map-node-dot" onclick="selectBiomeFromMap('mat')" tabindex="0" role="button" aria-label="Nó Guardian-Mata-Atlântica" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('mat');event.preventDefault();}">
+                <title>Nó Guardian-Mata-Atlântica</title>
+                <circle cx="440" cy="390" r="14" fill="#34d399" class="node-pulse-ring" />
+                <circle cx="440" cy="390" r="6" fill="#ffffff" stroke="#047857" stroke-width="2" />
+                <text x="450" y="405" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Mata-Atlântica</text>
+              </g>
+
+              <g class="map-node-dot" onclick="selectBiomeFromMap('pan')" tabindex="0" role="button" aria-label="Nó Guardian-Pantanal" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('pan');event.preventDefault();}">
+                <title>Nó Guardian-Pantanal</title>
+                <circle cx="225" cy="355" r="14" fill="#22d3ee" class="node-pulse-ring" />
+                <circle cx="225" cy="355" r="6" fill="#ffffff" stroke="#0891b2" stroke-width="2" />
+                <text x="120" y="360" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Pantanal</text>
+              </g>
+
+              <g class="map-node-dot" onclick="selectBiomeFromMap('pam')" tabindex="0" role="button" aria-label="Nó Guardian-Pampa" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('pam');event.preventDefault();}">
+                <title>Nó Guardian-Pampa</title>
+                <circle cx="360" cy="530" r="14" fill="#a3e635" class="node-pulse-ring" />
+                <circle cx="360" cy="530" r="6" fill="#ffffff" stroke="#65a30d" stroke-width="2" />
+                <text x="370" y="545" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Pampa</text>
+              </g>
+
+              <g class="map-node-dot" onclick="selectBiomeFromMap('cos')" tabindex="0" role="button" aria-label="Nó Guardian-Costeiro" onkeydown="if(event.key==='Enter'||event.key===' '){selectBiomeFromMap('cos');event.preventDefault();}">
+                <title>Nó Guardian-Costeiro</title>
+                <circle cx="510" cy="310" r="14" fill="#38bdf8" class="node-pulse-ring" />
+                <circle cx="510" cy="310" r="6" fill="#ffffff" stroke="#0284c7" stroke-width="2" />
+                <text x="460" y="295" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Costeiro</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Card de Detalhe Espacial do Bioma Selecionado -->
+          <div class="map-info-card" id="map-info-card">
+            <div class="map-info-title">
+              <span id="map-info-icon">🌳</span>
+              <span id="map-info-name">Bioma Amazônia</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text2); line-height: 1.5; margin-bottom: 16px;" id="map-info-desc">
+              Maior floresta tropical contínua da Terra, abrangendo 4,1 milhões de km² em território brasileiro. Regulador primordial do ciclo de rios voadores e sequestro ativo de carbono.
+            </p>
+
+            <div class="biome-stats-grid">
+              <div class="biome-stat-box">
+                <div class="biome-stat-lbl">Multiplicador PoE</div>
+                <div class="biome-stat-val" id="map-info-stress">1.20x</div>
+              </div>
+              <div class="biome-stat-box">
+                <div class="biome-stat-lbl">Cobertura Atual</div>
+                <div class="biome-stat-val" id="map-info-canopy">86.4%</div>
+              </div>
+              <div class="biome-stat-box">
+                <div class="biome-stat-lbl">Oráculo Ativo</div>
+                <div class="biome-stat-val" style="font-size: 11px;" id="map-info-oracle">INPE-DETER-AMZ-01</div>
+              </div>
+              <div class="biome-stat-box">
+                <div class="biome-stat-lbl">Índice Hídrico</div>
+                <div class="biome-stat-val" style="color: var(--teal);" id="map-info-water">Excelente (78%)</div>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 8px;" onclick="syncMapWithCalculator()">
+              <span>💚</span> Simular RBE neste Bioma
+            </button>
+        </div>
+      </div>
+
+      <div class="biomes-grid" id="biomes-grid">
+        <!-- Renderizado dinamicamente via app.js -->
+      </div>
+    </section>
+  </div>
+
   <!-- ═══════════════════ TAB 1: SIMULADOR DLT ═══════════════════ -->
-  <div id="tab-dlt" class="tab-content active">
+  <div id="tab-dlt" class="tab-content" role="tabpanel" aria-labelledby="btn-tab-dlt" tabindex="0">
     <main class="main-grid">
 
       <!-- ── COLUNA ESQUERDA ── -->
@@ -194,6 +630,7 @@
           <h2>Cadeia de Blocos Pública</h2>
           <div class="chain-actions">
             <button class="btn btn-ghost btn-sm" onclick="validateChain()">✅ Validar Cadeia</button>
+            <button class="btn btn-ghost btn-sm" onclick="resetChain()" title="Restaurar cadeia ao bloco gênesis demonstrativo">🔄 Reiniciar</button>
             <button class="btn btn-ghost btn-sm" onclick="exportChain()">📥 Exportar JSON</button>
             <button class="btn btn-danger btn-sm" onclick="simulateTamper()">⚠️ Simular Ataque</button>
           </div>
@@ -218,7 +655,7 @@
           </p>
 
           <div class="scenario-grid">
-            <div class="scenario-card" onclick="runStressTest('price_crash')">
+            <div class="scenario-card" onclick="runStressTest('price_crash')" tabindex="0" role="button" aria-label="Simular Queda do GAIA em 80%" onkeydown="if(event.key==='Enter'||event.key===' '){runStressTest('price_crash');event.preventDefault();}">
               <div class="scenario-card-head">
                 <span style="font-size: 12px; font-weight: 700; color: var(--text);">A: Queda do GAIA</span>
                 <span class="scenario-tag">-80% Preço</span>
@@ -226,7 +663,7 @@
               <div style="font-size: 11px; color: var(--text2);">Testa se o piso RBE protege a custódia mesmo com colapso de mercado.</div>
             </div>
 
-            <div class="scenario-card" onclick="runStressTest('oracle_spoof')">
+            <div class="scenario-card" onclick="runStressTest('oracle_spoof')" tabindex="0" role="button" aria-label="Simular Oráculo Spoofing" onkeydown="if(event.key==='Enter'||event.key===' '){runStressTest('oracle_spoof');event.preventDefault();}">
               <div class="scenario-card-head">
                 <span style="font-size: 12px; font-weight: 700; color: var(--text);">B: Oráculo Spoofing</span>
                 <span class="scenario-tag">Sensor Falso</span>
@@ -234,7 +671,7 @@
               <div style="font-size: 11px; color: var(--text2);">Testa se o limiar bayesiano (θ* ≥ 97,5%) detecta laudos adulterados.</div>
             </div>
 
-            <div class="scenario-card" onclick="runStressTest('collusion_30')">
+            <div class="scenario-card" onclick="runStressTest('collusion_30')" tabindex="0" role="button" aria-label="Simular Cartel de Validadores com 30% de colusão" onkeydown="if(event.key==='Enter'||event.key===' '){runStressTest('collusion_30');event.preventDefault();}">
               <div class="scenario-card-head">
                 <span style="font-size: 12px; font-weight: 700; color: var(--text);">C: Cartel Validadores</span>
                 <span class="scenario-tag">30% Colusão</span>
@@ -242,7 +679,7 @@
               <div style="font-size: 11px; color: var(--text2);">Testa se a VRF sublinear (ϕ = 0,85) e o Slashing neutralizam cartéis.</div>
             </div>
 
-            <div class="scenario-card" onclick="runStressTest('wildfire')">
+            <div class="scenario-card" onclick="runStressTest('wildfire')" tabindex="0" role="button" aria-label="Simular Incêndio Florestal" onkeydown="if(event.key==='Enter'||event.key===' '){runStressTest('wildfire');event.preventDefault();}">
               <div class="scenario-card-head">
                 <span style="font-size: 12px; font-weight: 700; color: var(--text);">D: Incêndio Florestal</span>
                 <span class="scenario-tag">Choque Clima</span>
@@ -250,6 +687,9 @@
               <div style="font-size: 11px; color: var(--text2);">Testa o congelamento preventivo de ativos e acionamento do Fundo de Emergência.</div>
             </div>
           </div>
+
+          <!-- Caixa de Resultado Dinâmico do Teste Red Team -->
+          <div id="redteam-result-box" class="redteam-result-box" aria-live="polite"></div>
         </div>
       </section>
 
@@ -350,420 +790,70 @@
     </main>
   </div>
 
-  <!-- ═══════════════════ TAB 2: BIOMAS & ORÁCULOS IA ═══════════════════ -->
-  <div id="tab-biomas" class="tab-content">
-    <section class="biomes-section">
+  <!-- ═══════════════════ TAB 5: BALANÇO ANTI-NARCISÍDIO ═══════════════════ -->
+  <div id="tab-narcisidio" class="tab-content" role="tabpanel" aria-labelledby="btn-tab-narcisidio" tabindex="0">
+    <section class="narc-section">
       <div class="biomes-header-box">
         <div>
-          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Rede Nacional de Oráculos Ambientais</h2>
+          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Rompendo o Narcisídio Social: A Matemática da Transição</h2>
           <p style="font-size: 13px; color: var(--text2); margin-top: 4px;">
-            Fusão em tempo real de sensoriamento orbital (INPE/CBERS/Sentinel), telemetria IoT terrestre e laudos comunitários em nuvem de Estado (SERPRO/RNP).
-          </p>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: center;">
-          <span class="badge" style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 20px;">
-            ● 7 Biomas Sincronizados
-          </span>
-          <span class="badge" style="background: rgba(45,212,191,0.15); color: var(--teal); padding: 6px 12px; border-radius: 20px;">
-            Reconciliação Bayesiana: 98.9% (Simulado)
-          </span>
-        </div>
-      </div>
-
-      <!-- MAPA VETORIAL INTERATIVO DOS 7 BIOMAS -->
-      <div class="map-section-box">
-        <div class="map-header-row">
-          <div>
-            <h3 style="font-size: 19px; font-weight: 800; color: var(--green);">Mapa Geoespacial dos Biomas Brasileiros</h3>
-            <p style="font-size: 12px; color: var(--text2); margin-top: 4px;">
-              Clique em qualquer bioma ou nó guardião para inspecionar dados orbitais ao vivo e sincronizar a calculadora territorial.
-            </p>
-          </div>
-          <div style="display: flex; gap: 8px;">
-            <span class="badge" style="background: rgba(52,211,100,0.15); color: var(--green); padding: 5px 12px; border-radius: 12px; font-size: 11px;">
-              ● 7 Biomas Sincronizados
-            </span>
-            <span class="badge" style="background: rgba(45,212,191,0.15); color: var(--teal); padding: 5px 12px; border-radius: 12px; font-size: 11px;">
-              📡 Oráculos SERPRO/INPE Ativos
-            </span>
-          </div>
-        </div>
-
-        <div class="map-container-wrap">
-          <!-- SVG Vetorial do Território Brasileiro -->
-          <div class="brazil-svg-box">
-            <svg viewBox="0 0 600 600" id="brazil-map-svg">
-              <defs>
-                <linearGradient id="grad-amz" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#059669" stop-opacity="0.8" />
-                  <stop offset="100%" stop-color="#10b981" stop-opacity="0.9" />
-                </linearGradient>
-                <linearGradient id="grad-cer" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#d97706" stop-opacity="0.75" />
-                  <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.85" />
-                </linearGradient>
-                <linearGradient id="grad-caa" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ea580c" stop-opacity="0.75" />
-                  <stop offset="100%" stop-color="#fb923c" stop-opacity="0.85" />
-                </linearGradient>
-                <linearGradient id="grad-mat" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#047857" stop-opacity="0.8" />
-                  <stop offset="100%" stop-color="#34d399" stop-opacity="0.9" />
-                </linearGradient>
-                <linearGradient id="grad-pan" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#0891b2" stop-opacity="0.8" />
-                  <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.9" />
-                </linearGradient>
-                <linearGradient id="grad-pam" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#65a30d" stop-opacity="0.8" />
-                  <stop offset="100%" stop-color="#a3e635" stop-opacity="0.9" />
-                </linearGradient>
-                <linearGradient id="grad-cos" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#0284c7" stop-opacity="0.5" />
-                  <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.7" />
-                </linearGradient>
-              </defs>
-
-              <!-- Zona Costeira / Marinha -->
-              <path class="biome-path" id="biome-svg-cos" d="M 520,130 Q 580,240 520,380 L 460,490 L 390,580 L 420,590 L 510,480 Q 610,330 550,140 Z" fill="url(#grad-cos)" onclick="selectBiomeFromMap('cos')" title="Zona Costeira e Marinha" />
-
-              <!-- Amazônia -->
-              <path class="biome-path selected" id="biome-svg-amz" d="M 50,180 Q 90,70 210,50 Q 310,45 370,110 L 390,180 L 310,230 L 230,290 L 110,270 Z" fill="url(#grad-amz)" onclick="selectBiomeFromMap('amz')" title="Bioma Amazônia" />
-
-              <!-- Cerrado -->
-              <path class="biome-path" id="biome-svg-cer" d="M 230,290 L 310,230 L 390,180 L 420,210 L 410,340 L 330,390 L 250,380 L 225,330 Z" fill="url(#grad-cer)" onclick="selectBiomeFromMap('cer')" title="Bioma Cerrado" />
-
-              <!-- Caatinga -->
-              <path class="biome-path" id="biome-svg-caa" d="M 390,180 Q 470,120 530,155 L 535,225 L 455,265 L 420,210 Z" fill="url(#grad-caa)" onclick="selectBiomeFromMap('caa')" title="Bioma Caatinga" />
-
-              <!-- Mata Atlântica -->
-              <path class="biome-path" id="biome-svg-mat" d="M 455,265 L 535,225 Q 515,310 475,390 L 415,480 L 365,460 L 410,340 Z" fill="url(#grad-mat)" onclick="selectBiomeFromMap('mat')" title="Bioma Mata Atlântica" />
-
-              <!-- Pantanal -->
-              <path class="biome-path" id="biome-svg-pan" d="M 195,335 L 245,315 L 255,385 L 205,395 Z" fill="url(#grad-pan)" onclick="selectBiomeFromMap('pan')" title="Bioma Pantanal" />
-
-              <!-- Pampa -->
-              <path class="biome-path" id="biome-svg-pam" d="M 335,485 L 415,480 L 390,575 L 320,565 Z" fill="url(#grad-pam)" onclick="selectBiomeFromMap('pam')" title="Bioma Pampa" />
-
-              <!-- Marcadores de Nós Guardiões Georreferenciados -->
-              <g class="map-node-dot" onclick="selectBiomeFromMap('amz')">
-                <circle cx="210" cy="150" r="14" fill="#10b981" class="node-pulse-ring" />
-                <circle cx="210" cy="150" r="6" fill="#ffffff" stroke="#059669" stroke-width="2" />
-                <text x="220" y="145" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Amazônia</text>
-              </g>
-
-              <g class="map-node-dot" onclick="selectBiomeFromMap('cer')">
-                <circle cx="315" cy="295" r="14" fill="#f59e0b" class="node-pulse-ring" />
-                <circle cx="315" cy="295" r="6" fill="#ffffff" stroke="#d97706" stroke-width="2" />
-                <text x="325" y="290" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Cerrado</text>
-              </g>
-
-              <g class="map-node-dot" onclick="selectBiomeFromMap('caa')">
-                <circle cx="455" cy="195" r="14" fill="#ea580c" class="node-pulse-ring" />
-                <circle cx="455" cy="195" r="6" fill="#ffffff" stroke="#c2410c" stroke-width="2" />
-                <text x="400" y="180" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Caatinga</text>
-              </g>
-
-              <g class="map-node-dot" onclick="selectBiomeFromMap('mat')">
-                <circle cx="440" cy="390" r="14" fill="#34d399" class="node-pulse-ring" />
-                <circle cx="440" cy="390" r="6" fill="#ffffff" stroke="#047857" stroke-width="2" />
-                <text x="450" y="405" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Mata-Atlântica</text>
-              </g>
-
-              <g class="map-node-dot" onclick="selectBiomeFromMap('pan')">
-                <circle cx="225" cy="355" r="14" fill="#22d3ee" class="node-pulse-ring" />
-                <circle cx="225" cy="355" r="6" fill="#ffffff" stroke="#0891b2" stroke-width="2" />
-                <text x="120" y="360" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Pantanal</text>
-              </g>
-
-              <g class="map-node-dot" onclick="selectBiomeFromMap('pam')">
-                <circle cx="360" cy="530" r="14" fill="#a3e635" class="node-pulse-ring" />
-                <circle cx="360" cy="530" r="6" fill="#ffffff" stroke="#65a30d" stroke-width="2" />
-                <text x="370" y="545" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Pampa</text>
-              </g>
-
-              <g class="map-node-dot" onclick="selectBiomeFromMap('cos')">
-                <circle cx="510" cy="310" r="14" fill="#38bdf8" class="node-pulse-ring" />
-                <circle cx="510" cy="310" r="6" fill="#ffffff" stroke="#0284c7" stroke-width="2" />
-                <text x="460" y="295" fill="#e2f5e8" font-size="10" font-family="JetBrains Mono" font-weight="700">Guardian-Costeiro</text>
-              </g>
-            </svg>
-          </div>
-
-          <!-- Card de Detalhe Espacial do Bioma Selecionado -->
-          <div class="map-info-card" id="map-info-card">
-            <div class="map-info-title">
-              <span id="map-info-icon">🌳</span>
-              <span id="map-info-name">Bioma Amazônia</span>
-            </div>
-            <p style="font-size: 13px; color: var(--text2); line-height: 1.5; margin-bottom: 16px;" id="map-info-desc">
-              Maior floresta tropical contínua da Terra, abrangendo 4,1 milhões de km² em território brasileiro. Regulador primordial do ciclo de rios voadores e sequestro ativo de carbono.
-            </p>
-
-            <div class="biome-stats-grid">
-              <div class="biome-stat-box">
-                <div class="biome-stat-lbl">Multiplicador PoE</div>
-                <div class="biome-stat-val" id="map-info-stress">1.20x</div>
-              </div>
-              <div class="biome-stat-box">
-                <div class="biome-stat-lbl">Cobertura Atual</div>
-                <div class="biome-stat-val" id="map-info-canopy">86.4%</div>
-              </div>
-              <div class="biome-stat-box">
-                <div class="biome-stat-lbl">Oráculo Ativo</div>
-                <div class="biome-stat-val" style="font-size: 11px;" id="map-info-oracle">INPE-DETER-AMZ-01</div>
-              </div>
-              <div class="biome-stat-box">
-                <div class="biome-stat-lbl">Índice Hídrico</div>
-                <div class="biome-stat-val" style="color: var(--teal);" id="map-info-water">Excelente (78%)</div>
-              </div>
-            </div>
-
-            <button class="btn btn-primary" style="width: 100%; margin-top: 8px;" onclick="syncMapWithCalculator()">
-              <span>💚</span> Simular RBE neste Bioma
-            </button>
-        </div>
-      </div>
-
-      <div class="biomes-grid" id="biomes-grid">
-        <!-- Renderizado dinamicamente via app.js -->
-      </div>
-    </section>
-  </div>
-
-  <!-- ═══════════════════ TAB 3: CALCULADORA RBE & DREX ═══════════════════ -->
-  <div id="tab-rbe" class="tab-content">
-    <section class="rbe-section">
-      <div class="biomes-header-box">
-        <div>
-          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Simulador do Programa Nacional de Renda Básica Ecológica (RBE)</h2>
-          <p style="font-size: 13px; color: var(--text2); margin-top: 4px;">
-            Cálculo paramétrico do benefício de custódia segundo o Art. 14 do Anteprojeto de Lei da BioChain, com liquidação automática via Drex (Real Digital).
+            Comparativo de teoria econômica: por que a destruição florestal é um suicídio contábil de curto prazo e a custódia BioChain é uma estratégia sustentável validada estocasticamente.
           </p>
         </div>
       </div>
 
-      <div class="rbe-grid">
-        <!-- Controles / Sliders -->
-        <div class="card">
-          <div class="card-header">
-            <span class="card-icon">🎛️</span>
-            <h3>Parâmetros Territoriais de Custódia</h3>
+      <div class="narc-compare-grid">
+        <!-- Lado Predatório -->
+        <div class="narc-box predatory">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="font-size: 24px;">🪓</span>
+            <h3 style="color: var(--red); font-size: 18px;">Economia do Narcisídio Social</h3>
           </div>
-
-          <div class="form-group">
-            <label for="rbe-bioma">Bioma sob Custódia</label>
-            <select id="rbe-bioma" onchange="calculateRBE()">
-              <option value="Pantanal">Pantanal (Fator de Estresse: 1.35x)</option>
-              <option value="Mata Atlântica">Mata Atlântica (Fator de Estresse: 1.40x)</option>
-              <option value="Cerrado">Cerrado (Fator de Estresse: 1.25x)</option>
-              <option value="Amazônia" selected>Amazônia (Fator de Estresse: 1.20x)</option>
-              <option value="Caatinga">Caatinga (Fator de Estresse: 1.30x)</option>
-              <option value="Pampa">Pampa (Fator de Estresse: 1.15x)</option>
-              <option value="Zona Costeira e Marinha">Zona Costeira e Marinha (Fator: 1.25x)</option>
-            </select>
-          </div>
-
-          <div class="range-slider-wrap">
-            <div class="range-slider-head">
-              <label>Área Preservada Auditada</label>
-              <span class="range-val-badge" id="rbe-area-val">150 ha</span>
-            </div>
-            <input type="range" class="range-input" id="rbe-area-slider" min="10" max="2000" step="10" value="150" oninput="calculateRBE()" />
-          </div>
-
-          <div class="range-slider-wrap">
-            <div class="range-slider-head">
-              <label>Famílias Guardiãs no Território</label>
-              <span class="range-val-badge" id="rbe-families-val">12 famílias</span>
-            </div>
-            <input type="range" class="range-input" id="rbe-families-slider" min="1" max="100" step="1" value="12" oninput="calculateRBE()" />
-          </div>
-
-          <div class="range-slider-wrap">
-            <div class="range-slider-head">
-              <label>Índice de Integridade Ecológica (IIE)</label>
-              <span class="range-val-badge" id="rbe-iie-val">94%</span>
-            </div>
-            <input type="range" class="range-input" id="rbe-iie-slider" min="50" max="100" step="1" value="94" oninput="calculateRBE()" />
-          </div>
-
-          <div style="background: var(--bg2); padding: 14px; border-radius: var(--radius-sm); font-size: 12px; color: var(--text2); line-height: 1.5;">
-            💡 <b>Fórmula Legal:</b> R$ 810,50 (piso legal: 50% SM 2026) + (Hectares × Fator Bioma × IIE) dividido equitativamente pelas famílias guardiãs homologadas.
+          <ul style="list-style: none; font-size: 13px; color: var(--text2); line-height: 1.8;">
+            <li>❌ <b>Receita Única e Exaustiva:</b> Venda de madeira e pasto de baixa produtividade (R$ 1.800/ha uma única vez).</li>
+            <li>❌ <b>Externalidades Socializadas:</b> Secas, quebra de safras e custos hospitalares pagos pelo povo.</li>
+            <li>❌ <b>Insegurança Jurídica:</b> Risco constante de embargo, multas do IBAMA e perda de acesso a crédito rural.</li>
+            <li>❌ <b>Horizonte Econômico:</b> Degradação do solo em 5 a 7 anos, transformando ativos em desertos.</li>
+          </ul>
+          <div style="background: rgba(239, 68, 68, 0.1); border-radius: var(--radius-sm); padding: 12px; margin-top: 16px; font-size: 12px; color: #fca5a5;">
+            <b>VPL em 10 Anos:</b> R$ 2.450 / ha (Taxa de desconto social r = 6,5% a.a.; corte raso inicial + pasto com decaimento acelerado e risco de embargo IBAMA).
           </div>
         </div>
 
-        <!-- Resultados & Drex -->
-        <div class="card">
-          <div class="card-header">
-            <span class="card-icon">💳</span>
-            <h3>Demonstrativo de Liquidação</h3>
+        <!-- Lado Biocêntrico -->
+        <div class="narc-box biocentric">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="font-size: 24px;">🌿</span>
+            <h3 style="color: var(--green); font-size: 18px;">Tecnocracia Biocêntrica (BioChain)</h3>
           </div>
-
-          <div style="background: linear-gradient(135deg, rgba(52,211,100,0.1), rgba(45,212,191,0.05)); border: 1px solid var(--green); border-radius: var(--radius); padding: 20px; text-align: center; margin-bottom: 20px;">
-            <span style="font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em;">RBE Mensal por Família</span>
-            <div style="font-size: 36px; font-weight: 800; color: var(--green); font-family: 'JetBrains Mono', monospace; margin: 6px 0;" id="rbe-total-family">
-              —
-            </div>
-            <span style="font-size: 12px; color: var(--teal);" id="rbe-gaia-equiv">
-              —
-            </span>
+          <ul style="list-style: none; font-size: 13px; color: var(--text2); line-height: 1.8;">
+            <li>✅ <b>Fluxo Perpétuo de Caixa:</b> Emissão contínua de GAIA e créditos de biodiversidade todo ano.</li>
+            <li>✅ <b>Renda Básica Direta:</b> R$ 810,50 a R$ 1.800/mês (piso legal indexado a 50% do salário mínimo + parcela territorial PSA).</li>
+            <li>✅ <b>Colateralização Financeira:</b> Ativos GAIA auditáveis servem de garantia em empréstimos verdes no SFN.</li>
+            <li>✅ <b>Soberania e Reconhecimento:</b> O Brasil como polo regulador da nova moeda ecológica global.</li>
+          </ul>
+          <div style="background: rgba(52, 211, 100, 0.1); border-radius: var(--radius-sm); padding: 12px; margin-top: 16px; font-size: 12px; color: #86efac;">
+            <b>VPL em 10 Anos:</b> R$ 14.800 / ha (Taxa de desconto social r = 6,5% a.a.; fluxo contínuo PSA R$ 12,50/ha·mês + créditos GAIA e RBE).
           </div>
-
-          <div class="biome-stats-grid">
-            <div class="biome-stat-box">
-              <span class="biome-stat-lbl">Repasse Mensal Território</span>
-              <span class="biome-stat-val" id="rbe-territorio-total">—</span>
-            </div>
-            <div class="biome-stat-box">
-              <span class="biome-stat-lbl">CO₂e Sequestrado Anual</span>
-              <span class="biome-stat-val" id="rbe-co2-anual">—</span>
-            </div>
-            <div class="biome-stat-box" style="grid-column: 1 / -1; background: rgba(45, 212, 191, 0.05); border-color: rgba(45, 212, 191, 0.2);">
-              <span class="biome-stat-lbl">Adicionalidade Ecológica Contrafactual (Y1 - Y0)</span>
-              <span class="biome-stat-val" id="rbe-additionality-val" style="color: var(--teal); font-size: 13px;">—</span>
-            </div>
-          </div>
-
-          <!-- Comprovante Criptográfico RBE em 2 Fases -->
-          <div class="drex-receipt-box">
-            <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding-bottom: 6px; margin-bottom: 8px;">
-              <span>ARQUITETURA RBE (FASE 1: PIX/CAIXA | FASE 2: DREX VAREJO)</span>
-              <span style="color: var(--teal);">● SIMULAÇÃO DE FLUXO</span>
-            </div>
-            <div>Beneficiário: Família Guardiã Xingu (Hash: 0x9f4c...3e1a)</div>
-            <div>Trilho Vigente (Fase 1): Pix / Caixa Econômica Federal (Conta Social)</div>
-            <div>Migração Futura (Fase 2): Smart Contracts Drex Varejo (Roadmap Bacen)</div>
-            <div style="margin-top: 6px; color: var(--green);">Taxa de Intermediação: R$ 0,00 (Zero Pedágio)</div>
-          </div>
-
-          <button class="btn btn-primary" style="margin-top: 16px; width: 100%;" onclick="simulateRBEDeposit()">
-            <span>🚀</span> Simular Emissão de Lote RBE On-Chain
-          </button>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ═══════════════════ TAB: MODELO CAUSAL INTEGRADO ═══════════════════ -->
-  <div id="tab-causal" class="tab-content">
-    <section class="biomes-section">
-      <div class="biomes-header-box">
-        <div>
-          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Modelo Causal Integrado</h2>
-          <p style="font-size: 13px; color: var(--text2); margin-top: 4px;">
-            Do estado biofísico verificável à conservação ecológica economicamente incentivada — o circuito completo da BioChain em 7 camadas causais.
-          </p>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: center;">
-          <span class="badge" style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 20px;">
-            🔬 Arquitetura Científica
-          </span>
-          <span class="badge" style="background: rgba(45,212,191,0.15); color: var(--teal); padding: 6px 12px; border-radius: 20px;">
-            7 Camadas Causais
-          </span>
         </div>
       </div>
 
-      <!-- Diagrama de Fluxo Causal em 7 Camadas -->
-      <div style="padding: 24px; max-width: 1100px; margin: 0 auto;">
-
-        <!-- Ciclo visual em seta com cards -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px;">
-
-          <div class="card" style="border-left: 4px solid var(--green); padding: 20px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 1 · Entrada</div>
-            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Estado Biofísico</div>
-            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Massa vegetal, carbono orgânico, higidez hídrica e biodiversidade mensurável como variáveis de estado ecológico (World W).</div>
-            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">Fonte: IBGE / INPE / MapBiomas</div>
-          </div>
-
-          <div class="card" style="border-left: 4px solid var(--teal); padding: 20px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 2 · Aquisição</div>
-            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Mensuração Multimodal</div>
-            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Sensoriamento INPE/CBERS, IoT terrestre, laudos comunitários e reconciliação bayesiana: P(E|D<sub>sat</sub>, D<sub>IoT</sub>, D<sub>soc</sub>).</div>
-            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">SERPRO / ANA / EMBRAPA</div>
-          </div>
-
-          <div class="card" style="border-left: 4px solid var(--gold); padding: 20px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 3 · Inferência</div>
-            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Oráculo IA Bayesiano</div>
-            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Inferência probabilística com limiar θ* ≥ 97,5% derivado da função de perda assimétrica. Rejeita laudos adulterados via slashing.</div>
-            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">GAIA Oracle Network</div>
-          </div>
-
-          <div class="card" style="border-left: 4px solid #a78bfa; padding: 20px;">
-            <div style="font-size: 11px; font-weight: 700; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 4 · Consenso</div>
-            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Proof-of-Ecology (PoE)</div>
-            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Seleção de validadores via VRF sublinear ponderada pelo Ecoscore: P<sub>i</sub> = S<sub>i</sub><sup>ϕ</sup> / Σ S<sub>k</sub><sup>ϕ</sup>, com ϕ = 0,85 e mitigação de Sybil via credenciamento institucional federado.</div>
-            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">BioBFT / EcoSort Protocol</div>
-          </div>
-
-          <div class="card" style="border-left: 4px solid #fb923c; padding: 20px;">
-            <div style="font-size: 11px; font-weight: 700; color: #fb923c; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 5 · Ativo</div>
-            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Ativo GAIA</div>
-            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">GAIA = f(Carbono, Biodiversidade, Água, Solo, Território, Custódia). Máquina de estados: Pendente → Ativo → Suspenso → Aposentado.</div>
-            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">Lei Federal 14.119/2021</div>
-          </div>
-
-          <div class="card" style="border-left: 4px solid var(--green); padding: 20px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 6 · Redistribuição</div>
-            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Renda Básica Ecológica</div>
-            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">RBE = R$ 810,50 (piso legal) + (ha × Ω<sub>bioma</sub> × IIE) / Famílias. Repasse direto via Pix/Caixa (Fase 1) e Drex Real Digital (Fase 2). Zero intermediários.</div>
-            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">STN / Banco Central do Brasil</div>
-          </div>
-
-          <div class="card" style="border-left: 4px solid var(--teal); padding: 20px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Camada 7 · Resultado</div>
-            <div style="font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Conservação Verificável</div>
-            <div style="font-size: 13px; color: var(--text2); line-height: 1.6;">Adicionalidade contrafactual: Y1 − Y0 mensura retenção florestal real vs. linha de base. Fecha o ciclo: Custódia → Natureza → Custódia.</div>
-            <div style="margin-top: 12px; font-size: 11px; color: var(--text3);">INPE-DETER / MapBiomas Alert</div>
-          </div>
-
+      <!-- Teoria dos Jogos Estocástica -->
+      <div class="card" style="background: var(--surface2); border: 1px solid var(--border2); padding: 24px;">
+        <h3 style="color: var(--teal); font-size: 16px; margin-bottom: 8px;">Conclusão da Modelagem de Teoria dos Jogos & Equilíbrio de Nash</h3>
+        <p style="font-size: 13px; color: var(--text); line-height: 1.6;">
+          Quando a renda contínua da BioChain somada à Renda Básica Ecológica e às sanções da Lei de Crimes Ambientais supera o retorno da madeira predatória no <b>modelo estocástico de payoffs</b>, 
+          <b>a preservação torna-se a estratégia racional ótima</b> para proprietários rurais e comunidades tradicionais. O narcisídio social deixa de ser viável não apenas por apelo ético, mas por pura racionalidade econômica de longo prazo (fluxo de caixa descontado ajustado aos riscos climáticos).
+        </p>
+        <div style="margin-top: 14px; padding: 12px; border-left: 3px solid var(--gold); background: rgba(251,191,36,0.06); font-size: 12px; color: var(--text2); line-height: 1.5;">
+          <b>⚠️ Ressalva de Política Pública e Hipóteses H4–H5:</b> A dominância econômica da custódia florestal pressupõe o enforcement ativo de comando e controle do Estado contra a grilagem e a ocupação ilegal de terras públicas (Art. 225 da CF/88). Na ausência de fiscalização punitiva, a apropriação predatória ilícita pode criar distorções oportunistas de curto prazo que nenhum mecanismo puramente de mercado consegue mitigar sozinho.
         </div>
-
-        <!-- Diagrama de fluxo em linha -->
-        <div class="card" style="padding: 24px; margin-bottom: 24px;">
-          <h3 style="font-size: 16px; font-weight: 700; color: var(--green); margin-bottom: 16px;">Circuito Causal Completo</h3>
-          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px; font-family: 'JetBrains Mono', monospace;">
-            <span style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 8px; font-weight: 700;">🌿 Natureza</span>
-            <span style="color: var(--text3);">→</span>
-            <span style="background: rgba(45,212,191,0.1); color: var(--teal); padding: 6px 12px; border-radius: 8px;">📡 Medição</span>
-            <span style="color: var(--text3);">→</span>
-            <span style="background: rgba(251,191,36,0.1); color: var(--gold); padding: 6px 12px; border-radius: 8px;">🤖 Oráculo</span>
-            <span style="color: var(--text3);">→</span>
-            <span style="background: rgba(167,139,250,0.1); color: #a78bfa; padding: 6px 12px; border-radius: 8px;">⛓️ Blockchain</span>
-            <span style="color: var(--text3);">→</span>
-            <span style="background: rgba(251,146,60,0.1); color: #fb923c; padding: 6px 12px; border-radius: 8px;">🪙 GAIA</span>
-            <span style="color: var(--text3);">→</span>
-            <span style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 8px;">💚 RBE</span>
-            <span style="color: var(--text3);">→</span>
-            <span style="background: rgba(45,212,191,0.1); color: var(--teal); padding: 6px 12px; border-radius: 8px;">👨‍👩‍👧 Família</span>
-            <span style="color: var(--text3);">→</span>
-            <span style="background: rgba(52,211,100,0.15); color: var(--green); padding: 6px 12px; border-radius: 8px; font-weight: 700;">🌿 Custódia</span>
-          </div>
-          <p style="font-size: 12px; color: var(--text3); margin-top: 12px;">Cada seta representa uma transformação verificada criptograficamente e registrada de forma imutável no livro-razão público da BioChain.</p>
-        </div>
-
-        <!-- Nota Epistemológica -->
-        <div class="card" style="padding: 20px; border: 1px solid rgba(251,191,36,0.3); background: rgba(251,191,36,0.05);">
-          <h3 style="font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 10px;">⚠️ Nota Epistemológica (Protótipo Acadêmico)</h3>
-          <p style="font-size: 13px; color: var(--text2); line-height: 1.7;">
-            Este modelo causal está <b>em desenvolvimento e validação acadêmica</b>. Cada camada opera em um nível epistemológico distinto: 
-            (A) hipótese normativa — a natureza deve ser tratada como sujeito de direitos; 
-            (B) teoria econômica — incentivos financeiros alteram comportamento de agentes; 
-            (C) modelo matemático — Ecoscore, GAIA e RBE podem ser formalizados; 
-            (D) implementação computacional — blockchain e smart contracts podem executar essas regras.
-            A validade de cada camada <b>não implica automaticamente a validade das demais</b>, e o circuito completo requer validação empírica em escala.
-          </p>
-        </div>
-
       </div>
     </section>
   </div>
 
   <!-- ═══════════════════ TAB 4: ACERVO DE POLÍTICA PÚBLICA ═══════════════════ -->
-  <div id="tab-politica" class="tab-content">
+  <div id="tab-politica" class="tab-content" role="tabpanel" aria-labelledby="btn-tab-politica" tabindex="0">
     <section class="policy-section">
       <div class="biomes-header-box">
         <div>
@@ -856,72 +946,13 @@
     </section>
   </div>
 
-  <!-- ═══════════════════ TAB 5: BALANÇO ANTI-NARCISÍDIO ═══════════════════ -->
-  <div id="tab-narcisidio" class="tab-content">
-    <section class="narc-section">
-      <div class="biomes-header-box">
-        <div>
-          <h2 style="font-size: 22px; font-weight: 800; color: var(--green);">Rompendo o Narcisídio Social: A Matemática da Transição</h2>
-          <p style="font-size: 13px; color: var(--text2); margin-top: 4px;">
-            Comparativo de teoria econômica: por que a destruição florestal é um suicídio contábil de curto prazo e a custódia BioChain é uma estratégia sustentável validada estocasticamente.
-          </p>
-        </div>
-      </div>
-
-      <div class="narc-compare-grid">
-        <!-- Lado Predatório -->
-        <div class="narc-box predatory">
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-            <span style="font-size: 24px;">🪓</span>
-            <h3 style="color: var(--red); font-size: 18px;">Economia do Narcisídio Social</h3>
-          </div>
-          <ul style="list-style: none; font-size: 13px; color: var(--text2); line-height: 1.8;">
-            <li>❌ <b>Receita Única e Exaustiva:</b> Venda de madeira e pasto de baixa produtividade (R$ 1.800/ha uma única vez).</li>
-            <li>❌ <b>Externalidades Socializadas:</b> Secas, quebra de safras e custos hospitalares pagos pelo povo.</li>
-            <li>❌ <b>Insegurança Jurídica:</b> Risco constante de embargo, multas do IBAMA e perda de acesso a crédito rural.</li>
-            <li>❌ <b>Horizonte Econômico:</b> Degradação do solo em 5 a 7 anos, transformando ativos em desertos.</li>
-          </ul>
-          <div style="background: rgba(239, 68, 68, 0.1); border-radius: var(--radius-sm); padding: 12px; margin-top: 16px; font-size: 12px; color: #fca5a5;">
-            <b>VPL em 10 Anos:</b> R$ 2.450 / ha (exaustão do solo e sanções)
-          </div>
-        </div>
-
-        <!-- Lado Biocêntrico -->
-        <div class="narc-box biocentric">
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-            <span style="font-size: 24px;">🌿</span>
-            <h3 style="color: var(--green); font-size: 18px;">Tecnocracia Biocêntrica (BioChain)</h3>
-          </div>
-          <ul style="list-style: none; font-size: 13px; color: var(--text2); line-height: 1.8;">
-            <li>✅ <b>Fluxo Perpétuo de Caixa:</b> Emissão contínua de GAIA e créditos de biodiversidade todo ano.</li>
-            <li>✅ <b>Renda Básica Direta:</b> R$ 600 a R$ 1.200/mês para as famílias que mantêm a floresta de pé.</li>
-            <li>✅ <b>Colateralização Financeira:</b> Ativos GAIA auditáveis servem de garantia em empréstimos verdes no SFN.</li>
-            <li>✅ <b>Soberania e Reconhecimento:</b> O Brasil como polo regulador da nova moeda ecológica global.</li>
-          </ul>
-          <div style="background: rgba(52, 211, 100, 0.1); border-radius: var(--radius-sm); padding: 12px; margin-top: 16px; font-size: 12px; color: #86efac;">
-            <b>VPL em 10 Anos:</b> R$ 14.800 / ha (fluxo de caixa descontado dinâmico ajustado a riscos climáticos)
-          </div>
-        </div>
-      </div>
-
-      <!-- Teoria dos Jogos Estocástica -->
-      <div class="card" style="background: var(--surface2); border: 1px solid var(--border2); padding: 24px;">
-        <h3 style="color: var(--teal); font-size: 16px; margin-bottom: 8px;">Conclusão da Modelagem de Teoria dos Jogos</h3>
-        <p style="font-size: 13px; color: var(--text); line-height: 1.6;">
-          Quando a renda contínua da BioChain somada à Renda Básica Ecológica e às sanções da Lei de Crimes Ambientais supera o retorno da madeira predatória no <b>modelo estocástico de payoffs</b>, 
-          <b>a preservação torna-se a estratégia racional ótima (matriz de probabilidade climática) para proprietários e comunidades</b>. O narcisídio social deixa de ser viável não apenas por apelo moral, mas por pura racionalidade econômica de longo prazo (fluxo de caixa descontado ajustado ao risco climático).
-        </p>
-      </div>
-    </section>
-  </div>
-
   <!-- ═══════════════════ DRAWER DA BIOWALLET ═══════════════════ -->
-  <div id="wallet-drawer" class="wallet-drawer">
+  <div id="wallet-drawer" class="wallet-drawer" role="region" aria-label="Painel da BioWallet Drex">
     <div class="wallet-drawer-head">
       <h3 style="font-size: 17px; font-weight: 700; color: var(--green); display: flex; align-items: center; gap: 8px;">
         <span>👛</span> BioWallet Drex
       </h3>
-      <button class="btn btn-ghost btn-sm" onclick="toggleWalletDrawer()">✕</button>
+      <button class="btn btn-ghost btn-sm" onclick="toggleWalletDrawer()" aria-label="Fechar painel da carteira">✕</button>
     </div>
 
     <div class="wallet-card-display">
@@ -942,21 +973,21 @@
 
     <div style="font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 10px;">Alternar Perfil Institucional:</div>
     <div class="wallet-profile-select-grid">
-      <div class="profile-card-option active" id="prof-guardian" onclick="setWalletProfile('guardian')">
+      <div class="profile-card-option active" id="prof-guardian" onclick="setWalletProfile('guardian')" tabindex="0" role="button" aria-label="Selecionar perfil Guardião Territorial" onkeydown="if(event.key==='Enter'||event.key===' '){setWalletProfile('guardian');event.preventDefault();}">
         <span style="font-size: 20px;">🌿</span>
         <div>
           <div style="font-size: 13px; font-weight: 700; color: var(--text);">Guardião Territorial</div>
           <div style="font-size: 11px; color: var(--text3);">Comunidade Xingu · Recebimento RBE</div>
         </div>
       </div>
-      <div class="profile-card-option" id="prof-enterprise" onclick="setWalletProfile('enterprise')">
+      <div class="profile-card-option" id="prof-enterprise" onclick="setWalletProfile('enterprise')" tabindex="0" role="button" aria-label="Selecionar perfil Empresa Compensadora" onkeydown="if(event.key==='Enter'||event.key===' '){setWalletProfile('enterprise');event.preventDefault();}">
         <span style="font-size: 20px;">🏢</span>
         <div>
           <div style="font-size: 13px; font-weight: 700; color: var(--text);">Empresa Compensadora</div>
           <div style="font-size: 11px; color: var(--text3);">Indústria S.A. · Queima de Créditos</div>
         </div>
       </div>
-      <div class="profile-card-option" id="prof-auditor" onclick="setWalletProfile('auditor')">
+      <div class="profile-card-option" id="prof-auditor" onclick="setWalletProfile('auditor')" tabindex="0" role="button" aria-label="Selecionar perfil Auditor de Estado" onkeydown="if(event.key==='Enter'||event.key===' '){setWalletProfile('auditor');event.preventDefault();}">
         <span style="font-size: 20px;">🏛️</span>
         <div>
           <div style="font-size: 13px; font-weight: 700; color: var(--text);">Auditor de Estado</div>
@@ -974,10 +1005,10 @@
   </div>
 
   <!-- ═══════════════════ MODAL CERTIFICADO DE DESCARBONIZAÇÃO ═══════════════════ -->
-  <div id="cert-modal" class="cert-modal hidden">
+  <div id="cert-modal" class="cert-modal hidden" role="dialog" aria-modal="true" aria-labelledby="cert-title">
     <div class="cert-modal-inner">
       <div class="cert-watermark">PROTÓTIPO DE SIMULAÇÃO · NÃO OFICIAL</div>
-      <button class="btn btn-ghost btn-sm" style="position: absolute; top: 16px; right: 16px; z-index: 20;" onclick="closeCertModal()">✕ Fechar</button>
+      <button class="btn btn-ghost btn-sm" style="position: absolute; top: 16px; right: 16px; z-index: 20;" onclick="closeCertModal()" aria-label="Fechar certificado">✕ Fechar</button>
 
       <div class="cert-border-seal">
         <div class="cert-prototype-banner">
@@ -987,7 +1018,7 @@
           <div class="cert-emblem">🌿</div>
           <div class="cert-country">PROTÓTIPO DE POLÍTICA PÚBLICA · MÉTODO BRASILIANO</div>
           <div class="cert-agency">MINUTA DE SIMULAÇÃO DE PROTOCOLO BIOCHAIN · DEMONSTRAÇÃO DE CONCEITO</div>
-          <h2 class="cert-title">SIMULAÇÃO DE CERTIFICADO NACIONAL DE COMPENSAÇÃO AMBIENTAL</h2>
+          <h2 class="cert-title" id="cert-title">SIMULAÇÃO DE CERTIFICADO NACIONAL DE COMPENSAÇÃO AMBIENTAL</h2>
           <p style="font-size: 12px; color: var(--text2);">Documento de demonstração conceitual baseado na Lei Federal nº 14.119/2021</p>
         </div>
 
@@ -1048,11 +1079,11 @@
   </div>
 
   <!-- ═══════════════════ MODAL LEITOR DE DOCUMENTOS ═══════════════════ -->
-  <div id="doc-modal" class="doc-modal hidden">
+  <div id="doc-modal" class="doc-modal hidden" role="dialog" aria-modal="true" aria-labelledby="doc-modal-title">
     <div class="doc-modal-inner">
       <div class="doc-modal-head">
         <h3 id="doc-modal-title" style="color: var(--green); font-size: 16px;">Visualizador de Documento</h3>
-        <button class="btn btn-ghost btn-sm" onclick="closeDocModal()">✕ Fechar</button>
+        <button class="btn btn-ghost btn-sm" onclick="closeDocModal()" aria-label="Fechar documento">✕ Fechar</button>
       </div>
       <div class="doc-modal-body" id="doc-modal-body">
         <!-- Conteúdo do documento carregado aqui -->
@@ -1060,8 +1091,54 @@
     </div>
   </div>
 
+  <!-- ═══════════════════ MODAL GLOSSÁRIO DE CONCEITOS ═══════════════════ -->
+  <div id="glossary-modal" class="glossary-modal hidden" role="dialog" aria-modal="true" aria-labelledby="glossary-modal-title">
+    <div class="glossary-modal-inner">
+      <div class="glossary-modal-head">
+        <h3 id="glossary-modal-title" style="color: var(--green); font-size: 17px; display: flex; align-items: center; gap: 8px;">
+          <span>📖</span> Glossário de Conceitos & Fórmulas da BioChain
+        </h3>
+        <button class="btn btn-ghost btn-sm" onclick="closeGlossaryModal()" aria-label="Fechar glossário">✕ Fechar</button>
+      </div>
+      <div class="glossary-modal-body">
+        <div class="glossary-item">
+          <div class="glossary-term">🪙 Ativo GAIA</div>
+          <div class="glossary-desc">Ativo ambiental biofísico sintético emitido com base no estado ecológico verificado: <code>GAIA = f(C, Bio, Água, Solo, Território, Custódia)</code>. Máquina de estados: <i>Issued → Active → Suspended → Retired</i>.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">⚡ Proof-of-Ecology (PoE)</div>
+          <div class="glossary-desc">Mecanismo de consenso com seleção probabilística sublinear de validadores via VRF: <code>w_i = (S_i × estresse_i)^0.85</code>, atrelando a dificuldade ao sequestro real de carbono auditado.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">🌿 IIE (Índice de Integridade Ecológica)</div>
+          <div class="glossary-desc">Métrica contínua (0.0 a 1.0) derivada de reconciliação bayesiana entre sensoriamento orbital multiespectral (INPE/CBERS), telemetria IoT terrestre e laudos comunitários.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">💚 RBE (Renda Básica Ecológica)</div>
+          <div class="glossary-desc">Remuneração mensal garantida às famílias guardiãs (Art. 14): <code>RBE = Piso (R$ 810,50) + (ha × Ω_bioma × IIE) / Famílias</code>. Fase 1: Pix/Caixa; Fase 2: Drex Varejo.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">🎲 VRF (Verifiable Random Function)</div>
+          <div class="glossary-desc">Função pseudoaleatória auditável com prova criptográfica pública que impede manipulação ou previsibilidade na eleição de validadores na federação de biomas.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">⚖️ Slashing Ecológico</div>
+          <div class="glossary-desc">Penalidade automática on-chain com queima ou confisco de stake institucional de nós que validam laudos fraudulentos ou discordam da reconciliação bayesiana.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">🎯 Limiar Bayesiano Ótimo (θ*)</div>
+          <div class="glossary-desc">Critério formal de decisão (<code>θ* ≥ 97,5%</code>) calibrado pela função de perda assimétrica, onde o custo ecológico de validar uma fraude supera amplamente o de auditar um laudo legítimo.</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">🇧🇷 Drex (Real Digital)</div>
+          <div class="glossary-desc">Moeda digital de banco central (CBDC) brasileira emitida pelo Banco Central do Brasil. Na Fase 2 da BioChain, os pagamentos RBE serão liquidados via smart contracts programáveis em Drex.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Mining Modal -->
-  <div id="mining-modal" class="modal hidden">
+  <div id="mining-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="mining-title">
     <div class="modal-inner">
       <div class="mining-animation">
         <div class="mining-orb">⛏️</div>
@@ -1071,7 +1148,7 @@
           <div class="ring r3"></div>
         </div>
       </div>
-      <h3>Validando Bloco...</h3>
+      <h3 id="mining-title">Validando Bloco...</h3>
       <p id="mining-status">Calculando Proof-of-Ecology...</p>
       <div class="progress-bar-bg">
         <div class="progress-bar-fill" id="mining-progress"></div>

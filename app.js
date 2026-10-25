@@ -81,6 +81,7 @@ const BIOME_MAP_INFO = {
     desc: 'Maior floresta tropical contínua da Terra, abrangendo 4,1 milhões de km² em território brasileiro. Regulador primordial do ciclo de rios voadores e sequestro ativo de carbono.',
     stress: '1.20x',
     canopy: '86.4%',
+    canopyType: 'Cobertura Florestal Nativa',
     oracle: 'INPE-DETER-AMZ-01',
     water: 'Excelente (78%)',
     biomaSelectVal: 'Amazônia'
@@ -91,6 +92,7 @@ const BIOME_MAP_INFO = {
     desc: 'Berço das águas brasileiras e savana mais biodiversa do mundo (2,0M km²). Alimenta 8 das 12 principais bacias hidrográficas nacionais com alta taxa de estresse antrópico.',
     stress: '1.25x',
     canopy: '51.2%',
+    canopyType: 'Vegetação Nativa (Savana/Campo)',
     oracle: 'INPE-DETER-CR-04',
     water: 'Crítico (44%)',
     biomaSelectVal: 'Cerrado'
@@ -101,6 +103,7 @@ const BIOME_MAP_INFO = {
     desc: 'Único bioma exclusivamente brasileiro (844k km²). Alta resiliência climática, endemismo biológico e fronteira prioritária contra a desertificação no Semiárido.',
     stress: '1.30x',
     canopy: '42.0%',
+    canopyType: 'Vegetação Xerófila Nativa',
     oracle: 'INPE-SEMIARIDO-03',
     water: 'Seco (28%)',
     biomaSelectVal: 'Caatinga'
@@ -108,9 +111,10 @@ const BIOME_MAP_INFO = {
   mat: {
     name: 'Bioma Mata Atlântica',
     icon: '🌿',
-    desc: 'Bioma mais ameaçado e densamente habitado (1,3M km² original, 28,5% remanescente). Abriga 70% da população e gera 80% do PIB, com altíssimo valor de conservação.',
+    desc: 'Bioma mais ameaçado e densamente habitado (1,3M km² original). Abriga 70% da população e gera 80% do PIB, com altíssimo valor de conservação (12,4% primária SOS Mata Atlântica; 28,5% total MapBiomas).',
     stress: '1.40x',
     canopy: '28.5%',
+    canopyType: 'Remanescente Nativo (Prim.+Sec.)',
     oracle: 'INPE-SIRENE-MA-02',
     water: 'Moderado (62%)',
     biomaSelectVal: 'Mata Atlântica'
@@ -121,6 +125,7 @@ const BIOME_MAP_INFO = {
     desc: 'Maior planície alagável contínua do planeta (150k km²). Patrimônio Natural da Humanidade com ciclos hidrológicos extremos e altíssima vulnerabilidade a incêndios.',
     stress: '1.35x',
     canopy: '72.1%',
+    canopyType: 'Cobertura Nativa e Áreas Alagáveis',
     oracle: 'ANA-TELEMETRIA-PAN-09',
     water: 'Alagado (82%)',
     biomaSelectVal: 'Pantanal'
@@ -128,9 +133,10 @@ const BIOME_MAP_INFO = {
   pam: {
     name: 'Bioma Pampa',
     icon: '🌾',
-    desc: 'Campos sulinos com rica biodiversidade vegetal e solos de alto teor de matéria orgânica (176k km²). Tradição pastoril sustentável e conservação de pastagens naturais.',
+    desc: 'Campos sulinos com rica biodiversidade vegetal e solos de alto teor de matéria orgânica (176k km²). Tradição pastoril sustentável e conservação de pastagens naturais campestres.',
     stress: '1.15x',
     canopy: '74.0%',
+    canopyType: 'Integridade dos Campos Nacionais',
     oracle: 'EMBRAPA-PAMPA-01',
     water: 'Estável (65%)',
     biomaSelectVal: 'Pampa'
@@ -141,6 +147,7 @@ const BIOME_MAP_INFO = {
     desc: 'Mais de 8.500 km de costa (Amazônia Azul). Manguezais com sequestro de carbono azul até 5x superior a florestas terrestres e proteção de recifes de corais.',
     stress: '1.25x',
     canopy: '91.0%',
+    canopyType: 'Manguezais e Recifes Protegidos',
     oracle: 'MARINHA-ORACULO-07',
     water: 'Marinho (95%)',
     biomaSelectVal: 'Zona Costeira e Marinha'
@@ -150,55 +157,55 @@ const BIOME_MAP_INFO = {
 const PROPOSALS = [
   {
     id: 'p1', title: 'PSA Universal — Pagamento por Serviços Ambientais',
-    desc: 'Tokenizar 50M ha de floresta nativa e distribuir GAIA tokens para guardiões locais.',
-    yes: 72, no: 18, userVotes: 0
+    desc: 'Tokenizar 50M ha de vegetação nativa e distribuir GAIA tokens para guardiões locais.',
+    yes: 72, no: 18, userVotesYes: 0, userVotesNo: 0
   },
   {
     id: 'p2', title: 'RBE — Renda Básica Ecológica',
     desc: 'Financiar renda básica com receita de créditos de carbono tokenizados na BioChain.',
-    yes: 85, no: 10, userVotes: 0
+    yes: 85, no: 10, userVotesYes: 0, userVotesNo: 0
   },
   {
     id: 'p3', title: 'Oráculos de IA  (INPE/MapBiomas)',
     desc: 'Hospedar modelos de visão computacional ambiental em infraestrutura pública do SERPRO/RNP.',
-    yes: 94, no: 4, userVotes: 0
+    yes: 94, no: 4, userVotesYes: 0, userVotesNo: 0
   }
 ];
 
 const BIOMES_DATA = [
   {
     id: 'amz', name: 'Amazônia', icon: '🌳', stress: '1.20x',
-    area: '4,1M km²', canopy: 86.4, moisture: 78, alert: '0.00%',
+    area: '4,1M km²', canopy: 86.4, canopyLbl: 'Cobertura Florestal', moisture: 78, alert: '0.00%',
     oracle: 'INPE-DETER-AMZ-01', bayes: '99.4%'
   },
   {
     id: 'cer', name: 'Cerrado', icon: '🌱', stress: '1.25x',
-    area: '2,0M km²', canopy: 51.2, moisture: 44, alert: '0.01%',
+    area: '2,0M km²', canopy: 51.2, canopyLbl: 'Vegetação Savânica', moisture: 44, alert: '0.01%',
     oracle: 'INPE-DETER-CR-04', bayes: '98.8%'
   },
   {
     id: 'mat', name: 'Mata Atlântica', icon: '🌿', stress: '1.40x',
-    area: '1,3M km²', canopy: 28.5, moisture: 62, alert: '0.00%',
+    area: '1,3M km²', canopy: 28.5, canopyLbl: 'Remanescente Nativo', moisture: 62, alert: '0.00%',
     oracle: 'INPE-SIRENE-MA-02', bayes: '99.1%'
   },
   {
     id: 'pan', name: 'Pantanal', icon: '🐾', stress: '1.35x',
-    area: '150k km²', canopy: 72.1, moisture: 82, alert: '0.00%',
+    area: '150k km²', canopy: 72.1, canopyLbl: 'Áreas Alagadas/Campos', moisture: 82, alert: '0.00%',
     oracle: 'ANA-TELEMETRIA-PAN-09', bayes: '98.6%'
   },
   {
     id: 'caa', name: 'Caatinga', icon: '🌵', stress: '1.30x',
-    area: '844k km²', canopy: 42.0, moisture: 28, alert: '0.00%',
+    area: '844k km²', canopy: 42.0, canopyLbl: 'Vegetação Caatinga', moisture: 28, alert: '0.00%',
     oracle: 'INPE-SEMIARIDO-03', bayes: '97.9%'
   },
   {
     id: 'pam', name: 'Pampa', icon: '🌾', stress: '1.15x',
-    area: '176k km²', canopy: 74.0, moisture: 65, alert: '0.00%',
+    area: '176k km²', canopy: 74.0, canopyLbl: 'Campos Nacionais', moisture: 65, alert: '0.00%',
     oracle: 'EMBRAPA-PAMPA-01', bayes: '98.2%'
   },
   {
     id: 'cos', name: 'Zona Costeira e Marinha', icon: '🌊', stress: '1.25x',
-    area: '8,5k km costa', canopy: 91.0, moisture: 95, alert: '0.00%',
+    area: '8,5k km costa', canopy: 91.0, canopyLbl: 'Manguezais/Recifes', moisture: 95, alert: '0.00%',
     oracle: 'MARINHA-ORACULO-07', bayes: '99.5%'
   }
 ];
@@ -211,10 +218,10 @@ const DOCS_DATA = {
       <p>A <b>BioChain</b> é posicionada como política pública de Estado para o Brasil do século XXI, respondendo simultaneamente à <b>Crise Climática</b>, à <b>Ascensão da Inteligência Artificial</b> e ao <b>Narcisídio Social</b> (a destruição das bases vitais da sociedade em troca de rentismo imediato).</p>
       <h3>Eixos Estruturantes:</h3>
       <ul>
-        <li><b>O Método Brasiliano:</b> O Brasil não importa modelos — sintetiza soluções universais a partir de sua megabiodiversidade e sociodiversidade.</li>
-        <li><b>Proof-of-Ecology (PoE):</b> O poder de validação decorre da preservação física de biomas, e não da queima de energia ou concentração de capital.</li>
+        <li><b>O Método Brasiliano:</b> Síntese institucional soberana ancorada na megabiodiversidade e sociodiversidade nacional.</li>
+        <li><b>Proof-of-Ecology (PoE):</b> O poder de validação decorre da custódia física de biomas, e não da queima de energia ou concentração plutocrática.</li>
         <li><b>Renda Básica Ecológica:</b> 60% da liquidação primária de ativos GAIA é destinada a famílias guardiãs (indígenas, quilombolas, ribeirinhos).</li>
-        <li><b>Meta 2030:</b> 100M de hectares registrados, 500.000 famílias atendidas e redução de 80% no desmatamento líquido.</li>
+        <li><b>Roadmap Escalonado:</b> Piloto inicial com 1.000 famílias em 3 biomas prioritários, expandindo para 10.000–15.000 famílias em 2027 e meta decenal de 500.000 famílias em 100M ha até 2030.</li>
       </ul>
       <p><a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/01_politica_publica_diretriz.md" target="_blank" class="btn btn-primary btn-sm">Abrir Documento Integral no GitHub</a></p>
     `
@@ -226,9 +233,9 @@ const DOCS_DATA = {
       <p>Síntese executiva desenhada para leitura em 3 minutos por ministros, presidentes de casas legislativas e bancos multilaterais.</p>
       <h3>Pontos-Chave:</h3>
       <ul>
-        <li><b>O Problema:</b> Com a Amazônia e o Cerrado próximos do ponto de não-retorno, mecanismos punitivos tradicionais são insuficientes sem incentivos econômicos de custódia.</li>
-        <li><b>Impacto Fiscal Neutro:</b> Financiado pela internalização do mercado de carbono e fundos climáticos multilaterais, sem expansão de dívida pública.</li>
-        <li><b>Ação para os Próximos 60 Dias:</b> Decreto Presidencial criando o Grupo de Trabalho Interministerial (GTI BioChain) e autorização do piloto em 3 biomas.</li>
+        <li><b>O Problema:</b> Com biomas próximos do ponto de não-retorno, mecanismos punitivos tradicionais são insuficientes sem incentivos econômicos de custódia territorial.</li>
+        <li><b>Financiamento Sustentável:</b> 60% da receita primária de ativos GAIA combinada a fundos climáticos multilaterais e garantia soberana de última instância (Fundo Clima / Tesouro).</li>
+        <li><b>Ação para os Próximos 60 Dias:</b> Decreto Presidencial criando o Grupo de Trabalho Interministerial (GTI BioChain) e autorização do piloto em 3 biomas prioritários.</li>
       </ul>
       <p><a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/02_one_pager_executivo.md" target="_blank" class="btn btn-primary btn-sm">Abrir Documento Integral no GitHub</a></p>
     `
@@ -242,11 +249,11 @@ const DOCS_DATA = {
       <ol>
         <li>Capa & Tese de Impacto: A maior biodiversidade como motor de riqueza nacional.</li>
         <li>O Narcisídio Social: A floresta valorada a zero no PIB e os custos socializados.</li>
-        <li>A Encruzilhada da IA: Anti-extrativismo de dados genéticos por Big Techs.</li>
-        <li>O Método Brasiliano: Síntese de DLT, dados do INPE e saberes ancestrais.</li>
-        <li>Proof-of-Ecology e o Ativo GAIA: Lastro de 1 tCO₂e com queima mandatória.</li>
-        <li>Renda Básica Ecológica: Repasse direto via Drex sem intermediários.</li>
-        <li>Roadmap 2026–2030: Do piloto federativo à liderança na OTCA.</li>
+        <li>A Encruzilhada da IA: Soberania contra o extrativismo de dados genéticos.</li>
+        <li>O Método Brasiliano: Síntese de DLT pública, dados do INPE e saberes tradicionais.</li>
+        <li>Proof-of-Ecology e o Ativo GAIA: Lastro biofísico de 1 tCO₂e com queima/aposentadoria auditável.</li>
+        <li>Renda Básica Ecológica: Repasse direto via Pix/Caixa (Fase 1) e integração com moeda digital soberana (Fase 2).</li>
+        <li>Roadmap 2026–2030: Do piloto federativo à cooperação pan-amazônica na OTCA.</li>
       </ol>
       <p><a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/03_pitch_deck_institucional.md" target="_blank" class="btn btn-primary btn-sm">Abrir Documento Integral no GitHub</a></p>
     `
@@ -259,10 +266,10 @@ const DOCS_DATA = {
       <h3>Artigos Fundamentais:</h3>
       <ul>
         <li><b>Art. 5º:</b> Criação dos Nós Guardiões Federados para os 7 biomas nacionais.</li>
-        <li><b>Art. 6º:</b> Vedação ao Proof-of-Work predatório e ao Proof-of-Stake plutocrático.</li>
-        <li><b>Art. 8º:</b> Soberania digital: oráculos em nuvem de Estado (SERPRO/RNP) com código auditável e vedação à apropriação patentária de dados comunitários.</li>
+        <li><b>Art. 6º:</b> Vedação ao Proof-of-Work predatório e mitigação da plutocracia do Proof-of-Stake via seleção sublinear VRF.</li>
+        <li><b>Art. 8º:</b> Soberania digital: oráculos em nuvem de Estado (SERPRO/RNP) com código auditável e salvaguarda do patrimônio genético comunitário.</li>
         <li><b>Art. 13:</b> Partilha legal: 60% da liquidação primária para o Fundo da RBE.</li>
-        <li><b>Art. 14:</b> Pagamento direto aos guardiões integrado ao Drex sem taxas.</li>
+        <li><b>Art. 14:</b> Pagamento direto aos guardiões integrado ao sistema financeiro público (Pix/Caixa na Fase 1, e Drex conforme diretrizes do Bacen).</li>
       </ul>
       <p><a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/04_anteprojeto_de_lei.md" target="_blank" class="btn btn-primary btn-sm">Abrir Documento Integral no GitHub</a></p>
     `
@@ -274,10 +281,10 @@ const DOCS_DATA = {
       <p>Documento formal de arquitetura DLT, modelagem matemática do consenso e teoria dos jogos.</p>
       <h3>Tópicos Técnicos:</h3>
       <ul>
-        <li><b>Matemática do Ecoscore:</b> Função de validação ponderada pelos multiplicadores de estresse dos biomas (Pantanal 1.35x, Mata Atlântica 1.40x).</li>
-        <li><b>Oráculos Bayesianos Multimodais:</b> Reconciliação entre imagens SAR/ópticas orbitais e sensores IoT terrestres com meta P ≥ 97.5%.</li>
-        <li><b>Teoria dos Jogos & Nash:</b> Demonstração de que o valor presente líquido da preservação (VPL_PoE) supera estritamente o retorno do desmatamento (VPL_ext).</li>
-        <li><b>Smart Contract Solidity:</b> Código do contrato RendaBasicaEcologica integrado à ponte IDrexBridge.</li>
+        <li><b>Consenso Proof-of-Ecology & VRF:</b> Função de validação sublinear (P_i ∝ S_i^0.85) com salvaguardas contra manipulação autodeclarada (Lei de Goodhart).</li>
+        <li><b>Oráculos Bayesianos Multimodais:</b> Reconciliação entre imagens orbitais e sensores terrestres com meta P ≥ 97.5% balanceando custos de erro falso-positivo.</li>
+        <li><b>Teoria dos Jogos & Hipóteses Falseáveis (H1–H5):</b> Análise paramétrica do VPL da conservação frente ao custo de oportunidade da terra e grilagem.</li>
+        <li><b>Smart Contract Solidity:</b> Arquitetura do contrato de custódia e máquina de estados de ativos (Issued, Active, Transferred, Suspended, Retired).</li>
       </ul>
       <p><a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/05_whitepaper_tecnico.md" target="_blank" class="btn btn-primary btn-sm">Abrir Documento Integral no GitHub</a></p>
     `
@@ -316,11 +323,17 @@ async function init() {
     if (e.target.id === 'cert-modal') closeCertModal();
   });
 
+  // Fechar modal de glossário ao clicar fora
+  document.getElementById('glossary-modal')?.addEventListener('click', (e) => {
+    if (e.target.id === 'glossary-modal') closeGlossaryModal();
+  });
+
   // Atalho Teclado ESC para fechar gavetas e modais
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeDocModal();
       closeCertModal();
+      closeGlossaryModal();
       const drawer = document.getElementById('wallet-drawer');
       if (drawer?.classList.contains('open')) toggleWalletDrawer();
     }
@@ -329,13 +342,25 @@ async function init() {
 
 // ─── Switch Tab Navigation ────────────────────────────────
 function switchTab(tabId) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected', 'false');
+  });
+  document.querySelectorAll('.tab-content').forEach(c => {
+    c.classList.remove('active');
+    c.setAttribute('aria-hidden', 'true');
+  });
 
   const btn = document.getElementById(`btn-tab-${tabId}`);
   const content = document.getElementById(`tab-${tabId}`);
-  if (btn) btn.classList.add('active');
-  if (content) content.classList.add('active');
+  if (btn) {
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+  }
+  if (content) {
+    content.classList.add('active');
+    content.setAttribute('aria-hidden', 'false');
+  }
 
   log(`Navegação: Módulo "${tabId.toUpperCase()}" ativado`, 'info');
 }
@@ -521,15 +546,11 @@ async function mineBlock() {
   modal.classList.remove('hidden');
 
   let pct = 0;
-  // BC-05: Seleção de validador ponderada por stake (PoE / Stake Ecológico)
-  const totalStake = nodes.reduce((s, n) => s + (n.stake || 1), 0);
-  let r = Math.random() * totalStake, cumulative = 0;
-  const selectedNode = nodes.find(n => {
-    cumulative += (n.stake || 1);
-    return r <= cumulative;
-  }) || nodes[0];
-  const validator = selectedNode.name;
-  status.textContent = `Validador: ${validator}`;
+  // Sorteio de validador via VRF sublinear (ϕ = 0.85) ancorado no hash anterior
+  const lastBlock = blockchain.getLatestBlock();
+  const vrfResult = blockchain.selectValidatorVRF(nodes, lastBlock.hash);
+  const validator = vrfResult.validator.name;
+  status.textContent = `Validador sorteado (VRF): ${validator}`;
 
   const progressInterval = setInterval(() => {
     pct = Math.min(pct + Math.random() * 10, 90);
@@ -538,13 +559,13 @@ async function mineBlock() {
 
   try {
     const block = await blockchain.mineBlock(validator, (nonce, hash) => {
-      hashEl.textContent = `Hash: 0x${hash.slice(0, 20)}...`;
-      status.textContent = `Nonce: ${nonce.toLocaleString('pt-BR')} · PoE Ativo`;
+      hashEl.textContent = `Hash: 0x${hash.slice(0, 16)}... | VRF: 0x${vrfResult.ticket.slice(0, 8)}...`;
+      status.textContent = `Nonce: ${nonce.toLocaleString('pt-BR')} · PoE Ativo (VRF p=${(vrfResult.probability * 100).toFixed(1)}%)`;
     });
 
     clearInterval(progressInterval);
     progress.style.width = '100%';
-    hashEl.textContent = `Hash: 0x${block.hash.slice(0, 20)}...`;
+    hashEl.textContent = `Hash: 0x${block.hash.slice(0, 16)}... | VRF: 0x${vrfResult.ticket.slice(0, 10)}...`;
 
     await sleep(500);
     modal.classList.add('hidden');
@@ -559,7 +580,7 @@ async function mineBlock() {
       setTimeout(() => openCertModalForBlock(block.index), 500);
     }
 
-    log(`⛏️ Bloco #${block.index} minerado por ${validator} · Score PoE: ${block.ecologicalScore}`, 'success');
+    log(`⛏️ Bloco #${block.index} minerado por ${validator} · Ticket VRF: ${vrfResult.ticket.slice(0, 10)}... (prob: ${(vrfResult.probability * 100).toFixed(1)}%, ϕ=0.85) · Score PoE: ${block.ecologicalScore}`, 'success');
     showToast(`⛏️ Bloco #${block.index} minerado com sucesso!`, 'success');
   } catch (e) {
     clearInterval(progressInterval);
@@ -592,21 +613,54 @@ function simulateTamper() {
   }
   const targetIdx = Math.floor(Math.random() * (blockchain.chain.length - 1)) + 1;
   const block = blockchain.chain[targetIdx];
+  let tamperedDesc = '';
+
   if (block.transactions.length) {
-    block.transactions[0].amount = 999999999;
-    // Atualiza Merkle root para tentar burlar a árvore, mas o SHA-256 do bloco detectará
+    const tx = block.transactions[0];
+    const fields = ['amount', 'destination', 'co2', 'origin'];
+    const chosenField = fields[Math.floor(Math.random() * fields.length)];
+    if (chosenField === 'amount') {
+      tx.amount = 999999999;
+      tamperedDesc = 'Adulteração em amount (999.999.999 GAIA)';
+    } else if (chosenField === 'destination') {
+      tx.destination = 'Hacker-Account-0xEVIL';
+      tamperedDesc = 'Adulteração de destino (Hacker-Account-0xEVIL)';
+    } else if (chosenField === 'co2') {
+      tx.co2 = 88888;
+      tamperedDesc = 'Adulteração de carbono (88.888 tCO₂)';
+    } else {
+      tx.origin = 'Fake-Reserve-0xFRAUD';
+      tamperedDesc = 'Adulteração de origem (Fake-Reserve-0xFRAUD)';
+    }
+    // O atacante tenta recalcular a raiz de Merkle do bloco para simular sofisticação
     block.merkleRoot = block._computeMerkleRoot();
   } else {
     block.validator = 'Invasor-0xDEAD';
+    tamperedDesc = 'Adulteração de validador (Invasor-0xDEAD)';
   }
-  // BC-01: Não alterar block.hash artificialmente!
-  // A validação criptográfica (recomputação de SHA-256) detectará a fraude genuinamente.
+
+  // A validação criptográfica (recomputação de SHA-256 e verificação de assinatura) detectará a fraude genuinamente.
   renderChain();
   const statusEl = document.getElementById('chain-status');
   statusEl.innerHTML = '<span class="dot red"></span> Bloco Modificado (Aguardando Validação)';
   document.getElementById(`block-${targetIdx}`)?.classList.add('tampered');
-  showToast(`⚠️ Dados adulterados no bloco #${targetIdx}. Clique em "Validar Cadeia" para testar a detecção criptográfica.`, 'warn');
-  log(`🔴 Adulteração não autorizada inserida no bloco #${targetIdx} (Clique em Validar Cadeia)`, 'warn');
+  showToast(`⚠️ ${tamperedDesc} no bloco #${targetIdx}. Clique em "Validar Cadeia" para acionar a detecção criptográfica.`, 'warn');
+  log(`🔴 Adulteração não autorizada inserida no bloco #${targetIdx}: ${tamperedDesc}`, 'warn');
+}
+
+// ─── Reset Chain ──────────────────────────────────────────
+async function resetChain() {
+  blockchain = new BioBlockchain();
+  if (blockchain.ready) await blockchain.ready;
+  await seedDemoData();
+  renderChain();
+  renderMempool();
+  updateStats();
+  document.querySelectorAll('.block-card').forEach(c => c.classList.remove('tampered'));
+  const statusEl = document.getElementById('chain-status');
+  if (statusEl) statusEl.innerHTML = '<span class="dot green"></span> Chain Válida';
+  showToast('🔄 Cadeia restaurada para o estado demonstrativo original!', 'info');
+  log('Blockchain reiniciada para estado demonstrativo original', 'info');
 }
 
 // ─── Export ───────────────────────────────────────────────
@@ -622,10 +676,17 @@ function exportChain() {
 }
 
 // ─── Stats & Metrics ──────────────────────────────────────
+// ─── Stats & Metrics ──────────────────────────────────────
 function updateStats() {
   document.getElementById('val-blocks').textContent = blockchain.chain.length;
   document.getElementById('val-tokens').textContent = blockchain.getTotalTokens().toLocaleString('pt-BR');
-  document.getElementById('val-co2').textContent = blockchain.getTotalCO2().toFixed(1) + ' tC';
+  document.getElementById('val-co2').textContent = blockchain.getTotalCO2().toFixed(1) + ' tCO₂e';
+
+  // Contador de Famílias Beneficiadas na cadeia (Seção 4)
+  const totalFamilias = blockchain.chain.reduce((sum, b) =>
+    sum + b.transactions.filter(t => t.type === 'renda').reduce((st, t) => st + (t.metadata?.familias || 0), 0), 0);
+  const elFam = document.getElementById('val-rbe-familias');
+  if (elFam) elFam.textContent = Math.max(12, totalFamilias).toLocaleString('pt-BR');
 
   const m = blockchain.getMetricsByType();
   document.getElementById('m-floresta').textContent = m.floresta.toLocaleString('pt-BR');
@@ -661,7 +722,7 @@ function renderBiomes() {
 
       <div class="biome-stats-grid">
         <div class="biome-stat-box">
-          <div class="biome-stat-lbl">Cobertura Florestal</div>
+          <div class="biome-stat-lbl">${b.canopyLbl || 'Cobertura Nativa'}</div>
           <div class="biome-stat-val" id="canopy-${b.id}">${b.canopy.toFixed(1)}%</div>
         </div>
         <div class="biome-stat-box">
@@ -688,7 +749,7 @@ function renderBiomes() {
 
 function simulateOracleTelemetry() {
   BIOMES_DATA.forEach(b => {
-    // Pequena flutuacao de telemetria realista
+    // Pequena flutuação de telemetria realista simulada
     b.moisture = Math.max(15, Math.min(95, Math.round(b.moisture + (Math.random() * 2 - 1))));
     const el = document.getElementById(`moisture-${b.id}`);
     if (el) el.textContent = b.moisture + '%';
@@ -700,13 +761,23 @@ const BASE_RBE = 810.50; // Piso legal: 50% do salário mínimo 2026 (R$ 1.621,0
 
 function computeRBE(bioma, area, families, iie) {
   const stressMultiplier = (window.BIOME_STRESS_FACTORS && window.BIOME_STRESS_FACTORS[bioma]) || 1.0;
-  // A parcela territorial é dividida equitativamente entre as famílias guardiãs (Art. 14)
-  const parcelaVariavelPorFamilia = families > 0 ? (area * stressMultiplier * iie) / families : 0;
+
+  // Valoração de Serviços Ecossistêmicos: R$ 12,50/ha·mês (~3.2 tCO2e/ha/ano a R$ 47/t + água/biodiversidade)
+  const taxaMensalPSA = 12.50;
+  const psaTerritorialTotal = area * taxaMensalPSA * stressMultiplier * iie;
+
+  // A parcela territorial de PSA é distribuída entre as famílias guardiãs homologadas (Art. 14)
+  const parcelaVariavelPorFamilia = families > 0 ? (psaTerritorialTotal / families) : 0;
   const valorPorFamilia = BASE_RBE + parcelaVariavelPorFamilia;
   const repasseTotalTerritorio = valorPorFamilia * families;
   const gaiaTokensEquiv = Math.round(valorPorFamilia / 6.0); // 1 GAIA ~ R$ 6,00 no modelo primário
   const co2Anual = Math.round(area * 3.2);
-  const additionalityPct = (70 + (iie * 20) + (area / 200)).toLocaleString('pt-BR', {
+
+  // Adicionalidade Contrafactual (Seção 1.3): Y0 (1.8% a.a. regional histórico) vs Y1 (desmate residual sob custódia)
+  const y0 = 0.018;
+  const y1 = Math.max(0, (1.0 - iie) * y0);
+  const haEvitadosAnual = +((y0 - y1) * area).toFixed(1);
+  const additionalityPct = (((y0 - y1) / y0) * 100).toLocaleString('pt-BR', {
     minimumFractionDigits: 1,
     maximumFractionDigits: 1
   });
@@ -714,11 +785,13 @@ function computeRBE(bioma, area, families, iie) {
   return {
     BASE_RBE,
     stressMultiplier,
+    psaTerritorialTotal,
     parcelaVariavelPorFamilia,
     valorPorFamilia,
     repasseTotalTerritorio,
     gaiaTokensEquiv,
     co2Anual,
+    haEvitadosAnual,
     additionalityPct
   };
 }
@@ -744,12 +817,12 @@ function calculateRBE() {
   const rbe = computeRBE(bioma, area, families, iie);
 
   document.getElementById('rbe-total-family').textContent = `R$ ${rbe.valorPorFamilia.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-  document.getElementById('rbe-gaia-equiv').textContent = `equiv. a ${rbe.gaiaTokensEquiv.toLocaleString('pt-BR')} GAIA Tokens / mês`;
+  document.getElementById('rbe-gaia-equiv').textContent = `equiv. a ${rbe.gaiaTokensEquiv.toLocaleString('pt-BR')} GAIA Tokens / mês (R$ ${BASE_RBE.toFixed(2)} piso + R$ ${rbe.parcelaVariavelPorFamilia.toFixed(2)} PSA)`;
   document.getElementById('rbe-territorio-total').textContent = `R$ ${rbe.repasseTotalTerritorio.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
   document.getElementById('rbe-co2-anual').textContent = `${rbe.co2Anual.toLocaleString('pt-BR')} tCO₂e`;
 
   const additionalityEl = document.getElementById('rbe-additionality-val');
-  if (additionalityEl) additionalityEl.textContent = `+${rbe.additionalityPct}% de retenção florestal vs. linha de base (estimativa ilustrativa)`;
+  if (additionalityEl) additionalityEl.textContent = `+${rbe.additionalityPct}% de retenção contrafactual (${rbe.haEvitadosAnual} ha/ano evitados vs. Y₀ = 1,8% a.a.)`;
 }
 
 function simulateRBEDeposit() {
@@ -776,15 +849,18 @@ function simulateRBEDeposit() {
       bioma,
       familias: families,
       canal: 'Pix-ContaSocial-Fase1',
+      pisoLegalBRL: `R$ ${BASE_RBE.toFixed(2)}`,
+      psaTerritorialBRL: `R$ ${rbe.psaTerritorialTotal.toFixed(2)}`,
       repasseTotalBRL: `R$ ${rbe.repasseTotalTerritorio.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`
     }
   });
 
   blockchain.addTransaction(tx);
   renderMempool();
+  updateStats();
   switchTab('dlt');
-  showToast(`✅ Lote RBE simulado enviado à mempool (Fase 1: Pix/Caixa)!`, 'success');
-  log(`Lote RBE gerado: ${families.toLocaleString('pt-BR')} famílias do bioma ${bioma} · Ordem de pagamento enviada (Fase 1: Pix / Conta Social)`, 'success');
+  showToast(`✅ Lote RBE simulado para ${families} famílias enviado à Mempool! Clique em "Minerar Bloco" para registrar on-chain.`, 'success');
+  log(`Lote RBE gerado: ${families.toLocaleString('pt-BR')} famílias do bioma ${bioma} (R$ ${rbe.repasseTotalTerritorio.toLocaleString('pt-BR', {minimumFractionDigits: 2})} total) · Enviado para mempool`, 'success');
 }
 
 // ─── Public Policy Reader Modal ───────────────────────────
@@ -834,9 +910,11 @@ function renderGovernance() {
     const total = p.yes + p.no;
     const yesPct = total ? Math.round((p.yes / total) * 100) : 50;
     const noPct = 100 - yesPct;
-    const userVotes = p.userVotes || 0;
-    const nextVoteCost = 2 * userVotes + 1;
-    const creditsSpent = userVotes * userVotes;
+    const uYes = p.userVotesYes || 0;
+    const uNo = p.userVotesNo || 0;
+    const nextCostYes = 2 * uYes + 1;
+    const nextCostNo = 2 * uNo + 1;
+    const creditsSpent = (uYes * uYes) + (uNo * uNo);
 
     return `
     <div class="gov-proposal" id="prop-${p.id}">
@@ -851,17 +929,27 @@ function renderGovernance() {
         <span>❌ Não: ${noPct}% (${p.no})</span>
       </div>
 
-      <!-- Controle de Votação Quadrática (v²) -->
-      <div class="quad-vote-control">
-        <div>
-          <span style="font-size: 11px; color: var(--text2);">Poder de Voz:</span>
-          <span class="quad-cost-badge">${userVotes} Voto${userVotes !== 1 ? 's' : ''} (${creditsSpent} cr)</span>
+      <!-- Controle de Votação Quadrática Bidirecional (v²) -->
+      <div class="quad-vote-control" style="flex-direction: column; gap: 8px; align-items: stretch;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 11px; color: var(--text2);">Seus Votos:</span>
+          <span class="quad-cost-badge">${uYes} Sim | ${uNo} Não (${creditsSpent} cr gastos)</span>
         </div>
-        <div style="display: flex; gap: 6px; align-items: center;">
-          <button class="quad-btn" onclick="voteQuadratic('${p.id}', -1)" ${userVotes <= 0 ? 'disabled style="opacity:0.4;cursor:not-allowed;"' : ''} title="Remover 1 voto">-</button>
-          <button class="btn btn-secondary btn-sm" onclick="voteQuadratic('${p.id}', 1)" title="Adicionar 1 voto (custo: ${nextVoteCost} cr)">
-            +1 Voto (${nextVoteCost} cr)
-          </button>
+        <div style="display: flex; justify-content: space-between; gap: 8px;">
+          <!-- Voto SIM -->
+          <div style="display: flex; gap: 4px; align-items: center;">
+            <button class="quad-btn" onclick="voteQuadratic('${p.id}', 'yes', -1)" ${uYes <= 0 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''} title="Remover 1 voto Sim" aria-label="Remover voto Sim">-</button>
+            <button class="btn btn-secondary btn-sm" onclick="voteQuadratic('${p.id}', 'yes', 1)" title="Adicionar 1 voto Sim (custo: ${nextCostYes} cr)" aria-label="Adicionar voto Sim">
+              +1 Sim (${nextCostYes} cr)
+            </button>
+          </div>
+          <!-- Voto NÃO -->
+          <div style="display: flex; gap: 4px; align-items: center;">
+            <button class="quad-btn" onclick="voteQuadratic('${p.id}', 'no', -1)" ${uNo <= 0 ? 'disabled style="opacity:0.35;cursor:not-allowed;"' : ''} title="Remover 1 voto Não" aria-label="Remover voto Não">-</button>
+            <button class="btn btn-ghost btn-sm" style="border: 1px solid rgba(239,68,68,0.4); color: #fca5a5;" onclick="voteQuadratic('${p.id}', 'no', 1)" title="Adicionar 1 voto Não (custo: ${nextCostNo} cr)" aria-label="Adicionar voto Não">
+              +1 Não (${nextCostNo} cr)
+            </button>
+          </div>
         </div>
       </div>
     </div>`;
@@ -936,8 +1024,11 @@ function syncMapWithCalculator() {
 // ─── BioWallet Drex ───────────────────────────────────────
 function toggleWalletDrawer() {
   const drawer = document.getElementById('wallet-drawer');
+  const pill = document.getElementById('wallet-pill');
   if (drawer) {
     drawer.classList.toggle('open');
+    const isOpen = drawer.classList.contains('open');
+    if (pill) pill.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   }
 }
 
@@ -1051,46 +1142,86 @@ function closeCertModal() {
 }
 
 // ─── Governança Quadrática ────────────────────────────────
-function voteQuadratic(proposalId, delta) {
+function voteQuadratic(proposalId, side, delta) {
   const p = PROPOSALS.find(item => item.id === proposalId);
   if (!p) return;
-  p.userVotes = p.userVotes || 0;
+  p.userVotesYes = p.userVotesYes || 0;
+  p.userVotesNo = p.userVotesNo || 0;
 
-  if (delta > 0) {
-    const cost = 2 * p.userVotes + 1;
-    if (voiceBudget < cost) {
-      showToast(`⚠️ Créditos de voz insuficientes! Custo: ${cost}, você tem: ${voiceBudget}`, 'warn');
-      return;
-    }
-    voiceBudget -= cost;
-    p.userVotes += 1;
-    p.yes += 1;
-
-    const tx = new BioTransaction({
-      type: 'governanca',
-      origin: WALLET_PROFILES[currentProfile]?.origin || nodes[0].name,
-      destination: 'DAO-BioChain-Brasil',
-      amount: 1,
-      metadata: {
-        proposta: p.id,
-        tipo: 'voto_quadratico_favoravel',
-        votos_acumulados: p.userVotes,
-        creditos_gastos: cost
+  if (side === 'yes') {
+    if (delta > 0) {
+      const cost = 2 * p.userVotesYes + 1;
+      if (voiceBudget < cost) {
+        showToast(`⚠️ Créditos de voz insuficientes! Custo: ${cost}, você tem: ${voiceBudget}`, 'warn');
+        return;
       }
-    });
-    blockchain.addTransaction(tx);
-    renderMempool();
-    showToast(`🗳️ Voto quadrático computado para "${p.title.slice(0, 25)}..."! Custo: ${cost} cr`, 'success');
-    log(`DAO Votação Quadrática: +1 voto em ${p.id} (Custo: ${cost} créditos)`, 'success');
-  } else if (delta < 0) {
-    if (p.userVotes <= 0) return;
-    const refund = 2 * p.userVotes - 1;
-    voiceBudget += refund;
-    p.userVotes -= 1;
-    p.yes = Math.max(0, p.yes - 1);
+      voiceBudget -= cost;
+      p.userVotesYes += 1;
+      p.yes += 1;
 
-    showToast(`↩️ Voto retirado. ${refund} créditos devolvidos ao seu orçamento de voz.`, 'info');
-    log(`DAO Votação Quadrática: -1 voto em ${p.id} (Reembolso: ${refund} créditos)`, 'info');
+      const tx = new BioTransaction({
+        type: 'governanca',
+        origin: WALLET_PROFILES[currentProfile]?.origin || nodes[0].name,
+        destination: 'DAO-BioChain-Brasil',
+        amount: 1,
+        metadata: {
+          proposta: p.id,
+          tipo: 'voto_quadratico_favoravel',
+          votos_acumulados: p.userVotesYes,
+          creditos_gastos: cost
+        }
+      });
+      blockchain.addTransaction(tx);
+      renderMempool();
+      showToast(`🗳️ +1 Voto Sim em "${p.title.slice(0, 25)}..."! Custo: ${cost} cr`, 'success');
+      log(`DAO Votação Quadrática: +1 Voto SIM em ${p.id} (Custo: ${cost} cr, total Sim: ${p.userVotesYes})`, 'success');
+    } else if (delta < 0) {
+      if (p.userVotesYes <= 0) return;
+      const refund = 2 * p.userVotesYes - 1;
+      voiceBudget += refund;
+      p.userVotesYes -= 1;
+      p.yes = Math.max(0, p.yes - 1);
+
+      showToast(`↩️ Voto Sim retirado. ${refund} créditos devolvidos.`, 'info');
+      log(`DAO Votação Quadrática: -1 Voto SIM em ${p.id} (Reembolso: ${refund} cr)`, 'info');
+    }
+  } else if (side === 'no') {
+    if (delta > 0) {
+      const cost = 2 * p.userVotesNo + 1;
+      if (voiceBudget < cost) {
+        showToast(`⚠️ Créditos de voz insuficientes! Custo: ${cost}, você tem: ${voiceBudget}`, 'warn');
+        return;
+      }
+      voiceBudget -= cost;
+      p.userVotesNo += 1;
+      p.no += 1;
+
+      const tx = new BioTransaction({
+        type: 'governanca',
+        origin: WALLET_PROFILES[currentProfile]?.origin || nodes[0].name,
+        destination: 'DAO-BioChain-Brasil',
+        amount: 1,
+        metadata: {
+          proposta: p.id,
+          tipo: 'voto_quadratico_contrario',
+          votos_acumulados: p.userVotesNo,
+          creditos_gastos: cost
+        }
+      });
+      blockchain.addTransaction(tx);
+      renderMempool();
+      showToast(`🗳️ +1 Voto Não em "${p.title.slice(0, 25)}..."! Custo: ${cost} cr`, 'success');
+      log(`DAO Votação Quadrática: +1 Voto NÃO em ${p.id} (Custo: ${cost} cr, total Não: ${p.userVotesNo})`, 'success');
+    } else if (delta < 0) {
+      if (p.userVotesNo <= 0) return;
+      const refund = 2 * p.userVotesNo - 1;
+      voiceBudget += refund;
+      p.userVotesNo -= 1;
+      p.no = Math.max(0, p.no - 1);
+
+      showToast(`↩️ Voto Não retirado. ${refund} créditos devolvidos.`, 'info');
+      log(`DAO Votação Quadrática: -1 Voto NÃO em ${p.id} (Reembolso: ${refund} cr)`, 'info');
+    }
   }
 
   renderGovernance();
@@ -1098,34 +1229,126 @@ function voteQuadratic(proposalId, delta) {
 
 // ─── Adversarial Red Team Stress Test ──────────────
 function runStressTest(scenarioKey) {
-  const scenarios = {
-    price_crash: {
-      msg: '🛡️ Teste de Estresse A: Preço do GAIA caiu 80%. Piso legal R$ 600 mantido via repasse RBE direto!',
-      logMsg: 'RED TEAM TEST A: Colapso de mercado simulado (-80%). Piso legal RBE sustentou a custódia territorial',
-      type: 'warn'
-    },
-    oracle_spoof: {
-      msg: '🛡️ Teste de Estresse B: Laudo falso detectado! Reconciliação bayesiana P(E|D) = 84.1% < 97.5%. Transação rejeitada!',
-      logMsg: 'RED TEAM TEST B: Inferência Bayesiana detectou adulteração oracular. Limiar θ* ≥ 97.5% ativado (Slashing aplicado)',
-      type: 'error'
-    },
-    collusion_30: {
-      msg: '🛡️ Teste de Estresse C: Colusão de 30% detectada. VRF sublinear (ϕ = 0.85) barrou proposição de blocos ilegítimos!',
-      logMsg: 'RED TEAM TEST C: 30% validadores coludidos. Algoritmo VRF sublinear e Slashing impediram cartel plutocrático',
-      type: 'success'
-    },
-    wildfire: {
-      msg: '🛡️ Teste de Estresse D: Evento climático extremo! Congelamento preventivo de ativos e acionamento do Fundo de Emergência.',
-      logMsg: 'RED TEAM TEST D: Incêndio no bioma. Máquina de estados marcou ativos afetados como Suspended e acionou apólice eco-climática',
-      type: 'warn'
+  const resultBox = document.getElementById('redteam-result-box');
+
+  if (scenarioKey === 'price_crash') {
+    const crashPrice = 1.20; // -80%
+    const tokensFamilia = 135;
+    const valorMercado = tokensFamilia * crashPrice;
+    const pisoLegal = 810.50;
+    const gapFiscal = pisoLegal - valorMercado;
+
+    if (resultBox) {
+      resultBox.className = 'redteam-result-box active';
+      resultBox.innerHTML = `
+        <div class="redteam-result-title" style="color: var(--gold);">
+          <span>🛡️</span> Cenário A: Queda de 80% na Cotação do GAIA — Backstop Ativado
+        </div>
+        <div class="redteam-result-body">
+          O preço de mercado secundário do GAIA caiu para <b>R$ 1,20</b>. A liquidação privada geraria apenas <b>R$ ${valorMercado.toLocaleString('pt-BR', {minimumFractionDigits:2})}/mês</b> por família.
+          O protocolo acionou automaticamente o <b>Fundo Nacional sobre Mudança do Clima (FNMC) / STN</b> como backstop soberano, cobrindo o gap fiscal de <b>R$ ${gapFiscal.toLocaleString('pt-BR', {minimumFractionDigits:2})}</b> por família guardiã e garantindo o piso legal de <b>R$ 810,50</b>.
+        </div>
+        <div class="redteam-result-metrics">
+          <div class="redteam-metric-item">Preço do GAIA: <div class="redteam-metric-val" style="color:var(--red);">R$ 1,20 (-80%)</div></div>
+          <div class="redteam-metric-item">Repasse Família: <div class="redteam-metric-val" style="color:var(--green);">R$ 810,50 (Piso Preservado)</div></div>
+          <div class="redteam-metric-item">Subsídio Backstop FNMC: <div class="redteam-metric-val" style="color:var(--gold);">R$ ${gapFiscal.toLocaleString('pt-BR', {minimumFractionDigits:2})}/fam</div></div>
+          <div class="redteam-metric-item">Taxa de Desmate: <div class="redteam-metric-val" style="color:var(--teal);">Inalterada (0,00%)</div></div>
+        </div>
+      `;
     }
-  };
+    showToast(`🛡️ Teste A: Preço do GAIA caiu 80%. Piso legal R$ 810,50 assegurado via Backstop FNMC/STN!`, 'warn');
+    log(`RED TEAM TEST A: Colapso de -80% mitigado. Gap fiscal de R$ ${gapFiscal.toFixed(2)}/família coberto pelo Tesouro/Fundo Clima.`, 'warn');
+  } 
+  else if (scenarioKey === 'oracle_spoof') {
+    const pPosterior = 84.1; // Reconciliação P(E|D)
+    const thetaStar = 97.5; // Limiar de perda assimétrica
+    // Aplica slashing de 20% no nó suspeito
+    const rogueNode = nodes.find(n => n.name.includes('Cerrado')) || nodes[1] || nodes[0];
+    const prevStake = rogueNode.stake || 2000;
+    rogueNode.stake = Math.round(prevStake * 0.80);
+    renderNodes();
 
-  const sc = scenarios[scenarioKey];
-  if (!sc) return;
+    if (resultBox) {
+      resultBox.className = 'redteam-result-box active';
+      resultBox.innerHTML = `
+        <div class="redteam-result-title" style="color: var(--red);">
+          <span>🚨</span> Cenário B: Tentativa de Fraude Oracular — Reconciliação Bayesiana & Slashing
+        </div>
+        <div class="redteam-result-body">
+          Um sensor IoT terrestre comprometido enviou telemetria de biomassa inflada em 300%. A reconciliação bayesiana multimodal com satélite CBERS-4A e laudo comunitário resultou em <b>P(E|D) = ${pPosterior}%</b>, abaixo do limiar ótimo de decisão <b>θ* ≥ ${thetaStar}%</b>.
+          A transação foi rejeitada em consenso e o nó <b>${rogueNode.name}</b> sofreu <b>Slashing contratual de 20%</b> do seu stake.
+        </div>
+        <div class="redteam-result-metrics">
+          <div class="redteam-metric-item">P(E|D) Reconciliado: <div class="redteam-metric-val" style="color:var(--red);">${pPosterior}% < ${thetaStar}%</div></div>
+          <div class="redteam-metric-item">Veredito do Consenso: <div class="redteam-metric-val" style="color:var(--red);">REJEITADO</div></div>
+          <div class="redteam-metric-item">Nó Penalizado: <div class="redteam-metric-val" style="color:var(--gold);">${rogueNode.name}</div></div>
+          <div class="redteam-metric-item">Slashing de Stake: <div class="redteam-metric-val" style="color:var(--red);">-20% (${prevStake} → ${rogueNode.stake})</div></div>
+        </div>
+      `;
+    }
+    showToast(`🚨 Teste B: Laudo fraudulento detectado! P(E|D)=${pPosterior}% < ${thetaStar}%. Slashing de 20% aplicado a ${rogueNode.name}!`, 'error');
+    log(`RED TEAM TEST B: Rejeição bayesiana (θ* ≥ 97,5%). Slashing de 20% aplicado ao nó ${rogueNode.name} (${prevStake} → ${rogueNode.stake}).`, 'error');
+  } 
+  else if (scenarioKey === 'collusion_30') {
+    const nominalPower = 30.0;
+    const effectivePower = 24.3; // Com dispersão institucional de nós federados e peso geográfico
+    const bftQuorum = 66.7;
 
-  showToast(sc.msg, sc.type);
-  log(sc.logMsg, sc.type === 'error' ? 'error' : (sc.type === 'warn' ? 'warn' : 'success'));
+    if (resultBox) {
+      resultBox.className = 'redteam-result-box active';
+      resultBox.innerHTML = `
+        <div class="redteam-result-title" style="color: var(--teal);">
+          <span>🛡️</span> Cenário C: Tentativa de Colusão de 30% — VRF Sublinear e Quórum BFT
+        </div>
+        <div class="redteam-result-body">
+          Um consórcio malicioso coordenou 30% dos nós validadores para tentar censurar queimas de tokens. Devido à <b>VRF sublinear (ϕ = 0,85)</b> combinada com o credenciamento geográfico descentralizado, a probabilidade efetiva de proposição caiu para <b>${effectivePower}%</b>.
+          Como a finalização BFT exige estritamente <b>2/3 dos votos válidos (≥ ${bftQuorum}%)</b>, nenhum bloco censurado atingiu quórum de commit. O ataque foi neutralizado sem necessidade de hard fork.
+        </div>
+        <div class="redteam-result-metrics">
+          <div class="redteam-metric-item">Poder Nominal do Cartel: <div class="redteam-metric-val" style="color:var(--red);">${nominalPower}%</div></div>
+          <div class="redteam-metric-item">Poder Efetivo VRF (ϕ=0.85): <div class="redteam-metric-val" style="color:var(--gold);">${effectivePower}%</div></div>
+          <div class="redteam-metric-item">Quórum BFT Exigido: <div class="redteam-metric-val" style="color:var(--green);">${bftQuorum}% (2/3)</div></div>
+          <div class="redteam-metric-item">Integridade da Rede: <div class="redteam-metric-val" style="color:var(--teal);">100% Preservada</div></div>
+        </div>
+      `;
+    }
+    showToast(`🛡️ Teste C: Cartel de 30% neutralizado! VRF sublinear e quórum BFT (66,7%) impediram blocos ilegítimos.`, 'success');
+    log(`RED TEAM TEST C: 30% de nós coludidos contidos pela VRF sublinear (ϕ = 0,85) e quórum BFT de 2/3.`, 'success');
+  } 
+  else if (scenarioKey === 'wildfire') {
+    if (resultBox) {
+      resultBox.className = 'redteam-result-box active';
+      resultBox.innerHTML = `
+        <div class="redteam-result-title" style="color: var(--gold);">
+          <span>🔥</span> Cenário D: Incêndio Florestal Catastrófico — Protocolo Eco-Emergencial
+        </div>
+        <div class="redteam-result-body">
+          O sistema de sensoriamento orbital (INPE BDQueimadas) detectou anomalia térmica crítica em 4.200 hectares sob custódia.
+          A máquina de estados dos tokens GAIA vinculados ao polígono transitou instantaneamente de <b>Active</b> para <b>Suspended</b>.
+          As famílias guardiãs <b>não sofreram penalização financeira</b> pelo choque fortuito: o <b>Fundo Emergencial Climático</b> foi disparado com repasse de auxílio-calamidade (+20%), e equipes brigadistas foram acionadas.
+        </div>
+        <div class="redteam-result-metrics">
+          <div class="redteam-metric-item">Área Afetada: <div class="redteam-metric-val" style="color:var(--red);">4.200 ha</div></div>
+          <div class="redteam-metric-item">Status dos Tokens: <div class="redteam-metric-val" style="color:var(--gold);">Suspended</div></div>
+          <div class="redteam-metric-item">Proteção às Famílias: <div class="redteam-metric-val" style="color:var(--green);">Garantida (Sem Corte RBE)</div></div>
+          <div class="redteam-metric-item">Fundo Emergencial: <div class="redteam-metric-val" style="color:var(--teal);">Acionado (+20% Ajuda)</div></div>
+        </div>
+      `;
+    }
+    showToast(`🔥 Teste D: Incêndio detectado! Ativos congelados como Suspended e Fundo Emergencial ativado sem corte de renda.`, 'warn');
+    log(`RED TEAM TEST D: Evento fortuito no bioma. Tokens em quarentena (Suspended) e auxílio-calamidade despachado.`, 'warn');
+  }
+}
+
+// ─── Glossário de Conceitos ───────────────────────────────
+function openGlossaryModal() {
+  const modal = document.getElementById('glossary-modal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeGlossaryModal() {
+  const modal = document.getElementById('glossary-modal');
+  if (modal) modal.classList.add('hidden');
 }
 
 // ─── Log & Toast ──────────────────────────────────────────
