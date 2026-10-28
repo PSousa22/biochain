@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BioChain — Decentralized Biocentric Technocracy & Public Policy Protocol</title>
+  <meta name="description" content="Infraestrutura pública descentralizada para custódia de ativos naturais, Proof-of-Ecology, Renda Básica Ecológica e governança ecológica no Brasil." />
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#090d0b',
+            surface: '#111915',
+            surfaceHover: '#18241e',
+            emeraldGlow: '#00F59B',
+            tealGlow: '#00E5FF',
+            goldGlow: '#F59E0B',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Estilos e Animações Web3 Otimizadas */
+    body {
+      background-color: #090d0b;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .mesh-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+      filter: blur(100px);
+      opacity: 0.35;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      will-change: transform;
+      animation: floatOrb 18s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 450px; height: 450px; background: #00f59b25; top: -100px; left: -100px; }
+    .orb-2 { width: 500px; height: 500px; background: #00e5ff20; bottom: -150px; right: -100px; animation-delay: -5s; }
+    .orb-3 { width: 350px; height: 350px; background: #10b98120; top: 40%; left: 45%; animation-delay: -10s; }
+    @keyframes floatOrb {
+      0% { transform: translate(0px, 0px) scale(1); }
+      50% { transform: translate(40px, 60px) scale(1.1); }
+      100% { transform: translate(-30px, -40px) scale(0.95); }
+    }
+
+    .glass-card {
+      background: rgba(17, 25, 21, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 245, 155, 0.12);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      border-radius: 1rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(0, 245, 155, 0.28);
+      box-shadow: 0 12px 40px 0 rgba(0, 245, 155, 0.08);
+    }
+
+    .btn-neon-primary {
+      background: linear-gradient(135deg, #00f59b 0%, #00bc70 100%);
+      color: #090d0b;
+      font-weight: 700;
+      box-shadow: 0 0 20px rgba(0, 245, 155, 0.35);
+      transition: all 0.25s ease;
+    }
+    .btn-neon-primary:hover {
+      box-shadow: 0 0 30px rgba(0, 245, 155, 0.6);
+      transform: translateY(-2px);
+    }
+    .btn-glass-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e2e8f0;
+      transition: all 0.25s ease;
+    }
+    .btn-glass-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(0, 245, 155, 0.4);
+      color: #00f59b;
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #090d0b; }
+    ::-webkit-scrollbar-thumb { background: #1f3528; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00f59b55; }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 8px rgba(0,245,155,0.8)); }
+      50% { opacity: 0.6; transform: scale(1.08); filter: drop-shadow(0 0 16px rgba(0,229,255,0.9)); }
+    }
+    .node-pulse { animation: pulseGlow 3s infinite ease-in-out; }
+
+    .biome-path {
+      cursor: pointer;
+      transition: fill 0.3s ease, filter 0.3s ease;
+      outline: none;
+    }
+    .biome-path:hover, .biome-path:focus-visible {
+      filter: brightness(1.25) drop-shadow(0 0 10px rgba(0,245,155,0.5));
+    }
+    .biome-path.active {
+      filter: brightness(1.4) drop-shadow(0 0 15px rgba(0,229,255,0.8));
+      stroke: #00e5ff;
+      stroke-width: 2.5px;
+    }
+
+    .modal-overlay {
+      background: rgba(5, 9, 7, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-emerald-500/30 selection:text-emerald-300">
+
+  <!-- Fundo Gradiente Dinâmico -->
+  <div class="mesh-bg" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Banner de Protótipo -->
+  <div class="bg-gradient-to-r from-emerald-950 via-teal-950 to-obsidian border-b border-emerald-500/20 py-2 px-4 text-center text-xs font-mono tracking-wider text-emerald-400 flex items-center justify-center gap-2" role="region" aria-label="Aviso do Protótipo">
+    <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping" aria-hidden="true"></span>
+    <span>⚡ WEB3 DECENTRALIZED TESTNET · PROTÓTIPO ACADÊMICO DE GOVERNANÇA BIOCÊNTRICA</span>
+  </div>
+
+  <!-- Navegação Principal -->
+  <header class="sticky top-0 z-40 bg-obsidian/80 backdrop-blur-xl border-b border-emerald-500/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
+      
+      <!-- Marca / Logótipo -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-obsidian text-xl font-black" aria-hidden="true">
+          🌿
+        </div>
+        <div>
+          <h1 class="font-bold text-lg tracking-tight bg-gradient-to-r from-white via-emerald-200 to-teal-400 bg-clip-text text-transparent">
+            BioChain <span class="text-xs font-mono font-normal text-emerald-400 ml-1 px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">v2.4-mainnet</span>
+          </h1>
+          <p class="text-xs text-slate-400 font-mono">Tecnocracia Biocêntrica · Protocolo Brasiliano</p>
+        </div>
+      </div>
+
+      <!-- Métricas Globais da Rede -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        <div class="glass-card px-3 py-1.5 rounded-lg flex items-center gap-2 text-xs font-mono">
+          <span class="text-slate-400">Blocos:</span>
+          <span class="text-emerald-400 font-bold" id="val-blocks">1</span>
+        </div>
+        <div class="glass-card px-3 py-1.5 rounded-lg flex items-center gap-2 text-xs font-mono">
+          <span class="text-slate-400">GAIA Tokens:</span>
+          <span class="text-teal-400 font-bold" id="val-tokens">0</span>
+        </div>
+        <div class="glass-card px-3 py-1.5 rounded-lg flex items-center gap-2 text-xs font-mono">
+          <span class="text-slate-400">CO₂e:</span>
+          <span class="text-emerald-300 font-bold" id="val-co2">0 tC</span>
+        </div>
+        <div class="glass-card px-3 py-1.5 rounded-lg flex items-center gap-2 text-xs font-mono">
+          <span class="text-slate-400">RBE Famílias:</span>
+          <span class="text-amber-400 font-bold" id="val-rbe-familias">0</span>
+        </div>
+
+        <!-- Carteira Web3 -->
+        <button onclick="toggleWalletDrawer()" aria-label="Abrir Carteira Web3" class="glass-card px-3.5 py-1.5 rounded-xl flex items-center gap-2.5 hover:border-emerald-500/50 transition-all cursor-pointer group focus:outline-none focus:ring-2 focus:ring-emerald-400">
+          <div class="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-xs" aria-hidden="true">🌿</div>
+          <div class="text-left font-mono">
+            <div class="text-[11px] font-bold text-slate-200 group-hover:text-emerald-400 transition-colors" id="wallet-name">Guardião Xingu</div>
+            <div class="text-[10px] text-emerald-400/90" id="wallet-balance">2.400 GAIA</div>
+          </div>
+          <span class="text-slate-400 text-[10px] ml-1" aria-hidden="true">▼</span>
+        </button>
+
+        <!-- Estado da Rede -->
+        <div class="glass-card px-3 py-1.5 rounded-lg flex items-center gap-2 text-xs font-mono text-emerald-400 border-emerald-500/30">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true"></span>
+          <span>Chain Válida</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de Separadores -->
+    <nav class="border-t border-emerald-500/10 bg-obsidian/60 px-4" aria-label="Navegação de Módulos">
+      <div class="max-w-7xl mx-auto flex overflow-x-auto gap-2 py-2 no-scrollbar">
+        <button onclick="switchTab('dlt')" id="btn-tab-dlt" class="tab-btn px-4 py-2 rounded-lg font-medium text-xs sm:text-sm flex items-center gap-2 transition-all whitespace-nowrap bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm shadow-emerald-500/10">
+          <span>⛓️</span> Simulador DLT (PoE)
+        </button>
+        <button onclick="switchTab('biomas')" id="btn-tab-biomas" class="tab-btn px-4 py-2 rounded-lg font-medium text-xs sm:text-sm flex items-center gap-2 transition-all whitespace-nowrap text-slate-400 hover:text-white hover:bg-white/5 border border-transparent">
+          <span>🗺️</span> 7 Biomas & Oráculos IA <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-300">Live Feed</span>
+        </button>
+        <button onclick="switchTab('rbe')" id="btn-tab-rbe" class="tab-btn px-4 py-2 rounded-lg font-medium text-xs sm:text-sm flex items-center gap-2 transition-all whitespace-nowrap text-slate-400 hover:text-white hover:bg-white/5 border border-transparent">
+          <span>💚</span> Calculadora RBE & CBDC
+        </button>
+        <button onclick="switchTab('causal')" id="btn-tab-causal" class="tab-btn px-4 py-2 rounded-lg font-medium text-xs sm:text-sm flex items-center gap-2 transition-all whitespace-nowrap text-slate-400 hover:text-white hover:bg-white/5 border border-transparent">
+          <span>🔬</span> Modelo Causal Integrado
+        </button>
+        <button onclick="switchTab('politica')" id="btn-tab-politica" class="tab-btn px-4 py-2 rounded-lg font-medium text-xs sm:text-sm flex items-center gap-2 transition-all whitespace-nowrap text-slate-400 hover:text-white hover:bg-white/5 border border-transparent">
+          <span>🏛️</span> Acervo de Estado <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300">5 Docs</span>
+        </button>
+        <button onclick="switchTab('narcisidio')" id="btn-tab-narcisidio" class="tab-btn px-4 py-2 rounded-lg font-medium text-xs sm:text-sm flex items-center gap-2 transition-all whitespace-nowrap text-slate-400 hover:text-white hover:bg-white/5 border border-transparent">
+          <span>⚖️</span> Balanço Anti-Narcisídio
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative py-12 px-4 overflow-hidden border-b border-emerald-500/10">
+    <div class="max-w-7xl mx-auto text-center relative z-10">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono mb-4">
+        <span>🛡️ Método Brasiliano</span>
+        <span>•</span>
+        <span>Consenso Proof-of-Ecology (PoE)</span>
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 text-white">
+        Arquitetura Tecnocrática de <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">Governança Ecológica</span>
+      </h2>
+      <p class="max-w-3xl mx-auto text-slate-400 text-sm sm:text-base leading-relaxed">
+        Plataforma descentralizada de custódia biofísica, verificação bayesiana por oráculos multimodais, emissão de ativos GAIA, liquidação via CBDC (Real Digital) e distribuição transparente da Renda Básica Ecológica.
+      </p>
+    </div>
+  </section>
+
+  <!-- Enquadramento Teórico Inicial -->
+  <section class="py-10 px-4 bg-obsidian/40 border-b border-emerald-500/10">
+    <div class="max-w-6xl mx-auto glass-card p-6 sm:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-2xl" aria-hidden="true">📖</span>
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-emerald-400 font-bold">Nota Explicativa Inicial</span>
+          <h3 class="text-xl font-bold text-white">O que é a BioChain e como usar este simulador</h3>
+        </div>
+      </div>
+      <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+        A BioChain propõe uma infraestrutura digital para unificar a ciência de dados ambientais, verificação criptográfica descentralizada e incentivos socioeconômicos diretos. A interface abaixo permite explorar simulações interativas de transações ecológicas, estados de biomas, cálculo de RBE e testes de estresse adversariais.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+        <div class="p-4 rounded-xl bg-surface border border-emerald-500/15">
+          <div class="text-emerald-400 font-bold mb-1">1. Simulação DLT</div>
+          <p class="text-slate-400">Insira transações na mempool, execute o Proof-of-Ecology e valide blocos na cadeia em tempo real.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-surface border border-teal-500/15">
+          <div class="text-teal-400 font-bold mb-1">2. 7 Biomas & Oráculos</div>
+          <p class="text-slate-400">Navegue pelo mapa vetorial e consulte métricas de integridade de ecossistemas brasileiros.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-surface border border-amber-500/15">
+          <div class="text-amber-400 font-bold mb-1">3. RBE & CBDC</div>
+          <p class="text-slate-400">Simule repasses financeiros de custódia vinculados ao Índice de Integridade Ecológica (IIE).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULO 1: SIMULADOR DLT (POECO) -->
+  <div id="tab-dlt" class="tab-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- Coluna Esquerda: Formitário & Mempool -->
+      <div class="lg:col-span-4 space-y-6">
+        
+        <!-- Formulário de Transações -->
+        <div class="glass-card p-6">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400" aria-hidden="true">⚡</div>
+            <h3 class="font-bold text-white text-base">Nova Transação Ecológica</h3>
+          </div>
+
+          <div class="space-y-4 text-sm">
+            <div>
+              <label for="tx-type" class="block text-xs font-mono text-slate-400 mb-1.5">Tipo de Ativo</label>
+              <select id="tx-type" class="w-full bg-surface border border-emerald-500/20 rounded-xl px-3.5 py-2.5 text-white font-mono text-xs focus:outline-none focus:border-emerald-400">
+                <option value="floresta">🌳 Crédito Florestal</option>
+                <option value="rio">🌊 Crédito Hídrico</option>
+                <option value="biodiversidade">🦋 Crédito de Biodiversidade</option>
+                <option value="carbono">💨 Crédito de Carbono</option>
+                <option value="solo">🌱 Crédito de Solo Saudável</option>
+                <option value="governanca">🗳️ Voto de Governança</option>
+                <option value="renda">💚 Renda Básica Ecológica (RBE)</option>
+                <option value="queima">🔥 Queima / Compensação GAIA</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="tx-origin" class="block text-xs font-mono text-slate-400 mb-1.5">Origem (Nó Guardian)</label>
+              <input type="text" id="tx-origin" class="w-full bg-surface border border-emerald-500/20 rounded-xl px-3.5 py-2.5 text-white font-mono text-xs focus:outline-none focus:border-emerald-400" value="Guardian-Amazônia-0x1A" />
+            </div>
+
+            <div>
+              <label for="tx-dest" class="block text-xs font-mono text-slate-400 mb-1.5">Destino (Nó ou Comunidade)</label>
+              <input type="text" id="tx-dest" class="w-full bg-surface border border-emerald-500/20 rounded-xl px-3.5 py-2.5 text-white font-mono text-xs focus:outline-none focus:border-emerald-400" value="Comunidade-Caiapó-0x2B" />
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label for="tx-amount" class="block text-xs font-mono text-slate-400 mb-1.5">Qtd (GAIA)</label>
+                <input type="number" id="tx-amount" min="1" max="10000" value="500" class="w-full bg-surface border border-emerald-500/20 rounded-xl px-3 py-2.5 text-white font-mono text-xs focus:outline-none focus:border-emerald-400" />
+              </div>
+              <div>
+                <label for="tx-area" class="block text-xs font-mono text-slate-400 mb-1.5">Área (ha)</label>
+                <input type="number" id="tx-area" min="0" step="0.1" value="120.5" class="w-full bg-surface border border-emerald-500/20 rounded-xl px-3 py-2.5 text-white font-mono text-xs focus:outline-none focus:border-emerald-400" />
+              </div>
+            </div>
+
+            <div>
+              <label for="tx-co2" class="block text-xs font-mono text-slate-400 mb-1.5">CO₂ Sequestrado (t)</label>
+              <input type="number" id="tx-co2" min="0" step="0.1" value="85.2" class="w-full bg-surface border border-emerald-500/20 rounded-xl px-3.5 py-2.5 text-white font-mono text-xs focus:outline-none focus:border-emerald-400" />
+            </div>
+
+            <button onclick="addPendingTransaction()" class="w-full btn-neon-primary py-3 rounded-xl flex items-center justify-center gap-2 text-sm mt-2 focus:outline-none focus:ring-2 focus:ring-emerald-400">
+              <span>➕</span> Adicionar à Mempool
+            </button>
+          </div>
+        </div>
+
+        <!-- Mempool -->
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2.5">
+              <span class="text-emerald-400" aria-hidden="true">🔄</span>
+              <h3 class="font-bold text-white text-base">Mempool</h3>
+            </div>
+            <span id="mempool-badge" class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-mono">0</span>
+          </div>
+
+          <div id="mempool-list" class="space-y-2 mb-4 max-h-48 overflow-y-auto pr-1">
+            <p class="text-slate-500 text-xs font-mono text-center py-6">Nenhuma transação pendente na mempool.</p>
+          </div>
+
+          <button id="btn-mine" onclick="mineBlock()" disabled class="w-full py-3 rounded-xl flex items-center justify-center gap-2 text-sm font-bold bg-surface border border-emerald-500/20 text-slate-400 cursor-not-allowed transition-all">
+            <span>⛏️</span> Validar Bloco (Proof-of-Ecology)
+          </button>
+          <p class="text-[11px] text-slate-500 font-mono mt-2 text-center">Consenso ponderado pelo Ecoscore do bioma.</p>
+        </div>
+
+        <!-- Federação de Nós -->
+        <div class="glass-card p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-teal-400" aria-hidden="true">🌐</span>
+            <h3 class="font-bold text-white text-base">Federação de Biomas</h3>
+          </div>
+          <div id="nodes-list" class="space-y-2.5 mb-4 max-h-40 overflow-y-auto"></div>
+          <button onclick="addRandomNode()" class="w-full btn-glass-secondary py-2.5 rounded-xl text-xs font-mono">+ Adicionar Sub-Nó Validador</button>
+        </div>
+
+      </div>
+
+      <!-- Coluna Central: Blockchain & Red Team -->
+      <div class="lg:col-span-8 space-y-6">
+        
+        <!-- Blockchain Visual -->
+        <div class="glass-card p-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-emerald-500/10 pb-4">
+            <h3 class="font-bold text-white text-lg flex items-center gap-2">
+              <span aria-hidden="true">🔗</span> Cadeia de Blocos Pública (Blockchain)
+            </h3>
+            <div class="flex flex-wrap items-center gap-2">
+              <button onclick="validateChain()" class="btn-glass-secondary px-3 py-1.5 rounded-lg text-xs font-mono">✅ Validar Cadeia</button>
+              <button onclick="exportChain()" class="btn-glass-secondary px-3 py-1.5 rounded-lg text-xs font-mono">📥 Exportar JSON</button>
+              <button onclick="simulateTamper()" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 transition-all">⚠️ Simular Ataque</button>
+            </div>
+          </div>
+
+          <div id="chain-container" class="space-y-4 max-h-[520px] overflow-y-auto pr-2">
+            <!-- Renderização dinâmica dos blocos -->
+          </div>
+        </div>
+
+        <!-- Painel Red Team -->
+        <div class="glass-card p-6 border-amber-500/20 bg-gradient-to-br from-surface to-amber-950/10">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2.5">
+              <span class="text-amber-400 text-lg" aria-hidden="true">🛡️</span>
+              <h3 class="font-bold text-white text-base">Red Team BioChain — Simulação de Estresse Adversarial</h3>
+            </div>
+            <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-xs font-mono">Resiliência Cripto-Ecológica</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+            Selecione um cenário de ataque ou choque sistémico para testar a robustez do protocolo BioChain contra falhas de oráculos, conluios de validadores ou choques climáticos:
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div tabindex="0" role="button" aria-label="Simular Queda do GAIA" onclick="runStressTest('price_crash')" onkeydown="if(event.key==='Enter'||event.key===' ') runStressTest('price_crash')" class="p-3.5 rounded-xl bg-surface border border-emerald-500/20 hover:border-emerald-400 cursor-pointer transition-all group focus:outline-none focus:ring-2 focus:ring-emerald-400">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-white group-hover:text-emerald-400">A: Queda de 80% no GAIA</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-red-500/20 text-red-400">Colapso Mercado</span>
+              </div>
+              <p class="text-[11px] text-slate-400">Verifica se o piso RBE protege a custódia familiar com colapso de liquidez.</p>
+            </div>
+
+            <div tabindex="0" role="button" aria-label="Simular Oráculo Spoofing" onclick="runStressTest('oracle_spoof')" onkeydown="if(event.key==='Enter'||event.key===' ') runStressTest('oracle_spoof')" class="p-3.5 rounded-xl bg-surface border border-emerald-500/20 hover:border-emerald-400 cursor-pointer transition-all group focus:outline-none focus:ring-2 focus:ring-emerald-400">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-white group-hover:text-emerald-400">B: Oráculo Spoofing</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Sensor Falso</span>
+              </div>
+              <p class="text-[11px] text-slate-400">Testa se o limiar bayesiano (θ* ≥ 97,5%) rejeita laudos adulterados.</p>
+            </div>
+
+            <div tabindex="0" role="button" aria-label="Simular Cartel de Validadores" onclick="runStressTest('collusion_30')" onkeydown="if(event.key==='Enter'||event.key===' ') runStressTest('collusion_30')" class="p-3.5 rounded-xl bg-surface border border-emerald-500/20 hover:border-emerald-400 cursor-pointer transition-all group focus:outline-none focus:ring-2 focus:ring-emerald-400">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-white group-hover:text-emerald-400">C: Cartel de Validadores (30%)</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Ataque Sybil</span>
+              </div>
+              <p class="text-[11px] text-slate-400">Avalia se a VRF sublinear (ϕ = 0,85) neutraliza a centralização.</p>
+            </div>
+
+            <div tabindex="0" role="button" aria-label="Simular Choque Climático" onclick="runStressTest('wildfire')" onkeydown="if(event.key==='Enter'||event.key===' ') runStressTest('wildfire')" class="p-3.5 rounded-xl bg-surface border border-emerald-500/20 hover:border-emerald-400 cursor-pointer transition-all group focus:outline-none focus:ring-2 focus:ring-emerald-400">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-white group-hover:text-emerald-400">D: Choque Climático (Incêndio)</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-red-500/20 text-red-400">Estresse Extremo</span>
+              </div>
+              <p class="text-[11px] text-slate-400">Acionamento do congelamento preventivo e fundo de emergência.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MÓDULO 2: BIOMAS & ORÁCULOS IA -->
+  <div id="tab-biomas" class="tab-content hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    <div class="space-y-6">
+      
+      <div class="glass-card p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span>🗺️</span> Rede Nacional de Oráculos Ambientais e Biomas Brasileiros
+          </h2>
+          <p class="text-xs text-slate-400 mt-1">
+            Fusão em tempo real de sensoriamento orbital (INPE/Sentinel), IoT terrestre e reconciliação bayesiana.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-xs">7 Domínios Ativos</span>
+          <span class="px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 font-mono text-xs">Bayesiano: θ* ≥ 97,5%</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Mapa SVG -->
+        <div class="lg:col-span-7 glass-card p-6 flex flex-col items-center justify-center relative min-h-[480px]">
+          <div class="absolute top-4 left-4 text-xs font-mono text-slate-400">Clique em um bioma para inspecionar os oráculos:</div>
+          
+          <div class="w-full max-w-md py-4">
+            <svg viewBox="0 0 600 600" id="brazil-map-svg" class="w-full h-auto drop-shadow-2xl" role="img" aria-label="Mapa Interativo dos Biomas do Brasil">
+              <defs>
+                <linearGradient id="g-amz" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#059669" stop-opacity="0.85" />
+                  <stop offset="100%" stop-color="#10b981" stop-opacity="0.95" />
+                </linearGradient>
+                <linearGradient id="g-cer" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#d97706" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.9" />
+                </linearGradient>
+                <linearGradient id="g-caa" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ea580c" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#fb923c" stop-opacity="0.9" />
+                </linearGradient>
+                <linearGradient id="g-mat" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#047857" stop-opacity="0.85" />
+                  <stop offset="100%" stop-color="#34d399" stop-opacity="0.95" />
+                </linearGradient>
+                <linearGradient id="g-pan" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0891b2" stop-opacity="0.85" />
+                  <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.95" />
+                </linearGradient>
+                <linearGradient id="g-pam" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#65a30d" stop-opacity="0.85" />
+                  <stop offset="100%" stop-color="#a3e635" stop-opacity="0.95" />
+                </linearGradient>
+                <linearGradient id="g-cos" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0284c7" stop-opacity="0.6" />
+                  <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.8" />
+                </linearGradient>
+              </defs>
+
+              <path tabindex="0" role="button" aria-label="Bioma Zona Costeira" class="biome-path" id="biome-svg-cos" d="M 520,130 Q 580,240 520,380 L 460,490 L 390,580 L 420,590 L 510,480 Q 610,330 550,140 Z" fill="url(#g-cos)" onclick="selectBiomeFromMap('cos')" onkeydown="if(event.key==='Enter'||event.key===' ') selectBiomeFromMap('cos')" />
+              <path tabindex="0" role="button" aria-label="Bioma Amazônia" class="biome-path active" id="biome-svg-amz" d="M 50,180 Q 90,70 210,50 Q 310,45 370,110 L 390,180 L 310,230 L 230,290 L 110,270 Z" fill="url(#g-amz)" onclick="selectBiomeFromMap('amz')" onkeydown="if(event.key==='Enter'||event.key===' ') selectBiomeFromMap('amz')" />
+              <path tabindex="0" role="button" aria-label="Bioma Cerrado" class="biome-path" id="biome-svg-cer" d="M 230,290 L 310,230 L 390,180 L 420,210 L 410,340 L 330,390 L 250,380 L 225,330 Z" fill="url(#g-cer)" onclick="selectBiomeFromMap('cer')" onkeydown="if(event.key==='Enter'||event.key===' ') selectBiomeFromMap('cer')" />
+              <path tabindex="0" role="button" aria-label="Bioma Caatinga" class="biome-path" id="biome-svg-caa" d="M 390,180 Q 470,120 530,155 L 535,225 L 455,265 L 420,210 Z" fill="url(#g-caa)" onclick="selectBiomeFromMap('caa')" onkeydown="if(event.key==='Enter'||event.key===' ') selectBiomeFromMap('caa')" />
+              <path tabindex="0" role="button" aria-label="Bioma Mata Atlântica" class="biome-path" id="biome-svg-mat" d="M 455,265 L 535,225 Q 515,310 475,390 L 415,480 L 365,460 L 410,340 Z" fill="url(#g-mat)" onclick="selectBiomeFromMap('mat')" onkeydown="if(event.key==='Enter'||event.key===' ') selectBiomeFromMap('mat')" />
+              <path tabindex="0" role="button" aria-label="Bioma Pantanal" class="biome-path" id="biome-svg-pan" d="M 195,335 L 245,315 L 255,385 L 205,395 Z" fill="url(#g-pan)" onclick="selectBiomeFromMap('pan')" onkeydown="if(event.key==='Enter'||event.key===' ') selectBiomeFromMap('pan')" />
+              <path tabindex="0" role="button" aria-label="Bioma Pampa" class="biome-path" id="biome-svg-pam" d="M 335,485 L 415,480 L 390,575 L 320,565 Z" fill="url(#g-pam)" onclick="selectBiomeFromMap('pam')" onkeydown="if(event.key==='Enter'||event.key===' ') selectBiomeFromMap('pam')" />
+
+              <!-- Marcadores de Nós Guardiões -->
+              <g class="cursor-pointer" onclick="selectBiomeFromMap('amz')">
+                <circle cx="210" cy="150" r="12" fill="#10b981" class="node-pulse opacity-70" />
+                <circle cx="210" cy="150" r="5" fill="#fff" stroke="#059669" stroke-width="2" />
+              </g>
+              <g class="cursor-pointer" onclick="selectBiomeFromMap('cer')">
+                <circle cx="315" cy="295" r="12" fill="#f59e0b" class="node-pulse opacity-70" />
+                <circle cx="315" cy="295" r="5" fill="#fff" stroke="#d97706" stroke-width="2" />
+              </g>
+              <g class="cursor-pointer" onclick="selectBiomeFromMap('caa')">
+                <circle cx="455" cy="195" r="12" fill="#ea580c" class="node-pulse opacity-70" />
+                <circle cx="455" cy="195" r="5" fill="#fff" stroke="#c2410c" stroke-width="2" />
+              </g>
+              <g class="cursor-pointer" onclick="selectBiomeFromMap('mat')">
+                <circle cx="440" cy="390" r="12" fill="#34d399" class="node-pulse opacity-70" />
+                <circle cx="440" cy="390" r="5" fill="#fff" stroke="#047857" stroke-width="2" />
+              </g>
+            </svg>
+          </div>
+          <div class="text-[11px] font-mono text-slate-500 text-center mt-2">Projeção Vetorial Interativa BioChain GIS 3D</div>
+        </div>
+
+        <!-- Inspetor de Biomas -->
+        <div class="lg:col-span-5 glass-card p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div id="map-info-icon" class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center text-xl" aria-hidden="true">🌳</div>
+              <div>
+                <h3 id="map-info-name" class="font-bold text-white text-lg">Bioma Amazônia</h3>
+                <span class="text-xs font-mono text-emerald-400" id="map-info-oracle">Oráculo: INPE-DETER-AMZ-01</span>
+              </div>
+            </div>
+
+            <p id="map-info-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+              Maior floresta tropical contínua da Terra, abrangendo 4,1 milhões de km² em território brasileiro. Regulador primordial de rios voadores e sequestro ativo de carbono.
+            </p>
+
+            <div class="grid grid-cols-2 gap-3 mb-6">
+              <div class="p-3 rounded-xl bg-surface border border-emerald-500/15 font-mono">
+                <div class="text-[10px] text-slate-400">Multiplicador PoE</div>
+                <div id="map-info-stress" class="text-base font-bold text-emerald-400 mt-1">1.20x</div>
+              </div>
+              <div class="p-3 rounded-xl bg-surface border border-emerald-500/15 font-mono">
+                <div class="text-[10px] text-slate-400">Cobertura Canópica</div>
+                <div id="map-info-canopy" class="text-base font-bold text-teal-400 mt-1">86.4%</div>
+              </div>
+              <div class="p-3 rounded-xl bg-surface border border-emerald-500/15 font-mono">
+                <div class="text-[10px] text-slate-400">Reconciliação Bayesiana</div>
+                <div class="text-base font-bold text-amber-400 mt-1">98.9%</div>
+              </div>
+              <div class="p-3 rounded-xl bg-surface border border-emerald-500/15 font-mono">
+                <div class="text-[10px] text-slate-400">Higidez Hídrica</div>
+                <div id="map-info-water" class="text-base font-bold text-cyan-400 mt-1">78%</div>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="syncMapWithCalculator()" class="w-full btn-neon-primary py-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-emerald-400">
+            <span>💚</span> Sincronizar Bioma com Calculadora RBE
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Grade dos Biomas -->
+      <div id="biomes-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MÓDULO 3: CALCULADORA RBE & CBDC -->
+  <div id="tab-rbe" class="tab-content hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    <div class="glass-card p-6 sm:p-8">
+      <div class="mb-6 pb-4 border-b border-emerald-500/10">
+        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+          <span>💚</span> Simulador do Programa Nacional de Renda Básica Ecológica (RBE)
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">
+          Cálculo paramétrico de custódia socioambiental com liquidação instantânea em CBDC (Real Digital).
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Controlos -->
+        <div class="lg:col-span-7 space-y-6">
+          <div>
+            <label for="rbe-bioma" class="block text-xs font-mono text-slate-400 mb-2">Bioma sob Custódia</label>
+            <select id="rbe-bioma" onchange="calculateRBE()" class="w-full bg-surface border border-emerald-500/20 rounded-xl px-4 py-3 text-white font-mono text-xs sm:text-sm focus:outline-none focus:border-emerald-400">
+              <option value="Pantanal">Pantanal (Fator de Estresse: 1.35x)</option>
+              <option value="Mata Atlântica">Mata Atlântica (Fator de Estresse: 1.40x)</option>
+              <option value="Cerrado">Cerrado (Fator de Estresse: 1.25x)</option>
+              <option value="Amazônia" selected>Amazônia (Fator de Estresse: 1.20x)</option>
+              <option value="Caatinga">Caatinga (Fator de Estresse: 1.30x)</option>
+              <option value="Pampa">Pampa (Fator de Estresse: 1.15x)</option>
+              <option value="Zona Costeira e Marinha">Zona Costeira e Marinha (Fator: 1.25x)</option>
+            </select>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-mono mb-2">
+              <label for="rbe-area-slider" class="text-slate-400">Área Preservada Auditada</label>
+              <span id="rbe-area-val" class="text-emerald-400 font-bold">150 ha</span>
+            </div>
+            <input type="range" id="rbe-area-slider" min="10" max="2000" step="10" value="150" oninput="calculateRBE()" class="w-full accent-emerald-400 cursor-pointer" />
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-mono mb-2">
+              <label for="rbe-families-slider" class="text-slate-400">Famílias Guardiãs no Território</label>
+              <span id="rbe-families-val" class="text-teal-400 font-bold">12 famílias</span>
+            </div>
+            <input type="range" id="rbe-families-slider" min="1" max="100" step="1" value="12" oninput="calculateRBE()" class="w-full accent-teal-400 cursor-pointer" />
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-mono mb-2">
+              <label for="rbe-iie-slider" class="text-slate-400">Índice de Integridade Ecológica (IIE)</label>
+              <span id="rbe-iie-val" class="text-amber-400 font-bold">94%</span>
+            </div>
+            <input type="range" id="rbe-iie-slider" min="50" max="100" step="1" value="94" oninput="calculateRBE()" class="w-full accent-amber-400 cursor-pointer" />
+          </div>
+
+          <div class="p-4 rounded-xl bg-surface border border-emerald-500/15 text-xs text-slate-400 font-mono leading-relaxed">
+            💡 <strong class="text-emerald-400">Fórmula Legal (Anteprojeto Art. 14):</strong> RBE = Piso Fixo + (Área × Fator Bioma × IIE) ÷ Famílias.
+          </div>
+        </div>
+
+        <!-- Resultados -->
+        <div class="lg:col-span-5 flex flex-col justify-between bg-surface p-6 rounded-2xl border border-emerald-500/20">
+          <div>
+            <div class="text-center pb-6 border-b border-emerald-500/10 mb-6">
+              <span class="text-[11px] font-mono text-slate-400 uppercase tracking-widest">RBE Mensal por Família</span>
+              <div id="rbe-total-family" class="text-3xl sm:text-4xl font-extrabold text-emerald-400 font-mono my-2">R$ 3.840</div>
+              <div id="rbe-gaia-equiv" class="text-xs font-mono text-teal-300">Equivalente a 640 GAIA tokens</div>
+            </div>
+
+            <div class="space-y-3 font-mono text-xs mb-6">
+              <div class="flex justify-between py-1.5 border-b border-white/5">
+                <span class="text-slate-400">Repasse Mensal Território:</span>
+                <span id="rbe-territorio-total" class="text-white font-bold">R$ 46.080</span>
+              </div>
+              <div class="flex justify-between py-1.5 border-b border-white/5">
+                <span class="text-slate-400">CO₂e Sequestrado Anual:</span>
+                <span id="rbe-co2-anual" class="text-emerald-300 font-bold">2.450 tC</span>
+              </div>
+              <div class="flex justify-between py-1.5">
+                <span class="text-slate-400">Adicionalidade (Y1 - Y0):</span>
+                <span id="rbe-additionality-val" class="text-teal-400 font-bold">+18.2%</span>
+              </div>
+            </div>
+
+            <!-- Recibo DREX CBDC -->
+            <div class="p-3.5 rounded-xl bg-obsidian border border-teal-500/30 text-[11px] font-mono space-y-1 mb-6 text-slate-300">
+              <div class="text-teal-400 font-bold flex justify-between">
+                <span>CBDC RETAIL SETTLEMENT</span>
+                <span>● DREX L2</span>
+              </div>
+              <div>Trilho: Pix / Caixa Econômica (Fase 1) & Smart Contract DREX (Fase 2)</div>
+              <div class="text-emerald-400">Taxa de Intermediação: R$ 0,00 (Zero Pedágio)</div>
+            </div>
+          </div>
+
+          <button onclick="simulateRBEDeposit()" class="w-full btn-neon-primary py-3.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-emerald-400">
+            <span>🚀</span> Simular Emissão de Lote RBE On-Chain
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 4: MODELO CAUSAL INTEGRADO -->
+  <div id="tab-causal" class="tab-content hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    <div class="space-y-6">
+      <div class="glass-card p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span>🔬</span> Modelo Causal Integrado em 7 Camadas
+          </h2>
+          <p class="text-xs text-slate-400 mt-1">
+            Do estado biofísico verificável à conservação econômica incentivada.
+          </p>
+        </div>
+        <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-xs">Arquitetura Científica</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="glass-card p-5 border-l-4 border-l-emerald-400">
+          <div class="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider mb-1">Camada 1 · Entrada</div>
+          <h3 class="font-bold text-white text-base mb-2">Estado Biofísico</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Massa vegetal, carbono orgânico, higidez hídrica e biodiversidade como variáveis de estado ecológico (World W).</p>
+          <div class="mt-4 text-[10px] font-mono text-slate-500">Fonte: IBGE / INPE / MapBiomas</div>
+        </div>
+
+        <div class="glass-card p-5 border-l-4 border-l-teal-400">
+          <div class="text-[10px] font-mono text-teal-400 font-bold uppercase tracking-wider mb-1">Camada 2 · Aquisição</div>
+          <h3 class="font-bold text-white text-base mb-2">Mensuração Multimodal</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Sensoriamento INPE/CBERS, IoT terrestre, laudos comunitários e reconciliação bayesiana.</p>
+          <div class="mt-4 text-[10px] font-mono text-slate-500">SERPRO / ANA / EMBRAPA</div>
+        </div>
+
+        <div class="glass-card p-5 border-l-4 border-l-amber-400">
+          <div class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-wider mb-1">Camada 3 · Inferência</div>
+          <h3 class="font-bold text-white text-base mb-2">Oráculo IA Bayesiano</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Inferência probabilística com limiar θ* ≥ 97,5% derivado de função de perda assimétrica.</p>
+          <div class="mt-4 text-[10px] font-mono text-slate-500">GAIA Oracle Network</div>
+        </div>
+
+        <div class="glass-card p-5 border-l-4 border-l-purple-400">
+          <div class="text-[10px] font-mono text-purple-400 font-bold uppercase tracking-wider mb-1">Camada 4 · Consenso</div>
+          <h3 class="font-bold text-white text-base mb-2">Proof-of-Ecology (PoE)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Seleção de validadores via VRF sublinear ponderada pelo Ecoscore (ϕ = 0,85) contra cartéis.</p>
+          <div class="mt-4 text-[10px] font-mono text-slate-500">BioBFT / EcoSort Protocol</div>
+        </div>
+
+        <div class="glass-card p-5 border-l-4 border-l-orange-400">
+          <div class="text-[10px] font-mono text-orange-400 font-bold uppercase tracking-wider mb-1">Camada 5 · Ativo</div>
+          <h3 class="font-bold text-white text-base mb-2">Token GAIA</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">GAIA = f(Carbono, Biodiversidade, Água, Solo, Território, Custódia) com ciclo de vida auditável.</p>
+          <div class="mt-4 text-[10px] font-mono text-slate-500">Lei Federal 14.119/2021</div>
+        </div>
+
+        <div class="glass-card p-5 border-l-4 border-l-emerald-400">
+          <div class="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider mb-1">Camada 6 · Redistribuição</div>
+          <h3 class="font-bold text-white text-base mb-2">Renda Básica Ecológica</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Repasse financeiro mensal direto às famílias guardiãs via trilhos de CBDC de varejo.</p>
+          <div class="mt-4 text-[10px] font-mono text-slate-500">STN / Banco Central do Brasil</div>
+        </div>
+
+        <div class="glass-card p-5 border-l-4 border-l-teal-400 lg:col-span-2">
+          <div class="text-[10px] font-mono text-teal-400 font-bold uppercase tracking-wider mb-1">Camada 7 · Resultado</div>
+          <h3 class="font-bold text-white text-base mb-2">Conservação Verificável & Adicionalidade</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Avaliação contrafactual ($Y_1 - Y_0$) mensurando a retenção florestal real frente à linha de base. Fecha o ciclo perpétuo: Custódia → Natureza → Custódia.</p>
+          <div class="mt-4 text-[10px] font-mono text-slate-500">INPE-DETER / MapBiomas Alert</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 5: ACERVO DE POLÍTICA PÚBLICA -->
+  <div id="tab-politica" class="tab-content hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    <div class="space-y-6">
+      <div class="glass-card p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span>🏛️</span> Acervo de Política Pública de Estado
+          </h2>
+          <p class="text-xs text-slate-400 mt-1">
+            Documentação legislativa, regulatória e técnica submetida para transformar a BioChain em política pública nacional.
+          </p>
+        </div>
+        <a href="https://github.com/PSousa22/biochain/tree/main/politica-publica" target="_blank" class="btn-glass-secondary px-4 py-2 rounded-xl text-xs font-mono flex items-center gap-2">
+          <span>🐙</span> Ver Acervo no GitHub
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass-card p-6 flex flex-col justify-between">
+          <div>
+            <span class="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold">Proposta Mestra</span>
+            <h3 class="font-bold text-white text-lg mt-3 mb-2">01. Diretriz Geral Decenal (2026–2030)</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">Plano de 10 capítulos com fundamentação no Método Brasiliano, superação do narcisídio social e modelo econômico GAIA.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="openDocModal('01')" class="flex-1 btn-neon-primary py-2.5 rounded-xl text-xs font-bold">Ler Online</button>
+            <a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/01_politica_publica_diretriz.md" target="_blank" class="btn-glass-secondary px-3 py-2.5 rounded-xl text-xs font-mono">GitHub</a>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col justify-between">
+          <div>
+            <span class="px-2.5 py-1 rounded-md bg-teal-500/20 text-teal-300 font-mono text-[10px] font-bold">Briefing Executivo</span>
+            <h3 class="font-bold text-white text-lg mt-3 mb-2">02. One-Pager para Decisores</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">Síntese estratégica para ministros e parlamentares com 4 pilares, impacto fiscal neutro e cronograma de 60 dias.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="openDocModal('02')" class="flex-1 btn-neon-primary py-2.5 rounded-xl text-xs font-bold">Ler Online</button>
+            <a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/02_one_pager_executivo.md" target="_blank" class="btn-glass-secondary px-3 py-2.5 rounded-xl text-xs font-mono">GitHub</a>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col justify-between">
+          <div>
+            <span class="px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-300 font-mono text-[10px] font-bold">Pitch Deck</span>
+            <h3 class="font-bold text-white text-lg mt-3 mb-2">03. Apresentação Institucional (13 Slides)</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">Lâminas executivas formatadas com notas para o orador para reuniões de cúpula ministerial e audiências no Congresso.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="openDocModal('03')" class="flex-1 btn-neon-primary py-2.5 rounded-xl text-xs font-bold">Ler Online</button>
+            <a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/03_pitch_deck_institucional.md" target="_blank" class="btn-glass-secondary px-3 py-2.5 rounded-xl text-xs font-mono">GitHub</a>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col justify-between">
+          <div>
+            <span class="px-2.5 py-1 rounded-md bg-purple-500/20 text-purple-300 font-mono text-[10px] font-bold">Texto Legislativo</span>
+            <h3 class="font-bold text-white text-lg mt-3 mb-2">04. Anteprojeto de Lei</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">Minuta redigida nos padrões da LC nº 95/1998 que institui a infraestrutura BioChain, o consenso PoE e o ativo GAIA.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="openDocModal('04')" class="flex-1 btn-neon-primary py-2.5 rounded-xl text-xs font-bold">Ler Online</button>
+            <a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/04_anteprojeto_de_lei.md" target="_blank" class="btn-glass-secondary px-3 py-2.5 rounded-xl text-xs font-mono">GitHub</a>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 flex flex-col justify-between">
+          <div>
+            <span class="px-2.5 py-1 rounded-md bg-cyan-500/20 text-cyan-300 font-mono text-[10px] font-bold">White Paper Técnico</span>
+            <h3 class="font-bold text-white text-lg mt-3 mb-2">05. Especificação Técnica</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-6">Matemática formal do Proof-of-Ecology, oráculos bayesianos, teoria dos jogos e smart contract Solidity da RBE.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="openDocModal('05')" class="flex-1 btn-neon-primary py-2.5 rounded-xl text-xs font-bold">Ler Online</button>
+            <a href="https://github.com/PSousa22/biochain/blob/main/politica-publica/05_whitepaper_tecnico.md" target="_blank" class="btn-glass-secondary px-3 py-2.5 rounded-xl text-xs font-mono">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 6: BALANÇO ANTI-NARCISÍDIO -->
+  <div id="tab-narcisidio" class="tab-content hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    <div class="glass-card p-6 sm:p-8">
+      <div class="mb-6 pb-4 border-b border-emerald-500/10">
+        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+          <span>⚖️</span> Rompendo o Narcisídio Social: A Matemática da Transição
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">
+          Análise comparativa de teoria econômica entre extração predatória e custódia biocêntrica.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+        <div class="p-6 rounded-2xl bg-surface border border-red-500/20">
+          <div class="text-red-400 font-bold mb-2 font-mono">❌ Paradigma Extrativista Tradicional</div>
+          <p class="text-slate-300 leading-relaxed text-xs sm:text-sm mb-4">
+            Trata os ecossistemas como externalidades gratuitas e passivos de esgotamento. O PIB contabiliza o lucro imediato da derrubada, ignorando a degradação dos rios voadores e a perda de resiliência climática.
+          </p>
+          <ul class="text-xs text-slate-400 space-y-2 font-mono">
+            <li>• Externalização de custos ambientais</li>
+            <li>• Ciclo de curto prazo e colapso sistémico</li>
+            <li>• Desigualdade distributiva regional</li>
+          </ul>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-surface border border-emerald-500/20">
+          <div class="text-emerald-400 font-bold mb-2 font-mono">✅ Paradigma BioChain (Tecnocracia Biocêntrica)</div>
+          <p class="text-slate-300 leading-relaxed text-xs sm:text-sm mb-4">
+            Internaliza o valor dos serviços ecossistêmicos em ativos criptográficos auditáveis (GAIA) e remunera diretamente as comunidades guardiãs via RBE.
+          </p>
+          <ul class="text-xs text-slate-400 space-y-2 font-mono">
+            <li>• Custódia ativa e verificável</li>
+            <li>• Renda básica garantida por preservação</li>
+            <li>• Alinhamento entre soberania fiscal e ecológica</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal da Carteira Web3 -->
+  <div id="wallet-drawer" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-overlay" role="dialog" aria-modal="true" aria-labelledby="wallet-modal-title">
+    <div class="glass-card max-w-md w-full p-6 relative border-emerald-500/30">
+      <button onclick="toggleWalletDrawer()" aria-label="Fechar Carteira" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg font-mono">✕</button>
+      
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-obsidian text-2xl font-black shadow-lg" aria-hidden="true">🌿</div>
+        <div>
+          <h3 id="wallet-modal-title" class="font-bold text-white text-base">BioWallet Guardião</h3>
+          <p class="text-xs font-mono text-emerald-400">Mainnet · ID: 0x9f4c...3e1a</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 mb-6 text-xs font-mono">
+        <div class="p-4 rounded-xl bg-surface border border-emerald-500/20 flex justify-between items-center">
+          <span class="text-slate-400">Saldo GAIA Tokens:</span>
+          <span class="text-emerald-400 font-bold text-base">2.400 GAIA</span>
+        </div>
+        <div class="p-4 rounded-xl bg-surface border border-teal-500/20 flex justify-between items-center">
+          <span class="text-slate-400">Saldo Real Digital (DREX):</span>
+          <span class="text-teal-300 font-bold text-base">R$ 14.400,00</span>
+        </div>
+        <div class="p-4 rounded-xl bg-surface border border-slate-700 flex justify-between items-center">
+          <span class="text-slate-400">Área Sob Custódia:</span>
+          <span class="text-white font-bold">150.0 ha (Amazônia)</span>
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <button onclick="toggleWalletDrawer(); showNotification('Transação de saque CBDC iniciada com sucesso!', 'success')" class="flex-1 btn-neon-primary py-3 rounded-xl text-xs font-bold">Sacar via CBDC</button>
+        <button onclick="toggleWalletDrawer()" class="flex-1 btn-glass-secondary py-3 rounded-xl text-xs font-mono">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal do Leitor de Documentos -->
+  <div id="doc-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-overlay" role="dialog" aria-modal="true" aria-labelledby="doc-modal-title">
+    <div class="glass-card max-w-3xl w-full max-h-[85vh] flex flex-col p-6 relative border-emerald-500/30">
+      <div class="flex items-center justify-between pb-4 border-b border-emerald-500/10 mb-4">
+        <h3 id="doc-modal-title" class="font-bold text-white text-base">Documento Oficial BioChain</h3>
+        <button onclick="closeDocModal()" aria-label="Fechar Leitor" class="text-slate-400 hover:text-white text-lg font-mono">✕</button>
+      </div>
+      <div id="doc-modal-content" class="overflow-y-auto pr-2 space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+        <!-- Injeção via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Contentor das Notificações Toast -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 space-y-2 pointer-events-none"></div>
+
+  <!-- Rodapé -->
+  <footer class="mt-auto py-8 px-4 border-t border-emerald-500/10 bg-obsidian text-center text-xs text-slate-500 font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>BioChain Protocol · Infraestrutura de Tecnocracia Biocêntrica</div>
+      <div class="flex items-center gap-4">
+        <span class="text-emerald-400">● Mainnet Online</span>
+        <span>Consenso PoE v2.4</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Motor de Simulação JavaScript Otimizado -->
+  <script>
+    /* Utilidades de Segurança */
+    function escapeHTML(str) {
+      if (typeof str !== 'string') return str;
+      return str.replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+      );
+    }
+
+    /* Estado Global */
+    let chain = [
+      {
+        index: 0,
+        timestamp: "2026-06-06 00:00:00",
+        transactions: [{ type: "gênese", origin: "Sistema", dest: "Fundação BioChain", amount: 1000000, area: 5000, co2: 25000 }],
+        hash: "0000e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852",
+        previousHash: "0000000000000000000000000000000000000000000000000000000000000000",
+        validator: "Genesis-Node-0x0"
+      }
+    ];
+
+    let mempool = [];
+
+    let nodes = [
+      { name: "Guardian-Amazônia", ecoscore: 0.96, stake: 45000, active: true },
+      { name: "Guardian-Cerrado", ecoscore: 0.88, stake: 28000, active: true },
+      { name: "Guardian-MataAtlântica", ecoscore: 0.91, stake: 34000, active: true },
+      { name: "Guardian-Pantanal", ecoscore: 0.94, stake: 19000, active: true }
+    ];
+
+    const biomesData = {
+      amz: { name: "Bioma Amazônia", icon: "🌳", desc: "Maior floresta tropical contínua da Terra, abrangendo 4,1 milhões de km² em território brasileiro. Regulador primordial de rios voadores e sequestro ativo de carbono.", stress: "1.20x", canopy: "86.4%", oracle: "INPE-DETER-AMZ-01", water: "78% (Excelente)" },
+      cer: { name: "Bioma Cerrado", icon: "🌾", desc: "Berço das águas do Brasil, savana com alta biodiversidade endêmica e profundo armazenamento subterrâneo de carbono orgânico.", stress: "1.25x", canopy: "54.2%", oracle: "EMBRAPA-CERRADO-02", water: "62% (Estável)" },
+      caa: { name: "Bioma Caatinga", icon: "🌵", desc: "Ecossistema semiárido exclusivamente brasileiro com rica flora endêmica adaptada ao estresse hídrico e alta resiliência.", stress: "1.30x", canopy: "48.1%", oracle: "ANA-CAATINGA-03", water: "41% (Alerta)" },
+      mat: { name: "Bioma Mata Atlântica", icon: "🍃", desc: "Floresta tropical litorânea de extrema biodiversidade, altamente fragmentada e crucial para o microclima urbano e hídrico.", stress: "1.40x", canopy: "28.5%", oracle: "SOS-MATAT-04", water: "70% (Moderado)" },
+      pan: { name: "Bioma Pantanal", icon: "🌊", desc: "A maior planície alagável contínua do planeta, vital para a regulação de cheias e refúgio de fauna neotropical.", stress: "1.35x", canopy: "82.0%", oracle: "ANA-PANTANAL-05", water: "85% (Ótimo)" },
+      pam: { name: "Bioma Pampa", icon: "🌾", desc: "Campos subtropicais de gramíneas nativas, essenciais para a pecuária sustentável e fixação de carbono no solo.", stress: "1.15x", canopy: "36.0%", oracle: "EMBRAPA-PAMPA-06", water: "68% (Estável)" },
+      cos: { name: "Zona Costeira e Marinha", icon: "🌊", desc: "Manguezais, estuários e recifes que garantem berçários pesqueiros e proteção contra erosão marinha.", stress: "1.25x", canopy: "74.0%", oracle: "INPE-COAST-07", water: "90% (Excelente)" }
+    };
+
+    let selectedBiomeKey = 'amz';
+
+    window.onload = function() {
+      renderChain();
+      renderMempool();
+      renderNodes();
+      renderBiomesGrid();
+      selectBiomeFromMap('amz');
+      calculateRBE();
+    };
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      const target = document.getElementById('tab-' + tabId);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.className = "tab-btn px-4 py-2 rounded-lg font-medium text-xs sm:text-sm flex items-center gap-2 transition-all whitespace-nowrap text-slate-400 hover:text-white hover:bg-white/5 border border-transparent";
+      });
+      const activeBtn = document.getElementById('btn-tab-' + tabId);
+      if (activeBtn) {
+        activeBtn.className = "tab-btn px-4 py-2 rounded-lg font-medium text-xs sm:text-sm flex items-center gap-2 transition-all whitespace-nowrap bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm shadow-emerald-500/10";
+      }
+    }
+
+    function toggleWalletDrawer() {
+      const drawer = document.getElementById('wallet-drawer');
+      drawer.classList.toggle('hidden');
+      drawer.classList.toggle('flex');
+    }
+
+    function addPendingTransaction() {
+      const type = document.getElementById('tx-type').value;
+      const origin = document.getElementById('tx-origin').value;
+      const dest = document.getElementById('tx-dest').value;
+      const amount = parseFloat(document.getElementById('tx-amount').value) || 100;
+      const area = parseFloat(document.getElementById('tx-area').value) || 10;
+      const co2 = parseFloat(document.getElementById('tx-co2').value) || 5;
+
+      const tx = { type, origin, dest, amount, area, co2, id: 'tx-' + Math.random().toString(36).substr(2, 6) };
+      mempool.push(tx);
+
+      renderMempool();
+      showNotification('Transação adicionada à Mempool com sucesso!', 'success');
+    }
+
+    function renderMempool() {
+      const list = document.getElementById('mempool-list');
+      const badge = document.getElementById('mempool-badge');
+      const btnMine = document.getElementById('btn-mine');
+
+      badge.textContent = mempool.length;
+
+      if (mempool.length === 0) {
+        list.innerHTML = `<p class="text-slate-500 text-xs font-mono text-center py-6">Nenhuma transação pendente na mempool.</p>`;
+        btnMine.disabled = true;
+        btnMine.className = "w-full py-3 rounded-xl flex items-center justify-center gap-2 text-sm font-bold bg-surface border border-emerald-500/20 text-slate-400 cursor-not-allowed transition-all";
+        return;
+      }
+
+      btnMine.disabled = false;
+      btnMine.className = "w-full btn-neon-primary py-3 rounded-xl flex items-center justify-center gap-2 text-sm font-bold cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-400";
+
+      list.innerHTML = mempool.map(tx => `
+        <div class="p-2.5 rounded-xl bg-surface border border-emerald-500/20 text-xs font-mono flex items-center justify-between">
+          <div>
+            <span class="text-emerald-400 font-bold">[${escapeHTML(tx.type.toUpperCase())}]</span> 
+            <span class="text-slate-300">${tx.amount} GAIA</span>
+          </div>
+          <span class="text-[10px] text-slate-500">${escapeHTML(tx.origin.substring(0, 12))}...</span>
+        </div>
+      `).join('');
+    }
+
+    function mineBlock() {
+      if (mempool.length === 0) return;
+
+      const activeNodes = nodes.filter(n => n.active);
+      const chosenNode = activeNodes[Math.floor(Math.random() * activeNodes.length)] || { name: "Guardian-Default" };
+
+      const newBlock = {
+        index: chain.length,
+        timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19),
+        transactions: [...mempool],
+        previousHash: chain[chain.length - 1].hash,
+        validator: chosenNode.name,
+        hash: '0000' + Math.random().toString(16).substring(2, 16) + Math.random().toString(16).substring(2, 16)
+      };
+
+      chain.push(newBlock);
+      mempool = [];
+
+      renderChain();
+      renderMempool();
+      updateGlobalStats();
+      showNotification(`Bloco #${newBlock.index} minerado via Proof-of-Ecology pelo nó ${chosenNode.name}!`, 'success');
+    }
+
+    function renderChain() {
+      const container = document.getElementById('chain-container');
+      container.innerHTML = chain.map((block) => `
+        <div class="p-4 rounded-xl bg-surface border border-emerald-500/20 font-mono text-xs transition-all hover:border-emerald-400">
+          <div class="flex items-center justify-between mb-2 pb-2 border-b border-white/5">
+            <span class="text-emerald-400 font-bold">Bloco #${block.index}</span>
+            <span class="text-[10px] text-slate-500">${block.timestamp}</span>
+          </div>
+          <div class="space-y-1 text-slate-300">
+            <div><span class="text-slate-500">Validador (PoE):</span> ${escapeHTML(block.validator)}</div>
+            <div><span class="text-slate-500">Transações:</span> ${block.transactions.length} item(ns)</div>
+            <div><span class="text-slate-500">Hash:</span> <span class="text-teal-400">${block.hash.substring(0, 24)}...</span></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateGlobalStats() {
+      document.getElementById('val-blocks').textContent = chain.length;
+      let totalTokens = 0, totalCO2 = 0;
+      chain.forEach(b => {
+        b.transactions.forEach(t => {
+          totalTokens += (t.amount || 0);
+          totalCO2 += (t.co2 || 0);
+        });
+      });
+      document.getElementById('val-tokens').textContent = totalTokens.toLocaleString();
+      document.getElementById('val-co2').textContent = totalCO2.toFixed(1) + ' tC';
+    }
+
+    function addRandomNode() {
+      const biomasList = ['Pantanal', 'Cerrado', 'Amazônia', 'Caatinga', 'MataAtlântica', 'Pampa'];
+      const name = "Guardian-" + biomasList[Math.floor(Math.random() * biomasList.length)] + "-" + Math.floor(Math.random() * 99);
+      nodes.push({ name, ecoscore: (0.8 + Math.random() * 0.19).toFixed(2), stake: 15000 + Math.floor(Math.random() * 20000), active: true });
+      renderNodes();
+      showNotification(`Novo nó validador ${name} adicionado à federação!`, 'success');
+    }
+
+    function renderNodes() {
+      const container = document.getElementById('nodes-list');
+      container.innerHTML = nodes.map(n => `
+        <div class="p-2.5 rounded-xl bg-obsidian border border-emerald-500/15 text-xs font-mono flex items-center justify-between">
+          <span class="text-slate-200">${escapeHTML(n.name)}</span>
+          <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[10px]">Ecoscore: ${n.ecoscore}</span>
+        </div>
+      `).join('');
+    }
+
+    function validateChain() {
+      showNotification('Cadeia 100% íntegra. Provas criptográficas verificadas!', 'success');
+    }
+
+    function exportChain() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(chain, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "biochain_export.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showNotification('Exportação JSON da blockchain realizada com sucesso!', 'success');
+    }
+
+    function simulateTamper() {
+      showNotification('Alerta de Segurança: Tentativa de adulteração detectada e rejeitada pelo consenso PoE!', 'error');
+    }
+
+    function runStressTest(type) {
+      const titles = {
+        price_crash: "Cenário A: Queda de 80% do GAIA — Piso RBE mantido via reservas soberanas.",
+        oracle_spoof: "Cenário B: Oráculo Spoofing — Limiar bayesiano (θ* ≥ 97,5%) rejeitou o laudo falso.",
+        collusion_30: "Cenário C: Cartel de Validadores — VRF sublinear (ϕ = 0,85) neutralizou tentativa de domínio.",
+        wildfire: "Cenário D: Choque Climático — Congelamento preventivo de créditos e ativação do Fundo Verde."
+      };
+      showNotification(titles[type] || "Teste de estresse executado com sucesso.", 'success');
+    }
+
+    function selectBiomeFromMap(key) {
+      selectedBiomeKey = key;
+      const data = biomesData[key];
+      if (!data) return;
+
+      document.querySelectorAll('.biome-path').forEach(p => p.classList.remove('active'));
+      const activePath = document.getElementById('biome-svg-' + key);
+      if (activePath) activePath.classList.add('active');
+
+      document.getElementById('map-info-icon').textContent = data.icon;
+      document.getElementById('map-info-name').textContent = data.name;
+      document.getElementById('map-info-oracle').textContent = "Oráculo: " + data.oracle;
+      document.getElementById('map-info-desc').textContent = data.desc;
+      document.getElementById('map-info-stress').textContent = data.stress;
+      document.getElementById('map-info-canopy').textContent = data.canopy;
+      document.getElementById('map-info-water').textContent = data.water;
+    }
+
+    function syncMapWithCalculator() {
+      const data = biomesData[selectedBiomeKey];
+      if (!data) return;
+      switchTab('rbe');
+      const select = document.getElementById('rbe-bioma');
+      for (let i = 0; i < select.options.length; i++) {
+        if (select.options[i].text.includes(data.name.replace('Bioma ', '').replace('Zona Costeira e Marinha', 'Zona Costeira'))) {
+          select.selectedIndex = i;
+          break;
+        }
+      }
+      calculateRBE();
+      showNotification(`Parâmetros do ${data.name} sincronizados com a calculadora RBE!`, 'success');
+    }
+
+    function renderBiomesGrid() {
+      const grid = document.getElementById('biomes-grid');
+      grid.innerHTML = Object.entries(biomesData).map(([k, b]) => `
+        <div tabindex="0" role="button" aria-label="Selecionar ${escapeHTML(b.name)}" onclick="selectBiomeFromMap('${k}')" onkeydown="if(event.key==='Enter'||event.key===' ') selectBiomeFromMap('${k}')" class="glass-card p-5 cursor-pointer hover:border-emerald-400 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-400">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">${b.icon}</span>
+            <div>
+              <h4 class="font-bold text-white text-sm">${escapeHTML(b.name)}</h4>
+              <span class="text-[10px] font-mono text-emerald-400">Multiplicador: ${b.stress}</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 line-clamp-2">${escapeHTML(b.desc)}</p>
+        </div>
+      `).join('');
+    }
+
+    function calculateRBE() {
+      const area = parseFloat(document.getElementById('rbe-area-slider').value) || 150;
+      const families = parseInt(document.getElementById('rbe-families-slider').value) || 12;
+      const iie = parseFloat(document.getElementById('rbe-iie-slider').value) || 94;
+
+      document.getElementById('rbe-area-val').textContent = area + ' ha';
+      document.getElementById('rbe-families-val').textContent = families + ' famílias';
+      document.getElementById('rbe-iie-val').textContent = iie + '%';
+
+      const basePerFamily = 1200;
+      const ecologicalVar = (area * 35 * (iie / 100)) / families;
+      const totalFamily = Math.round(basePerFamily + ecologicalVar);
+      const territorioTotal = totalFamily * families;
+      const co2Anual = Math.round(area * 16.3);
+
+      document.getElementById('rbe-total-family').textContent = 'R$ ' + totalFamily.toLocaleString();
+      document.getElementById('rbe-gaia-equiv').textContent = 'Equivalente a ' + Math.round(totalFamily / 6) + ' GAIA tokens';
+      document.getElementById('rbe-territorio-total').textContent = 'R$ ' + territorioTotal.toLocaleString();
+      document.getElementById('rbe-co2-anual').textContent = co2Anual.toLocaleString() + ' tC';
+      document.getElementById('rbe-additionality-val').textContent = '+' + (iie * 0.19).toFixed(1) + '%';
+      document.getElementById('val-rbe-familias').textContent = families;
+    }
+
+    function simulateRBEDeposit() {
+      showNotification('Lote RBE emitido via smart contract e depositado em contas CBDC das famílias guardiãs!', 'success');
+    }
+
+    const documentsRepo = {
+      '01': { title: "01. Diretriz Geral Decenal (2026–2030)", text: "Plano estruturado em 10 capítulos estabelecendo a transição para a tecnocracia biocêntrica no Brasil. Aborda a superação do narcisídio social, a soberania sobre os biomas, a emissão do ativo GAIA e a governança quadripartite entre Estado, ciência, comunidades e mercado regulado." },
+      '02': { title: "02. One-Pager Executivo para Decisores", text: "Síntese executiva voltada a ministros de Estado, parlamentares e bancos de desenvolvimento. Destaca os 4 pilares fundamentais da BioChain, a neutralidade fiscal do modelo através de compensações cruzadas e o cronograma de implementação em 60 dias." },
+      '03': { title: "03. Pitch Deck Institucional (13 Slides)", text: "Apresentação corporativa e institucional com notas para orador. Estruturada para audiências públicas no Congresso Nacional, plenárias da COP e reuniões de cúpula com agências multilaterais." },
+      '04': { title: "04. Anteprojeto de Lei (Minuta Formal)", text: "Minuta legislativa redigida nos estritos padrões da Lei Complementar nº 95/1998. Institui formalmente a Infraestrutura Nacional BioChain, regulamenta o consenso Proof-of-Ecology e cria a Renda Básica Ecológica." },
+      '05': { title: "05. White Paper Técnico-Econômico", text: "Especificação formal de engenharia de protocolo: matemática estocástica do Proof-of-Ecology, oráculos bayesianos multimodais, teoria dos jogos de preservação e código Solidity para os contratos de custódia da RBE." }
+    };
+
+    function openDocModal(id) {
+      const doc = documentsRepo[id];
+      if (!doc) return;
+      document.getElementById('doc-modal-title').textContent = doc.title;
+      document.getElementById('doc-modal-content').innerHTML = `<p>${escapeHTML(doc.text)}</p>`;
+      const modal = document.getElementById('doc-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeDocModal() {
+      const modal = document.getElementById('doc-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function showNotification(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `p-4 rounded-xl glass-card text-xs font-mono shadow-2xl flex items-center gap-3 transition-all duration-300 transform translate-y-2 opacity-0 ${type === 'error' ? 'border-red-500/40 text-red-300' : 'border-emerald-500/40 text-emerald-300'}`;
+      toast.innerHTML = `<span>${type === 'error' ? '⚠️' : '✅'}</span> <span>${escapeHTML(message)}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      }, 10);
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-2', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+  </script>
+
+</body>
+</html>
