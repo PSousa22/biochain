@@ -547,9 +547,11 @@ async function mineBlock() {
 
   let pct = 0;
   // Sorteio de validador via VRF sublinear (ϕ = 0.85) ancorado no hash anterior
-  const lastBlock = blockchain.getLatestBlock();
+  const lastBlock = blockchain.latestBlock;
   const vrfResult = blockchain.selectValidatorVRF(nodes, lastBlock.hash);
-  const validator = vrfResult.validator.name;
+  const validator = vrfResult.validator;
+  const vrfProof = vrfResult.vrfProof || 'VRF_0x00000000';
+  const vrfDraw = parseFloat(vrfResult.draw) || 0;
   status.textContent = `Validador sorteado (VRF): ${validator}`;
 
   const progressInterval = setInterval(() => {
@@ -559,13 +561,13 @@ async function mineBlock() {
 
   try {
     const block = await blockchain.mineBlock(validator, (nonce, hash) => {
-      hashEl.textContent = `Hash: 0x${hash.slice(0, 16)}... | VRF: 0x${vrfResult.ticket.slice(0, 8)}...`;
-      status.textContent = `Nonce: ${nonce.toLocaleString('pt-BR')} · PoE Ativo (VRF p=${(vrfResult.probability * 100).toFixed(1)}%)`;
+      hashEl.textContent = `Hash: 0x${hash.slice(0, 16)}... | VRF: ${vrfProof.slice(-16)}`;
+      status.textContent = `Nonce: ${nonce.toLocaleString('pt-BR')} · PoE Ativo (VRF draw=${vrfDraw.toFixed(4)}, φ=0.85)`;
     });
 
     clearInterval(progressInterval);
     progress.style.width = '100%';
-    hashEl.textContent = `Hash: 0x${block.hash.slice(0, 16)}... | VRF: 0x${vrfResult.ticket.slice(0, 10)}...`;
+    hashEl.textContent = `Hash: 0x${block.hash.slice(0, 16)}... | VRF: ${vrfProof.slice(-16)}`;
 
     await sleep(500);
     modal.classList.add('hidden');
@@ -580,7 +582,7 @@ async function mineBlock() {
       setTimeout(() => openCertModalForBlock(block.index), 500);
     }
 
-    log(`⛏️ Bloco #${block.index} minerado por ${validator} · Ticket VRF: ${vrfResult.ticket.slice(0, 10)}... (prob: ${(vrfResult.probability * 100).toFixed(1)}%, ϕ=0.85) · Score PoE: ${block.ecologicalScore}`, 'success');
+    log(`⛏️ Bloco #${block.index} minerado por ${validator} · VRF: ${vrfProof.slice(-16)} (draw=${vrfDraw.toFixed(4)}, ϕ=0.85) · Score PoE: ${block.ecologicalScore}`, 'success');
     showToast(`⛏️ Bloco #${block.index} minerado com sucesso!`, 'success');
   } catch (e) {
     clearInterval(progressInterval);
