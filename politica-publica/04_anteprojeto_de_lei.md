@@ -1,4 +1,4 @@
-# 📜 ANTEPROJETO DE LEI Nº ____, DE 2026
+# 📜 ANTEPROJETO DE LEI Nº ____, DE ____
 
 > **Ementa:** *Institui a Infraestrutura Pública Digital de Razão Distribuída para Custódia e Governança Ambiental (BioChain), estabelece o mecanismo de validação por Prova de Ecologia (Proof-of-Ecology), cria o Ativo Ecológico Nacional GAIA e o Programa Nacional de Renda Básica Ecológica (RBE), dispõe sobre a soberania de dados e inteligência artificial ecológica, altera a Lei nº 14.119, de 13 de janeiro de 2021, e dá outras providências.*
 
