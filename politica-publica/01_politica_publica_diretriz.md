@@ -179,7 +179,7 @@ A **RBE** é o mecanismo de inclusão social:
 - Cada guardião de floresta (indígena, quilombola, agricultor familiar, ribeirinho) recebe GAIA tokens mensalmente
 - Valor calculado por: `área_preservada × ecológical_weight × fator_bioma`
 - Convertível em real via sistema bancário integrado (Open Finance + BioChain)
-- Estimativa inicial: R\$ 600–1.200/mês por família guardiã
+- Piso inicial: 50% do salário mínimo nacional vezes o fator de estresse do bioma por família guardiã
 
 ---
 
