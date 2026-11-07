@@ -31,7 +31,7 @@ Pelo **Método Brasiliano**, o Brasil deixa de importar marcos regulatórios ex�
    [Proof-of-Ecology] [Oráculos de IA]    [Token GAIA]       [RBE Universal]
    Consenso ancorado  Validação híbrida:  Unidade de valor   Renda Básica
    em indicadores     satélites + IoT +   lastreada em tCO2e Ecológica direta
-   biofísicos reais   saberes locais      auditado e bioma   aos guardiões
+   biofísicos reais   saberes locais      auditado           aos guardiões
 ```
 
 1. **Proof-of-Ecology (PoE):** O poder de validação institucional na rede não advém da queima de energia nem da concentração de capital financeiro, mas de **desempenho ecológico auditável**.
