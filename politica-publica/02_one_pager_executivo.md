@@ -52,7 +52,7 @@ Pelo **Método Brasiliano**, o Brasil deixa de importar marcos regulatórios ex�
 
 ---
 
-### 5. Encaminhamento e Decisão Imediata (Próximos 60 Dias)
+### 5. Encaminhamento e Decisão Imediata 
 
 > [!IMPORTANT]
 > **Ação Recomendada para o Executivo e Legislativo:**
