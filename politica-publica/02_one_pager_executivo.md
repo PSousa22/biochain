@@ -61,4 +61,4 @@ Pelo **Método Brasiliano**, o Brasil deixa de importar marcos regulatórios ex�
 > 3. **Envio de Anteprojeto de Lei:** Protocolar o *Marco Legal da Custódia Ecológica e Ativos Digitais Biocêntricos*.
 
 ---
-*Contato Técnico-Institucional: Iniciativa BioChain Brasil · tecnocracia.biocentrica@biochain.gov.br*
+*Contato Técnico-Institucional: Iniciativa BioChain Brasil
