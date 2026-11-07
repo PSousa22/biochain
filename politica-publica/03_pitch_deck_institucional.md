@@ -37,7 +37,8 @@
          └─────────────┬─────────────────────────────┬─────────────┘
                        ▼                             ▼
               [ CRISE CLIMÁTICA ]           [ AVANÇO DA IA ]
-              • Amazônia próxima a 25%      • Big Techs monopolizando dados
+              • Desmatamento na 
+                Amazônia próximo a 25%      • Big Techs monopolizando dados
                 (Ponto de Não-Retorno)        biogenéticos do Sul Global
               • Secas extremas no Pantanal  • Algoritmos orientados a
                 e tempestades no Sul          eficiência extrativa
