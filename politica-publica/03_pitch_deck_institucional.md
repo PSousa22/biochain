@@ -142,7 +142,7 @@ A **BioChain** é uma infraestrutura de Tecnologia de Razão Distribuída (DLT) 
                                       ▼
            [ Depósito direto na Carteira Digital Cidadã (via Pix/Drex) ]
                                       ▼
-           [ R$ 600 a R$ 1.200 mensais para famílias de guardiões ]
+           [ 50% do SMN vezes o fator de estresse do bioma por família]
 ```
 
 * **Sem Intermediários:** Acaba com o "pedágio" de ONGs atravessadoras ou burocracias cartoriais.
