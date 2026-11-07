@@ -37,7 +37,7 @@ Pelo **Método Brasiliano**, o Brasil deixa de importar marcos regulatórios ex�
 1. **Proof-of-Ecology (PoE):** O poder de validação institucional na rede não advém da queima de energia nem da concentração de capital financeiro, mas de **desempenho ecológico auditável**.
 2. **Oráculos Públicos & IA Soberana:** Dados processados por IA pública em nuvem soberana (RNP/SERPRO), convertendo relatórios de bioma em triggers contratuais sem intermediação política.
 3. **Ativo Ecológico GAIA:** Token nacional de custódia e compensação ambiental, eliminando a pirataria de carbono e fraudes de *greenwashing*.
-4. **Renda Básica Ecológica (RBE):** Pagamento por Serviços Ambientais (PSA) contínuo, transparente e depositado diretamente na carteira digital de povos indígenas, quilombolas e agricultores familiares (R$ 600 a R$ 1.200/mês).
+4. **Renda Básica Ecológica (RBE):** Pagamento por Serviços Ambientais (PSA) contínuo, transparente e depositado diretamente na carteira digital de povos indígenas, quilombolas e agricultores familiares.
 
 ---
 
