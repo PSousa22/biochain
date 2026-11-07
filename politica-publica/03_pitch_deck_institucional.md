@@ -183,10 +183,10 @@ O controle da BioChain não pertence a um grupo privado nem à discricionariedad
 
 | Fase | Período | Principais Entregas |
 |:---:|:---:|:---|
-| **Fase 1: Fundação** | 2026 (Semestre 2) | • Criação do GTI Interministerial<br>• Anteprojeto de Lei do Marco Legal da BioChain<br>• Homologação do nó central SERPRO/RNP |
-| **Fase 2: Piloto** | 2027 | • Ativação dos nós *Amazônia*, *Cerrado* e *Pantanal*<br>• Primeira emissão oficial do Token GAIA<br>• RBE ativa para 15.000 famílias |
-| **Fase 3: Escala** | 2028 – 2029 | • Integração com o Drex (Real Digital) e Open Finance<br>• Cobertura dos 6 biomas terrestres + zona costeira-marinha<br>• Adesão de 200 grandes corporações ao registro oficial |
-| **Fase 4: Hegemonia** | 2030 | • Padronização do modelo na OTCA (Tratado Amazônico)<br>• O Brasil como bolsa global de ativos de conservação |
+| **Fase 1: Fundação** | 1 - 6 meses | • Criação do GTI Interministerial<br>• Anteprojeto de Lei do Marco Legal da BioChain<br>• Homologação do nó central SERPRO/RNP |
+| **Fase 2: Piloto** | 6 - 12 meses | • Ativação dos nós *Amazônia*, *Cerrado* e *Pantanal*<br>• Primeira emissão oficial do Token GAIA<br>• RBE ativa para 15.000 famílias |
+| **Fase 3: Escala** | 12 - 36 meses | • Integração com o Drex (Real Digital) e Open Finance<br>• Cobertura dos 6 biomas terrestres + zona costeira-marinha<br>• Adesão de 200 grandes corporações ao registro oficial |
+| **Fase 4: Hegemonia** | 36 - 72 meses | • Padronização do modelo na OTCA (Tratado Amazônico)<br>• O Brasil como bolsa global de ativos de conservação |
 
 ---
 
