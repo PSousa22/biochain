@@ -802,6 +802,11 @@
         </div>
       </div>
 
+      <div style="background: rgba(30, 41, 59, 0.6); border-left: 3px solid var(--gold); border-radius: 6px; padding: 12px 16px; margin-bottom: 20px; font-size: 12.5px; color: var(--text2); line-height: 1.6;">
+        <span style="color: var(--gold); font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px;">Definição Teórica Formal (§3.3):</span><br/>
+        <b>Narcisídio Social</b> é o processo de decisão econômica no qual agentes, instituições ou sistemas produtivos priorizam ganhos privados de curto prazo, mesmo quando tais decisões comprometem sistematicamente as condições biofísicas e institucionais necessárias à reprodução do bem-estar coletivo no longo prazo.
+      </div>
+
       <div class="narc-compare-grid">
         <!-- Lado Predatório -->
         <div class="narc-box predatory">
@@ -865,7 +870,11 @@
         <a href="https://github.com/PSousa22/biochain/tree/main/politica-publica" target="_blank" class="btn btn-ghost">
           <span>🐙</span> Ver Acervo no GitHub
         </a>
-      </div>
+      
+      <p style="font-size: 11.5px; color: var(--text3); margin: 12px 0 20px 0; line-height: 1.5;">
+        <b>Nota Metodológica & Formulação do VPL <span class="data-tag data-tag-sim">Simulado</span> (§6):</b> <code>VPL_j = -I_{0,j} + \sum_{t=1}^T \frac{FC_{j,t}}{(1+r)^t}</code>. A comparação considera taxa de desconto social r = 6,5% a.a., custos de transação, monitoramento e dedução de riscos de reversão. Projeções de simulação computacional não configuram comprovação causal empírica definitiva.
+      </p>
+</div>
 
       <div class="policy-cards-grid">
         <!-- Card 1 -->
@@ -1102,12 +1111,24 @@
       </div>
       <div class="glossary-modal-body">
         <div class="glossary-item">
-          <div class="glossary-term">🪙 Ativo GAIA</div>
-          <div class="glossary-desc">Ativo ambiental biofísico sintético emitido com base no estado ecológico verificado: <code>GAIA = f(C, Bio, Água, Solo, Território, Custódia)</code>. Máquina de estados: <i>Issued → Active → Suspended → Retired</i>.</div>
+          <div class="glossary-term">🧠 Narcisídio Social</div>
+          <div class="glossary-desc">Processo de decisão econômica no qual agentes, instituições ou sistemas produtivos priorizam ganhos privados de curto prazo, mesmo quando tais decisões comprometem sistematicamente as condições biofísicas e institucionais necessárias à reprodução do bem-estar coletivo no longo prazo (§3.3).</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">🪙 Ativo GAIA (Q_GAIA e V_GAIA)</div>
+          <div class="glossary-desc">Ativo ambiental biofísico sintético que separa a <b>quantidade ecológica verificada</b> <code>Q_GAIA = f(C, B, A, S, T)</code> (Carbono, Biodiversidade, Água, Solo, Território) de sua <b>valoração econômica</b> <code>V_GAIA = p(Q_GAIA, M, R)</code> condicionada ao orçamento e governança. Máquina de estados: <i>Issued → Active → Suspended → Retired</i> (§4.1).</div>
+        </div>
+        <div class="glossary-item">
+          <div class="glossary-term">🏷️ Taxonomia de Confiabilidade de Dados</div>
+          <div class="glossary-desc">Padronização epistemológica adotada na plataforma BioChain (§8.4):<br/>
+          • <b style="color:#38bdf8">[OBSERVADO]</b>: dado primário de sensoriamento ou base oficial (INPE, PRODES, BDQueimadas).<br/>
+          • <b style="color:#a78bfa">[ESTIMADO]</b>: resultado de inferência estatística ou reconciliação bayesiana multimodal.<br/>
+          • <b style="color:#fbbf24">[SIMULADO]</b>: modelo prospectivo hipotético (VPL, Red Team, testes de estresse).<br/>
+          • <b style="color:#34d364">[NORMATIVO]</b>: parâmetro de diretriz legal e regulatória (piso RBE R$ 600,00, Lei 14.119/2021).</div>
         </div>
         <div class="glossary-item">
           <div class="glossary-term">⚡ Proof-of-Ecology (PoE)</div>
-          <div class="glossary-desc">Mecanismo de consenso com seleção probabilística sublinear de validadores via VRF: <code>w_i = (S_i × estresse_i)^0.85</code>, atrelando a dificuldade ao sequestro real de carbono auditado.</div>
+          <div class="glossary-desc">Mecanismo de consenso com seleção probabilística sublinear de validadores via VRF ponderada: <code>W_i = S_i^ϕ × R_i × C_i</code> (onde <code>S_i</code> é o score ecológico verificado, <code>R_i</code> a confiabilidade histórica e <code>C_i</code> o credenciamento institucional, com <code>ϕ = 0.85</code>), atrelando a dificuldade ao sequestro real de carbono auditado (§7.1).</div>
         </div>
         <div class="glossary-item">
           <div class="glossary-term">🌿 IIE (Índice de Integridade Ecológica)</div>
@@ -1115,7 +1136,7 @@
         </div>
         <div class="glossary-item">
           <div class="glossary-term">💚 RBE (Renda Básica Ecológica)</div>
-          <div class="glossary-desc">Remuneração mensal garantida às famílias guardiãs (Art. 14): <code>RBE = Piso (R$ 810,50) + (ha × Ω_bioma × IIE) / Famílias</code>. Fase 1: Pix/Caixa; Fase 2: Drex Varejo.</div>
+          <div class="glossary-desc">Remuneração mensal garantida às famílias guardiãs (Art. 14): <code>RBE_i = B_0 + (A × Ω_b × IIE × E) / N</code>, separando o piso legal da política pública (<code>B_0 = R$ 600,00</code>) do componente variável territorial de PSA. Validação estrita: <code>N > 0</code>, <code>A ≥ 0</code>, <code>IIE ∈ [0, 1]</code> (§5).</div>
         </div>
         <div class="glossary-item">
           <div class="glossary-term">🎲 VRF (Verifiable Random Function)</div>

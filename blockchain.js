@@ -141,8 +141,12 @@ class BioTransaction {
     const biome = this.metadata?.bioma || 'Amazônia';
     const multiplier = BIOME_STRESS_FACTORS[biome] || 1.0;
 
-    // Mitigação da Lei de Goodhart: valores autodeclarados são delimitados por oráculos
-    const isAttested = Boolean(this.metadata?.sensor || this.metadata?.oraculo || this.metadata?.canal);
+    // Mitigação da Lei de Goodhart: só atestação com oracleId + dataHash eleva o peso.
+    // Metadados de pagamento (canal, chave_pix) NÃO são evidência ecológica (T4).
+    const isAttested = Boolean(
+      (this.metadata?.oracleId && this.metadata?.dataHash) ||
+      (this.metadata?.sensor && this.metadata?.oraculo)
+    );
     const safeCo2 = Math.min(Math.max(0, this.co2), 500);
     const safeArea = Math.min(Math.max(0, this.area), 1000);
     const trustFactor = isAttested ? 1.0 : 0.5;
@@ -294,6 +298,15 @@ class BioBlockchain {
   }
 
   addTransaction(tx) {
+    if (!tx || typeof tx.isValid !== 'function' || !tx.isValid()) {
+      console.warn('addTransaction: transação inválida ou com assinatura violada');
+      return null;
+    }
+    const txHash = tx.hash();
+    if (this.pendingTransactions.some(p => p.hash() === txHash)) {
+      console.warn('addTransaction: transação duplicada já presente na Mempool');
+      return null;
+    }
     this.pendingTransactions.push(tx);
     return tx;
   }

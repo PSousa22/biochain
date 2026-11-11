@@ -1020,6 +1020,17 @@ body {
 .onto-bio { background: rgba(251, 191, 36, 0.15); color: var(--gold); border: 1px solid rgba(251, 191, 36, 0.3); }
 .onto-cert { background: rgba(168, 85, 247, 0.15); color: var(--purple); border: 1px solid rgba(168, 85, 247, 0.3); }
 
+/* Taxonomia Epistemológica de Confiabilidade de Dados (Recomendações Item 8.4) */
+.data-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
+  padding: 2px 6px; border-radius: 4px; display: inline-block; vertical-align: middle;
+  text-transform: uppercase; letter-spacing: 0.5px; margin-left: 4px;
+}
+.data-tag-obs { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); }
+.data-tag-est { background: rgba(167, 139, 250, 0.15); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.35); }
+.data-tag-sim { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.35); }
+.data-tag-norm { background: rgba(52, 211, 100, 0.15); color: #34d364; border: 1px solid rgba(52, 211, 100, 0.35); }
+
 /* ═══════════ ACESSIBILIDADE & TECLADO ═══════════ */
 :focus-visible {
   outline: 2px solid var(--green);

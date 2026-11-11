@@ -328,6 +328,11 @@ async function init() {
     if (e.target.id === 'glossary-modal') closeGlossaryModal();
   });
 
+  // X2: Roteamento por hash — abre aba da URL se presente na carga inicial
+  const hashTab = (location.hash || '').replace('#', '').trim();
+  const validTabs = ['causal', 'rbe', 'biomas', 'dlt', 'narcisidio', 'politica'];
+  if (hashTab && validTabs.includes(hashTab)) switchTab(hashTab);
+
   // Atalho Teclado ESC para fechar gavetas e modais
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -362,6 +367,10 @@ function switchTab(tabId) {
     content.setAttribute('aria-hidden', 'false');
   }
 
+  // X2: Atualiza URL por aba — permite citar, compartilhar e usar botão Voltar
+  if (window.history && history.pushState) {
+    history.pushState(null, '', '#' + tabId);
+  }
   log(`Navegação: Módulo "${tabId.toUpperCase()}" ativado`, 'info');
 }
 
@@ -552,7 +561,9 @@ async function mineBlock() {
   const validator = vrfResult.validator;
   const vrfProof = vrfResult.vrfProof || 'VRF_0x00000000';
   const vrfDraw = parseFloat(vrfResult.draw) || 0;
-  status.textContent = `Validador sorteado (VRF): ${validator}`;
+  // E3: SHA-256(hash_anterior|época) é deterministicamente previsível (sem chave secreta)
+  // VRF real requer par de chaves e prova verificável (RFC 9381 / ECVRF)
+  status.textContent = `Sorteio (hash-based demonstrativo): ${validator}`;
 
   const progressInterval = setInterval(() => {
     pct = Math.min(pct + Math.random() * 10, 90);
@@ -758,14 +769,39 @@ function simulateOracleTelemetry() {
   });
 }
 
+// ─── Parâmetros Canônicos do Modelo (E1 / T7) ─────────────
+// SM 2026 (Jovem Pan 24/12/2025), PSA (Lei 14.119/2021), CO2 (INPE/REDD+)
+const PARAMS = {
+  SM_2026:        1621.00,   // Salário Mínimo 2026 (R$)
+  PISO_RBE:        810.50,   // 50% SM — piso social incondicional (Art. 14 minuta)
+  PSA_HA_MES:       12.50,   // R$/ha·mês — PSA territorial
+  CO2_HA_ANO:        3.20,   // tCO2e/ha·ano — sequestro médio
+  GAIA_BRL:          6.00,   // R$/GAIA — liquidação primária
+  CO2_MERCADO_T:    47.00,   // R$/tCO2e — preço de mercado voluntário
+  // Nota M5: 1 GAIA = 1 tCO2e (Art. 3º III). Liquidação R$6 != preço mercado R$47.
+  // Y0 por bioma: linha de base contrafactual (West et al., PNAS 2020 + INPE PRODES)
+  Y0_BIOMA: {
+    'Amazônia':                0.018,  // 1.8% a.a.
+    'Cerrado':                 0.021,  // 2.1%
+    'Mata Atlântica':          0.009,  // 0.9%
+    'Pantanal':                0.014,  // 1.4%
+    'Caatinga':                0.016,  // 1.6%
+    'Pampa':                   0.012,  // 1.2%
+    'Zona Costeira e Marinha': 0.010   // 1.0%
+  },
+  IIE_THRESHOLD_SUSPEND: 0.60  // IIE < 60%: tokens suspensos (disjuntor biocêntr.)
+};
 // ─── RBE Shared Calculation ───────────────────────────────
-const BASE_RBE = 810.50; // Piso legal: 50% do salário mínimo 2026 (R$ 1.621,00)
+const BASE_RBE = PARAMS.PISO_RBE; // Piso social: 50% SM (R$ 1.621,00) — incondicional (§2 relatório)
 
 function computeRBE(bioma, area, families, iie) {
-  const stressMultiplier = (window.BIOME_STRESS_FACTORS && window.BIOME_STRESS_FACTORS[bioma]) || 1.0;
+  // Validação estrita de domínio e invariantes (Item 9.3 do relatório de aprimoramento)
+  area = Math.max(0, Number(area) || 0);
+  families = Math.max(1, parseInt(families, 10) || 1); // Garante N >= 1 para evitar divisão por zero
+  iie = Math.min(1.0, Math.max(0.0, Number(iie) || 0)); // Garante IIE no intervalo fechado [0, 1]
 
-  // Valoração de Serviços Ecossistêmicos: R$ 12,50/ha·mês (~3.2 tCO2e/ha/ano a R$ 47/t + água/biodiversidade)
-  const taxaMensalPSA = 12.50;
+  const stressMultiplier = (window.BIOME_STRESS_FACTORS && window.BIOME_STRESS_FACTORS[bioma]) || 1.0;
+  const taxaMensalPSA = (typeof PARAMS !== 'undefined' && PARAMS.PSA_HA_MES) || 12.50;
   const psaTerritorialTotal = area * taxaMensalPSA * stressMultiplier * iie;
 
   // A parcela territorial de PSA é distribuída entre as famílias guardiãs homologadas (Art. 14)
@@ -776,8 +812,11 @@ function computeRBE(bioma, area, families, iie) {
   const co2Anual = Math.round(area * 3.2);
 
   // Adicionalidade Contrafactual (Seção 1.3): Y0 (1.8% a.a. regional histórico) vs Y1 (desmate residual sob custódia)
-  const y0 = 0.018;
-  const y1 = Math.max(0, (1.0 - iie) * y0);
+  // Adicionalidade por bioma — corrige tautologia IIE=adicionalidade (M4)
+  // Y0 independente do IIE; Y1 inclui leakage residual de 30% (West et al. 2020)
+  const y0 = PARAMS.Y0_BIOMA[bioma] || 0.018;
+  const fatorResidual = 0.30; // 30% de desmate persiste mesmo com custódia (leakage)
+  const y1 = Math.max(0, y0 * (1 - iie) * fatorResidual);
   const haEvitadosAnual = +((y0 - y1) * area).toFixed(1);
   const additionalityPct = (((y0 - y1) / y0) * 100).toLocaleString('pt-BR', {
     minimumFractionDigits: 1,
@@ -833,10 +872,19 @@ function simulateRBEDeposit() {
   const familiesSlider = document.getElementById('rbe-families-slider');
   const iieSlider = document.getElementById('rbe-iie-slider');
 
-  const bioma = biomaSelect.value;
-  const area = parseFloat(areaSlider.value);
-  const families = parseInt(familiesSlider.value);
+  const bioma = biomaSelect ? biomaSelect.value : 'Amazônia';
+  const area = parseFloat(areaSlider ? areaSlider.value : 0);
+  const families = parseInt(familiesSlider ? familiesSlider.value : 0, 10);
   const iie = iieSlider ? (parseFloat(iieSlider.value) / 100) : 0.94;
+
+  if (families <= 0 || isNaN(families)) {
+    showToast('⚠️ O número de famílias elegíveis deve ser maior que zero.', 'warn');
+    return;
+  }
+  if (area <= 0 || isNaN(area)) {
+    showToast('⚠️ A área sob custódia deve ser maior que zero hectares.', 'warn');
+    return;
+  }
 
   const rbe = computeRBE(bioma, area, families, iie);
 
@@ -1234,88 +1282,104 @@ function runStressTest(scenarioKey) {
   const resultBox = document.getElementById('redteam-result-box');
 
   if (scenarioKey === 'price_crash') {
-    const crashPrice = 1.20; // -80%
+    // E7: Variância real — queda entre -60% e -92%
+    const quedaPct = 0.60 + Math.random() * 0.32;
+    const crashPrice = +(PARAMS.GAIA_BRL * (1 - quedaPct)).toFixed(2);
     const tokensFamilia = 135;
-    const valorMercado = tokensFamilia * crashPrice;
-    const pisoLegal = 810.50;
-    const gapFiscal = pisoLegal - valorMercado;
+    const valorMercado = +(tokensFamilia * crashPrice).toFixed(2);
+    const pisoLegal = PARAMS.PISO_RBE;
+    const gapFiscal = +(pisoLegal - valorMercado).toFixed(2);
+    const FNMC_CAP_FAM = 450; // hipótese: cap FNMC R$ 450/família/mês
+    const backstopViavel = gapFiscal <= FNMC_CAP_FAM;
+    const quedaStr = (quedaPct * 100).toFixed(0) + '%';
 
     if (resultBox) {
       resultBox.className = 'redteam-result-box active';
       resultBox.innerHTML = `
-        <div class="redteam-result-title" style="color: var(--gold);">
-          <span>🛡️</span> Cenário A: Queda de 80% na Cotação do GAIA — Backstop Ativado
+        <div class="redteam-result-title" style="color: ${backstopViavel ? 'var(--gold)' : 'var(--red)'}">
+          <span>${backstopViavel ? '\u{1F6E1}\uFE0F' : '\u{1F6A8}'}</span> Cenário A: Queda de ${quedaStr} — ${backstopViavel ? 'Backstop Ativado' : 'COBERTURA INSUFICIENTE'}
         </div>
         <div class="redteam-result-body">
-          O preço de mercado secundário do GAIA caiu para <b>R$ 1,20</b>. A liquidação privada geraria apenas <b>R$ ${valorMercado.toLocaleString('pt-BR', {minimumFractionDigits:2})}/mês</b> por família.
-          O protocolo acionou automaticamente o <b>Fundo Nacional sobre Mudança do Clima (FNMC) / STN</b> como backstop soberano, cobrindo o gap fiscal de <b>R$ ${gapFiscal.toLocaleString('pt-BR', {minimumFractionDigits:2})}</b> por família guardiã e garantindo o piso legal de <b>R$ 810,50</b>.
+          GAIA caiu para <b>R$ ${crashPrice.toFixed(2)}</b> (−${quedaStr}). Liquidação privada: <b>R$ ${valorMercado.toFixed(2)}/mês/família</b>.
+          Gap fiscal: <b>R$ ${gapFiscal.toFixed(2)}/família</b> vs. cap FNMC hipotético de <b>R$ ${FNMC_CAP_FAM}/família</b>.
+          ${backstopViavel ? 'Protocolo ativou <b>FNMC/STN</b> como backstop soberano. Piso garantido.' : '<b style="color:var(--red)">Gap excede cap FNMC — piso em risco. Requer Tesouro Nacional ou revisão do lastro.</b>'}
         </div>
         <div class="redteam-result-metrics">
-          <div class="redteam-metric-item">Preço do GAIA: <div class="redteam-metric-val" style="color:var(--red);">R$ 1,20 (-80%)</div></div>
-          <div class="redteam-metric-item">Repasse Família: <div class="redteam-metric-val" style="color:var(--green);">R$ 810,50 (Piso Preservado)</div></div>
-          <div class="redteam-metric-item">Subsídio Backstop FNMC: <div class="redteam-metric-val" style="color:var(--gold);">R$ ${gapFiscal.toLocaleString('pt-BR', {minimumFractionDigits:2})}/fam</div></div>
-          <div class="redteam-metric-item">Taxa de Desmate: <div class="redteam-metric-val" style="color:var(--teal);">Inalterada (0,00%)</div></div>
+          <div class="redteam-metric-item">Preço GAIA: <div class="redteam-metric-val" style="color:var(--red);">R$ ${crashPrice.toFixed(2)} (−${quedaStr})</div></div>
+          <div class="redteam-metric-item">Gap Fiscal: <div class="redteam-metric-val" style="color:${backstopViavel?'var(--gold)':'var(--red)'};">R$ ${gapFiscal.toFixed(2)}/fam</div></div>
+          <div class="redteam-metric-item">Cap FNMC (hip.): <div class="redteam-metric-val" style="color:var(--gold);">R$ ${FNMC_CAP_FAM}/fam</div></div>
+          <div class="redteam-metric-item">Resultado: <div class="redteam-metric-val" style="color:${backstopViavel?'var(--green)':'var(--red)'}">${backstopViavel?'Piso Garantido':'RISCO FISCAL'}</div></div>
         </div>
       `;
     }
-    showToast(`🛡️ Teste A: Preço do GAIA caiu 80%. Piso legal R$ 810,50 assegurado via Backstop FNMC/STN!`, 'warn');
-    log(`RED TEAM TEST A: Colapso de -80% mitigado. Gap fiscal de R$ ${gapFiscal.toFixed(2)}/família coberto pelo Tesouro/Fundo Clima.`, 'warn');
-  } 
+    showToast(`${backstopViavel ? '🛡️' : '🚨'} Teste A: Queda ${quedaStr}. ${backstopViavel ? 'Piso R$ ' + pisoLegal.toFixed(2) + ' assegurado.' : 'RISCO: gap R$ ' + gapFiscal.toFixed(2) + ' excede FNMC!'}`, backstopViavel ? 'warn' : 'error');
+    log(`RED TEAM TEST A: Queda ${quedaStr}. Gap R$ ${gapFiscal.toFixed(2)}/fam. Backstop: ${backstopViavel ? 'SUFICIENTE' : 'INSUFICIENTE — risco fiscal'}.`, backstopViavel ? 'warn' : 'error');
+  }
   else if (scenarioKey === 'oracle_spoof') {
-    const pPosterior = 84.1; // Reconciliação P(E|D)
-    const thetaStar = 97.5; // Limiar de perda assimétrica
-    // Aplica slashing de 20% no nó suspeito
+    // E7: P(E|D) com variância — pode ficar abaixo ou acima de theta*
+    const pBase = 84.1;
+    const pPosterior = +(Math.min(99, Math.max(60, pBase + (Math.random() * 20 - 5)))).toFixed(1);
+    const thetaStar = 97.5; // limiar ótimo (perda assimétrica falso-negativo)
+    const rejeitado = pPosterior < thetaStar;
     const rogueNode = nodes.find(n => n.name.includes('Cerrado')) || nodes[1] || nodes[0];
     const prevStake = rogueNode.stake || 2000;
-    rogueNode.stake = Math.round(prevStake * 0.80);
-    renderNodes();
+    if (rejeitado) {
+      rogueNode.stake = Math.round(prevStake * 0.80);
+      renderNodes();
+    }
 
     if (resultBox) {
       resultBox.className = 'redteam-result-box active';
       resultBox.innerHTML = `
-        <div class="redteam-result-title" style="color: var(--red);">
-          <span>🚨</span> Cenário B: Tentativa de Fraude Oracular — Reconciliação Bayesiana & Slashing
+        <div class="redteam-result-title" style="color: ${rejeitado ? 'var(--red)' : 'var(--gold)'};">
+          <span>${rejeitado ? '🚨' : '⚠️'}</span> Cenário B: Tentativa de Fraude Oracular — Reconciliação Bayesiana & Slashing
         </div>
         <div class="redteam-result-body">
-          Um sensor IoT terrestre comprometido enviou telemetria de biomassa inflada em 300%. A reconciliação bayesiana multimodal com satélite CBERS-4A e laudo comunitário resultou em <b>P(E|D) = ${pPosterior}%</b>, abaixo do limiar ótimo de decisão <b>θ* ≥ ${thetaStar}%</b>.
-          A transação foi rejeitada em consenso e o nó <b>${rogueNode.name}</b> sofreu <b>Slashing contratual de 20%</b> do seu stake.
+          Um sensor IoT terrestre comprometido enviou telemetria de biomassa inflada em 300%. A reconciliação bayesiana multimodal com satélite CBERS-4A e laudo comunitário resultou em <b>P(E|D) = ${pPosterior}%</b>, ${rejeitado ? `abaixo do limiar ótimo de decisão <b>θ* ≥ ${thetaStar}%</b>.<br>A transação foi <b>rejeitada em consenso</b> e o nó <b>${rogueNode.name}</b> sofreu <b>slashing contratual de 20%</b> do seu stake.` : `atingindo o limiar provisório (<b>θ* ≥ ${thetaStar}%</b>), com incerteza residual encaminhada para comitê comunitário.`}
         </div>
         <div class="redteam-result-metrics">
-          <div class="redteam-metric-item">P(E|D) Reconciliado: <div class="redteam-metric-val" style="color:var(--red);">${pPosterior}% < ${thetaStar}%</div></div>
-          <div class="redteam-metric-item">Veredito do Consenso: <div class="redteam-metric-val" style="color:var(--red);">REJEITADO</div></div>
-          <div class="redteam-metric-item">Nó Penalizado: <div class="redteam-metric-val" style="color:var(--gold);">${rogueNode.name}</div></div>
-          <div class="redteam-metric-item">Slashing de Stake: <div class="redteam-metric-val" style="color:var(--red);">-20% (${prevStake} → ${rogueNode.stake})</div></div>
+          <div class="redteam-metric-item">P(E|D) Reconciliado: <div class="redteam-metric-val" style="color:${rejeitado ? 'var(--red)' : 'var(--gold)'};">${pPosterior}% (${rejeitado ? '< ' + thetaStar + '%' : '≥ ' + thetaStar + '%'})</div></div>
+          <div class="redteam-metric-item">Veredito do Consenso: <div class="redteam-metric-val" style="color:${rejeitado ? 'var(--red)' : 'var(--teal)'};">${rejeitado ? 'REJEITADO' : 'AUDITORIA EX-POST'}</div></div>
+          <div class="redteam-metric-item">Nó Inspecionado: <div class="redteam-metric-val" style="color:var(--gold);">${rogueNode.name}</div></div>
+          <div class="redteam-metric-item">Stake: <div class="redteam-metric-val" style="color:${rejeitado ? 'var(--red)' : 'var(--green)'};">${rejeitado ? `-20% (${prevStake} → ${rogueNode.stake})` : 'Preservado'}</div></div>
         </div>
       `;
     }
-    showToast(`🚨 Teste B: Laudo fraudulento detectado! P(E|D)=${pPosterior}% < ${thetaStar}%. Slashing de 20% aplicado a ${rogueNode.name}!`, 'error');
-    log(`RED TEAM TEST B: Rejeição bayesiana (θ* ≥ 97,5%). Slashing de 20% aplicado ao nó ${rogueNode.name} (${prevStake} → ${rogueNode.stake}).`, 'error');
-  } 
+    showToast(rejeitado ? `🚨 Teste B: Laudo fraudulento detectado! P(E|D)=${pPosterior}% < ${thetaStar}%. Slashing de 20% aplicado a ${rogueNode.name}!` : `⚠️ Teste B: P(E|D)=${pPosterior}%. Incerteza residual encaminhada para comitê comunitário.`, rejeitado ? 'error' : 'warn');
+    log(`RED TEAM TEST B: Reconciliação bayesiana P(E|D)=${pPosterior}% vs θ*=${thetaStar}%. Veredito: ${rejeitado ? 'Rejeição & Slashing no nó ' + rogueNode.name : 'Incerteza residual / auditoria ex-post'}.`, rejeitado ? 'error' : 'warn');
+  }
   else if (scenarioKey === 'collusion_30') {
+    // E7: Limite BFT real com n nós: f < n/3 (§5 relatório). Com 7 nós: 2 suportados, 3 rompem.
+    const totalNodes = nodes.length;
+    const bftFaultTol = Math.floor((totalNodes - 1) / 3);
+    const bftLimitPct = (bftFaultTol / totalNodes * 100).toFixed(1);
     const nominalPower = 30.0;
-    const effectivePower = 24.3; // Com dispersão institucional de nós federados e peso geográfico
+    const colludedNodes = Math.round(totalNodes * nominalPower / 100);
+    const bftRompido = colludedNodes > bftFaultTol;
+    const phi = 0.85;
+    const effectivePower = (100 * Math.pow(nominalPower / 100, phi)).toFixed(1);
     const bftQuorum = 66.7;
 
     if (resultBox) {
       resultBox.className = 'redteam-result-box active';
       resultBox.innerHTML = `
-        <div class="redteam-result-title" style="color: var(--teal);">
-          <span>🛡️</span> Cenário C: Tentativa de Colusão de 30% — VRF Sublinear e Quórum BFT
+        <div class="redteam-result-title" style="color: ${bftRompido?'var(--red)':'var(--teal)'}">
+          <span>${bftRompido ? '\u{1F6A8}' : '\u{1F6E1}\uFE0F'}</span> Cenário C: ${colludedNodes}/${totalNodes} nós coludidos (${nominalPower}%) — ${bftRompido?'LIMITE BFT VIOLADO':'VRF + BFT Resistiram'}
         </div>
         <div class="redteam-result-body">
-          Um consórcio malicioso coordenou 30% dos nós validadores para tentar censurar queimas de tokens. Devido à <b>VRF sublinear (ϕ = 0,85)</b> combinada com o credenciamento geográfico descentralizado, a probabilidade efetiva de proposição caiu para <b>${effectivePower}%</b>.
-          Como a finalização BFT exige estritamente <b>2/3 dos votos válidos (≥ ${bftQuorum}%)</b>, nenhum bloco censurado atingiu quórum de commit. O ataque foi neutralizado sem necessidade de hard fork.
+          <b>${colludedNodes} de ${totalNodes} nós</b> (${nominalPower}%) foram cooptados. VRF sublinear (ϕ=0,85) reduz poder efetivo para <b>${effectivePower}%</b>.
+          Limite BFT: <b>f &lt; n/3 → ${bftFaultTol} nós</b> (${bftLimitPct}%). ${bftRompido ? '<b style="color:var(--red)">VIOLADO — '+colludedNodes+' &gt; '+bftFaultTol+'. Rede em risco de fork malicioso!</b>' : colludedNodes+' ≤ '+bftFaultTol+' — dentro do limite. Ataque neutralizado sem hard fork.'}
         </div>
         <div class="redteam-result-metrics">
-          <div class="redteam-metric-item">Poder Nominal do Cartel: <div class="redteam-metric-val" style="color:var(--red);">${nominalPower}%</div></div>
-          <div class="redteam-metric-item">Poder Efetivo VRF (ϕ=0.85): <div class="redteam-metric-val" style="color:var(--gold);">${effectivePower}%</div></div>
-          <div class="redteam-metric-item">Quórum BFT Exigido: <div class="redteam-metric-val" style="color:var(--green);">${bftQuorum}% (2/3)</div></div>
-          <div class="redteam-metric-item">Integridade da Rede: <div class="redteam-metric-val" style="color:var(--teal);">100% Preservada</div></div>
+          <div class="redteam-metric-item">Nós Coludidos: <div class="redteam-metric-val" style="color:var(--red);">${colludedNodes}/${totalNodes} (${nominalPower}%)</div></div>
+          <div class="redteam-metric-item">Limite BFT f&lt;n/3: <div class="redteam-metric-val" style="color:${bftRompido?'var(--red)':'var(--green)'}">${bftFaultTol} nós (${bftLimitPct}%) ${bftRompido?'VIOLADO':'OK'}</div></div>
+          <div class="redteam-metric-item">Poder Efetivo VRF (ϕ=0,85): <div class="redteam-metric-val" style="color:var(--gold);">${effectivePower}%</div></div>
+          <div class="redteam-metric-item">Resultado: <div class="redteam-metric-val" style="color:${bftRompido?'var(--red)':'var(--teal)'}">${bftRompido?'VULNERÁVEL':'Rede Íntegra'}</div></div>
         </div>
       `;
     }
-    showToast(`🛡️ Teste C: Cartel de 30% neutralizado! VRF sublinear e quórum BFT (66,7%) impediram blocos ilegítimos.`, 'success');
-    log(`RED TEAM TEST C: 30% de nós coludidos contidos pela VRF sublinear (ϕ = 0,85) e quórum BFT de 2/3.`, 'success');
+    showToast(`${bftRompido?'🚨':'🛡️'} Teste C: ${colludedNodes}/${totalNodes} nós. Limite BFT: ${bftFaultTol}. ${bftRompido?'RISCO: limite violado!':'Rede íntegra.'}`, bftRompido?'error':'success');
+    log(`RED TEAM TEST C: ${colludedNodes}/${totalNodes} nós coludidos. Limite BFT f<n/3=${bftFaultTol}. Poder VRF efetivo=${effectivePower}%. Resultado: ${bftRompido?'VULNERÁVEL':'Íntegro'}.`, bftRompido?'error':'success');
   } 
   else if (scenarioKey === 'wildfire') {
     if (resultBox) {
@@ -1345,7 +1409,14 @@ function runStressTest(scenarioKey) {
 // ─── Glossário de Conceitos ───────────────────────────────
 function openGlossaryModal() {
   const modal = document.getElementById('glossary-modal');
-  if (modal) modal.classList.remove('hidden');
+  if (modal) {
+    modal.classList.remove('hidden');
+    // X3: Mover foco para o botão de fechar do diálogo (acessibilidade)
+    requestAnimationFrame(() => {
+      const btn = modal.querySelector('button');
+      if (btn) btn.focus();
+    });
+  }
 }
 
 function closeGlossaryModal() {
